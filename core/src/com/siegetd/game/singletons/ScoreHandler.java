@@ -27,5 +27,6 @@ public class ScoreHandler {
     private void subtractScore(String playerId, int amount){
         playerScores.put(playerId,playerScores.get(playerId) - amount);
     }
-
+/**TODO**/
+//Instantiate player scores
 }
