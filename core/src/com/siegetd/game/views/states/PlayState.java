@@ -16,6 +16,12 @@ public class PlayState extends GameState{
         font = new BitmapFont();
     }
 
+
+    @Override
+    public void handleInput() {
+
+    }
+
     @Override
     public void update(float delta) {
     }

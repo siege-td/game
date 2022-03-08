@@ -10,7 +10,7 @@ public class SplashState extends GameState{
     float acc = 0f;
     CharSequence str;
     BitmapFont font;
-    final int COUNTDOWN = 5;
+    final int COUNTDOWN = 1;
 
     public SplashState(GameStateController gsc){
         super(gsc);
@@ -18,11 +18,17 @@ public class SplashState extends GameState{
         font = new BitmapFont();
     }
 
+
+    @Override
+    public void handleInput() {
+
+    }
+
     @Override
     public void update(float delta) {
         acc += delta;
         if(acc >= COUNTDOWN){
-            gsc.setState(GameStateController.State.PLAY);
+            gsc.setState(GameStateController.State.MENU);
         }
 
         str = "SPLASHSCREEN " + "\n" + (COUNTDOWN - acc) + "";
