@@ -2,7 +2,10 @@ package com.siegetd.game.controllers;
 
 import com.siegetd.game.SiegeTd;
 import com.siegetd.game.views.GameState;
+import com.siegetd.game.views.states.LobbyState;
+import com.siegetd.game.views.states.MainMenuState;
 import com.siegetd.game.views.states.PlayState;
+import com.siegetd.game.views.states.SettingsState;
 import com.siegetd.game.views.states.SplashState;
 
 import java.util.Stack;
@@ -13,9 +16,11 @@ public class GameStateController {
     private final SiegeTd app;
     private final Stack<GameState> states;
 
-
     public enum State{
         SPLASH,
+        MENU,
+        SETTINGS,
+        LOBBY,
         PLAY
     }
 
@@ -57,6 +62,12 @@ public class GameStateController {
                 return new SplashState(this);
             case PLAY:
                 return new PlayState(this);
+            case MENU:
+                return new MainMenuState(this);
+            case LOBBY:
+                return new LobbyState(this);
+            case SETTINGS:
+                return new SettingsState(this);
         }
         return null;
     }
