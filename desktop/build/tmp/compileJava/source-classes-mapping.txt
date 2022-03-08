@@ -1,0 +1,2 @@
+com/siegetd/game/desktop/DesktopLauncher.java
+ com.siegetd.game.desktop.DesktopLauncher
