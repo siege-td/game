@@ -39,6 +39,7 @@ public class RenderingSystem extends SortedIteratingSystem {
         this.batch = batch;
 
         camera = new OrthographicCamera(renderUtils.getFrustumWidth(), renderUtils.getFrustumHeight());
+        camera.setToOrtho(false);
         camera.position.set(renderUtils.getFrustumWidth() / 2f, renderUtils.getFrustumHeight() / 2f, 0);
     }
 
