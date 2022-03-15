@@ -34,6 +34,7 @@ com/siegetd/game/SiegeTd.java
  com.siegetd.game.SiegeTd
 com/siegetd/game/views/states/MainMenuState.java
  com.siegetd.game.views.states.MainMenuState
+ com.siegetd.game.views.states.MainMenuState$1
 com/siegetd/game/controllers/GameStateController.java
  com.siegetd.game.controllers.GameStateController
  com.siegetd.game.controllers.GameStateController$1
