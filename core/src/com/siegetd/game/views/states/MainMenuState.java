@@ -13,10 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
+import com.siegetd.game.views.components.ButtonSettings;
 
 public class MainMenuState extends GameState{
     private Texture background, settingsBtn, hostBtn, joinImg,rope,table;
-    private Button btnSettings, host, join;
+    private  ButtonSettings btnSettings;
 
     private int tableWidth;
     private int tableHeight;
@@ -35,7 +36,7 @@ public class MainMenuState extends GameState{
     private int hostBtnY;
     private int settingsBtnY;
 
-    Stage stage;
+    private Stage stage;
 
     public MainMenuState(final GameStateController gsc){
         super(gsc);
@@ -46,8 +47,9 @@ public class MainMenuState extends GameState{
         table = new Texture("GUI/table.png");
         //joinImg = new Texture("GUI/join_game.png");
         //hostBtn = new Texture("GUI/create_game.png");
-        settingsBtn = new Texture("GUI/settings.png");
         rope = new Texture("GUI/rope_big.png");
+
+
 
         //Centers table/window  and scales it to 0.75-0.60
         tableHeight = (int)(Gdx.graphics.getHeight() * 0.75);
@@ -62,26 +64,13 @@ public class MainMenuState extends GameState{
         ropeRightX =  (Gdx.graphics.getWidth() / 2) + (tableWidth / 3)- rope.getWidth();
 
         //TODO: Base the Y-coordinates and size(?) to table instead of graphics
-        btnWidth = (int)(settingsBtn.getWidth()/2);
-        btnHeight = (int)(settingsBtn.getHeight()/2);
-        btnX = ((Gdx.graphics.getWidth() / 2) - (btnWidth / 2));
         //joinBtnY = ((int)(Gdx.graphics.getHeight() * 0.7) - (btnHeight / 2));
         //hostBtnY = ((int)(Gdx.graphics.getHeight() * 0.5) - (btnHeight / 2));
-        settingsBtnY = ((int)(Gdx.graphics.getHeight() * 0.3) - (btnHeight / 2));
 
-        btnSettings = new Button(new TextureRegionDrawable(new TextureRegion(settingsBtn)));
-        btnSettings.setPosition(btnX, settingsBtnY);
-        btnSettings.setSize(settingsBtn.getWidth()/2, settingsBtn.getHeight()/2);
-        stage.addActor(btnSettings);
-        Gdx.input.setInputProcessor(stage);
-        btnSettings.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameStateController.State.SETTINGS);
-                dispose();
-            }
-        } );
 
+        btnSettings = new ButtonSettings();
+        btnSettings.addButtonListners(gsc);
+        stage.addActor(btnSettings.btn);
     }
 
     @Override
@@ -117,7 +106,7 @@ public class MainMenuState extends GameState{
         background.dispose();
         table.dispose();
         rope.dispose();
-        settingsBtn.dispose();
+        btnSettings.dispose();
         //joinBtn.dispose();
         //hostBtn.dispose();
     }

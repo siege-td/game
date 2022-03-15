@@ -17,6 +17,7 @@ public class LobbyState extends GameState{
         font = new BitmapFont();
     }
 
+
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
