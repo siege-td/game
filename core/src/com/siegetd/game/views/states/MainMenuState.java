@@ -15,10 +15,6 @@ public class MainMenuState extends GameState{
     private Texture hostBtn;
     private Texture settingsBtn;
 
-    private String join;
-    private String host;
-    private String settings;
-
     private int tableWidth;
     private int tableHeight;
     private int tableX;
@@ -28,7 +24,6 @@ public class MainMenuState extends GameState{
     private int ropeLeftX;
     private int ropeY;
     private int ropeRightX;
-    private int ropeRightY;
 
     private int btnWidth;
     private int btnHeight;
@@ -37,23 +32,15 @@ public class MainMenuState extends GameState{
     private int hostBtnY;
     private int settingsBtnY;
 
-    //TODO: Change to FreeTypeFontParameter
-    private CharSequence str;
-    private final BitmapFont font;
-
     public MainMenuState(GameStateController gsc){
         super(gsc);
-        font = new BitmapFont();
         background = new Texture("GUI/bg.png");
         table = new Texture("GUI/table.png");
-        joinBtn = new Texture("GUI/button_empty_2.png");
-        hostBtn = new Texture("GUI/button_empty_2.png");
-        settingsBtn = new Texture("GUI/button_empty_2.png");
+        joinBtn = new Texture("GUI/join_game.png");
+        hostBtn = new Texture("GUI/create_game.png");
+        settingsBtn = new Texture("GUI/settings.png");
         rope = new Texture("GUI/rope_big.png");
 
-        settings = "Settings";
-        join = "Join Lobby";
-        host = "Host Lobby";
 
         //Centers table/window  and scales it to 0.75-0.60
         tableHeight = (int)(Gdx.graphics.getHeight() * 0.75);
@@ -103,10 +90,6 @@ public class MainMenuState extends GameState{
         batch.draw(joinBtn, btnX, joinBtnY, btnWidth, btnHeight);
         batch.draw(hostBtn, btnX, hostBtnY, btnWidth, btnHeight);
 
-        font.setColor(1f, 1f, 1f, 1f);
-        font.draw(batch, settings, (Gdx.graphics.getWidth() /2),  settingsBtnY);
-        font.draw(batch, join, (Gdx.graphics.getWidth() /2),  joinBtnY);
-        font.draw(batch, host, (Gdx.graphics.getWidth() /2),  hostBtnY);
         batch.end();
     }
 
@@ -115,5 +98,8 @@ public class MainMenuState extends GameState{
         background.dispose();
         table.dispose();
         rope.dispose();
+        settingsBtn.dispose();
+        joinBtn.dispose();
+        hostBtn.dispose();
     }
 }
