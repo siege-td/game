@@ -34,11 +34,12 @@ public class MainMenuState extends GameState{
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
+        //Visual components
         background = new Texture("GUI/bg.png");
-
         table = new TableComponent();
         rope = new RopeComponent(table);
 
+        //functional components
         btnSettings = new ButtonSettings();
         btnSettings.addButtonListners(gsc);
         stage.addActor(btnSettings.btn);
@@ -73,6 +74,7 @@ public class MainMenuState extends GameState{
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.end();
+        //Draw buttons
         stage.draw();
     }
 
@@ -81,9 +83,9 @@ public class MainMenuState extends GameState{
         background.dispose();
         table.dispose();
         rope.dispose();
-        stage.dispose();
         btnSettings.dispose();
         btnJoin.dispose();
         btnHost.dispose();
+        stage.dispose();
     }
 }
