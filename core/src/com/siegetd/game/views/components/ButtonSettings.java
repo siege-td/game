@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.siegetd.game.controllers.GameStateController;
 
-public class ButtonSettings extends Buttons {
+public class ButtonSettings extends ButtonComponent {
 private GameStateController gsc;
     public ButtonSettings() {
         img = new Texture("GUI/settings.png");
@@ -20,6 +20,7 @@ private GameStateController gsc;
         btnY = ((int)(Gdx.graphics.getHeight() * 0.3) - (btnHeight / 2));
         btn.setPosition(btnX, btnY);
         btn.setSize(btnWidth, btnHeight);
+
     }
 
     public void addButtonListners(final GameStateController gsc) {

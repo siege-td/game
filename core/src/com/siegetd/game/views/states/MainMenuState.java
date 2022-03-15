@@ -13,28 +13,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
+import com.siegetd.game.views.components.ButtonHost;
+import com.siegetd.game.views.components.ButtonJoin;
 import com.siegetd.game.views.components.ButtonSettings;
+import com.siegetd.game.views.components.RopeComponent;
+import com.siegetd.game.views.components.TableComponent;
 
 public class MainMenuState extends GameState{
-    private Texture background, settingsBtn, hostBtn, joinImg,rope,table;
-    private  ButtonSettings btnSettings;
-
-    private int tableWidth;
-    private int tableHeight;
-    private int tableX;
-    private int tableY;
-
-    private int ropeWidth;
-    private int ropeLeftX;
-    private int ropeY;
-    private int ropeRightX;
-
-    private int btnWidth;
-    private int btnHeight;
-    private int btnX;
-    private int joinBtnY;
-    private int hostBtnY;
-    private int settingsBtnY;
+    private Texture background;
+    private ButtonSettings btnSettings;
+    private ButtonJoin btnJoin;
+    private ButtonHost btnHost;
+    private TableComponent table;
+    private RopeComponent rope;
 
     private Stage stage;
 
@@ -44,33 +35,21 @@ public class MainMenuState extends GameState{
         Gdx.input.setInputProcessor(stage);
 
         background = new Texture("GUI/bg.png");
-        table = new Texture("GUI/table.png");
-        //joinImg = new Texture("GUI/join_game.png");
-        //hostBtn = new Texture("GUI/create_game.png");
-        rope = new Texture("GUI/rope_big.png");
 
-
-
-        //Centers table/window  and scales it to 0.75-0.60
-        tableHeight = (int)(Gdx.graphics.getHeight() * 0.75);
-        tableWidth = (int)(Gdx.graphics.getWidth() * 0.6);
-        tableX = (Gdx.graphics.getWidth() / 2) - (tableWidth / 2);
-        tableY = (Gdx.graphics.getHeight()/ 2) - (tableHeight / 2);
-
-        //Scales the ropes to 0.75, attaches them to table/window based on graphics and tablewidth
-        ropeWidth = (int) (rope.getWidth()*0.75);
-        ropeY =  (Gdx.graphics.getHeight()/ 2) + (tableHeight/3);
-        ropeLeftX =  (Gdx.graphics.getWidth() / 2) - (tableWidth / 3);
-        ropeRightX =  (Gdx.graphics.getWidth() / 2) + (tableWidth / 3)- rope.getWidth();
-
-        //TODO: Base the Y-coordinates and size(?) to table instead of graphics
-        //joinBtnY = ((int)(Gdx.graphics.getHeight() * 0.7) - (btnHeight / 2));
-        //hostBtnY = ((int)(Gdx.graphics.getHeight() * 0.5) - (btnHeight / 2));
-
+        table = new TableComponent();
+        rope = new RopeComponent(table);
 
         btnSettings = new ButtonSettings();
         btnSettings.addButtonListners(gsc);
         stage.addActor(btnSettings.btn);
+
+        btnJoin = new ButtonJoin();
+        btnJoin.addButtonListners(gsc);
+        stage.addActor(btnJoin.btn);
+
+        btnHost = new ButtonHost();
+        btnHost.addButtonListners(gsc);
+        stage.addActor(btnHost.btn);
     }
 
     @Override
@@ -90,15 +69,11 @@ public class MainMenuState extends GameState{
 
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(table, tableX,tableY, tableWidth, tableHeight );
-        batch.draw(rope, ropeLeftX, ropeY, ropeWidth, rope.getHeight());
-        batch.draw(rope, ropeRightX, ropeY, ropeWidth, rope.getHeight());
-        //batch.draw(settingsBtn, btnX, settingsBtnY, btnWidth, btnHeight);
-        stage.draw();
-        //batch.draw(joinBtn, btnX, joinBtnY, btnWidth, btnHeight);
-        //batch.draw(hostBtn, btnX, hostBtnY, btnWidth, btnHeight);
-
+        batch.draw(table.img, table.tableX,table.tableY, table.tableWidth, table.tableHeight);
+        batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
+        batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.end();
+        stage.draw();
     }
 
     @Override
@@ -106,8 +81,9 @@ public class MainMenuState extends GameState{
         background.dispose();
         table.dispose();
         rope.dispose();
+        stage.dispose();
         btnSettings.dispose();
-        //joinBtn.dispose();
-        //hostBtn.dispose();
+        btnJoin.dispose();
+        btnHost.dispose();
     }
 }
