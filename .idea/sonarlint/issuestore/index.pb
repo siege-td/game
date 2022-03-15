@@ -5,8 +5,6 @@ u
 Ecore/src/com/siegetd/game/models/ecs/components/TextureComponent.java,7/f/7f3bdf65edcfa70aa4f5105069b1b51ec3fa07f3
 w
 Gcore/src/com/siegetd/game/models/ecs/components/AnimationComponent.java,a/9/a9c73a8069784dce8c3dee149618482c3c960832
-v
-Fcore/src/com/siegetd/game/models/ecs/components/HitpointComponent.java,e/c/ec5ab654f8924110b650a80141c1456c3af07748
 j
 :core/src/com/siegetd/game/models/ecs/components/State.java,5/b/5be0ba5198a8cf8905ed4b4d85d138f1496afa38
 r
@@ -33,5 +31,3 @@ q
 Acore/src/com/siegetd/game/models/ecs/systems/AnimationSystem.java,a/b/ab4e555936d9082c6d8b7dfb9e6df84c417b4ba8
 m
 =core/src/com/siegetd/game/models/ecs/entities/TestEntity.java,1/5/1573d62e7c393388ea79c1cec9454cc9e6ffdd25
-V
-&core/src/com/siegetd/game/SiegeTd.java,a/5/a58aa743f7066484c26467209b37edb5c5fd9b22
