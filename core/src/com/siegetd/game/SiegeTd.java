@@ -42,13 +42,21 @@ public class SiegeTd extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		engine.update(Gdx.graphics.getDeltaTime());
+
+		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 	}
-	
+
 	@Override
 	public void dispose () {
+		gsm.dispose();
 		batch.dispose();
+	}
+
+	public SpriteBatch getBatch(){
+		return batch;
 	}
 }

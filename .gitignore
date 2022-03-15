@@ -23,3 +23,8 @@ hs_err_pid*
 
 # Mac stuff
 .DS_Store
+
+.idea/
+.gradle/
+
+local.properties
