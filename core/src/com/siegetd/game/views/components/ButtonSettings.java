@@ -15,11 +15,10 @@ public class ButtonSettings extends ButtonComponent {
     public ButtonSettings() {
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/settings.png");
-        this.button = this.buttonComponent.createButton(0.3f, this.buttonImg);
+        this.button = this.buttonComponent.createButton( this.buttonImg);
     }
 
     public void addButtonListners(final GameStateController gsc) {
-        System.out.println("gsc: " + gsc);
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

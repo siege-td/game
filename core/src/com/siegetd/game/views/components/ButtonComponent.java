@@ -10,17 +10,12 @@ public class ButtonComponent {
 
     protected ButtonComponent(){ }
 
-    public Button createButton(float yScale, Texture img) {
+    public Button createButton( Texture img) {
         Button button = new Button(
                 new TextureRegionDrawable(
                         new TextureRegion(img)
                 )
         );
-        button.setSize(button.getWidth() / 2, button.getHeight() / 2);
-        button.setPosition(
-                (Gdx.graphics.getWidth() / 2) - (button.getWidth() / 2),
-                (Gdx.graphics.getHeight() * yScale) - (button.getHeight() / 2)
-                );
         return button;
     }
 

@@ -8,9 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.ButtonHost;
@@ -26,6 +28,7 @@ public class MainMenuState extends GameState{
     private ButtonHost btnHost;
     private TableComponent table;
     private RopeComponent rope;
+    private Table buttonTable;
 
     private Stage stage;
 
@@ -40,17 +43,25 @@ public class MainMenuState extends GameState{
         rope = new RopeComponent(table);
 
         //functional components
+        buttonTable = new Table();
+        //buttonTable.setSize(table.tableWidth, table.tableHeight);
+        //buttonTable.align(Align.center);
+        buttonTable.setFillParent(true);
+
         btnSettings = new ButtonSettings();
         btnSettings.addButtonListners(gsc);
-        stage.addActor(btnSettings.button);
+        buttonTable.add(btnSettings.button).size(btnSettings.button.getWidth() / 2,btnSettings.button.getHeight() / 2).row();
 
         btnJoin = new ButtonJoin();
         btnJoin.addButtonListners(gsc);
-        stage.addActor(btnJoin.button);
+        buttonTable.add(btnJoin.button).size(btnJoin.button.getWidth() / 2,btnJoin.button.getHeight() / 2).row();
 
         btnHost = new ButtonHost();
         btnHost.addButtonListners(gsc);
-        stage.addActor(btnHost.button);
+        buttonTable.add(btnHost.button).size(btnHost.button.getWidth() / 2, btnHost.button.getHeight() / 2).row();
+
+
+        stage.addActor(buttonTable);
     }
 
     @Override
