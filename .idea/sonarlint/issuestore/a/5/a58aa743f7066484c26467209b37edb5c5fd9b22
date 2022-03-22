@@ -1,0 +1,14 @@
+
+p
+java:S1450"URemove the "camera" field and declare it as a local variable in the relevant methods.(äÃÆ²şÿÿÿÿ
+t
+java:S1450"^Remove the "renderingSystem" field and declare it as a local variable in the relevant methods.(«À›û
+Y
+java:S1128">Remove this unused import 'com.badlogic.gdx.graphics.Texture'.(ˆ°µúÿÿÿÿ
+U
+java:S1128
+":Remove this unused import 'com.badlogic.gdx.math.Vector2'.(•Á‚ ùÿÿÿÿ
+\
+java:S1128"ARemove this unused import 'com.badlogic.gdx.physics.box2d.World'.(ëÊ‰šúÿÿÿÿ
+U
+java:S1128"?Remove this unused import 'com.badlogic.gdx.utils.ScreenUtils'.(«Ü
