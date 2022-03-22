@@ -38,34 +38,59 @@ public class ResourceLoader {
     }
 
     private Sound getSoundById(String id){
-        return sounds.get(id);
+        return this.sounds.get(id);
     }
 
     private Music getMusicById(String id){
-        return music.get(id);
+        return this.music.get(id);
     }
 
     private TextureRegion getAttackerTexture(String id){
-        return attackers.get(id);
+        return this.attackers.get(id);
     }
 
     private TextureRegion getDefenderTexture(String id){
-        return defenders.get(id);
+        return this.defenders.get(id);
     }
 
     private TextureRegion getMapById(String id){
-        return maps.get(id);
+        return this.maps.get(id);
     }
 
     private TextureRegion getProjectileTexture(String id){
-        return projectiles.get(id);
+        return this.projectiles.get(id);
     }
 
     private TextureRegion getCollisionTexture(String id){
-        return collisions.get(id);
+        return this.collisions.get(id);
     }
 
-    private void addSounds()
+    private void addSound(String id,Sound sound){
+        this.sounds.put(id,sound);
+    }
 
+    private void addMusic(String id,Music music){
+        this.music.put(id,music);
+    }
+
+    private void addAttacker(String id,TextureRegion attacker){
+        this.attackers.put(id,attacker);
+    }
+
+    private void addDefender(String id, TextureRegion defender){
+        this.defenders.put(id,defender);
+    }
+
+    private void addMap(String id,TextureRegion map){
+        this.maps.put(id,map);
+    }
+
+    private void addProjectile(String id, TextureRegion projectile){
+        this.projectiles.put(id,projectile);
+    }
+
+    private void addCollisions(String id, TextureRegion collision){
+        this.collisions.put(id,collision);
+    }
 
 }
