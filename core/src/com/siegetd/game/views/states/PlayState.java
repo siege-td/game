@@ -17,8 +17,7 @@ public class PlayState extends GameState{
     }
 
     @Override
-    public void update(float delta) {
-    }
+    public void update(float delta) {}
 
     @Override
     public void render() {
