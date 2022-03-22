@@ -42,21 +42,19 @@ public class MainMenuState extends GameState{
         //functional components
         btnSettings = new ButtonSettings();
         btnSettings.addButtonListners(gsc);
-        stage.addActor(btnSettings.btn);
+        stage.addActor(btnSettings.button);
 
         btnJoin = new ButtonJoin();
         btnJoin.addButtonListners(gsc);
-        stage.addActor(btnJoin.btn);
+        stage.addActor(btnJoin.button);
 
         btnHost = new ButtonHost();
         btnHost.addButtonListners(gsc);
-        stage.addActor(btnHost.btn);
+        stage.addActor(btnHost.button);
     }
 
     @Override
-    public void handleInput() {
-
-  }
+    public void handleInput() {  }
 
     @Override
     public void update(float delta) {
@@ -83,9 +81,6 @@ public class MainMenuState extends GameState{
         background.dispose();
         table.dispose();
         rope.dispose();
-        btnSettings.dispose();
-        btnJoin.dispose();
-        btnHost.dispose();
         stage.dispose();
     }
 }
