@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.controllers.GameStateController;
 
 public class ButtonSettings extends ButtonComponent {
+
     private ButtonComponent buttonComponent;
     private Texture buttonImg;
     public Button button;
