@@ -6,7 +6,8 @@ public class ScoreHandler {
     private static ScoreHandler scoreInstance = null;
     private HashMap<String,Integer> playerScores;
 
-    public ScoreHandler(){
+    private ScoreHandler(){
+        playerScores = new HashMap<>();
     }
 
     public static ScoreHandler getInstance(){
@@ -26,7 +27,9 @@ public class ScoreHandler {
 
     private void subtractScore(String playerId, int amount){
         playerScores.put(playerId,playerScores.get(playerId) - amount);
+
     }
-/**TODO**/
-//Instantiate player scores
+    private void addPlayerToScores(String id){
+        playerScores.put(id,30);
+    }
 }
