@@ -5,11 +5,11 @@ public class Currency {
 
     private int currency;
 
-    public Currency(){
+    private Currency(){
         this.currency = 100;
     }
 
-    private static Currency getInstance(){
+    public static Currency getInstance(){
         if(currencyInstance == null){
             currencyInstance = new Currency();
         }
