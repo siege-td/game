@@ -20,9 +20,17 @@ public class ResourceLoader {
     private HashMap<String, TextureRegion> collisions;
 
     public ResourceLoader(){
+        sounds = new HashMap<>();
+        music = new HashMap<>();
 
+        attackers = new HashMap<>();
+        defenders = new HashMap<>();
+
+        maps = new HashMap<>();
+        projectiles = new HashMap<>();
+        collisions = new HashMap<>();
     }
-    public static ResourceLoader getInstance(){
+    private static ResourceLoader getInstance(){
         if(resourceLoaderInstance == null){
             resourceLoaderInstance = new ResourceLoader();
         }
@@ -56,7 +64,8 @@ public class ResourceLoader {
     private TextureRegion getCollisionTexture(String id){
         return collisions.get(id);
     }
-/**TODO**/
-//Instantiate Files
+
+    private void addSounds()
+
 
 }
