@@ -14,7 +14,6 @@ public abstract class GameState {
         this.app = gsc.application();
         batch = app.getBatch();
     }
-
     public abstract void update(float delta);
     public abstract void render();
     public abstract void dispose();

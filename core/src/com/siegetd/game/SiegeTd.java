@@ -54,8 +54,9 @@ public class SiegeTd extends ApplicationAdapter {
 
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		engine.update(Gdx.graphics.getDeltaTime());
-
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render();
+		//engine.update(Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 	}
 

@@ -16,16 +16,16 @@ public class SettingsState extends GameState{
         font = new BitmapFont();
     }
 
+
     @Override
-    public void update(float delta) {
-    }
+    public void update(float delta) {}
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(.25f, .25f, .25f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         str = "SETTINGS SCREEN";
+        Gdx.gl.glClearColor(.25f, .25f, .25f, 1f);
+
         batch.begin();
         font.setColor(1f, 1f, 1f, 1f);
         font.draw(batch, str, (Gdx.graphics.getWidth() / 2f) - 50,  Gdx.graphics.getHeight() / 2f);

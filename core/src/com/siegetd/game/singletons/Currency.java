@@ -5,11 +5,8 @@ public class Currency {
 
     private int currency;
 
-    public Currency(){
+    private Currency(){
         this.currency = 100;
-    }
-    private void addCurrency(int amount){
-        currency += amount;
     }
 
     public static Currency getInstance(){
@@ -17,6 +14,9 @@ public class Currency {
             currencyInstance = new Currency();
         }
         return currencyInstance;
+    }
+    private void addCurrency(int amount){
+        currency += amount;
     }
 
     private void subtractCurrency(int amount){
