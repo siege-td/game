@@ -19,7 +19,7 @@ public class ResourceLoader {
     private HashMap<String, TextureRegion> projectiles;
     private HashMap<String, TextureRegion> collisions;
 
-    public ResourceLoader(){
+    private ResourceLoader(){
         sounds = new HashMap<>();
         music = new HashMap<>();
 
@@ -30,7 +30,7 @@ public class ResourceLoader {
         projectiles = new HashMap<>();
         collisions = new HashMap<>();
     }
-    private static ResourceLoader getInstance(){
+    public static ResourceLoader getInstance(){
         if(resourceLoaderInstance == null){
             resourceLoaderInstance = new ResourceLoader();
         }
