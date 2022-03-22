@@ -48,10 +48,7 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
-        implementation ('io.socket:socket.io-client:2.0.1') {
-            // excluding org.json which is provided by Android
-            exclude group: 'org.json', module: 'json'
-        }
+        api "io.socket:socket.io-client:2.0.1"
     }
 }
 
@@ -74,10 +71,7 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        implementation ('io.socket:socket.io-client:2.0.1') {
-            // excluding org.json which is provided by Android
-            exclude group: 'org.json', module: 'json'
-        }
+        api "io.socket:socket.io-client:2.0.1"
     }
 }
 
@@ -90,9 +84,6 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        implementation ('io.socket:socket.io-client:2.0.1') {
-            // excluding org.json which is provided by Android
-            exclude group: 'org.json', module: 'json'
-        }
+        api "io.socket:socket.io-client:2.0.1"
     }
 }
