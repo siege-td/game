@@ -8,15 +8,15 @@ public class Currency {
     public Currency(){
         this.currency = 100;
     }
-    private void addCurrency(int amount){
-        currency += amount;
-    }
 
-    public static Currency getInstance(){
+    private static Currency getInstance(){
         if(currencyInstance == null){
             currencyInstance = new Currency();
         }
         return currencyInstance;
+    }
+    private void addCurrency(int amount){
+        currency += amount;
     }
 
     private void subtractCurrency(int amount){
