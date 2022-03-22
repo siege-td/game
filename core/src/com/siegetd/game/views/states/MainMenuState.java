@@ -3,29 +3,21 @@ package com.siegetd.game.views.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.ButtonHost;
-import com.siegetd.game.views.components.ButtonJoin;
-import com.siegetd.game.views.components.ButtonSettings;
+import com.siegetd.game.views.components.HostButton;
+import com.siegetd.game.views.components.JoinButton;
+import com.siegetd.game.views.components.SettingsButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.TableComponent;
 
 public class MainMenuState extends GameState{
     private Texture background;
-    private ButtonSettings btnSettings;
-    private ButtonJoin btnJoin;
-    private ButtonHost btnHost;
+    private SettingsButton btnSettings;
+    private JoinButton btnJoin;
+    private HostButton btnHost;
     private TableComponent table;
     private RopeComponent rope;
     private Table buttonTable;
@@ -48,15 +40,15 @@ public class MainMenuState extends GameState{
         //buttonTable.align(Align.center);
         buttonTable.setFillParent(true);
 
-        btnSettings = new ButtonSettings();
+        btnSettings = new SettingsButton();
         btnSettings.addButtonListners(gsc);
         buttonTable.add(btnSettings.button).size(btnSettings.button.getWidth() / 2,btnSettings.button.getHeight() / 2).row();
 
-        btnJoin = new ButtonJoin();
+        btnJoin = new JoinButton();
         btnJoin.addButtonListners(gsc);
         buttonTable.add(btnJoin.button).size(btnJoin.button.getWidth() / 2,btnJoin.button.getHeight() / 2).row();
 
-        btnHost = new ButtonHost();
+        btnHost = new HostButton();
         btnHost.addButtonListners(gsc);
         buttonTable.add(btnHost.button).size(btnHost.button.getWidth() / 2, btnHost.button.getHeight() / 2).row();
 
@@ -65,12 +57,7 @@ public class MainMenuState extends GameState{
     }
 
     @Override
-    public void handleInput() {  }
-
-    @Override
-    public void update(float delta) {
-        handleInput();
-    }
+    public void update(float delta) {}
 
     @Override
     public void render() {

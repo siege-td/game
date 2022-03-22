@@ -20,11 +20,6 @@ public class SplashState extends GameState{
 
 
     @Override
-    public void handleInput() {
-
-    }
-
-    @Override
     public void update(float delta) {
         acc += delta;
         if(acc >= COUNTDOWN){

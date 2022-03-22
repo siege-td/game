@@ -18,16 +18,7 @@ public class SettingsState extends GameState{
 
 
     @Override
-    public void handleInput() {
-        //gsc.setState(GameStateController.State.MENU);
-        //dispose();
-    }
-
-
-    @Override
-    public void update(float delta) {
-        handleInput();
-    }
+    public void update(float delta) {}
 
     @Override
     public void render() {

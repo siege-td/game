@@ -6,15 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.controllers.GameStateController;
 
-public class ButtonJoin extends ButtonComponent {
+public class SettingsButton extends ButtonComponent {
 
     private ButtonComponent buttonComponent;
     private Texture buttonImg;
     public Button button;
 
-    public ButtonJoin() {
+    public SettingsButton() {
         this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/join_game.png");
+        this.buttonImg = new Texture("GUI/settings.png");
         this.button = this.buttonComponent.createButton( this.buttonImg);
     }
 
@@ -22,9 +22,8 @@ public class ButtonJoin extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameStateController.State.LOBBY);
+                gsc.setState(GameStateController.State.SETTINGS);
             }
         });
     }
 }
-

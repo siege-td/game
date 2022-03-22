@@ -6,15 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.controllers.GameStateController;
 
-public class ButtonHost {
+public class JoinButton extends ButtonComponent {
 
     private ButtonComponent buttonComponent;
     private Texture buttonImg;
     public Button button;
 
-    public ButtonHost(){
+    public JoinButton() {
         this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/create_game.png");
+        this.buttonImg = new Texture("GUI/join_game.png");
         this.button = this.buttonComponent.createButton( this.buttonImg);
     }
 
@@ -26,5 +26,5 @@ public class ButtonHost {
             }
         });
     }
-
 }
+

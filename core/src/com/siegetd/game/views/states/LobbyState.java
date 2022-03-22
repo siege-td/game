@@ -17,18 +17,8 @@ public class LobbyState extends GameState{
         font = new BitmapFont();
     }
 
-
     @Override
-    public void handleInput() {
-        if(Gdx.input.justTouched()){
-           // gsc.setState(new PlayState(gsc));
-            dispose();
-        }
-    }
-
-    @Override
-    public void update(float delta) {
-    }
+    public void update(float delta) {}
 
     @Override
     public void render() {
