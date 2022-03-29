@@ -22,7 +22,7 @@ public class HostButton {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameStateController.State.LOBBY);
+                gsc.setState(GameStateController.State.PLAY);
             }
         });
     }

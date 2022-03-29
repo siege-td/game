@@ -23,14 +23,14 @@ import java.util.LinkedList;
 public class GameMap {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer renderer;
-    OrthographicCamera camera = new OrthographicCamera();
-    FitViewport viewport;
+    private OrthographicCamera camera;
 
-    public GameMap(){
+    public GameMap(OrthographicCamera camera){
         tiledMap = new TmxMapLoader().load("level1/level1map.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
-        camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
-        camera.update();
+        this.camera = camera;
+        this.camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
+        this.camera.update();
 
         MapLayers mapLayers = tiledMap.getLayers();
         TiledMapTileLayer moveableLayer = (TiledMapTileLayer) mapLayers.get("Moveable");

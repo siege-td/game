@@ -24,27 +24,11 @@ public class SiegeTd extends ApplicationAdapter {
 	public static final int APP_FPS = 60 ;
 
 	private SpriteBatch batch;
-	private RenderingSystem renderingSystem;
-	private OrthographicCamera camera;
-	private PooledEngine engine;
 	private GameStateController gsm;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-
-		renderingSystem = new RenderingSystem(batch);
-
-		camera = renderingSystem.getCamera();
-		batch.setProjectionMatrix(camera.combined);
-
-		engine = new PooledEngine();
-
-		engine.addSystem(new AnimationSystem());
-		engine.addSystem(renderingSystem);
-		engine.addSystem(new MovementSystem());
-
-		new TestEntity(engine).create();
 
 		gsm = new GameStateController(this);
 	}
