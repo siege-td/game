@@ -4,8 +4,8 @@ com/siegetd/game/models/ecs/components/State.java
  com.siegetd.game.models.ecs.components.State
 com/siegetd/game/models/ecs/components/AnimationComponent.java
  com.siegetd.game.models.ecs.components.AnimationComponent
-com/siegetd/game/api/SocketConnection.java
- com.siegetd.game.api.SocketConnection
+com/siegetd/game/models/ecs/entities/TestEntity.java
+ com.siegetd.game.models.ecs.entities.TestEntity
 com/siegetd/game/singletons/Currency.java
  com.siegetd.game.singletons.Currency
 com/siegetd/game/utils/ZComparator.java
@@ -42,8 +42,8 @@ com/siegetd/game/models/ecs/components/TransformComponent.java
  com.siegetd.game.models.ecs.components.TransformComponent
 com/siegetd/game/models/ecs/utils/ZComparator.java
  com.siegetd.game.models.ecs.utils.ZComparator
-com/siegetd/game/models/ecs/entities/TestEntity.java
- com.siegetd.game.models.ecs.entities.TestEntity
+com/siegetd/game/models/ecs/components/CurrencyComponent.java
+ com.siegetd.game.models.ecs.components.CurrencyComponent
 com/siegetd/game/utils/SingletonHolder.java
  com.siegetd.game.utils.SingletonHolder
 com/siegetd/game/models/ecs/entities/IEntity.java
@@ -52,14 +52,12 @@ com/siegetd/game/models/ecs/components/TextureComponent.java
  com.siegetd.game.models.ecs.components.TextureComponent
 com/siegetd/game/models/map/GameMap.java
  com.siegetd.game.models.map.GameMap
-com/siegetd/game/models/ecs/utils/EntityRegister.java
- com.siegetd.game.models.ecs.utils.EntityRegister
+com/siegetd/game/api/SocketConnection.java
+ com.siegetd.game.api.SocketConnection
 com/siegetd/game/models/ecs/components/HitpointComponent.java
  com.siegetd.game.models.ecs.components.HitpointComponent
-com/siegetd/game/models/ecs/components/CurrencyComponent.java
- com.siegetd.game.models.ecs.components.CurrencyComponent
-com/siegetd/game/views/states/SplashState.java
- com.siegetd.game.views.states.SplashState
+com/siegetd/game/models/ecs/utils/ComponentUpdater.java
+ com.siegetd.game.models.ecs.utils.ComponentUpdater
 com/siegetd/game/views/GameState.java
  com.siegetd.game.views.GameState
 com/siegetd/game/views/states/SettingsState.java
@@ -74,7 +72,7 @@ com/siegetd/game/controllers/GameStateController.java
  com.siegetd.game.controllers.GameStateController
  com.siegetd.game.controllers.GameStateController$1
  com.siegetd.game.controllers.GameStateController$State
-com/siegetd/game/models/ecs/utils/ComponentUpdater.java
- com.siegetd.game.models.ecs.utils.ComponentUpdater
+com/siegetd/game/views/states/SplashState.java
+ com.siegetd.game.views.states.SplashState
 com/siegetd/game/SiegeTd.java
  com.siegetd.game.SiegeTd

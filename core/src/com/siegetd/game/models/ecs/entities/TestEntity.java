@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.siegetd.game.models.ecs.components.CurrencyComponent;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.State;
 import com.siegetd.game.models.ecs.components.StateComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
@@ -42,6 +44,8 @@ public class TestEntity implements IEntity {
         entity.add(stateComponent);
         entity.add(typeComponent);
         entity.add(velocityComponent);
+        entity.add(new HitpointComponent(100));
+        entity.add(new CurrencyComponent(0));
 
         engine.addEntity(entity);
     }

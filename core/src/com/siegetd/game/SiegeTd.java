@@ -13,7 +13,8 @@ import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.ecs.utils.ComponentUpdater;
-import com.siegetd.game.models.ecs.utils.EntityRegister;
+
+import org.json.JSONException;
 
 import java.net.URISyntaxException;
 
@@ -30,7 +31,6 @@ public class SiegeTd extends ApplicationAdapter {
 	private Socket socket;
 
 	private ComponentUpdater componentUpdater;
-	private EntityRegister entityRegister;
 
 	public SiegeTd() {
 		try {
@@ -39,7 +39,6 @@ public class SiegeTd extends ApplicationAdapter {
 		} catch (URISyntaxException error) {
 			System.out.println(error);
 		}
-
 	}
 
 	@Override
@@ -60,9 +59,9 @@ public class SiegeTd extends ApplicationAdapter {
 		new TestEntity(engine).create();
 
 		//This has to be initialized after all other entities, i think
-		entityRegister = new EntityRegister(engine);
 
 		componentUpdater = new ComponentUpdater();
+
 
 		//socket.connected();
 		//socket.emit("new_lobby", 1);
@@ -80,6 +79,11 @@ public class SiegeTd extends ApplicationAdapter {
 
 	@Override
 	public void dispose () {
+		try {
+			componentUpdater.updateCurrencyComponent(engine.getEntities().get(0), 10);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		batch.dispose();
 	}
 
