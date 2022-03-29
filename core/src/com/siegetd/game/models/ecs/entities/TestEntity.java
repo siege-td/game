@@ -34,8 +34,8 @@ public class TestEntity implements IEntity {
         textureComponent.region = new TextureRegion(new Texture("badlogic.jpg"));
         typeComponent.type = Type.DEFENDER;
         stateComponent.setState(State.NORMAL);
-        velocityComponent.xSpeed = 1f;
-        velocityComponent.ySpeed = 0.1f;
+        velocityComponent.xSpeed = 5f;
+        velocityComponent.ySpeed = 5f;
 
         entity.add(transformComponent);
         entity.add(textureComponent);
