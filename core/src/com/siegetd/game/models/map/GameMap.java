@@ -31,7 +31,7 @@ public class GameMap {
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.camera = camera;
         this.camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
-        this.camera.update();
+        //this.camera.update();
 
         generateTileTypes();
     }
