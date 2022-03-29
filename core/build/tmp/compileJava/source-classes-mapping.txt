@@ -71,19 +71,19 @@ com/siegetd/game/utils/RenderUtils.java
  com.siegetd.game.utils.RenderUtils
 com/siegetd/game/views/GameState.java
  com.siegetd.game.views.GameState
-com/siegetd/game/models/map/GameMap.java
- com.siegetd.game.models.map.GameMap
+com/siegetd/game/views/states/SplashState.java
+ com.siegetd.game.views.states.SplashState
 com/siegetd/game/views/states/SettingsState.java
  com.siegetd.game.views.states.SettingsState
 com/siegetd/game/views/states/MainMenuState.java
  com.siegetd.game.views.states.MainMenuState
-com/siegetd/game/views/states/PlayState.java
- com.siegetd.game.views.states.PlayState
-com/siegetd/game/views/states/LobbyState.java
- com.siegetd.game.views.states.LobbyState
 com/siegetd/game/controllers/GameStateController.java
  com.siegetd.game.controllers.GameStateController
  com.siegetd.game.controllers.GameStateController$1
  com.siegetd.game.controllers.GameStateController$State
-com/siegetd/game/views/states/SplashState.java
- com.siegetd.game.views.states.SplashState
+com/siegetd/game/views/states/LobbyState.java
+ com.siegetd.game.views.states.LobbyState
+com/siegetd/game/models/map/GameMap.java
+ com.siegetd.game.models.map.GameMap
+com/siegetd/game/views/states/PlayState.java
+ com.siegetd.game.views.states.PlayState

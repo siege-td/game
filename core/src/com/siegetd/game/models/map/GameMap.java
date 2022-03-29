@@ -24,6 +24,7 @@ public class GameMap {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
+    private LinkedList<MovableTile> movableTiles;
 
     public GameMap(OrthographicCamera camera){
         tiledMap = new TmxMapLoader().load("level1/level1map.tmx");
@@ -32,10 +33,14 @@ public class GameMap {
         this.camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
         this.camera.update();
 
+        generateTileTypes();
+    }
+
+    private void generateTileTypes(){
         MapLayers mapLayers = tiledMap.getLayers();
         TiledMapTileLayer moveableLayer = (TiledMapTileLayer) mapLayers.get("Moveable");
 
-        LinkedList<MovableTile> movableTiles = new LinkedList<MovableTile>();
+        this.movableTiles = new LinkedList<MovableTile>();
 
         for (int col = 0; col < TILE_COLUMN; col++) {
             for (int row = 0; row < TILE_ROW; row++) {
@@ -44,7 +49,7 @@ public class GameMap {
                 MovableTile movableTile = new MovableTile(col, row, movableCell);
 
                 if(movableCell != null){
-                    movableTiles.add(movableTile);
+                    this.movableTiles.add(movableTile);
                 }
             }
         }

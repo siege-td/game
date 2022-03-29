@@ -1,8 +1,8 @@
 package com.siegetd.game.models.map.tile;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
-
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+
 public abstract class Tile {
     private int x, y;
     private TiledMapTileLayer.Cell cell;
@@ -16,9 +16,11 @@ public abstract class Tile {
     public  TiledMapTileLayer.Cell getCell(){
         return this.cell;
     }
+
     public int getX(){
         return this.x;
     }
+
     public int getY(){
         return this.y;
     }
