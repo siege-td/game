@@ -20,20 +20,6 @@ public class ButtonComponent {
         return button;
     }
 
-    public Button createButton(Vector2 pos, Texture img) {
-        Button button = new Button(
-                new TextureRegionDrawable(
-                        new TextureRegion(img)
-                )
-        );
-        button.setSize(button.getWidth() / 2, button.getHeight() / 2);
-        button.setPosition(
-                (float) (pos.x - (button.getWidth()* 0.25)),
-                (float) (pos.y - (button.getHeight() * 0.75))
-        );
-        return button;
-    }
-
     public void dispose(Texture buttonImg) {
         buttonImg.dispose();
     }

@@ -1,0 +1,10 @@
+com/siegetd/game/BuildConfig.java
+ com.siegetd.game.BuildConfig
+com/siegetd/game/R.java
+ com.siegetd.game.R
+ com.siegetd.game.R$color
+ com.siegetd.game.R$drawable
+ com.siegetd.game.R$string
+ com.siegetd.game.R$style
+com/siegetd/game/AndroidLauncher.java
+ com.siegetd.game.AndroidLauncher

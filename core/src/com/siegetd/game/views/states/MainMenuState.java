@@ -7,17 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.HostButton;
-import com.siegetd.game.views.components.JoinButton;
+import com.siegetd.game.views.components.MultiPlayerButton;
 import com.siegetd.game.views.components.SettingsButton;
 import com.siegetd.game.views.components.RopeComponent;
+import com.siegetd.game.views.components.SinglePlayerButton;
 import com.siegetd.game.views.components.TableComponent;
 
 public class MainMenuState extends GameState{
     private Texture background;
-    private SettingsButton btnSettings;
-    private JoinButton btnJoin;
-    private HostButton btnHost;
+    private SettingsButton settingsButton;
+    private SinglePlayerButton singlePlayerButton;
+    private MultiPlayerButton multiPlayerButton;
     private TableComponent table;
     private RopeComponent rope;
     private Table buttonTable;
@@ -40,18 +40,26 @@ public class MainMenuState extends GameState{
         //buttonTable.align(Align.center);
         buttonTable.setFillParent(true);
 
-        btnSettings = new SettingsButton();
-        btnSettings.addButtonListners(gsc);
-        buttonTable.add(btnSettings.button).size(btnSettings.button.getWidth() / 2,btnSettings.button.getHeight() / 2).row();
+        settingsButton = new SettingsButton();
+        settingsButton.addButtonListners(gsc);
+        buttonTable.add(settingsButton.button).size(
+                table.tableWidth / 3,
+                (float) (table.tableHeight *0.3))
+                .row();
 
-        btnJoin = new JoinButton();
-        btnJoin.addButtonListners(gsc);
-        buttonTable.add(btnJoin.button).size(btnJoin.button.getWidth() / 2,btnJoin.button.getHeight() / 2).row();
+        singlePlayerButton = new SinglePlayerButton();
+        singlePlayerButton.addButtonListners(gsc);
+        buttonTable.add(singlePlayerButton.button).size(
+                table.tableWidth / 3,
+                (float) (table.tableHeight *0.3))
+                .row();
 
-        btnHost = new HostButton();
-        btnHost.addButtonListners(gsc);
-        buttonTable.add(btnHost.button).size(btnHost.button.getWidth() / 2, btnHost.button.getHeight() / 2).row();
-
+        multiPlayerButton = new MultiPlayerButton();
+        multiPlayerButton.addButtonListners(gsc);
+        buttonTable.add(multiPlayerButton.button).size(
+                table.tableWidth / 3,
+                (float) (table.tableHeight *0.3))
+                .row();
 
         stage.addActor(buttonTable);
     }

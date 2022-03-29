@@ -3,25 +3,21 @@ package com.siegetd.game.views.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
+import com.siegetd.game.views.components.MusicButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.SettingsButton;
 import com.siegetd.game.views.components.TableComponent;
 
 public class SettingsState extends GameState{
-    private Texture background;
-    private BackButton btnBack;
-    private TableComponent table;
-    private RopeComponent rope;
-    private Table buttonTable;
-    private Stage stage;
-    private Vector2 pos;
+    private final Texture background;
+    private final TableComponent table;
+    private final RopeComponent rope;
+    private final Stage stage;
 
     public SettingsState(GameStateController gsc){
         super(gsc);
@@ -33,11 +29,17 @@ public class SettingsState extends GameState{
         table = new TableComponent();
         rope = new RopeComponent(table);
 
-        pos = new Vector2(table.tableX, table.tableY + table.tableHeight);
-        btnBack = new BackButton(pos);
+        Table buttonTable = new Table();
+        buttonTable.setFillParent(true);
+        MusicButton musicButton = new MusicButton(table);
+        musicButton.addButtonListners(gsc);
+        buttonTable.add(musicButton.button);
+
+        //pos = new Vector2(table.tableX, table.tableY + table.tableHeight);
+        BackButton btnBack = new BackButton(table);
         btnBack.addButtonListners(gsc);
         stage.addActor(btnBack.button);
-
+        stage.addActor(buttonTable);
     }
 
 
