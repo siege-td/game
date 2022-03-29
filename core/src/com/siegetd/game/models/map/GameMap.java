@@ -48,7 +48,6 @@ public class GameMap {
                 }
             }
         }
-        System.out.println(movableTiles.getFirst().toString());
     }
 
     private MapLayer getTileLayers(String layer){
