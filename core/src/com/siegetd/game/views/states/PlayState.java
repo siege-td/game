@@ -1,5 +1,6 @@
 package com.siegetd.game.views.states;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -37,7 +38,9 @@ public class PlayState extends GameState{
     }
 
     @Override
-    public void update(float delta) {}
+    public void update(float delta) {
+        gameMap.update();
+    }
 
     @Override
     public void render() {
