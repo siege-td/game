@@ -17,7 +17,7 @@ public class InputButton extends ButtonComponent {
     public InputButton() {
 
         this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/input_field.png");
+        this.buttonImg = new Texture("GUI/add_pin.png");
         this.button = this.buttonComponent.createButton( this.buttonImg);
         this.listener = new InputListener();
     }

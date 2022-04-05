@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input;
 
 public class InputListener implements Input.TextInputListener {
 
-    private String text = "default";
+    private String text = "No pin added";
     @Override
     public void input(String text) {
         this.text = text;
@@ -12,7 +12,7 @@ public class InputListener implements Input.TextInputListener {
 
     @Override
     public void canceled() {
-        text="Canceled";
+        text="No pin added";
     }
 
     public String getText(){

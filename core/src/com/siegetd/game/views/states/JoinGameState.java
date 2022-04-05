@@ -46,7 +46,7 @@ public class JoinGameState extends GameState {
         inputButton = new InputButton();
         inputButton.addButtonListners(gsc);
         font = new BitmapFont();
-        font.getData().setScale(5f);
+        font.getData().setScale(3f);
 
         //Stage components
         buttonTable.add(inputButton.button).size(
@@ -76,9 +76,12 @@ public class JoinGameState extends GameState {
         batch.draw(table.img, table.tableX,table.tableY, table.tableWidth, table.tableHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
-        font.draw(batch, "PIN: " + inputButton.listener.getText(), (Gdx.graphics.getWidth() / 2), table.tableY);
-        batch.end();
+        font.draw(batch,
+                "PIN: " + inputButton.listener.getText(),
+                (float)((Gdx.graphics.getWidth() /2) - (font.getRegion().getRegionWidth() / 2)),
+                table.getBottomCenter().y + (float)(table.tableHeight * 0.9));
         stage.draw();
+        batch.end();
     }
 
     @Override
