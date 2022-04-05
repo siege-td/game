@@ -28,6 +28,12 @@
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-box2d:1.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.ashley:ashley:1.7.3" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-ai:1.8.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-freetype:1.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx:1.10.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.socket:socket.io-client:2.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: io.socket:engine.io-client:2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.json:json:20090211" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.12.12" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.15.0" level="project" />
   </component>
 </module>
