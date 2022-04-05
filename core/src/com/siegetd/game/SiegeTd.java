@@ -34,7 +34,7 @@ public class SiegeTd extends ApplicationAdapter {
 
 	public SiegeTd() {
 		try {
-			socketConnection = new SocketConnection();
+			socketConnection = SocketConnection.getInstance();
 			this.socket = socketConnection.getSocket();
 		} catch (URISyntaxException error) {
 			System.out.println(error);
@@ -44,11 +44,9 @@ public class SiegeTd extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		camera = new OrthographicCamera();
 
-		renderingSystem = new RenderingSystem(batch);
-
-		camera = renderingSystem.getCamera();
-		batch.setProjectionMatrix(camera.combined);
+		renderingSystem = new RenderingSystem(batch, camera);
 
 		engine = new PooledEngine();
 
@@ -57,11 +55,19 @@ public class SiegeTd extends ApplicationAdapter {
 		engine.addSystem(new MovementSystem());
 
 		new TestEntity(engine).create();
-
+		new TestEntity(engine).create();
 		//This has to be initialized after all other entities, i think
 
 		componentUpdater = new ComponentUpdater();
 
+		this.socket.emit("new_lobby", 1);
+
+		try {
+			componentUpdater.updateCurrencyComponent(engine.getEntities().get(0), 10);
+			componentUpdater.updateHitpointComponent(engine.getEntities().get(1), 80);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
 		//socket.connected();
 		//socket.emit("new_lobby", 1);
@@ -79,11 +85,6 @@ public class SiegeTd extends ApplicationAdapter {
 
 	@Override
 	public void dispose () {
-		try {
-			componentUpdater.updateCurrencyComponent(engine.getEntities().get(0), 10);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 		batch.dispose();
 	}
 

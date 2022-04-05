@@ -21,3 +21,19 @@ A
 core/build.gradle,9/1/918ca359602392354123b7d3b63264baf7ea9dde
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+^
+.core/src/com/siegetd/game/views/GameState.java,6/6/667ce93fe5a53f8163a03e94165899d23ff799b0
+v
+Fcore/src/com/siegetd/game/models/ecs/components/VelocityComponent.java,8/5/856ca3828cef94c7c2406e286f001533ad9f8d72
+j
+:core/src/com/siegetd/game/models/ecs/entities/IEntity.java,8/0/803b3ea1c0f3df65628e4f1239488f1af528cc4a
+q
+Acore/src/com/siegetd/game/models/ecs/systems/AnimationSystem.java,a/b/ab4e555936d9082c6d8b7dfb9e6df84c417b4ba8
+n
+>core/src/com/siegetd/game/controllers/GameStateController.java,b/6/b62127580781de9c940b27efea45e0a4c540858b
+i
+9desktop/src/com/siegetd/game/desktop/DesktopLauncher.java,1/6/163a3b2052472c184517e0bed7ac2cb83f3aa048
+v
+Fcore/src/com/siegetd/game/models/ecs/components/HitpointComponent.java,e/c/ec5ab654f8924110b650a80141c1456c3af07748
+v
+Fcore/src/com/siegetd/game/models/ecs/components/CurrencyComponent.java,b/9/b91c74f362f64b0a50ad3abaa7aabe98b782a19d

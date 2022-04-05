@@ -1,5 +1,5 @@
-com/siegetd/game/models/ecs/systems/RenderingSystem.java
- com.siegetd.game.models.ecs.systems.RenderingSystem
+com/siegetd/game/api/SocketConnection.java
+ com.siegetd.game.api.SocketConnection
 com/siegetd/game/models/ecs/components/State.java
  com.siegetd.game.models.ecs.components.State
 com/siegetd/game/models/ecs/components/AnimationComponent.java
@@ -34,8 +34,8 @@ com/siegetd/game/models/map/tile/Tile.java
  com.siegetd.game.models.map.tile.Tile
 com/siegetd/game/models/ecs/systems/MovementSystem.java
  com.siegetd.game.models.ecs.systems.MovementSystem
-com/siegetd/game/models/ecs/utils/RenderUtils.java
- com.siegetd.game.models.ecs.utils.RenderUtils
+com/siegetd/game/models/ecs/utils/ComponentUpdater.java
+ com.siegetd.game.models.ecs.utils.ComponentUpdater
 com/siegetd/game/models/ecs/components/VelocityComponent.java
  com.siegetd.game.models.ecs.components.VelocityComponent
 com/siegetd/game/models/ecs/components/TransformComponent.java
@@ -52,12 +52,10 @@ com/siegetd/game/models/ecs/components/TextureComponent.java
  com.siegetd.game.models.ecs.components.TextureComponent
 com/siegetd/game/models/map/GameMap.java
  com.siegetd.game.models.map.GameMap
-com/siegetd/game/api/SocketConnection.java
- com.siegetd.game.api.SocketConnection
 com/siegetd/game/models/ecs/components/HitpointComponent.java
  com.siegetd.game.models.ecs.components.HitpointComponent
-com/siegetd/game/models/ecs/utils/ComponentUpdater.java
- com.siegetd.game.models.ecs.utils.ComponentUpdater
+com/siegetd/game/models/ecs/systems/RenderingSystem.java
+ com.siegetd.game.models.ecs.systems.RenderingSystem
 com/siegetd/game/views/GameState.java
  com.siegetd.game.views.GameState
 com/siegetd/game/views/states/SettingsState.java

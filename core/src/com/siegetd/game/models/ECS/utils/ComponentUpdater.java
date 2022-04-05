@@ -23,7 +23,7 @@ public class ComponentUpdater {
 
     public ComponentUpdater() {
         try {
-            connection = new SocketConnection();
+            connection = SocketConnection.getInstance();
             this.socket = connection.getSocket();
         } catch (URISyntaxException error) {
             System.out.println(error);

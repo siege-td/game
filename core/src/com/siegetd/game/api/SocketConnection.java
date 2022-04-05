@@ -12,9 +12,18 @@ public class SocketConnection {
 
     private final Socket socket;
 
-    public SocketConnection() throws URISyntaxException {
+    private static SocketConnection instance;
+
+    private SocketConnection() {
         this.socket = IO.socket(URI.create(SOCKET_URI));
         this.socket.connect();
+    }
+
+    public static SocketConnection getInstance() throws URISyntaxException {
+        if (instance == null) {
+            instance = new SocketConnection();
+        }
+        return instance;
     }
 
     public Socket getSocket() {
