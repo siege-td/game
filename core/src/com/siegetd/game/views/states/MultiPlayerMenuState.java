@@ -35,27 +35,28 @@ public class MultiPlayerMenuState extends GameState {
         table = new TableComponent();
         rope = new RopeComponent(table);
 
+        //Declare components
         buttonTable = new Table();
         buttonTable.setFillParent(true);
         btnJoin = new JoinButton();
         btnJoin.addButtonListners(gsc);
         buttonTable.add(btnJoin.button).size(
-                table.tableWidth / 3,
+                (float)(table.tableWidth / 3),
                 (float) (table.tableHeight *0.3))
                 .row();
-
         btnHost = new HostButton();
         btnHost.addButtonListners(gsc);
         buttonTable.add(btnHost.button).size(
-                table.tableWidth / 3,
+                (float)(table.tableWidth / 3),
                 (float) (table.tableHeight *0.3))
                 .row();
-        stage.addActor(buttonTable);
 
-        //pos = new Vector2(table.tableX, table.tableY + table.tableHeight);
         btnBack = new BackButton(table);
         btnBack.addButtonListners(gsc);
+
+        //Add components
         stage.addActor(btnBack.button);
+        stage.addActor(buttonTable);
 
     }
 

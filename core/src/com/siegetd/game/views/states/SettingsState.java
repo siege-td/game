@@ -16,6 +16,9 @@ import com.siegetd.game.views.components.TableComponent;
 public class SettingsState extends GameState{
     private final Texture background;
     private final TableComponent table;
+    private final Table buttonTable;
+    private final MusicButton musicButton;
+    private final BackButton backButton;
     private final RopeComponent rope;
     private final Stage stage;
 
@@ -23,22 +26,27 @@ public class SettingsState extends GameState{
         super(gsc);
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+        /*
+        TODO: Edit music & Sound
+         */
 
-        //Visual components
+        //GUI
         background = new Texture("GUI/bg.png");
         table = new TableComponent();
         rope = new RopeComponent(table);
 
-        Table buttonTable = new Table();
+        //Declare components
+        buttonTable = new Table();
         buttonTable.setFillParent(true);
-        MusicButton musicButton = new MusicButton(table);
+        musicButton = new MusicButton(table);
         musicButton.addButtonListners(gsc);
         buttonTable.add(musicButton.button);
 
-        //pos = new Vector2(table.tableX, table.tableY + table.tableHeight);
-        BackButton btnBack = new BackButton(table);
-        btnBack.addButtonListners(gsc);
-        stage.addActor(btnBack.button);
+        backButton = new BackButton(table);
+        backButton.addButtonListners(gsc);
+
+        //Add components
+        stage.addActor(backButton.button);
         stage.addActor(buttonTable);
     }
 

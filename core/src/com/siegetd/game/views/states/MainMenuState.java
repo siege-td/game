@@ -15,13 +15,12 @@ import com.siegetd.game.views.components.TableComponent;
 
 public class MainMenuState extends GameState{
     private Texture background;
-    private SettingsButton settingsButton;
-    private SinglePlayerButton singlePlayerButton;
-    private MultiPlayerButton multiPlayerButton;
     private TableComponent table;
     private RopeComponent rope;
     private Table buttonTable;
-
+    private SettingsButton settingsButton;
+    private SinglePlayerButton singlePlayerButton;
+    private MultiPlayerButton multiPlayerButton;
     private Stage stage;
 
     public MainMenuState(final GameStateController gsc){
@@ -29,38 +28,37 @@ public class MainMenuState extends GameState{
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        //Visual components
+        //GUI
         background = new Texture("GUI/bg.png");
         table = new TableComponent();
         rope = new RopeComponent(table);
 
-        //functional components
+        //Declare components
         buttonTable = new Table();
-        //buttonTable.setSize(table.tableWidth, table.tableHeight);
-        //buttonTable.align(Align.center);
         buttonTable.setFillParent(true);
 
         settingsButton = new SettingsButton();
         settingsButton.addButtonListners(gsc);
         buttonTable.add(settingsButton.button).size(
-                table.tableWidth / 3,
+                (float)(table.tableWidth / 3),
                 (float) (table.tableHeight *0.3))
                 .row();
 
         singlePlayerButton = new SinglePlayerButton();
         singlePlayerButton.addButtonListners(gsc);
         buttonTable.add(singlePlayerButton.button).size(
-                table.tableWidth / 3,
+                (float)(table.tableWidth / 3),
                 (float) (table.tableHeight *0.3))
                 .row();
 
         multiPlayerButton = new MultiPlayerButton();
         multiPlayerButton.addButtonListners(gsc);
         buttonTable.add(multiPlayerButton.button).size(
-                table.tableWidth / 3,
+                (float)(table.tableWidth / 3),
                 (float) (table.tableHeight *0.3))
                 .row();
 
+        //Add components
         stage.addActor(buttonTable);
     }
 
@@ -78,7 +76,7 @@ public class MainMenuState extends GameState{
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.end();
-        //Draw buttons
+
         stage.draw();
     }
 
