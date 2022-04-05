@@ -26,6 +26,9 @@ public class JoinGameState extends GameState {
     private final RopeComponent rope;
     private final Stage stage;
 
+    private FreeTypeFontGenerator fontGenerator;
+    private FreeTypeFontGenerator.FreeTypeFontParameter fontParameter;
+
     private BitmapFont font;
 
     public JoinGameState(GameStateController gsc) {
@@ -47,16 +50,16 @@ public class JoinGameState extends GameState {
         backButton.addButtonListners(gsc);
         inputButton = new InputButton();
         inputButton.addButtonListners(gsc);
+
+        //Font settings
         font = new BitmapFont();
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
         fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        fontParameter.size = 12;
-        fontParameter.color = Color.BLACK;
+        fontParameter.size = 90;
+        fontParameter.color = Color.WHITE;
 
         font = fontGenerator.generateFont(fontParameter);
-
-        fontGenerator.dispose();
 
         //Stage components
         buttonTable.add(inputButton.button).size(
@@ -88,7 +91,7 @@ public class JoinGameState extends GameState {
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         font.draw(batch,
                 "PIN: " + inputButton.listener.getText(),
-                (float)((Gdx.graphics.getWidth() /2) - (font.getRegion().getRegionWidth() / 2)),
+                (float)((Gdx.graphics.getWidth() /2) - (font.getRegion().getRegionWidth() / 4)),
                 table.getBottomCenter().y + (float)(table.tableHeight * 0.9));
         stage.draw();
         batch.end();
@@ -101,5 +104,6 @@ public class JoinGameState extends GameState {
         rope.dispose();
         stage.dispose();
         font.dispose();
+        fontGenerator.dispose();
     }
 }
