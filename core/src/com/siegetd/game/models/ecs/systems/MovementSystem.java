@@ -35,6 +35,7 @@ public class MovementSystem extends IteratingSystem {
 	public void processEntity (Entity entity, float deltaTime) {
 		PositionComponent position = pm.get(entity);
 		MovementComponent movement = mm.get(entity);
+		movement.updateMovement((int)position.x, (int)position.y);
 
 		position.x += movement.velocityX * deltaTime;
 		position.y += movement.velocityY * deltaTime;

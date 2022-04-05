@@ -55,6 +55,10 @@ public class GameMap {
         }
     }
 
+    public LinkedList<MovableTile> getMovableTiles(){
+        return this.movableTiles;
+    }
+
     private MapLayer getTileLayers(String layer){
         return tiledMap.getLayers().get(layer);
     }

@@ -52,28 +52,18 @@ public class PlayState extends GameState{
 
         this.gameMap = new GameMap(camera);
 
-        Texture crateTexture = new Texture(Gdx.files.internal("crate.png"));
-        Texture coinTexture = new Texture(Gdx.files.internal("coin.png"));
+        Texture crateTexture = new Texture(Gdx.files.internal("3_enemies_1_attack_000.png"));
 
         engine = new PooledEngine();
         engine.addSystem(new RenderSystem(camera));
         engine.addSystem(new MovementSystem());
 
         Entity crate = engine.createEntity();
-        crate.add(new PositionComponent(50, 50));
+        crate.add(new PositionComponent(768, 0));
         crate.add(new VisualComponent(new TextureRegion(crateTexture)));
+        crate.add(new MovementComponent(200,200, this.gameMap.getMovableTiles()));
 
         engine.addEntity(crate);
-
-        TextureRegion coinRegion = new TextureRegion(coinTexture);
-
-        for (int i = 0; i < 100; i++) {
-            Entity coin = engine.createEntity();
-            coin.add(new PositionComponent(MathUtils.random(640), MathUtils.random(480)));
-            coin.add(new MovementComponent(10.0f, 100.0f));
-            coin.add(new VisualComponent(coinRegion));
-            engine.addEntity(coin);
-        }
     }
 
     @Override
