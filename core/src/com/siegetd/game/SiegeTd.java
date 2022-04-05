@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.models.ecs.entities.TestEntity;
@@ -39,14 +40,24 @@ public class SiegeTd extends ApplicationAdapter {
 		} catch (URISyntaxException error) {
 			System.out.println(error);
 		}
+
 	}
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		camera = new OrthographicCamera();
 
-		renderingSystem = new RenderingSystem(batch, camera);
+		this.camera = new OrthographicCamera(640, 480);
+		this.camera.position.set(320, 240, 0);
+		this.camera.update();
+
+		Texture testTexture = new Texture("badlogic.jpg");
+
+		try {
+			renderingSystem = new RenderingSystem(batch, this.camera);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 
 		engine = new PooledEngine();
 

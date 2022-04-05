@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 
+import java.net.URISyntaxException;
+
 public class RenderingSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
@@ -20,8 +22,7 @@ public class RenderingSystem extends EntitySystem {
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
 
-
-    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera) {
+    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera) throws URISyntaxException {
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
@@ -41,8 +42,6 @@ public class RenderingSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-        camera.update();
-
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
 
@@ -52,10 +51,23 @@ public class RenderingSystem extends EntitySystem {
             TextureComponent textureComponent = textureMapper.get(entity);
             TransformComponent transformComponent = transformMapper.get(entity);
 
+            float textureWidth = textureComponent.region.getRegionWidth();
+            float textureHeight = textureComponent.region.getRegionHeight();
+
+            float textureOriginX = textureWidth / 2f;
+            float textureOriginY = textureHeight / 2f;
+
             batch.draw(
                     textureComponent.region,
                     transformComponent.position.x,
-                    transformComponent.position.y
+                    transformComponent.position.y,
+                    textureWidth,
+                    textureHeight,
+                    textureOriginX,
+                    textureOriginY,
+                    1f,
+                    1f,
+                    0f
             );
         }
 

@@ -33,6 +33,7 @@
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-platform:1.10.0:natives-desktop" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-box2d-platform:1.10.0:natives-desktop" level="project" />
     <orderEntry type="library" name="Gradle: io.socket:socket.io-client:2.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-freetype-platform:1.10.0:natives-desktop" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-box2d:1.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.ashley:ashley:1.7.3" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-ai:1.8.2" level="project" />
@@ -50,9 +51,11 @@
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.12.12" level="project" />
     <orderEntry type="library" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.15.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.badlogicgames.gdx:gdx-freetype:1.10.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-linux" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-windows" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-osx" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.badlogicgames.gdx:gdx-freetype:1.10.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-linux" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-windows" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: net.java.jinput:jinput-platform:2.0.5:natives-osx" level="project" />
