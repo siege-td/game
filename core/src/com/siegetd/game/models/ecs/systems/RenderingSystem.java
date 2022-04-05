@@ -5,11 +5,13 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.views.components.GameStats;
 
 import java.net.URISyntaxException;
 
@@ -22,9 +24,15 @@ public class RenderingSystem extends EntitySystem {
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
 
-    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera) throws URISyntaxException {
+    private GameStats gameStats;
+
+    private PooledEngine engine;
+
+    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera, PooledEngine engine) throws URISyntaxException {
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
+
+        this.engine = engine;
 
         this.camera = camera;
         this.batch = batch;
@@ -44,6 +52,15 @@ public class RenderingSystem extends EntitySystem {
     public void update(float deltaTime) {
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
+
+        try {
+            gameStats = new GameStats(batch, engine);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        gameStats.updateStats();
+
 
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);

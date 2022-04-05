@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.models.ecs.entities.TestEntity;
@@ -14,8 +13,6 @@ import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.ecs.utils.ComponentUpdater;
-
-import org.json.JSONException;
 
 import java.net.URISyntaxException;
 
@@ -51,15 +48,14 @@ public class SiegeTd extends ApplicationAdapter {
 		this.camera.position.set(320, 240, 0);
 		this.camera.update();
 
-		Texture testTexture = new Texture("badlogic.jpg");
+		engine = new PooledEngine();
 
 		try {
-			renderingSystem = new RenderingSystem(batch, this.camera);
+			renderingSystem = new RenderingSystem(batch, this.camera, engine);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 
-		engine = new PooledEngine();
 
 		engine.addSystem(new AnimationSystem());
 		engine.addSystem(renderingSystem);
@@ -68,17 +64,6 @@ public class SiegeTd extends ApplicationAdapter {
 		new TestEntity(engine).create();
 		new TestEntity(engine).create();
 		//This has to be initialized after all other entities, i think
-
-		componentUpdater = new ComponentUpdater();
-
-		this.socket.emit("new_lobby", 1);
-
-		try {
-			componentUpdater.updateCurrencyComponent(engine.getEntities().get(0), 10);
-			componentUpdater.updateHitpointComponent(engine.getEntities().get(1), 80);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 
 		//socket.connected();
 		//socket.emit("new_lobby", 1);

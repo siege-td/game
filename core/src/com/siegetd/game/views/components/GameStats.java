@@ -1,11 +1,17 @@
 package com.siegetd.game.views.components;
 
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.siegetd.game.api.SocketConnection;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
@@ -22,7 +28,11 @@ public class GameStats {
 
     private Socket socket;
 
-    public GameStats(SpriteBatch batch) throws URISyntaxException {
+    private String name = "";
+    private int hitpoints = 0;
+    private int currency = 0;
+
+    public GameStats(SpriteBatch batch, PooledEngine engine) throws URISyntaxException {
         this.socket = SocketConnection.getInstance().getSocket();
 
         this.batch = batch;
@@ -30,31 +40,48 @@ public class GameStats {
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
         fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        fontParameter.size = 12;
+        fontParameter.size = 16;
         fontParameter.color = Color.BLACK;
 
         font = fontGenerator.generateFont(fontParameter);
+        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         fontGenerator.dispose();
 
-        subscribeToSocketEvents();
+        this.socket.on("updated_data", onNewData);
     }
 
-    public void initStats() {
+    public void updateStats() {
         font.draw(
                 batch,
-                "Hellooooooo",
-                20f,
-                20f
+                "Player: " + name + "\nHitpoints: " + hitpoints + "\nCurrency: " + currency,
+                10f,
+                470f
         );
     }
 
-    private void subscribeToSocketEvents() {
-        socket.on("updated_data", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println(args);
+    private Emitter.Listener onNewData = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            try {
+                JSONArray dataArray = (JSONArray) args[0];
+                JSONObject data = dataArray.getJSONObject(0);
+                String tempName = data.getString("playerName");
+                int tempHitpoints = data.getInt("hitpoints");
+                int tempCurrency = data.getInt("currency");
+
+                if (!tempName.equalsIgnoreCase(name) || tempHitpoints != hitpoints || tempCurrency != currency) {
+
+                    name = tempName;
+                    hitpoints = tempHitpoints;
+                    currency = tempCurrency;
+
+                    updateStats();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
-    }
+
+        }
+    };
 }
