@@ -11,11 +11,11 @@ import com.siegetd.game.views.components.MultiPlayerButton;
 import com.siegetd.game.views.components.SettingsButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.SinglePlayerButton;
-import com.siegetd.game.views.components.TableComponent;
+import com.siegetd.game.views.components.WindowComponent;
 
 public class MainMenuState extends GameState{
     private Texture background;
-    private TableComponent table;
+    private WindowComponent window;
     private RopeComponent rope;
     private Table buttonTable;
     private SettingsButton settingsButton;
@@ -25,41 +25,13 @@ public class MainMenuState extends GameState{
 
     public MainMenuState(final GameStateController gsc){
         super(gsc);
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
 
-        //GUI
-        background = new Texture("GUI/bg.png");
-        table = new TableComponent();
-        rope = new RopeComponent(table);
+        createStage();
+        createBackground();
+        createButtonTable();
+        createButtons();
 
-        //Declare components
-        buttonTable = new Table();
-        buttonTable.setFillParent(true);
-
-        settingsButton = new SettingsButton();
-        settingsButton.addButtonListners(gsc);
-        buttonTable.add(settingsButton.button).size(
-                (float)(table.tableWidth / 3),
-                (float) (table.tableHeight *0.3))
-                .row();
-
-        singlePlayerButton = new SinglePlayerButton();
-        singlePlayerButton.addButtonListners(gsc);
-        buttonTable.add(singlePlayerButton.button).size(
-                (float)(table.tableWidth / 3),
-                (float) (table.tableHeight *0.3))
-                .row();
-
-        multiPlayerButton = new MultiPlayerButton();
-        multiPlayerButton.addButtonListners(gsc);
-        buttonTable.add(multiPlayerButton.button).size(
-                (float)(table.tableWidth / 3),
-                (float) (table.tableHeight *0.3))
-                .row();
-
-        //Add components
-        stage.addActor(buttonTable);
+        stageComponents();
     }
 
     @Override
@@ -72,7 +44,7 @@ public class MainMenuState extends GameState{
 
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(table.img, table.tableX,table.tableY, table.tableWidth, table.tableHeight);
+        batch.draw(window.img, window.windowX, window.windowY, window.windowWidth, window.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.end();
@@ -80,10 +52,55 @@ public class MainMenuState extends GameState{
         stage.draw();
     }
 
+    private void createStage() {
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void createBackground() {
+        background = new Texture("GUI/bg.png");
+        window = new WindowComponent();
+        rope = new RopeComponent(window);
+    }
+
+    private void createButtonTable() {
+        buttonTable = new Table();
+        buttonTable.setFillParent(true);
+
+    }
+
+    private void createButtons() {
+        settingsButton = new SettingsButton();
+        settingsButton.addButtonListners(gsc);
+        buttonTable.add(settingsButton.button).size(
+                (float)(window.windowWidth / 3),
+                (float) (window.windowHeight *0.3))
+                .row();
+
+        singlePlayerButton = new SinglePlayerButton();
+        singlePlayerButton.addButtonListners(gsc);
+        buttonTable.add(singlePlayerButton.button).size(
+                (float)(window.windowWidth / 3),
+                (float) (window.windowHeight *0.3))
+                .row();
+
+        multiPlayerButton = new MultiPlayerButton();
+        multiPlayerButton.addButtonListners(gsc);
+        buttonTable.add(multiPlayerButton.button).size(
+                (float)(window.windowWidth / 3),
+                (float) (window.windowHeight *0.3))
+                .row();
+    }
+
+
+    private void stageComponents() {
+        stage.addActor(buttonTable);
+    }
+
     @Override
     public void dispose() {
         background.dispose();
-        table.dispose();
+        window.dispose();
         rope.dispose();
         stage.dispose();
     }

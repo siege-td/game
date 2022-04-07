@@ -13,13 +13,13 @@ import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
 import com.siegetd.game.views.components.PlayButton;
 import com.siegetd.game.views.components.RopeComponent;
-import com.siegetd.game.views.components.TableComponent;
+import com.siegetd.game.views.components.WindowComponent;
 
 public class HostGameState extends GameState {
     private Texture background;
     private BackButton backButton;
     private PlayButton playButton;
-    private TableComponent table;
+    private WindowComponent table;
     private RopeComponent rope;
     private Stage stage;
 
@@ -58,13 +58,13 @@ public class HostGameState extends GameState {
 
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(table.img, table.tableX,table.tableY, table.tableWidth, table.tableHeight);
+        batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
-                table.getBottomCenter().y + (float)(table.tableHeight * 0.9));
+                table.getBottomCenter().y + (float)(table.windowHeight * 0.9));
         batch.end();
         stage.draw();
     }
@@ -77,7 +77,7 @@ public class HostGameState extends GameState {
 
     private void createBackground() {
         background = new Texture("GUI/bg.png");
-        table = new TableComponent();
+        table = new WindowComponent();
         rope = new RopeComponent(table);
     }
 

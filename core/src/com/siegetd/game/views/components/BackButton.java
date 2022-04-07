@@ -14,12 +14,12 @@ public class BackButton extends ButtonComponent {
     private Vector2 pos;
     public Button button;
 
-    public BackButton(TableComponent table) {
+    public BackButton(WindowComponent table) {
         pos = table.getTopLeft();
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/button_close.png");
         this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(table.tableWidth/10, table.tableWidth/10);
+        this.button.setSize(table.windowWidth /10, table.windowWidth /10);
         this.button.setPosition(
                 (float) (pos.x - (button.getWidth()* 0.25)),
                 (float) (pos.y - (button.getHeight() * 0.75))

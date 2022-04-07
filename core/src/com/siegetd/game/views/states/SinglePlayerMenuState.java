@@ -9,36 +9,48 @@ import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
 import com.siegetd.game.views.components.PlayButton;
 import com.siegetd.game.views.components.RopeComponent;
-import com.siegetd.game.views.components.TableComponent;
+import com.siegetd.game.views.components.WindowComponent;
 
 public class SinglePlayerMenuState extends GameState {
-    private final Texture background;
-    private final BackButton backButton;
-    private final PlayButton playButton;
-    private final TableComponent table;
-    private final RopeComponent rope;
-    private final Stage stage;
+    private Texture background;
+    private BackButton backButton;
+    private PlayButton playButton;
+    private WindowComponent window;
+    private RopeComponent rope;
+    private Stage stage;
 
     public SinglePlayerMenuState(GameStateController gsc) {
         super(gsc);
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
         /*TODO:
            Game settings (Level layout/Difficulty?)
         */
 
-        //GUI
+        createStage();
+        createBackground();
+        createButtons();
+
+        stageComponents();
+    }
+
+    private void createStage() {
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void createBackground() {
         background = new Texture("GUI/bg.png");
-        table = new TableComponent();
-        rope = new RopeComponent(table);
+        window = new WindowComponent();
+        rope = new RopeComponent(window);
+    }
 
-        //Declare components
-        backButton = new BackButton(table);
+    private void createButtons() {
+        backButton = new BackButton(window);
         backButton.addButtonListners(gsc);
-        playButton = new PlayButton(table);
+        playButton = new PlayButton(window);
         playButton.addButtonListners(gsc);
+    }
 
-        //Add components
+    private void stageComponents() {
         stage.addActor(backButton.button);
         stage.addActor(playButton.button);
     }
@@ -55,7 +67,7 @@ public class SinglePlayerMenuState extends GameState {
 
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(table.img, table.tableX,table.tableY, table.tableWidth, table.tableHeight);
+        batch.draw(window.img, window.windowX, window.windowY, window.windowWidth, window.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.end();
@@ -66,7 +78,7 @@ public class SinglePlayerMenuState extends GameState {
     @Override
     public void dispose() {
         background.dispose();
-        table.dispose();
+        window.dispose();
         rope.dispose();
         stage.dispose();
     }

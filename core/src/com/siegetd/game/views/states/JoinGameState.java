@@ -15,7 +15,7 @@ import com.siegetd.game.views.components.BackButton;
 import com.siegetd.game.views.components.InputButton;
 import com.siegetd.game.views.components.JoinButton;
 import com.siegetd.game.views.components.RopeComponent;
-import com.siegetd.game.views.components.TableComponent;
+import com.siegetd.game.views.components.WindowComponent;
 
 public class JoinGameState extends GameState {
     private JoinButton joinButton;
@@ -23,7 +23,7 @@ public class JoinGameState extends GameState {
     private BackButton backButton;
     private Table buttonTable;
     private Texture background;
-    private TableComponent table;
+    private WindowComponent table;
     private RopeComponent rope;
     private Stage stage;
     private GlyphLayout glyphLayout;
@@ -57,14 +57,14 @@ public class JoinGameState extends GameState {
 
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(table.img, table.tableX,table.tableY, table.tableWidth, table.tableHeight);
+        batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         updateText();
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
-                table.getBottomCenter().y + (float)(table.tableHeight * 0.9));
+                table.getBottomCenter().y + (float)(table.windowHeight * 0.9));
         batch.end();
         stage.draw();
     }
@@ -77,7 +77,7 @@ public class JoinGameState extends GameState {
 
     private void createBackground() {
         background = new Texture("GUI/bg.png");
-        table = new TableComponent();
+        table = new WindowComponent();
         rope = new RopeComponent(table);
     }
 
@@ -117,12 +117,12 @@ public class JoinGameState extends GameState {
 
     private void stageComponents() {
         buttonTable.add(inputButton.button).size(
-                (float)(table.tableWidth / 3),
-                (float) (table.tableHeight *0.3))
+                (float)(table.windowWidth / 3),
+                (float) (table.windowHeight *0.3))
                 .row();
         buttonTable.add(joinButton.button).size(
-                (float)(table.tableWidth / 3),
-                (float) (table.tableHeight *0.3))
+                (float)(table.windowWidth / 3),
+                (float) (table.windowHeight *0.3))
                 .row();
         stage.addActor(backButton.button);
         stage.addActor(buttonTable);

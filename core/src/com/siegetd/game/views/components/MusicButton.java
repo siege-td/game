@@ -15,14 +15,13 @@ public class MusicButton extends ButtonComponent {
     private boolean enabled;
     public Button button;
 
-    public MusicButton(TableComponent table) {
-        System.out.println("PUTIN");
+    public MusicButton(WindowComponent table) {
         pos = table.getTopLeft();
         this.enabled = true;
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/button_music.png");
         this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(table.tableWidth/10, table.tableWidth/10);
+        this.button.setSize(table.windowWidth /10, table.windowWidth /10);
         this.button.setPosition(
                 (float) (pos.x - (button.getWidth()* 0.25)),
                 (float) (pos.y - (button.getHeight() * 0.75))

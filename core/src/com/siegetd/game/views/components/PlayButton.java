@@ -14,12 +14,12 @@ public class PlayButton extends ButtonComponent {
     private Vector2 pos;
     public Button button;
 
-    public PlayButton(TableComponent table) {
+    public PlayButton(WindowComponent table) {
         pos = table.getBottomCenter();
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/button_play.png");
         this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(table.tableWidth/5, table.tableWidth/5);
+        this.button.setSize(table.windowWidth /5, table.windowWidth /5);
         this.button.setPosition(
                 (float) (pos.x - (button.getWidth()* 0.5)),
                 (float) (pos.y - (button.getHeight() * 0.5))
