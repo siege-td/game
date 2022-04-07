@@ -10,7 +10,6 @@ import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
 import com.siegetd.game.views.components.MusicButton;
 import com.siegetd.game.views.components.RopeComponent;
-import com.siegetd.game.views.components.SettingsButton;
 import com.siegetd.game.views.components.TableComponent;
 
 public class SettingsState extends GameState{

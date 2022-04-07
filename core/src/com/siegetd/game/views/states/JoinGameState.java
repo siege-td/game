@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,61 +18,31 @@ import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.TableComponent;
 
 public class JoinGameState extends GameState {
-    private final JoinButton joinButton;
-    private final InputButton inputButton;
-    private final BackButton backButton;
-    private final Table buttonTable;
-    private final Texture background;
-    private final TableComponent table;
-    private final RopeComponent rope;
-    private final Stage stage;
-
+    private JoinButton joinButton;
+    private InputButton inputButton;
+    private BackButton backButton;
+    private Table buttonTable;
+    private Texture background;
+    private TableComponent table;
+    private RopeComponent rope;
+    private Stage stage;
+    private GlyphLayout glyphLayout;
+    private float textWidth;
+    private String pin;
     private FreeTypeFontGenerator fontGenerator;
     private FreeTypeFontGenerator.FreeTypeFontParameter fontParameter;
-
     private BitmapFont font;
 
     public JoinGameState(GameStateController gsc) {
         super(gsc);
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
 
-        //GUI
-        background = new Texture("GUI/bg.png");
-        table = new TableComponent();
-        rope = new RopeComponent(table);
+        createStage();
+        createBackground();
+        createButtonTable();
+        createButtons();
+        createFont();
 
-        //Declare components
-        buttonTable = new Table();
-        buttonTable.setFillParent(true);
-        joinButton = new JoinButton();
-        joinButton.addButtonListners(gsc);
-        backButton = new BackButton(table);
-        backButton.addButtonListners(gsc);
-        inputButton = new InputButton();
-        inputButton.addButtonListners(gsc);
-
-        //Font settings
-        font = new BitmapFont();
-        fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
-        fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-        fontParameter.size = 90;
-        fontParameter.color = Color.WHITE;
-
-        font = fontGenerator.generateFont(fontParameter);
-
-        //Stage components
-        buttonTable.add(inputButton.button).size(
-                (float)(table.tableWidth / 3),
-                (float) (table.tableHeight *0.3))
-                .row();
-        buttonTable.add(joinButton.button).size(
-                (float)(table.tableWidth / 3),
-                (float) (table.tableHeight *0.3))
-                .row();
-        stage.addActor(backButton.button);
-        stage.addActor(buttonTable);
+        stageComponents();
     }
 
     @Override
@@ -89,12 +60,72 @@ public class JoinGameState extends GameState {
         batch.draw(table.img, table.tableX,table.tableY, table.tableWidth, table.tableHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
+        updateText();
         font.draw(batch,
-                "PIN: " + inputButton.listener.getText(),
-                (float)((Gdx.graphics.getWidth() /2) - (font.getRegion().getRegionWidth() / 4)),
+                glyphLayout,
+                (Gdx.graphics.getWidth() - textWidth)/2,
                 table.getBottomCenter().y + (float)(table.tableHeight * 0.9));
-        stage.draw();
         batch.end();
+        stage.draw();
+    }
+
+    private void createStage() {
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+
+    }
+
+    private void createBackground() {
+        background = new Texture("GUI/bg.png");
+        table = new TableComponent();
+        rope = new RopeComponent(table);
+    }
+
+    private void createButtonTable(){
+        buttonTable = new Table();
+        buttonTable.setFillParent(true);
+    }
+
+    private void createButtons(){
+        joinButton = new JoinButton();
+        joinButton.addButtonListners(gsc);
+        backButton = new BackButton(table);
+        backButton.addButtonListners(gsc);
+        inputButton = new InputButton();
+        inputButton.addButtonListners(gsc);
+    }
+
+    private void createFont(){
+        font = new BitmapFont();
+        fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
+        fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+        fontParameter.size = 30;
+        fontParameter.color = Color.WHITE;
+
+        font = fontGenerator.generateFont(fontParameter);
+
+        glyphLayout = new GlyphLayout();
+        updateText();
+    }
+
+    private void updateText(){
+        pin = "PIN: " + inputButton.listener.getText();
+        glyphLayout.setText(font, pin);
+        textWidth = glyphLayout.width;
+    }
+
+    private void stageComponents() {
+        buttonTable.add(inputButton.button).size(
+                (float)(table.tableWidth / 3),
+                (float) (table.tableHeight *0.3))
+                .row();
+        buttonTable.add(joinButton.button).size(
+                (float)(table.tableWidth / 3),
+                (float) (table.tableHeight *0.3))
+                .row();
+        stage.addActor(backButton.button);
+        stage.addActor(buttonTable);
     }
 
     @Override
