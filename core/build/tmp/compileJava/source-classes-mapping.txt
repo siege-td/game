@@ -40,12 +40,11 @@ com/siegetd/game/SiegeTd.java
  com.siegetd.game.SiegeTd
 com/siegetd/game/models/map/tile/Tile.java
  com.siegetd.game.models.map.tile.Tile
-com/siegetd/game/controllers/GameStateController.java
- com.siegetd.game.controllers.GameStateController
- com.siegetd.game.controllers.GameStateController$1
- com.siegetd.game.controllers.GameStateController$State
-com/siegetd/game/models/ecs/systems/MovementSystem.java
- com.siegetd.game.models.ecs.systems.MovementSystem
+com/siegetd/game/views/components/JoinButton.java
+ com.siegetd.game.views.components.JoinButton
+ com.siegetd.game.views.components.JoinButton$1
+com/siegetd/game/utils/RenderUtils.java
+ com.siegetd.game.utils.RenderUtils
 com/siegetd/game/views/states/SplashState.java
  com.siegetd.game.views.states.SplashState
 com/siegetd/game/models/ecs/components/HitpointComponent.java
@@ -78,11 +77,12 @@ com/siegetd/game/models/ecs/components/VelocityComponent.java
  com.siegetd.game.models.ecs.components.VelocityComponent
 com/siegetd/game/models/ecs/utils/RenderUtils.java
  com.siegetd.game.models.ecs.utils.RenderUtils
-com/siegetd/game/utils/RenderUtils.java
- com.siegetd.game.utils.RenderUtils
-com/siegetd/game/views/components/JoinButton.java
- com.siegetd.game.views.components.JoinButton
- com.siegetd.game.views.components.JoinButton$1
+com/siegetd/game/models/ecs/systems/MovementSystem.java
+ com.siegetd.game.models.ecs.systems.MovementSystem
+com/siegetd/game/controllers/GameStateController.java
+ com.siegetd.game.controllers.GameStateController
+ com.siegetd.game.controllers.GameStateController$1
+ com.siegetd.game.controllers.GameStateController$State
 com/siegetd/game/models/map/GameMap.java
  com.siegetd.game.models.map.GameMap
 com/siegetd/game/views/states/PlayState.java

@@ -65,6 +65,9 @@ public class GameMap {
     }
 
     public void update(){
+        if(selectedCell != null){
+
+        }
         handleUserClick();
     }
 
@@ -72,6 +75,7 @@ public class GameMap {
         if(Gdx.input.justTouched()){
             if(selectedCell != null){
                 unselectCell();
+                return;
             }
             Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 
@@ -106,6 +110,7 @@ public class GameMap {
         TextureRegion unselectedTileTexture = new TextureRegion(new Texture("level1/tiles/22.png"));
         StaticTiledMapTile unselectedTile = new StaticTiledMapTile(unselectedTileTexture);
         selectedCell.setTile(unselectedTile);
+        selectedCell = null;
     }
 
     private MapLayer getTileLayers(String layer){
