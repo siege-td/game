@@ -24,6 +24,7 @@ public class SiegeTd extends ApplicationAdapter {
 	private RenderingSystem renderingSystem;
 	private OrthographicCamera camera;
 	private PooledEngine engine;
+	private GameStateController gsm;
 
 	private SocketConnection socketConnection;
 	private Socket socket;
@@ -62,19 +63,17 @@ public class SiegeTd extends ApplicationAdapter {
 		engine.addSystem(new MovementSystem());
 
 		new TestEntity(engine).create();
-		new TestEntity(engine).create();
-		//This has to be initialized after all other entities, i think
 
-		//socket.emit("new_lobby", 1);
-		//socket.emit("close_lobby", 1);
-
+		gsm = new GameStateController(this);
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		engine.update(Gdx.graphics.getDeltaTime());
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render();
+		//engine.update(Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 	}
 
