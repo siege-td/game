@@ -1,6 +1,5 @@
 package com.siegetd.game.views.components;
 
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,7 +31,7 @@ public class GameStats {
     private int hitpoints = 0;
     private int currency = 0;
 
-    public GameStats(SpriteBatch batch, PooledEngine engine) throws URISyntaxException {
+    public GameStats(SpriteBatch batch) throws URISyntaxException {
         this.socket = SocketConnection.getInstance().getSocket();
 
         this.batch = batch;
@@ -52,6 +51,8 @@ public class GameStats {
     }
 
     public void updateStats() {
+        // Add logic for checking if the data is the same
+
         font.draw(
                 batch,
                 "Player: " + name + "\nHitpoints: " + hitpoints + "\nCurrency: " + currency,
@@ -71,7 +72,6 @@ public class GameStats {
                 int tempCurrency = data.getInt("currency");
 
                 if (!tempName.equalsIgnoreCase(name) || tempHitpoints != hitpoints || tempCurrency != currency) {
-
                     name = tempName;
                     hitpoints = tempHitpoints;
                     currency = tempCurrency;

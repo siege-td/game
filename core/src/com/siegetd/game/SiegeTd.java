@@ -51,7 +51,7 @@ public class SiegeTd extends ApplicationAdapter {
 		engine = new PooledEngine();
 
 		try {
-			renderingSystem = new RenderingSystem(batch, this.camera, engine);
+			renderingSystem = new RenderingSystem(batch, this.camera);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -65,7 +65,6 @@ public class SiegeTd extends ApplicationAdapter {
 		new TestEntity(engine).create();
 		//This has to be initialized after all other entities, i think
 
-		//socket.connected();
 		//socket.emit("new_lobby", 1);
 		//socket.emit("close_lobby", 1);
 

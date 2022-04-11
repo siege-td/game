@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,13 +25,9 @@ public class RenderingSystem extends EntitySystem {
 
     private GameStats gameStats;
 
-    private PooledEngine engine;
-
-    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera, PooledEngine engine) throws URISyntaxException {
+    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera) throws URISyntaxException {
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
-
-        this.engine = engine;
 
         this.camera = camera;
         this.batch = batch;
@@ -54,7 +49,7 @@ public class RenderingSystem extends EntitySystem {
         batch.setProjectionMatrix(camera.combined);
 
         try {
-            gameStats = new GameStats(batch, engine);
+            gameStats = new GameStats(batch);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
