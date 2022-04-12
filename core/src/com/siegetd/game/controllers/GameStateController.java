@@ -3,6 +3,8 @@ package com.siegetd.game.controllers;
 import com.siegetd.game.SiegeTd;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.states.HostGameState;
+import com.siegetd.game.views.states.InMultiPlayerGameState;
+import com.siegetd.game.views.states.InSingePlayerGameState;
 import com.siegetd.game.views.states.JoinGameState;
 import com.siegetd.game.views.states.LobbyState;
 import com.siegetd.game.views.states.MainMenuState;
@@ -29,7 +31,9 @@ public class GameStateController {
         MULTI,
         SINGLE,
         JOIN,
-        HOST
+        HOST,
+        IN_GAME_SINGLE,
+        IN_GAME_MULTI
     }
 
     public GameStateController(final SiegeTd app){
@@ -84,6 +88,10 @@ public class GameStateController {
                 return new JoinGameState(this);
             case HOST:
                 return new HostGameState(this);
+            case IN_GAME_SINGLE:
+                return new InSingePlayerGameState(this);
+            case IN_GAME_MULTI:
+                return new InMultiPlayerGameState(this);
         }
         return null;
     }
