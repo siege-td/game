@@ -43,7 +43,7 @@ public class PlayButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameStateController.State.MENU);
+                gsc.setState(GameStateController.State.IN_GAME_SINGLE);
             }
         });
     }

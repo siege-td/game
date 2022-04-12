@@ -88,7 +88,7 @@ public class JoinGameState extends GameState {
 
     private void createButtons(){
         joinButton = new JoinButton();
-        joinButton.addButtonListners(gsc);
+        joinButton.addButtonListnersJoinMultiplayer(gsc);
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
         inputButton = new InputButton();
