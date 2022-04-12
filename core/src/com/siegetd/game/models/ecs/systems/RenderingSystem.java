@@ -25,12 +25,14 @@ public class RenderingSystem extends EntitySystem {
 
     private GameStats gameStats;
 
-    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera) throws URISyntaxException {
+    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera, GameStats gameStats) throws URISyntaxException {
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
         this.camera = camera;
         this.batch = batch;
+
+        this.gameStats = gameStats;
     }
 
     @Override
@@ -47,12 +49,6 @@ public class RenderingSystem extends EntitySystem {
     public void update(float deltaTime) {
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
-
-        try {
-            gameStats = new GameStats(batch);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
 
         gameStats.updateStats();
 

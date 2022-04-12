@@ -27,9 +27,9 @@ public class GameStats {
 
     private Socket socket;
 
-    private String name = "";
-    private int hitpoints = 0;
-    private int currency = 0;
+    private String name;
+    private int hitpoints;
+    private int currency;
 
     public GameStats(SpriteBatch batch) throws URISyntaxException {
         this.socket = SocketConnection.getInstance().getSocket();
@@ -47,7 +47,15 @@ public class GameStats {
 
         fontGenerator.dispose();
 
+        initStats();
+
         this.socket.on("updated_data", onNewData);
+    }
+
+    private void initStats() {
+        name = this.socket.id();
+        hitpoints = 100;
+        currency = 0;
     }
 
     public void updateStats() {

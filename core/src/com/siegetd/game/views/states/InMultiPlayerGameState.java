@@ -5,12 +5,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
+import com.siegetd.game.Globals;
+import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.models.ecs.entities.TestEntity;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.views.GameState;
+import com.siegetd.game.views.components.GameStats;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
@@ -20,6 +27,8 @@ public class InMultiPlayerGameState extends GameState {
     private RenderingSystem renderingSystem;
     private OrthographicCamera camera;
     private PooledEngine engine;
+
+    private GameStats gameStats;
 
     public InMultiPlayerGameState(GameStateController gsc) {
         super(gsc);
@@ -33,7 +42,8 @@ public class InMultiPlayerGameState extends GameState {
         engine = new PooledEngine();
 
         try {
-            renderingSystem = new RenderingSystem(batch, this.camera);
+            gameStats = new GameStats(this.batch);
+            renderingSystem = new RenderingSystem(batch, this.camera, this.gameStats);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
