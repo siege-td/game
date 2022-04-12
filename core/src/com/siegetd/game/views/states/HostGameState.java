@@ -95,7 +95,7 @@ public class HostGameState extends GameState {
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
         playButton = new PlayButton(table);
-        playButton.addButtonListners(gsc);
+        playButton.addButtonListnersForHostMultiplayer(gsc);
         inputButton = new InputButton();
         inputButton.addButtonListners(gsc);
     }

@@ -47,7 +47,7 @@ public class SinglePlayerMenuState extends GameState {
         backButton = new BackButton(window);
         backButton.addButtonListners(gsc);
         playButton = new PlayButton(window);
-        playButton.addButtonListners(gsc);
+        playButton.addButtonListnersForHostSingleplayer(gsc);
     }
 
     private void stageComponents() {
