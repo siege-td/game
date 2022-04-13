@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
-import com.siegetd.game.views.components.GameStats;
+import com.siegetd.game.views.components.gamestats.GameStats;
 
 import java.net.URISyntaxException;
 

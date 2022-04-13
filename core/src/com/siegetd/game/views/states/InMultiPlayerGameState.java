@@ -14,7 +14,7 @@ import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.GameStats;
+import com.siegetd.game.views.components.gamestats.GameStats;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +54,8 @@ public class InMultiPlayerGameState extends GameState {
 
         new TestEntity(engine).create();
         new TestEntity(engine).create();
+
+        doAfter3sec();
     }
 
     @Override
@@ -69,4 +71,24 @@ public class InMultiPlayerGameState extends GameState {
 
     @Override
     public void dispose() { }
+
+    private void doAfter3sec() {
+        Timer timer = new Timer();
+        Timer.Task task = timer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject object = new JSONObject();
+                    object.put("pin", Globals.pin);
+                    object.put("playerName", SocketConnection.getInstance().getSocket().id());
+                    object.put("hitpoints", 45);
+                    object.put("currency", 7878);
+
+                    SocketConnection.getInstance().getSocket().emit("update_game_data", object);
+                } catch (JSONException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 3);
+    }
 }
