@@ -38,6 +38,8 @@ public class JoinGameState extends GameState {
     private FreeTypeFontGenerator.FreeTypeFontParameter fontParameter;
     private BitmapFont font;
 
+    private boolean hasJoinedLobby;
+
     public JoinGameState(GameStateController gsc) {
         super(gsc);
 
@@ -48,6 +50,8 @@ public class JoinGameState extends GameState {
         createFont();
 
         stageComponents();
+
+        hasJoinedLobby = false;
     }
 
     @Override
@@ -132,11 +136,13 @@ public class JoinGameState extends GameState {
             pin = "PIN: " + inputButton.listener.getText();
         } else {
             pin = "PIN: " + inputButton.listener.getText() + "\nHost will start game";
+            if (!hasJoinedLobby) {
+                SocketConnection.getInstance().getSocket().emit("join_lobby", Globals.pin);
+                hasJoinedLobby = true;
+            }
         }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
-        // On updated text, join lobby
-        SocketConnection.getInstance().getSocket().emit("join_lobby", Globals.pin);
     }
 
     private void stageComponents() {
