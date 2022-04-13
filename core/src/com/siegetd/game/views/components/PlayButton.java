@@ -52,7 +52,7 @@ public class PlayButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                socket.emit("new_lobby", Globals.pin);
+                socket.emit("start_game", Globals.pin);
                 gsc.setState(GameStateController.State.IN_GAME_MULTI);
             }
         });

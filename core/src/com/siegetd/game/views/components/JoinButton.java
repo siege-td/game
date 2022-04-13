@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.Globals;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 
@@ -44,7 +43,7 @@ public class JoinButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                socket.emit("join_lobby", Globals.pin);
+                //socket.emit("join_lobby", Globals.pin);
                 gsc.setState(GameStateController.State.IN_GAME_MULTI);
             }
         });

@@ -30,6 +30,7 @@ public class InputButton extends ButtonComponent {
                         "Enter PIN",
                         listener.getText(),
                         "");
+
             }
         });
     }

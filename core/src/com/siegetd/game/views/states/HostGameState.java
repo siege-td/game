@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.siegetd.game.Globals;
+import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
@@ -16,6 +18,8 @@ import com.siegetd.game.views.components.InputButton;
 import com.siegetd.game.views.components.PlayButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
+
+import java.net.URISyntaxException;
 
 public class HostGameState extends GameState {
     private Texture background;
@@ -65,7 +69,13 @@ public class HostGameState extends GameState {
         batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
-        updateText();
+
+        try {
+            updateText();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
@@ -113,10 +123,12 @@ public class HostGameState extends GameState {
         glyphLayout = new GlyphLayout();
     }
 
-    private void updateText(){
+    private void updateText() throws URISyntaxException {
         pin = "LOBBY-PIN:\n" + inputButton.listener.getText(); // + getLobbyPinApiCall
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
+        // After pin is set, create lobby in backend
+        SocketConnection.getInstance().getSocket().emit("new_lobby", Globals.pin);
     }
 
     private void stageComponents(){

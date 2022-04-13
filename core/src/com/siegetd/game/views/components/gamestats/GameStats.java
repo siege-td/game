@@ -67,7 +67,7 @@ public class GameStats {
                     xPos,
                     470f
             );
-            xPos += 100f;
+            xPos += 200f;
         }
     }
 

@@ -9,16 +9,21 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.siegetd.game.Globals;
+import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
 import com.siegetd.game.views.components.InputButton;
-import com.siegetd.game.views.components.JoinButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
+import java.net.URISyntaxException;
+
+import io.socket.emitter.Emitter;
+
 public class JoinGameState extends GameState {
-    private JoinButton joinButton;
+    //private JoinButton joinButton;
     private InputButton inputButton;
     private BackButton backButton;
     private Table buttonTable;
@@ -60,13 +65,22 @@ public class JoinGameState extends GameState {
         batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
-        updateText();
+        try {
+            updateText();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
                 table.getBottomCenter().y + (float)(table.windowHeight * 0.9));
         batch.end();
         stage.draw();
+        try {
+            SocketConnection.getInstance().getSocket().on("game_started", onGameStarted);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     private void createStage() {
@@ -87,8 +101,8 @@ public class JoinGameState extends GameState {
     }
 
     private void createButtons(){
-        joinButton = new JoinButton();
-        joinButton.addButtonListnersJoinMultiplayer(gsc);
+        //joinButton = new JoinButton();
+        //joinButton.addButtonListnersJoinMultiplayer(gsc);
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
         inputButton = new InputButton();
@@ -106,13 +120,23 @@ public class JoinGameState extends GameState {
         font = fontGenerator.generateFont(fontParameter);
 
         glyphLayout = new GlyphLayout();
-        updateText();
+        try {
+            updateText();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void updateText(){
-        pin = "PIN: " + inputButton.listener.getText();
+    private void updateText() throws URISyntaxException {
+        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")) {
+            pin = "PIN: " + inputButton.listener.getText();
+        } else {
+            pin = "PIN: " + inputButton.listener.getText() + "\nHost will start game";
+        }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
+        // On updated text, join lobby
+        SocketConnection.getInstance().getSocket().emit("join_lobby", Globals.pin);
     }
 
     private void stageComponents() {
@@ -120,10 +144,10 @@ public class JoinGameState extends GameState {
                 (float)(table.windowWidth / 3),
                 (float) (table.windowHeight *0.3))
                 .row();
-        buttonTable.add(joinButton.button).size(
-                (float)(table.windowWidth / 3),
-                (float) (table.windowHeight *0.3))
-                .row();
+        //buttonTable.add(joinButton.button).size(
+        //        (float)(table.windowWidth / 3),
+        //        (float) (table.windowHeight *0.3))
+        //        .row();
         stage.addActor(backButton.button);
         stage.addActor(buttonTable);
     }
@@ -137,4 +161,11 @@ public class JoinGameState extends GameState {
         font.dispose();
         fontGenerator.dispose();
     }
+
+    private Emitter.Listener onGameStarted = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            gsc.setState(GameStateController.State.IN_GAME_MULTI);
+        }
+    };
 }
