@@ -55,7 +55,7 @@ public class InMultiPlayerGameState extends GameState {
         new TestEntity(engine).create();
         new TestEntity(engine).create();
 
-        doAfter3sec();
+        //doAfter3sec();
     }
 
     @Override

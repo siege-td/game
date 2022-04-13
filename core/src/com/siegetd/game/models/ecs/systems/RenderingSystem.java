@@ -50,7 +50,7 @@ public class RenderingSystem extends EntitySystem {
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
 
-        gameStats.updateStats();
+        gameStats.drawStats();
 
 
         for (int i = 0; i < entities.size(); i++) {

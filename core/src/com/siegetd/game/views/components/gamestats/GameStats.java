@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.siegetd.game.Globals;
 import com.siegetd.game.api.SocketConnection;
 
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -27,12 +29,12 @@ public class GameStats {
 
     private Socket socket;
 
-    private String name;
-    private int hitpoints;
-    private int currency;
+    private ArrayList<GameStat> gameStatList;
 
     public GameStats(SpriteBatch batch) throws URISyntaxException {
         this.socket = SocketConnection.getInstance().getSocket();
+
+        this.gameStatList = new ArrayList<>();
 
         this.batch = batch;
 
@@ -47,50 +49,68 @@ public class GameStats {
 
         fontGenerator.dispose();
 
-        initStats();
-
         // Socket event listners
+        this.socket.on("game_data_in_room", onGameDataInRoom);
         this.socket.on("updated_data", onNewData);
+
+        // init arraylist with game data
+        this.socket.emit("get_game_data_in_room", Globals.pin);
     }
 
-    private void initStats() {
-        name = this.socket.id();
-        hitpoints = 100;
-        currency = 0;
+    public void drawStats() {
+        float xPos = 10f;
+
+        for (GameStat stat : gameStatList) {
+            font.draw(
+                    batch,
+                    "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
+                    xPos,
+                    470f
+            );
+            xPos += 100f;
+        }
     }
 
-    public void updateStats() {
-        // Add logic for checking if the data is the same
+    private ArrayList<GameStat> jsonArrayToArrayList(JSONArray array) throws JSONException {
+        ArrayList<GameStat> gameStats = new ArrayList<>();
 
-        font.draw(
-                batch,
-                "Player: " + name + "\nHitpoints: " + hitpoints + "\nCurrency: " + currency,
-                10f,
-                470f
-        );
+        if (array != null) {
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject object = array.getJSONObject(i);
+                gameStats.add(new GameStat(
+                        object.getString("playerName"),
+                        object.getInt("hitpoints"),
+                        object.getInt("currency")
+                ));
+            }
+        }
+
+        return gameStats;
     }
+
+    private Emitter.Listener onGameDataInRoom = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            try {
+                gameStatList = jsonArrayToArrayList((JSONArray) args[0]);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
     private Emitter.Listener onNewData = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
             try {
-                JSONArray dataArray = (JSONArray) args[0];
-                JSONObject data = dataArray.getJSONObject(0);
-                String tempName = data.getString("playerName");
-                int tempHitpoints = data.getInt("hitpoints");
-                int tempCurrency = data.getInt("currency");
-
-                if (!tempName.equalsIgnoreCase(name) || tempHitpoints != hitpoints || tempCurrency != currency) {
-                    name = tempName;
-                    hitpoints = tempHitpoints;
-                    currency = tempCurrency;
-
-                    updateStats();
-                }
+                gameStatList = jsonArrayToArrayList((JSONArray) args[0]);
+                drawStats();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
     };
+
+
 }
