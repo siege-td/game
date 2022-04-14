@@ -38,6 +38,8 @@ public class HostGameState extends GameState {
     private float textWidth;
     private String pin;
 
+    private boolean hasHostedLobby;
+
     public HostGameState(GameStateController gsc) {
         super(gsc);
         /*TODO:
@@ -52,6 +54,8 @@ public class HostGameState extends GameState {
         createFont();
 
         stageComponents();
+
+        hasHostedLobby = false;
     }
 
     @Override
@@ -124,11 +128,17 @@ public class HostGameState extends GameState {
     }
 
     private void updateText() throws URISyntaxException {
-        pin = "LOBBY-PIN:\n" + inputButton.listener.getText(); // + getLobbyPinApiCall
+        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")) {
+            pin = "LOBBY-PIN:\n" + inputButton.listener.getText(); // + getLobbyPinApiCall
+        } else {
+            pin = "LOBBY-PIN:\n" + inputButton.listener.getText();
+            if (!hasHostedLobby) {
+                SocketConnection.getInstance().getSocket().emit("new_lobby", Globals.pin);
+                hasHostedLobby = true;
+            }
+        }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
-        // After pin is set, create lobby in backend
-        SocketConnection.getInstance().getSocket().emit("new_lobby", Globals.pin);
     }
 
     private void stageComponents(){
