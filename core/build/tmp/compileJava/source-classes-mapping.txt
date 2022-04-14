@@ -116,16 +116,20 @@ com/siegetd/game/views/states/SinglePlayerMenuState.java
  com.siegetd.game.views.states.SinglePlayerMenuState
 com/siegetd/game/models/map/utils/MapGlobals.java
  com.siegetd.game.models.map.utils.MapGlobals
-com/siegetd/game/models/map/GameMap.java
- com.siegetd.game.models.map.GameMap
+com/siegetd/game/models/ecs/systems/RenderingSystem.java
+ com.siegetd.game.models.ecs.systems.RenderingSystem
 com/siegetd/game/views/components/gamestats/GameStats.java
  com.siegetd.game.views.components.gamestats.GameStats
  com.siegetd.game.views.components.gamestats.GameStats$1
  com.siegetd.game.views.components.gamestats.GameStats$2
-com/siegetd/game/models/ecs/systems/RenderingSystem.java
- com.siegetd.game.models.ecs.systems.RenderingSystem
 com/siegetd/game/views/states/InMultiPlayerGameState.java
  com.siegetd.game.views.states.InMultiPlayerGameState
+com/siegetd/game/models/map/GameMapClickListener.java
+ com.siegetd.game.models.map.GameMapClickListener
+com/siegetd/game/models/map/GameMap.java
+ com.siegetd.game.models.map.GameMap
+com/siegetd/game/models/map/GameMapActor.java
+ com.siegetd.game.models.map.GameMapActor
 com/siegetd/game/controllers/GameStateController.java
  com.siegetd.game.controllers.GameStateController
  com.siegetd.game.controllers.GameStateController$1

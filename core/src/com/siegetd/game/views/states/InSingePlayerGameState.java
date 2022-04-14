@@ -64,6 +64,7 @@ public class InSingePlayerGameState extends GameState {
     public void render() {
         Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.input.setInputProcessor(gameMap);
         gameMap.render();
         engine.update(Gdx.graphics.getDeltaTime());
     }
