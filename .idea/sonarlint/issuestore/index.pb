@@ -29,7 +29,5 @@ A
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 v
 Fcore/src/com/siegetd/game/models/ecs/components/VelocityComponent.java,8/5/856ca3828cef94c7c2406e286f001533ad9f8d72
-w
-Gcore/src/com/siegetd/game/models/ecs/components/TransformComponent.java,9/9/992748f3d9230c1a326fcf6d387310477969ba49
 u
 Ecore/src/com/siegetd/game/models/ecs/components/TextureComponent.java,7/f/7f3bdf65edcfa70aa4f5105069b1b51ec3fa07f3

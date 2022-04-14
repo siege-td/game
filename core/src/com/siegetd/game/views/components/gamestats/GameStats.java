@@ -41,7 +41,7 @@ public class GameStats {
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
         fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        fontParameter.size = 16;
+        fontParameter.size = 120;
         fontParameter.color = Color.BLACK;
 
         font = fontGenerator.generateFont(fontParameter);
@@ -58,16 +58,16 @@ public class GameStats {
     }
 
     public void drawStats() {
-        float xPos = 10f;
+        float xPos = 20f;
 
         for (GameStat stat : gameStatList) {
             font.draw(
                     batch,
                     "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
                     xPos,
-                    470f
+                    2530f
             );
-            xPos += 200f;
+            xPos += 1000f;
         }
     }
 
