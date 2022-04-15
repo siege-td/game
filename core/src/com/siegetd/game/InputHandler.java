@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.models.map.tile.TileBorder;
-import com.siegetd.game.views.components.ingame.AddEntityButton;
+import com.siegetd.game.views.components.AddEntityButton;
 
 public class InputHandler {
 
@@ -38,8 +38,8 @@ public class InputHandler {
             addEntityButton = new AddEntityButton(camera);
             addEntityButton.addButtonListeners();
 
-            // IF touching where add button should be, do not render tile border
-            if (!Intersector.intersectRectangles(
+            // If touching where add button should be, do not render tile border
+            if (Intersector.intersectRectangles(
                     addEntityButton.getTransparentRectangle(),
                     new Rectangle(
                             lastTouchCoordinates.x - (lastTouchCoordinates.x % (camera.viewportWidth / TILE_COLUMN)),

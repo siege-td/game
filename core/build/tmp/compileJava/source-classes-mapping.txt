@@ -128,9 +128,11 @@ com/siegetd/game/views/states/LobbyState.java
  com.siegetd.game.views.states.LobbyState
 com/siegetd/game/models/map/tile/TileBorder.java
  com.siegetd.game.models.map.tile.TileBorder
-com/siegetd/game/views/components/ingame/AddEntityButton.java
- com.siegetd.game.views.components.ingame.AddEntityButton
- com.siegetd.game.views.components.ingame.AddEntityButton$1
+com/siegetd/game/views/components/AddEntityButton.java
+ com.siegetd.game.views.components.AddEntityButton
+ com.siegetd.game.views.components.AddEntityButton$1
+com/siegetd/game/views/components/selectentity/EntityModal.java
+ com.siegetd.game.views.components.selectentity.EntityModal
 com/siegetd/game/InputHandler.java
  com.siegetd.game.InputHandler
 com/siegetd/game/views/states/InSingePlayerGameState.java

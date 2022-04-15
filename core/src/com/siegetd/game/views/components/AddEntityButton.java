@@ -1,4 +1,4 @@
-package com.siegetd.game.views.components.ingame;
+package com.siegetd.game.views.components;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.views.components.ButtonComponent;
 
 public class AddEntityButton extends ButtonComponent {
 
