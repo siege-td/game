@@ -1,7 +1,15 @@
 package com.siegetd.game.views.components.ingame;
 
+import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
+import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -13,12 +21,40 @@ public class AddEntityButton extends ButtonComponent {
     private Texture buttonImg;
     public Button button;
 
+    // Invisible rectangle used for click detection
+    private ShapeRenderer shapeRenderer;
+    private Rectangle transparentRectangle;
+
     public AddEntityButton(OrthographicCamera camera) {
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/button_play.png");
         this.button = this.buttonComponent.createButton(this.buttonImg);
         this.button.setSize(camera.viewportWidth / 80, camera.viewportWidth / 80);
         this.button.setPosition(10, 10);
+
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        this.shapeRenderer = new ShapeRenderer();
+        this.shapeRenderer.setAutoShapeType(true);
+        this.shapeRenderer.setProjectionMatrix(camera.combined);
+
+        this.transparentRectangle = new Rectangle(
+                0,
+                0,
+                (camera.viewportWidth / TILE_COLUMN) * 3,
+                (camera.viewportHeight / TILE_ROW) * 2
+        );
+
+        this.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(new Color(0, 1, 0, 0f));
+        shapeRenderer.rect(
+                transparentRectangle.getX(),
+                transparentRectangle.getY(),
+                transparentRectangle.getWidth(),
+                transparentRectangle.getHeight()
+        );
+        shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
     public void addButtonListeners() {
@@ -28,5 +64,9 @@ public class AddEntityButton extends ButtonComponent {
                 System.out.println("OIHGOIH");
             }
         });
+    }
+
+    public Rectangle getTransparentRectangle() {
+        return transparentRectangle;
     }
 }

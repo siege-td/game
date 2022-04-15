@@ -1,8 +1,13 @@
 package com.siegetd.game;
 
+import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
+import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
+
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.models.map.tile.TileBorder;
@@ -30,18 +35,25 @@ public class InputHandler {
         }
 
         if (lastTouchCoordinates != null) {
-            // TODO: DO NOT CREATE IN UNDER ADD ENTITY BUTTON
-            TileBorder tileBorder = new TileBorder(lastTouchCoordinates.x, lastTouchCoordinates.y, this.camera);
-            tileBorder.drawTileBorder();
-
-            // Draw add entity button
-            // TODO: MOVE TO IN GAME UI CLASS
-
-
             addEntityButton = new AddEntityButton(camera);
             addEntityButton.addButtonListeners();
 
-            stage.addActor(addEntityButton.button);
+            // IF touching where add button should be, do not render tile border
+            if (!Intersector.intersectRectangles(
+                    addEntityButton.getTransparentRectangle(),
+                    new Rectangle(
+                            lastTouchCoordinates.x - (lastTouchCoordinates.x % (camera.viewportWidth / TILE_COLUMN)),
+                            lastTouchCoordinates.y - (lastTouchCoordinates.y % (camera.viewportHeight / TILE_ROW)),
+                            camera.viewportWidth / TILE_COLUMN,
+                            camera.viewportHeight / TILE_ROW
+                    ),
+                    addEntityButton.getTransparentRectangle()
+            )) {
+                TileBorder tileBorder = new TileBorder(lastTouchCoordinates.x, lastTouchCoordinates.y, this.camera);
+                tileBorder.drawTileBorder();
+
+                stage.addActor(addEntityButton.button);
+            }
 
         }
     }

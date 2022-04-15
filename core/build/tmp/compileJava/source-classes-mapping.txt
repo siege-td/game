@@ -73,9 +73,10 @@ com/siegetd/game/singletons/Currency.java
  com.siegetd.game.singletons.Currency
 com/siegetd/game/models/ecs/systems/AnimationSystem.java
  com.siegetd.game.models.ecs.systems.AnimationSystem
-com/siegetd/game/views/components/ingame/AddEntityButton.java
- com.siegetd.game.views.components.ingame.AddEntityButton
- com.siegetd.game.views.components.ingame.AddEntityButton$1
+com/siegetd/game/controllers/GameStateController.java
+ com.siegetd.game.controllers.GameStateController
+ com.siegetd.game.controllers.GameStateController$1
+ com.siegetd.game.controllers.GameStateController$State
 com/siegetd/game/views/GameState.java
  com.siegetd.game.views.GameState
 com/siegetd/game/models/ecs/components/CurrencyComponent.java
@@ -127,11 +128,10 @@ com/siegetd/game/views/states/LobbyState.java
  com.siegetd.game.views.states.LobbyState
 com/siegetd/game/models/map/tile/TileBorder.java
  com.siegetd.game.models.map.tile.TileBorder
+com/siegetd/game/views/components/ingame/AddEntityButton.java
+ com.siegetd.game.views.components.ingame.AddEntityButton
+ com.siegetd.game.views.components.ingame.AddEntityButton$1
 com/siegetd/game/InputHandler.java
  com.siegetd.game.InputHandler
-com/siegetd/game/controllers/GameStateController.java
- com.siegetd.game.controllers.GameStateController
- com.siegetd.game.controllers.GameStateController$1
- com.siegetd.game.controllers.GameStateController$State
 com/siegetd/game/views/states/InSingePlayerGameState.java
  com.siegetd.game.views.states.InSingePlayerGameState
