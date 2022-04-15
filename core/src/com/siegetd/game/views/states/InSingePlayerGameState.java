@@ -59,7 +59,7 @@ public class InSingePlayerGameState extends GameState {
 
         this.gameMap = new GameMap(camera);
 
-        this.inputHandler = new InputHandler(engine, camera);
+        this.inputHandler = new InputHandler(engine, camera, gameMap);
     }
 
     @Override
@@ -72,6 +72,7 @@ public class InSingePlayerGameState extends GameState {
         gameMap.render();
         inputHandler.listen();
         engine.update(Gdx.graphics.getDeltaTime());
+        //IN GAME UI CONTROLLER
     }
 
     @Override

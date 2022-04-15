@@ -4,33 +4,54 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.siegetd.game.models.map.GameMap;
 import com.siegetd.game.models.map.tile.TileBorder;
+import com.siegetd.game.views.components.ingame.AddEntityButton;
 
 public class InputHandler {
 
     private PooledEngine engine;
     private OrthographicCamera camera;
+    private GameMap gameMap;
 
     private Vector3 lastTouchCoordinates = null;
 
-    public InputHandler(PooledEngine engine, OrthographicCamera camera) {
+    private AddEntityButton addEntityButton;
+    private Stage stage;
+
+    private boolean buttonCreated = false;
+
+    public InputHandler(PooledEngine engine, OrthographicCamera camera, GameMap gameMap) {
         this.engine = engine;
         this.camera = camera;
+        this.gameMap = gameMap;
     }
 
     public void listen() {
         if (Gdx.input.justTouched()) {
             lastTouchCoordinates = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            System.out.println(lastTouchCoordinates);
-            // 1. check if tile clicked is placable
-            // 2. add square around tile clicked
-            // 3. open menu for selecting entity to spawn at placable tile
-            // 4. spawn selected entity in center of clicked tile
         }
 
         if (lastTouchCoordinates != null) {
+            // TODO: DO NOT CREATE IN UNDER ADD ENTITY BUTTON
             TileBorder tileBorder = new TileBorder(lastTouchCoordinates.x, lastTouchCoordinates.y, this.camera);
             tileBorder.drawTileBorder();
+
+            // Draw add entity button
+            // TODO: MOVE TO IN GAME UI CLASS
+            if (!buttonCreated) {
+                stage = new Stage();
+                Gdx.input.setInputProcessor(stage);
+
+                addEntityButton = new AddEntityButton(camera);
+                addEntityButton.addButtonListeners();
+
+                stage.addActor(addEntityButton.button);
+                stage.draw();
+
+                buttonCreated = true;
+            }
         }
     }
 }
