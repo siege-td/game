@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.siegetd.game.InputHandler;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
@@ -31,6 +32,8 @@ public class InSingePlayerGameState extends GameState {
     private RenderingSystem renderingSystem;
 
     private GameStats gameStats;
+
+    private InputHandler inputHandler;
 
     public InSingePlayerGameState(GameStateController gsc) {
         super(gsc);
@@ -55,6 +58,8 @@ public class InSingePlayerGameState extends GameState {
         engine.addSystem(new MovementSystem());
 
         this.gameMap = new GameMap(camera);
+
+        this.inputHandler = new InputHandler(engine, camera);
     }
 
     @Override
@@ -64,7 +69,7 @@ public class InSingePlayerGameState extends GameState {
     public void render() {
         Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.input.setInputProcessor(gameMap);
+        inputHandler.listen();
         gameMap.render();
         engine.update(Gdx.graphics.getDeltaTime());
     }

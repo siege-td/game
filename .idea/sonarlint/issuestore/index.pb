@@ -7,8 +7,6 @@ j
 :core/src/com/siegetd/game/models/ecs/components/State.java,5/b/5be0ba5198a8cf8905ed4b4d85d138f1496afa38
 r
 Bcore/src/com/siegetd/game/models/ecs/components/TypeComponent.java,c/e/ceb7b87277730632b6c31a0b8d204679d26b8e1d
-i
-9core/src/com/siegetd/game/models/ecs/components/Type.java,3/2/32d9e78384e66194782db2cbabe08c7529472aea
 s
 Ccore/src/com/siegetd/game/models/ecs/components/StateComponent.java,2/1/21e2560a53f00c7ed3207ca1f9c4d6dca0c51583
 j
