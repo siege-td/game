@@ -4,9 +4,11 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.siegetd.game.models.ecs.entities.MageEntity;
 import com.siegetd.game.views.components.ButtonComponent;
 
 public class SelectEntityModal {
@@ -31,11 +33,11 @@ public class SelectEntityModal {
 
     }
 
-    public void addButtonListeners(final PooledEngine engine) {
+    public void addButtonListeners(final PooledEngine engine, final Vector2 entitySpawnPos) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Add mage clicked");
+                new MageEntity(engine, entitySpawnPos).create();
             }
         });
     }

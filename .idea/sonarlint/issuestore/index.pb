@@ -9,8 +9,6 @@ r
 Bcore/src/com/siegetd/game/models/ecs/components/TypeComponent.java,c/e/ceb7b87277730632b6c31a0b8d204679d26b8e1d
 s
 Ccore/src/com/siegetd/game/models/ecs/components/StateComponent.java,2/1/21e2560a53f00c7ed3207ca1f9c4d6dca0c51583
-j
-:core/src/com/siegetd/game/models/ecs/entities/IEntity.java,8/0/803b3ea1c0f3df65628e4f1239488f1af528cc4a
 q
 Acore/src/com/siegetd/game/models/ecs/systems/AnimationSystem.java,a/b/ab4e555936d9082c6d8b7dfb9e6df84c417b4ba8
 i
@@ -27,5 +25,3 @@ A
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 v
 Fcore/src/com/siegetd/game/models/ecs/components/VelocityComponent.java,8/5/856ca3828cef94c7c2406e286f001533ad9f8d72
-u
-Ecore/src/com/siegetd/game/models/ecs/components/TextureComponent.java,7/f/7f3bdf65edcfa70aa4f5105069b1b51ec3fa07f3

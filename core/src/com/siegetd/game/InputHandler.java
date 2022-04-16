@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.models.map.tile.TileBorder;
@@ -30,20 +31,23 @@ public class InputHandler {
     private float tileY = 0f;
     private boolean tilePosSet = false;
 
+    private PooledEngine engine;
+
     public InputHandler(OrthographicCamera camera, Stage stage, PooledEngine engine) {
         this.camera = camera;
         this.stage = stage;
 
         this.touchCoordinates = new ArrayList<>();
 
-        addEntityButton = new AddEntityButton(camera, stage);
-        addEntityButton.addButtonListeners(engine);
+        this.engine = engine;
     }
 
     public void listen() {
         if (Gdx.input.justTouched()) {
             lastTouchCoordinates = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             touchCoordinates.add(lastTouchCoordinates);
+            addEntityButton = new AddEntityButton(camera, stage);
+
         }
 
         if (lastTouchCoordinates != null) {
@@ -59,8 +63,6 @@ public class InputHandler {
                     ),
                     addEntityButton.getTransparentRectangle()
             )) {
-                stage.addActor(addEntityButton.button);
-
                 if (!tilePosSet) {
                     tileX = lastTouchCoordinates.x;
                     tileY = lastTouchCoordinates.y;
@@ -70,6 +72,8 @@ public class InputHandler {
                 tileY = touchCoordinates.get(touchCoordinates.size() - 2).y;
                 tilePosSet = true;
             }
+            stage.addActor(addEntityButton.button);
+            addEntityButton.addButtonListeners(engine, new Vector2(tileX, tileY));
             TileBorder tileBorder = new TileBorder(
                     tileX,
                     tileY,
