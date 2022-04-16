@@ -32,10 +32,9 @@ public class InSingePlayerGameState extends GameState {
     private PooledEngine engine;
     private RenderingSystem renderingSystem;
 
+    // Other fields
     private GameStats gameStats;
-
     private InputHandler inputHandler;
-
     private Stage stage;
 
     public InSingePlayerGameState(GameStateController gsc) {
@@ -78,7 +77,6 @@ public class InSingePlayerGameState extends GameState {
         gameMap.render();
         inputHandler.listen();
         engine.update(Gdx.graphics.getDeltaTime());
-        // TODO: add entity spawning menu handler
         stage.draw();
     }
 

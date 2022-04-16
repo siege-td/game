@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.models.ecs.entities.MageEntity;
 import com.siegetd.game.views.components.ButtonComponent;
 
+import java.util.concurrent.Callable;
+
 public class SelectEntityModal {
 
     private OrthographicCamera camera;
@@ -21,7 +23,9 @@ public class SelectEntityModal {
 
     public SelectEntityModal(OrthographicCamera camera) {
         this.camera = camera;
+    }
 
+    public void showModal() {
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/add_mage.png");
         this.button = this.buttonComponent.createButton(buttonImg);
@@ -30,19 +34,25 @@ public class SelectEntityModal {
                 ((Gdx.graphics.getWidth() / 2) - (this.button.getWidth() / 2)),
                 ((Gdx.graphics.getHeight() / 2) - ((this.button.getHeight() / 2)))
         );
-
     }
 
-    public void addButtonListeners(final PooledEngine engine, final Vector2 entitySpawnPos) {
+    private void hideModal() {
+        this.button.setVisible(false);
+    }
+
+    public void addButtonListeners(final PooledEngine engine, final Vector2 entitySpawnPos, final Callable<Void> entitySpawned) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 new MageEntity(engine, entitySpawnPos, camera).create();
+                try {
+                    entitySpawned.call();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                hideModal();
             }
         });
     }
 
-    public void hideModal() {
-
-    }
 }

@@ -18,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.views.components.selectentity.SelectEntityModal;
 
+import java.util.concurrent.Callable;
+
 public class AddEntityButton extends ButtonComponent {
 
     private ButtonComponent buttonComponent;
@@ -69,13 +71,14 @@ public class AddEntityButton extends ButtonComponent {
         this.stage = stage;
     }
 
-    public void addButtonListeners(final PooledEngine engine, final Vector2 entitySpawnPos) {
+    public void addButtonListeners(final PooledEngine engine, final Vector2 entitySpawnPos, final Callable<Void> entitySpawned) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectEntityModal == null) {
                     selectEntityModal = new SelectEntityModal(camera);
-                    selectEntityModal.addButtonListeners(engine, entitySpawnPos);
+                    selectEntityModal.showModal();
+                    selectEntityModal.addButtonListeners(engine, entitySpawnPos, entitySpawned);
                     stage.addActor(selectEntityModal.button);
                 }
             }

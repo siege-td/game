@@ -15,6 +15,7 @@ import com.siegetd.game.models.map.tile.TileBorder;
 import com.siegetd.game.views.components.AddEntityButton;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 public class InputHandler {
 
@@ -52,7 +53,6 @@ public class InputHandler {
 
         if (lastTouchCoordinates != null) {
             // If touching where add button should be, do not render tile border
-            // TODO: keep tile border in place when touching under button
             if (!Intersector.intersectRectangles(
                     addEntityButton.getTransparentRectangle(),
                     new Rectangle(
@@ -72,14 +72,22 @@ public class InputHandler {
                 tileY = touchCoordinates.get(touchCoordinates.size() - 2).y;
                 tilePosSet = true;
             }
+
             stage.addActor(addEntityButton.button);
-            addEntityButton.addButtonListeners(engine, new Vector2(tileX, tileY));
+            addEntityButton.addButtonListeners(engine, new Vector2(tileX, tileY), onEntitySpawned());
+
             TileBorder tileBorder = new TileBorder(
                     tileX,
                     tileY,
                     this.camera
             );
+            
             tileBorder.drawTileBorder();
         }
+    }
+
+    public Callable<Void> onEntitySpawned() {
+        tilePosSet = false;
+        return null;
     }
 }
