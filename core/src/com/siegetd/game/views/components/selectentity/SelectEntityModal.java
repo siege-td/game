@@ -37,7 +37,7 @@ public class SelectEntityModal {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new MageEntity(engine, entitySpawnPos).create();
+                new MageEntity(engine, entitySpawnPos, camera).create();
             }
         });
     }

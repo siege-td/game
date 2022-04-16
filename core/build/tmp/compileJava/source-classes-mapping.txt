@@ -128,6 +128,10 @@ com/siegetd/game/controllers/GameStateController.java
  com.siegetd.game.controllers.GameStateController
  com.siegetd.game.controllers.GameStateController$1
  com.siegetd.game.controllers.GameStateController$State
+com/siegetd/game/views/states/InSingePlayerGameState.java
+ com.siegetd.game.views.states.InSingePlayerGameState
+com/siegetd/game/InputHandler.java
+ com.siegetd.game.InputHandler
 com/siegetd/game/views/components/AddEntityButton.java
  com.siegetd.game.views.components.AddEntityButton
  com.siegetd.game.views.components.AddEntityButton$1
@@ -136,7 +140,3 @@ com/siegetd/game/models/ecs/entities/MageEntity.java
 com/siegetd/game/views/components/selectentity/SelectEntityModal.java
  com.siegetd.game.views.components.selectentity.SelectEntityModal
  com.siegetd.game.views.components.selectentity.SelectEntityModal$1
-com/siegetd/game/InputHandler.java
- com.siegetd.game.InputHandler
-com/siegetd/game/views/states/InSingePlayerGameState.java
- com.siegetd.game.views.states.InSingePlayerGameState
