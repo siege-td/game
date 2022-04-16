@@ -3,6 +3,7 @@ package com.siegetd.game.views.components;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -29,7 +30,8 @@ public class AddEntityButton extends ButtonComponent {
     private OrthographicCamera camera;
     private Stage stage;
 
-    private SelectEntityModal selectEntityModal;
+    private SelectEntityModal selectEntityModal = null;
+
 
     public AddEntityButton(OrthographicCamera camera, Stage stage) {
         this.buttonComponent = new ButtonComponent();
@@ -64,16 +66,17 @@ public class AddEntityButton extends ButtonComponent {
 
         this.camera = camera;
         this.stage = stage;
-
-        selectEntityModal = new SelectEntityModal(camera);
-        selectEntityModal.addButtonListeners();
     }
 
-    public void addButtonListeners() {
+    public void addButtonListeners(final PooledEngine engine) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                stage.addActor(selectEntityModal.button);
+                if (selectEntityModal == null) {
+                    selectEntityModal = new SelectEntityModal(camera);
+                    selectEntityModal.addButtonListeners(engine);
+                    stage.addActor(selectEntityModal.button);
+                }
             }
         });
     }

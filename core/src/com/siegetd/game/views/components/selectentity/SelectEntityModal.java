@@ -1,5 +1,6 @@
 package com.siegetd.game.views.components.selectentity;
 
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -30,7 +31,7 @@ public class SelectEntityModal {
 
     }
 
-    public void addButtonListeners() {
+    public void addButtonListeners(final PooledEngine engine) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

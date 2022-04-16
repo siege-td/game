@@ -65,7 +65,7 @@ public class InSingePlayerGameState extends GameState {
         this.stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        this.inputHandler = new InputHandler(camera, stage, batch);
+        this.inputHandler = new InputHandler(camera, stage, engine);
     }
 
     @Override
