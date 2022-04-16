@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -28,8 +27,11 @@ public class AddEntityButton extends ButtonComponent {
     private Rectangle transparentRectangle;
 
     private OrthographicCamera camera;
+    private Stage stage;
 
-    public AddEntityButton(OrthographicCamera camera) {
+    private SelectEntityModal selectEntityModal;
+
+    public AddEntityButton(OrthographicCamera camera, Stage stage) {
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/button_play.png");
         this.button = this.buttonComponent.createButton(this.buttonImg);
@@ -61,15 +63,17 @@ public class AddEntityButton extends ButtonComponent {
         Gdx.gl.glDisable(GL20.GL_BLEND);
 
         this.camera = camera;
+        this.stage = stage;
+
+        selectEntityModal = new SelectEntityModal(camera);
+        selectEntityModal.addButtonListeners();
     }
 
-    public void addButtonListeners(final Stage stage, final SpriteBatch batch) {
+    public void addButtonListeners() {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                SelectEntityModal selectEntityModal = new SelectEntityModal(stage, camera);
-                selectEntityModal.showModal();
-                System.out.println("oaidgh");
+                stage.addActor(selectEntityModal.button);
             }
         });
     }

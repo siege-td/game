@@ -35,8 +35,8 @@ public class InputHandler {
         }
 
         if (lastTouchCoordinates != null) {
-            addEntityButton = new AddEntityButton(camera);
-            addEntityButton.addButtonListeners(stage, batch);
+            addEntityButton = new AddEntityButton(camera, stage);
+            addEntityButton.addButtonListeners();
 
             // If touching where add button should be, do not render tile border
             // TODO: keep tile border in place when touching under button
