@@ -3,9 +3,9 @@ package com.siegetd.game;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -15,18 +15,18 @@ import com.siegetd.game.views.components.AddEntityButton;
 
 public class InputHandler {
 
-    private PooledEngine engine;
     private OrthographicCamera camera;
+    private SpriteBatch batch;
 
     private Vector3 lastTouchCoordinates = null;
 
     private AddEntityButton addEntityButton;
     private Stage stage;
 
-    public InputHandler(PooledEngine engine, OrthographicCamera camera, Stage stage) {
-        this.engine = engine;
+    public InputHandler(OrthographicCamera camera, Stage stage, SpriteBatch batch) {
         this.camera = camera;
         this.stage = stage;
+        this.batch = batch;
     }
 
     public void listen() {
@@ -36,10 +36,11 @@ public class InputHandler {
 
         if (lastTouchCoordinates != null) {
             addEntityButton = new AddEntityButton(camera);
-            addEntityButton.addButtonListeners();
+            addEntityButton.addButtonListeners(stage, batch);
 
             // If touching where add button should be, do not render tile border
-            if (Intersector.intersectRectangles(
+            // TODO: keep tile border in place when touching under button
+            if (!Intersector.intersectRectangles(
                     addEntityButton.getTransparentRectangle(),
                     new Rectangle(
                             lastTouchCoordinates.x - (lastTouchCoordinates.x % (camera.viewportWidth / TILE_COLUMN)),

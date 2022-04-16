@@ -8,11 +8,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.siegetd.game.views.components.selectentity.SelectEntityModal;
 
 public class AddEntityButton extends ButtonComponent {
 
@@ -23,6 +26,8 @@ public class AddEntityButton extends ButtonComponent {
     // Invisible rectangle used for click detection
     private ShapeRenderer shapeRenderer;
     private Rectangle transparentRectangle;
+
+    private OrthographicCamera camera;
 
     public AddEntityButton(OrthographicCamera camera) {
         this.buttonComponent = new ButtonComponent();
@@ -54,13 +59,17 @@ public class AddEntityButton extends ButtonComponent {
         );
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
+
+        this.camera = camera;
     }
 
-    public void addButtonListeners() {
+    public void addButtonListeners(final Stage stage, final SpriteBatch batch) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("OIHGOIH");
+                SelectEntityModal selectEntityModal = new SelectEntityModal(stage, camera);
+                selectEntityModal.showModal();
+                System.out.println("oaidgh");
             }
         });
     }

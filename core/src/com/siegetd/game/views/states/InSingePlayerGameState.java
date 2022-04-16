@@ -65,7 +65,7 @@ public class InSingePlayerGameState extends GameState {
         this.stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        this.inputHandler = new InputHandler(engine, camera, stage);
+        this.inputHandler = new InputHandler(camera, stage, batch);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class InSingePlayerGameState extends GameState {
         gameMap.render();
         inputHandler.listen();
         engine.update(Gdx.graphics.getDeltaTime());
-        //IN GAME UI CONTROLLER
+        // TODO: add entity spawning menu handler
         stage.draw();
     }
 
