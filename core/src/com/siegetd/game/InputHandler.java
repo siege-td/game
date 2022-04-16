@@ -81,7 +81,7 @@ public class InputHandler {
                     tileY,
                     this.camera
             );
-            
+
             tileBorder.drawTileBorder();
         }
     }

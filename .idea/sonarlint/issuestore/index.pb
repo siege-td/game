@@ -73,8 +73,6 @@ a
 1core/src/com/siegetd/game/models/map/GameMap.java,3/8/38ef681e9d85924bf4a9ec73a386973de098dac8
 j
 :core/src/com/siegetd/game/views/components/PlayButton.java,c/c/cc431acf7cdebae0f21c8e4580fbb0255c4f2932
-o
-?core/src/com/siegetd/game/views/components/ButtonComponent.java,b/f/bf7b73a4202f98c63b207c148e3971bcd8f1f4c4
 ^
 .core/src/com/siegetd/game/views/GameState.java,6/6/667ce93fe5a53f8163a03e94165899d23ff799b0
 o

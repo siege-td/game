@@ -79,7 +79,9 @@ public class AddEntityButton extends ButtonComponent {
                     selectEntityModal = new SelectEntityModal(camera);
                     selectEntityModal.showModal();
                     selectEntityModal.addButtonListeners(engine, entitySpawnPos, entitySpawned);
-                    stage.addActor(selectEntityModal.button);
+                    stage.addActor(selectEntityModal.archerButton);
+                    stage.addActor(selectEntityModal.mageButton);
+                    stage.addActor(selectEntityModal.zappButton);
                 }
             }
         });
