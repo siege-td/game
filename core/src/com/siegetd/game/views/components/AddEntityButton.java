@@ -38,7 +38,7 @@ public class AddEntityButton extends ButtonComponent {
 
     public AddEntityButton(OrthographicCamera camera, Stage stage) {
         this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/button_play.png");
+        this.buttonImg = new Texture("GUI/open_shop.png");
         this.button = this.buttonComponent.createButton(this.buttonImg);
         this.button.setSize(camera.viewportWidth / 80, camera.viewportWidth / 80);
         this.button.setPosition(10, 10);

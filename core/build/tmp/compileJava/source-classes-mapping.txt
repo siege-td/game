@@ -136,13 +136,13 @@ com/siegetd/game/models/ecs/entities/ArcherEntity.java
  com.siegetd.game.models.ecs.entities.ArcherEntity
 com/siegetd/game/models/ecs/entities/ZappEntity.java
  com.siegetd.game.models.ecs.entities.ZappEntity
-com/siegetd/game/InputHandler.java
- com.siegetd.game.InputHandler
-com/siegetd/game/views/components/AddEntityButton.java
- com.siegetd.game.views.components.AddEntityButton
- com.siegetd.game.views.components.AddEntityButton$1
 com/siegetd/game/views/components/selectentity/SelectEntityModal.java
  com.siegetd.game.views.components.selectentity.SelectEntityModal
  com.siegetd.game.views.components.selectentity.SelectEntityModal$1
  com.siegetd.game.views.components.selectentity.SelectEntityModal$2
  com.siegetd.game.views.components.selectentity.SelectEntityModal$3
+com/siegetd/game/views/components/AddEntityButton.java
+ com.siegetd.game.views.components.AddEntityButton
+ com.siegetd.game.views.components.AddEntityButton$1
+com/siegetd/game/InputHandler.java
+ com.siegetd.game.InputHandler
