@@ -1,4 +1,4 @@
-package com.siegetd.game.models.ecs.entities;
+package com.siegetd.game.models.ecs.entities.defender;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.entities.IEntity;
 
 public class ArcherEntity implements IEntity {
 
