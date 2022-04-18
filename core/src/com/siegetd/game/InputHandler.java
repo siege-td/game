@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.siegetd.game.models.map.tile.TileBorder;
+import com.siegetd.game.views.components.map.TileBorder;
 import com.siegetd.game.views.components.AddEntityButton;
 
 import java.util.ArrayList;

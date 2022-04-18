@@ -18,6 +18,7 @@ import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.gamestats.GameStats;
+import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
 
@@ -36,6 +37,7 @@ public class InSingePlayerGameState extends GameState {
     private GameStats gameStats;
     private InputHandler inputHandler;
     private Stage stage;
+    private InGameGUI inGameGUI;
 
     public InSingePlayerGameState(GameStateController gsc) {
         super(gsc);
@@ -65,6 +67,8 @@ public class InSingePlayerGameState extends GameState {
         Gdx.input.setInputProcessor(stage);
 
         this.inputHandler = new InputHandler(camera, stage, engine);
+
+        this.inGameGUI = new InGameGUI(camera, stage);
     }
 
     @Override
