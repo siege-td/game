@@ -1,4 +1,12 @@
 {
+  "spawnPos": {
+    "x": 10,
+    "y": 10
+  },
+  "endPos": {
+    "x": 10,
+    "y": 10
+  },
   "rounds": [
     {
       "roundId": 1,

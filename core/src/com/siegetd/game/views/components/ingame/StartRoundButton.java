@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.RoundHandler;
 import com.siegetd.game.views.components.ButtonComponent;
 
 public class StartRoundButton extends ButtonComponent {
@@ -21,7 +20,7 @@ public class StartRoundButton extends ButtonComponent {
         this.button.setPosition(Gdx.graphics.getWidth() - (this.button.getWidth() + 10), 10);
     }
 
-    public void addButtonListener(RoundHandler roundHandler) {
+    public void addButtonListener() {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

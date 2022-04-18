@@ -40,6 +40,7 @@ public class PlayButton extends ButtonComponent {
     }
 
     public void addButtonListnersForHostSingleplayer(final GameStateController gsc) {
+        // TODO: INIT ALL LEVEL DATA HERE??
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
