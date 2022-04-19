@@ -26,12 +26,33 @@ public class LevelController {
 
         Round currentRound = levelData.getRounds().get(round);
 
-        entitySpawner.spawnAttackerAtInterval(
-                1,
-                Attacker.SCORPION,
-                currentRound.getNumOfScorpions(),
-                levelData.getEntitySpawnPos()
-        );
+        // Spawn scorpions
+        if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
+            entitySpawner.spawnAttackerAtInterval(
+                    currentRound.getSpawnRate().getScorpionSpawnRate(),
+                    Attacker.SCORPION,
+                    currentRound.getNumOfScorpions(),
+                    levelData.getEntitySpawnPos()
+            );
+        }
+        // Spawn ogres
+        if (currentRound.getSpawnRate().getOgreSpawnRate() > 0) {
+            entitySpawner.spawnAttackerAtInterval(
+                    currentRound.getSpawnRate().getOgreSpawnRate(),
+                    Attacker.OGRE,
+                    currentRound.getNumOfOgres(),
+                    levelData.getEntitySpawnPos()
+            );
+        }
+        // Spawn ghosts
+        if (currentRound.getSpawnRate().getGhostSpawnRate() > 0) {
+            entitySpawner.spawnAttackerAtInterval(
+                    currentRound.getSpawnRate().getGhostSpawnRate(),
+                    Attacker.GHOST,
+                    currentRound.getNumOfOgres(),
+                    levelData.getEntitySpawnPos()
+            );
+        }
     }
 
     private void loadData(int level) {

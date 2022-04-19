@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.siegetd.game.models.ecs.entities.attacker.Attacker;
+import com.siegetd.game.models.ecs.entities.attacker.GhostEntity;
+import com.siegetd.game.models.ecs.entities.attacker.OgreEntity;
 import com.siegetd.game.models.ecs.entities.attacker.ScorpionEntity;
 
 public class EntitySpawner {
@@ -26,13 +28,13 @@ public class EntitySpawner {
             public void run() {
                 switch (attackerType) {
                     case SCORPION:
-                        new ScorpionEntity(engine, spawnPos, new Vector2(100f, 100f)).create();
+                        new ScorpionEntity(engine, spawnPos, new Vector2(200f, 200f)).create();
                         break;
                     case OGRE:
-                        System.out.println("Spawn ogre");
+                        new OgreEntity(engine, spawnPos, new Vector2(100f, 100f)).create();
                         break;
                     case GHOST:
-                        System.out.println("Spawn ghost");
+                        new GhostEntity(engine, spawnPos, new Vector2(300f, 300f)).create();
                         break;
                 }
             }

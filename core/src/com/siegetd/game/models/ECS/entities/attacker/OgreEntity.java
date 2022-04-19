@@ -15,13 +15,13 @@ import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.VelocityComponent;
 import com.siegetd.game.models.ecs.entities.IEntity;
 
-public class ScorpionEntity implements IEntity {
+public class OgreEntity implements IEntity {
 
     private final PooledEngine engine;
     private Vector2 pos;
     private Vector2 speed;
 
-    public ScorpionEntity(PooledEngine engine, Vector2 spawnPos, Vector2 startSpeed) {
+    public OgreEntity(PooledEngine engine, Vector2 spawnPos, Vector2 startSpeed) {
         this.engine = engine;
         this.pos = spawnPos;
         this.speed = startSpeed;
@@ -31,19 +31,19 @@ public class ScorpionEntity implements IEntity {
     public void create() {
         Entity entity = engine.createEntity();
 
-        Pixmap origScorpionImg = new Pixmap(Gdx.files.internal("towers/scorpion.png"));
-        Pixmap scaledScorpionImg = new Pixmap(
+        Pixmap origOgreImg = new Pixmap(Gdx.files.internal("towers/ogre.png"));
+        Pixmap scaledOgreImg = new Pixmap(
                 ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN),
                 ((TILE_SIZE * TILE_ROW) / TILE_ROW),
-                origScorpionImg.getFormat()
+                origOgreImg.getFormat()
         );
-        scaledScorpionImg.drawPixmap(origScorpionImg,
-                0, 0, origScorpionImg.getWidth(), origScorpionImg.getHeight(),
-                0, 0, scaledScorpionImg.getWidth(), scaledScorpionImg.getHeight()
+        scaledOgreImg.drawPixmap(origOgreImg,
+                0, 0, origOgreImg.getWidth(), origOgreImg.getHeight(),
+                0, 0, scaledOgreImg.getWidth(), scaledOgreImg.getHeight()
         );
 
         entity.add(new TransformComponent(pos.x, pos.y));
-        entity.add(new TextureComponent(new Texture(scaledScorpionImg)));
+        entity.add(new TextureComponent(new Texture(scaledOgreImg)));
         entity.add(new VelocityComponent(speed.x, speed.y));
 
         engine.addEntity(entity);
