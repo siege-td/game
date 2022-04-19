@@ -17,7 +17,12 @@ public class InputListener implements Input.TextInputListener {
         text="No pin added";
     }
 
+    public void incorrectPin() {
+        text="Incorrect pin added";
+    }
+
     public String getText(){
         return this.text;
     }
+
 }

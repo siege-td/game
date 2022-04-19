@@ -8,7 +8,7 @@ import io.socket.client.Socket;
 
 public class SocketConnection {
 
-    private static final String SOCKET_URI = "ws://localhost:8877";
+    private static final String SOCKET_URI = "ws://10.24.164.245:8877";
 
     private final Socket socket;
 
