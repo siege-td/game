@@ -51,11 +51,12 @@ public class InMultiPlayerGameState extends GameState {
             e.printStackTrace();
         }
 
+        this.gameMap = new GameMap(camera);
+
         engine.addSystem(new AnimationSystem());
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
 
-        this.gameMap = new GameMap(camera);
     }
 
     @Override

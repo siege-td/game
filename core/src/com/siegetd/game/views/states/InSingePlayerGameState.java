@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.siegetd.game.Globals;
 import com.siegetd.game.controllers.InputController;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
@@ -57,11 +58,13 @@ public class InSingePlayerGameState extends GameState {
             e.printStackTrace();
         }
 
+        this.gameMap = new GameMap(camera);
+        Globals.gameMap = this.gameMap;
+
         engine.addSystem(new AnimationSystem());
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
 
-        this.gameMap = new GameMap(camera);
 
         this.stage = new Stage();
         Gdx.input.setInputProcessor(stage);

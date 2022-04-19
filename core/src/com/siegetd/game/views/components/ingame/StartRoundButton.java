@@ -16,7 +16,7 @@ public class StartRoundButton extends ButtonComponent {
     public Button button;
 
     private LevelController levelController;
-    private int currRoundIndex;
+    private int currRoundIndex = 0;
 
     public StartRoundButton(OrthographicCamera camera) {
         this.buttonComponent = new ButtonComponent();
