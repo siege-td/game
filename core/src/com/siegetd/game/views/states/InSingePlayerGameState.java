@@ -68,7 +68,7 @@ public class InSingePlayerGameState extends GameState {
 
         this.inputController = new InputController(camera, stage, engine);
 
-        this.inGameGUI = new InGameGUI(camera, stage);
+        this.inGameGUI = new InGameGUI(camera, stage, engine);
     }
 
     @Override

@@ -53,10 +53,6 @@ l
 <core/src/com/siegetd/game/models/map/tile/PlaceableTile.java,2/5/2524f3c3817a938469c35676c78016a3a078161a
 c
 3core/src/com/siegetd/game/models/map/tile/Tile.java,3/9/390d6601ec0c1284ebee22531a3a639dd9e6fbc2
-i
-9core/src/com/siegetd/game/models/ecs/components/Type.java,3/2/32d9e78384e66194782db2cbabe08c7529472aea
-b
-2core/src/com/siegetd/game/utils/EntitySpawner.java,a/9/a900a83baaa05530dd3c2a0d4dc840f40da08ebd
 j
 :core/src/com/siegetd/game/views/components/HostButton.java,4/9/4991f58a9391ffd145661ccd9d51c25d9a3a71df
 i
