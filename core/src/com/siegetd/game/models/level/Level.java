@@ -2,20 +2,20 @@ package com.siegetd.game.models.level;
 
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Level {
 
     private Vector2 entitySpawnPos;
     private Vector2 entityEndPos;
 
-    private ArrayList<Round> rounds;
+    private List<Round> rounds;
 
-    public Level(Vector2 entitySpawnPos, Vector2 entityEndPos) {
+    public Level(Vector2 entitySpawnPos, Vector2 entityEndPos, List<Round> rounds) {
         this.entitySpawnPos = entitySpawnPos;
         this.entityEndPos = entityEndPos;
 
-        this.rounds = new ArrayList<>();
+        this.rounds = rounds;
     }
 
     public Vector2 getEntitySpawnPos() {
@@ -26,7 +26,7 @@ public class Level {
         return entityEndPos;
     }
 
-    public ArrayList<Round> getRounds() {
+    public List<Round> getRounds() {
         return rounds;
     }
 }

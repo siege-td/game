@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.siegetd.game.controllers.LevelController;
 import com.siegetd.game.views.components.ButtonComponent;
 
 public class StartRoundButton extends ButtonComponent {
@@ -24,7 +25,7 @@ public class StartRoundButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("SAVAAA");
+                LevelController levelController = new LevelController(1);
             }
         });
     }
