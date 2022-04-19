@@ -11,15 +11,20 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.siegetd.game.models.ECS.components.TextureComponent;
 import com.siegetd.game.models.ECS.components.TransformComponent;
+import com.siegetd.game.models.ECS.components.Type;
+import com.siegetd.game.models.ECS.components.TypeComponent;
 import com.siegetd.game.models.ECS.entities.IEntity;
 
+import java.awt.Rectangle;
 public class ArcherEntity implements IEntity {
 
     private final PooledEngine engine;
     private Vector2 pos;
     private OrthographicCamera camera;
+    private int tileRadius = 3;
 
     public ArcherEntity(PooledEngine engine, Vector2 spawnPos, OrthographicCamera camera) {
         this.engine = engine;
@@ -27,7 +32,23 @@ public class ArcherEntity implements IEntity {
         this.camera = camera;
     }
 
-    @Override
+    public void listenForEnemies(){
+        for (Entity entity : engine.getEntities()) {
+            //Check if attacker
+            if(entity.getComponent(TypeComponent.class).type.equals(Type.ATTACKER)){
+                //Check if within radius
+                Vector2 entityPos = entity.getComponent(TransformComponent.class).position;
+
+                Rectangle entityRect = new Rectangle((int) entityPos.x,(int) entityPos.y, TILE_SIZE, TILE_SIZE);
+                Rectangle towerRect = new Rectangle(((int) pos.x) - ((tileRadius / 2) * TILE_SIZE), ((int) pos.y) - ((tileRadius / 2) * TILE_SIZE), TILE_SIZE * tileRadius, TILE_SIZE * tileRadius);
+
+                if(entityRect.intersects(towerRect)){
+                    System.out.println("SHOOT!");
+                }
+            }
+        }
+    }
+
     public void create() {
         Entity entity = engine.createEntity();
 
@@ -47,6 +68,7 @@ public class ArcherEntity implements IEntity {
                 (pos.y - (pos.y % (camera.viewportHeight / TILE_ROW)))
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
+        entity.add(new TypeComponent(Type.DEFENDER));
 
         origMageImg.dispose();
         scaledMageImg.dispose();
