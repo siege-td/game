@@ -8,6 +8,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -25,9 +27,16 @@ import java.util.concurrent.Callable;
 public class CollisionController {
 
     private PooledEngine engine;
+    private ArrayList<DefendAttackPair> defendAttackPairs;
+    private SpriteBatch batch;
+    private Texture img = new Texture(Gdx.files.internal("ammo/stone_small.png"));
+    private OrthographicCamera camera;
 
-    public CollisionController(PooledEngine engine) {
+    public CollisionController(PooledEngine engine, SpriteBatch batch, OrthographicCamera camera) {
         this.engine = engine;
+        this.defendAttackPairs = new ArrayList<DefendAttackPair>();
+        this.batch = batch;
+        this.camera = camera;
     }
 
     //Responsible for centering rectangle surrounding entity
@@ -35,6 +44,15 @@ public class CollisionController {
         int X = (int) position.x - (TILE_SIZE / 2);
         int Y = (int) position.y - (TILE_SIZE / 2);
         return new Vector2(X, Y);
+    }
+
+    public void update(){
+
+        batch.begin();
+        batch.draw(img, camera.viewportWidth / 2, camera.viewportHeight / 2, img.getWidth(), img.getHeight());
+        batch.end();
+
+
     }
 
     public void listen() {
@@ -50,7 +68,9 @@ public class CollisionController {
 
                         if (towerRect.intersects(attackerRect)) {
                             System.out.println("SHOOT!");
-                            engine.removeEntity(engine.getEntities().get(j));
+                            DefendAttackPair defendAttackPair = new DefendAttackPair(engine.getEntities().get(i), engine.getEntities().get(j));
+                            defendAttackPairs.add(defendAttackPair);
+                            //engine.removeEntity(engine.getEntities().get(j));
                         }
                     }
                 }

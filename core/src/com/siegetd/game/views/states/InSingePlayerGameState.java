@@ -74,7 +74,7 @@ public class InSingePlayerGameState extends GameState {
         Gdx.input.setInputProcessor(stage);
 
         this.inputController = new InputController(camera, stage, engine);
-        this.collisionController = new CollisionController(engine);
+        this.collisionController = new CollisionController(engine, batch, camera);
 
         this.inGameGUI = new InGameGUI(camera, stage);
 
@@ -83,7 +83,9 @@ public class InSingePlayerGameState extends GameState {
     }
 
     @Override
-    public void update(float delta) { }
+    public void update(float delta) {
+
+    }
 
     @Override
     public void render() {
@@ -91,10 +93,14 @@ public class InSingePlayerGameState extends GameState {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameMap.render();
         inputController.listen();
-        collisionController.listen();
         engine.update(Gdx.graphics.getDeltaTime());
-
         stage.draw();
+
+        collisionController.listen();
+        collisionController.update();
+
+
+
     }
 
     @Override
