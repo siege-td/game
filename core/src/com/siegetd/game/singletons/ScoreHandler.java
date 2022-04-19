@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class ScoreHandler {
     private static ScoreHandler scoreInstance = null;
     private HashMap<String,Integer> playerScores;
+    private final int HEALTH = 30;
 
     private ScoreHandler(){
         playerScores = new HashMap<>();
@@ -27,9 +28,9 @@ public class ScoreHandler {
 
     private void subtractScore(String playerId, int amount){
         playerScores.put(playerId,playerScores.get(playerId) - amount);
-
     }
+
     private void addPlayerToScores(String id){
-        playerScores.put(id,30);
+        playerScores.put(id,HEALTH);
     }
 }
