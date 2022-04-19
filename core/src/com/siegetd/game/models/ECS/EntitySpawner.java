@@ -27,10 +27,13 @@ public class EntitySpawner {
                 switch (attackerType) {
                     case SCORPION:
                         new ScorpionEntity(engine, spawnPos, new Vector2(100f, 100f)).create();
+                        break;
                     case OGRE:
                         System.out.println("Spawn ogre");
+                        break;
                     case GHOST:
                         System.out.println("Spawn ghost");
+                        break;
                 }
             }
         }, 0, intervalInSec, numOfAttackers-1);

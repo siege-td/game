@@ -9,6 +9,7 @@ import com.siegetd.game.models.ecs.EntitySpawner;
 import com.siegetd.game.models.ecs.entities.attacker.Attacker;
 import com.siegetd.game.models.level.Level;
 import com.siegetd.game.models.level.Round;
+import com.siegetd.game.models.level.SpawnRate;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class LevelController {
         Round currentRound = levelData.getRounds().get(round);
 
         entitySpawner.spawnAttackerAtInterval(
-                2,
+                1,
                 Attacker.SCORPION,
                 currentRound.getNumOfScorpions(),
                 levelData.getEntitySpawnPos()
@@ -58,7 +59,13 @@ public class LevelController {
                 int currNumOgres = jsonRounds.get(i).getInt(2);
                 int currNumGhosts = jsonRounds.get(i).getInt(3);
 
-                rounds.add(new Round(currNumScorpions, currNumOgres, currNumGhosts));
+                SpawnRate spawnRate = new SpawnRate(
+                        jsonRounds.get(i).get("spawnRates").getInt(0),
+                        jsonRounds.get(i).get("spawnRates").getInt(1),
+                        jsonRounds.get(i).get("spawnRates").getInt(2)
+                );
+
+                rounds.add(new Round(currNumScorpions, currNumOgres, currNumGhosts, spawnRate));
             }
         }
 
