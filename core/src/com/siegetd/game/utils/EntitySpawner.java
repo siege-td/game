@@ -1,7 +1,7 @@
 package com.siegetd.game.utils;
 
 import com.badlogic.ashley.core.PooledEngine;
-import com.siegetd.game.models.ecs.components.Type;
+import com.siegetd.game.models.ECS.components.Type;
 
 public class EntitySpawner {
 

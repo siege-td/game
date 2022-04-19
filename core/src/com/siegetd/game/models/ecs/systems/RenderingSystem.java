@@ -1,4 +1,4 @@
-package com.siegetd.game.models.ecs.systems;
+package com.siegetd.game.models.ECS.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -8,8 +8,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.siegetd.game.models.ecs.components.TextureComponent;
-import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ECS.components.TextureComponent;
+import com.siegetd.game.models.ECS.components.TransformComponent;
 import com.siegetd.game.views.components.gamestats.GameStats;
 
 import java.net.URISyntaxException;

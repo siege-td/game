@@ -1,4 +1,4 @@
-package com.siegetd.game.models.ecs.components;
+package com.siegetd.game.models.ECS.components;
 
 public enum State {
     NORMAL,

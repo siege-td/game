@@ -1,4 +1,4 @@
-package com.siegetd.game.models.ecs.entities.defender;
+package com.siegetd.game.models.ECS.entities.defender;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.siegetd.game.models.ecs.components.TextureComponent;
-import com.siegetd.game.models.ecs.components.TransformComponent;
-import com.siegetd.game.models.ecs.entities.IEntity;
+import com.siegetd.game.models.ECS.components.TextureComponent;
+import com.siegetd.game.models.ECS.components.TransformComponent;
+import com.siegetd.game.models.ECS.entities.IEntity;
 
 public class ZappEntity implements IEntity {
 

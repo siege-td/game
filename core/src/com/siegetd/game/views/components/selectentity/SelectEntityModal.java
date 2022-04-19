@@ -8,9 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.models.ecs.entities.defender.ArcherEntity;
-import com.siegetd.game.models.ecs.entities.defender.MageEntity;
-import com.siegetd.game.models.ecs.entities.defender.ZappEntity;
+import com.siegetd.game.models.ECS.entities.defender.ArcherEntity;
+import com.siegetd.game.models.ECS.entities.defender.MageEntity;
+import com.siegetd.game.models.ECS.entities.defender.ZappEntity;
 import com.siegetd.game.views.components.ButtonComponent;
 
 import java.util.concurrent.Callable;

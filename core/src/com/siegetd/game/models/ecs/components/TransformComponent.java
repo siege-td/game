@@ -1,4 +1,4 @@
-package com.siegetd.game.models.ecs.components;
+package com.siegetd.game.models.ECS.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;

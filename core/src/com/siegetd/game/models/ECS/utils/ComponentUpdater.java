@@ -1,11 +1,11 @@
-package com.siegetd.game.models.ecs.utils;
+package com.siegetd.game.models.ECS.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.siegetd.game.Globals;
 import com.siegetd.game.api.SocketConnection;
-import com.siegetd.game.models.ecs.components.CurrencyComponent;
-import com.siegetd.game.models.ecs.components.HitpointComponent;
+import com.siegetd.game.models.ECS.components.CurrencyComponent;
+import com.siegetd.game.models.ECS.components.HitpointComponent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
