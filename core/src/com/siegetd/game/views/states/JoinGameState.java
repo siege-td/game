@@ -9,16 +9,21 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.siegetd.game.Globals;
+import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
 import com.siegetd.game.views.components.InputButton;
-import com.siegetd.game.views.components.JoinButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
+import java.net.URISyntaxException;
+
+import io.socket.emitter.Emitter;
+
 public class JoinGameState extends GameState {
-    private JoinButton joinButton;
+    //private JoinButton joinButton;
     private InputButton inputButton;
     private BackButton backButton;
     private Table buttonTable;
@@ -33,6 +38,8 @@ public class JoinGameState extends GameState {
     private FreeTypeFontGenerator.FreeTypeFontParameter fontParameter;
     private BitmapFont font;
 
+    private boolean hasJoinedLobby;
+
     public JoinGameState(GameStateController gsc) {
         super(gsc);
 
@@ -43,6 +50,16 @@ public class JoinGameState extends GameState {
         createFont();
 
         stageComponents();
+
+        hasJoinedLobby = false;
+
+        //socket event listeners
+        try {
+            SocketConnection.getInstance().getSocket().on("join_pin_invalid", invalidPin);
+            SocketConnection.getInstance().getSocket().on("join_pin_valid", validPin);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -60,13 +77,23 @@ public class JoinGameState extends GameState {
         batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
-        updateText();
+        try {
+            updateText();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
                 table.getBottomCenter().y + (float)(table.windowHeight * 0.9));
         batch.end();
         stage.draw();
+        //try catch invalidPin
+        try {
+            SocketConnection.getInstance().getSocket().on("game_started", onGameStarted);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     private void createStage() {
@@ -87,8 +114,8 @@ public class JoinGameState extends GameState {
     }
 
     private void createButtons(){
-        joinButton = new JoinButton();
-        joinButton.addButtonListners(gsc);
+        //joinButton = new JoinButton();
+        //joinButton.addButtonListnersJoinMultiplayer(gsc);
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
         inputButton = new InputButton();
@@ -106,11 +133,28 @@ public class JoinGameState extends GameState {
         font = fontGenerator.generateFont(fontParameter);
 
         glyphLayout = new GlyphLayout();
-        updateText();
+        try {
+            updateText();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void updateText(){
-        pin = "PIN: " + inputButton.listener.getText();
+    private void updateText() throws URISyntaxException {
+        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")
+                || inputButton.listener.getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
+        {
+            font.setColor(Color.RED);
+            pin = "PIN: " + inputButton.listener.getText();
+        } else if (hasJoinedLobby){
+            font.setColor(Color.WHITE);
+            pin = "PIN: " + inputButton.listener.getText() + "\nWaiting for host to start..";
+            if (!hasJoinedLobby) {
+                SocketConnection.getInstance().getSocket().emit("join_lobby", Globals.pin);
+            }
+        } else {
+            inputButton.listener.incorrectPin();
+        }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
     }
@@ -120,10 +164,10 @@ public class JoinGameState extends GameState {
                 (float)(table.windowWidth / 3),
                 (float) (table.windowHeight *0.3))
                 .row();
-        buttonTable.add(joinButton.button).size(
-                (float)(table.windowWidth / 3),
-                (float) (table.windowHeight *0.3))
-                .row();
+        //buttonTable.add(joinButton.button).size(
+        //        (float)(table.windowWidth / 3),
+        //        (float) (table.windowHeight *0.3))
+        //        .row();
         stage.addActor(backButton.button);
         stage.addActor(buttonTable);
     }
@@ -137,4 +181,26 @@ public class JoinGameState extends GameState {
         font.dispose();
         fontGenerator.dispose();
     }
+
+    private Emitter.Listener onGameStarted = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            gsc.setState(GameStateController.State.IN_GAME_MULTI);
+        }
+    };
+
+    private Emitter.Listener invalidPin = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            hasJoinedLobby = false;
+            inputButton.listener.incorrectPin();
+        }
+    };
+
+    private Emitter.Listener validPin = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            hasJoinedLobby = true;
+        }
+    };
 }

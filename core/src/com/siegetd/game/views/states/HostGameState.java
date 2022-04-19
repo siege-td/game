@@ -8,20 +8,28 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.siegetd.game.Globals;
+import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.BackButton;
+import com.siegetd.game.views.components.InputButton;
 import com.siegetd.game.views.components.PlayButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
+import java.net.URISyntaxException;
+
 public class HostGameState extends GameState {
     private Texture background;
     private BackButton backButton;
+    private InputButton inputButton;
     private PlayButton playButton;
     private WindowComponent table;
     private RopeComponent rope;
     private Stage stage;
+    private Table buttonTable;
 
     private FreeTypeFontGenerator fontGenerator;
     private FreeTypeFontGenerator.FreeTypeFontParameter fontParameter;
@@ -29,6 +37,8 @@ public class HostGameState extends GameState {
     private GlyphLayout glyphLayout;
     private float textWidth;
     private String pin;
+
+    private boolean hasHostedLobby;
 
     public HostGameState(GameStateController gsc) {
         super(gsc);
@@ -39,11 +49,13 @@ public class HostGameState extends GameState {
         */
         createStage();
         createBackground();
+        createButtonTable();
         createButtons();
         createFont();
-        setText();
 
         stageComponents();
+
+        hasHostedLobby = false;
     }
 
     @Override
@@ -61,6 +73,13 @@ public class HostGameState extends GameState {
         batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
+
+        try {
+            updateText();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
@@ -81,11 +100,18 @@ public class HostGameState extends GameState {
         rope = new RopeComponent(table);
     }
 
+    private void createButtonTable() {
+        buttonTable = new Table();
+        buttonTable.setFillParent(true);
+    }
+
     private void createButtons(){
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
         playButton = new PlayButton(table);
-        playButton.addButtonListners(gsc);
+        playButton.addButtonListnersForHostMultiplayer(gsc);
+        inputButton = new InputButton();
+        inputButton.addButtonListners(gsc);
     }
 
     private void createFont(){
@@ -101,15 +127,28 @@ public class HostGameState extends GameState {
         glyphLayout = new GlyphLayout();
     }
 
-    private void setText(){
-        pin = "LOBBY-PIN:\n12345"; // + getLobbyPinApiCall
+    private void updateText() throws URISyntaxException {
+        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")) {
+            pin = "LOBBY-PIN:\n" + inputButton.listener.getText(); // + getLobbyPinApiCall
+        } else {
+            pin = "LOBBY-PIN:\n" + inputButton.listener.getText();
+            if (!hasHostedLobby) {
+                SocketConnection.getInstance().getSocket().emit("new_lobby", Globals.pin);
+                hasHostedLobby = true;
+            }
+        }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
     }
 
     private void stageComponents(){
+        buttonTable.add(inputButton.button).size(
+                (float)(table.windowWidth / 3),
+                (float) (table.windowHeight *0.3))
+                .row();
         stage.addActor(backButton.button);
         stage.addActor(playButton.button);
+        stage.addActor(buttonTable);
     }
 
 

@@ -1,6 +1,7 @@
 package com.siegetd.game.views.components;
 
 import com.badlogic.gdx.Input;
+import com.siegetd.game.Globals;
 
 public class InputListener implements Input.TextInputListener {
 
@@ -8,6 +9,7 @@ public class InputListener implements Input.TextInputListener {
     @Override
     public void input(String text) {
         this.text = text;
+        Globals.pin = text;
     }
 
     @Override
@@ -15,7 +17,12 @@ public class InputListener implements Input.TextInputListener {
         text="No pin added";
     }
 
+    public void incorrectPin() {
+        text="Incorrect pin added";
+    }
+
     public String getText(){
         return this.text;
     }
+
 }

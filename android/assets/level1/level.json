@@ -1,0 +1,30 @@
+{
+  "spawnPos": {
+    "x": 10,
+    "y": 10
+  },
+  "endPos": {
+    "x": 10,
+    "y": 10
+  },
+  "rounds": [
+    {
+      "roundId": 1,
+      "scorpions": 10,
+      "ogres": 0,
+      "ghosts": 0
+    },
+    {
+      "roundId": 2,
+      "scorpions": 10,
+      "ogres": 10,
+      "ghosts": 0
+    },
+    {
+      "roundId": 3,
+      "scorpions": 10,
+      "ogres": 10,
+      "ghosts": 10
+    }
+  ]
+}
