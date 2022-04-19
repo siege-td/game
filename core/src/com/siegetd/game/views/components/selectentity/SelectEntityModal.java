@@ -17,18 +17,13 @@ import java.util.concurrent.Callable;
 
 public class SelectEntityModal {
 
-    private OrthographicCamera camera;
+    private final OrthographicCamera camera;
 
-    private ButtonComponent buttonComponent;
+    private Button archerButton;
 
-    private Texture archerButtonImg;
-    public Button archerButton;
+    private Button mageButton;
 
-    private Texture mageButtonImg;
-    public Button mageButton;
-
-    private Texture zappButtonImg;
-    public Button zappButton;
+    private Button zappButton;
 
 
     public SelectEntityModal(OrthographicCamera camera) {
@@ -36,26 +31,23 @@ public class SelectEntityModal {
     }
 
     public void showModal() {
-        this.buttonComponent = new ButtonComponent();
+        ButtonComponent buttonComponent = new ButtonComponent();
 
-        this.archerButtonImg = new Texture("GUI/add_archer.png");
-        this.archerButton = this.buttonComponent.createButton(archerButtonImg);
+        this.archerButton = buttonComponent.createButton(new Texture("GUI/add_archer.png"));
         this.archerButton.setSize(camera.viewportWidth / 80, camera.viewportWidth / 80);
         this.archerButton.setPosition(
-                (((Gdx.graphics.getWidth() / 2) - (this.archerButton.getWidth() / 2))) - 80,
-                ((Gdx.graphics.getHeight() / 2) - ((this.archerButton.getHeight() / 2)))
+                ((Gdx.graphics.getWidth() / 2) - (this.archerButton.getWidth() / 2)) - 80,
+                ((Gdx.graphics.getHeight() / 2) - (this.archerButton.getHeight() / 2))
         );
 
-        this.mageButtonImg = new Texture("GUI/add_mage.png");
-        this.mageButton = this.buttonComponent.createButton(mageButtonImg);
+        this.mageButton = buttonComponent.createButton(new Texture("GUI/add_mage.png"));
         this.mageButton.setSize(camera.viewportWidth / 80, camera.viewportWidth / 80);
         this.mageButton.setPosition(
                 ((Gdx.graphics.getWidth() / 2) - (this.mageButton.getWidth() / 2)),
                 ((Gdx.graphics.getHeight() / 2) - ((this.mageButton.getHeight() / 2)))
         );
 
-        this.zappButtonImg = new Texture("GUI/add_zapp.png");
-        this.zappButton = this.buttonComponent.createButton(zappButtonImg);
+        this.zappButton = buttonComponent.createButton(new Texture("GUI/add_zapp.png"));
         this.zappButton.setSize(camera.viewportWidth / 80, camera.viewportWidth / 80);
         this.zappButton.setPosition(
                 (((Gdx.graphics.getWidth() / 2) - (this.zappButton.getWidth() / 2))) + 80,
@@ -110,4 +102,15 @@ public class SelectEntityModal {
         });
     }
 
+    public Button getArcherButton() {
+        return archerButton;
+    }
+
+    public Button getMageButton() {
+        return mageButton;
+    }
+
+    public Button getZappButton() {
+        return zappButton;
+    }
 }
