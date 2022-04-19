@@ -47,8 +47,6 @@ k
 ;core/src/com/siegetd/game/views/components/InputButton.java,4/6/46fe3e14025b3db7648284e4e916f4c30bc06104
 i
 9core/src/com/siegetd/game/views/states/JoinGameState.java,2/9/29f534f136ed007aa2e546bf34026c67b8bfd5b2
-s
-Ccore/src/com/siegetd/game/views/components/gamestats/GameStats.java,7/3/73875347bd72b8986a5a5f6866b63ddc7d4738cc
 q
 Acore/src/com/siegetd/game/models/ecs/systems/RenderingSystem.java,5/3/53fb0e87058c4146c158735b8e5572f7cb73edf5
 j
