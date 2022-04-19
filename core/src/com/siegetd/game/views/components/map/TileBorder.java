@@ -1,4 +1,4 @@
-package com.siegetd.game.models.map.tile;
+package com.siegetd.game.views.components.map;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
