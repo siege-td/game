@@ -30,6 +30,11 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../android/assets" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../../android/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../../android/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../android/build/generated/renderscript_source_output_dir/debug/compileDebugRenderscript/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../android/build/generated/res/resValues/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../android/build/generated/res/rs/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../android/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../android/build/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../../android/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../android/build" />
     </content>
@@ -76,6 +81,32 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="Gradle: io.socket:socket.io-client:2.0.1">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.socket/socket.io-client/2.0.1/d132c5928e7e93c43b8be0e0513c3e12309523e2/socket.io-client-2.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.socket/socket.io-client/2.0.1/71062e539bfd8a54df346b813d06055f6d87ff21/socket.io-client-2.0.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.socket/socket.io-client/2.0.1/2c1b33a90e2380b57fbd7afe6d81db308630220c/socket.io-client-2.0.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: com.badlogicgames.gdx:gdx-freetype:1.10.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.10.0/de1d0d5c1e92e8d91364256fd6b7bb279d3e9859/gdx-freetype-1.10.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.10.0/78df46404bdb4ca6354c01d0d0f0e65b80dbe622/gdx-freetype-1.10.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.10.0/8900f7ddf35e3a3184775d3e4614e5e52038986d/gdx-freetype-1.10.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Gradle: com.badlogicgames.gdx:gdx:1.10.0">
         <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.10.0/74c240f79dc4fb6b766a834249600d0a019d0489/gdx-1.10.0.jar!/" />
@@ -86,6 +117,54 @@
         <SOURCES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.10.0/126a80a5ef6d32683bc563d4015c6c163d690f15/gdx-1.10.0-sources.jar!/" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: io.socket:engine.io-client:2.0.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.socket/engine.io-client/2.0.0/9d4a84db8ab071574e62cfce67e35bf5194f4c76/engine.io-client-2.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.socket/engine.io-client/2.0.0/2b8395b0a4780b714392b798554c7ddbb48949c0/engine.io-client-2.0.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.socket/engine.io-client/2.0.0/f814053b7f79104998fc5cfbd63efc657e02a2db/engine.io-client-2.0.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: com.squareup.okhttp3:okhttp:3.12.12">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.12.12/d3e1ce1d2b3119adf270b2d00d947beb03fe3321/okhttp-3.12.12.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.12.12/ede45c866b8df7529fe7a00202020757805d1e92/okhttp-3.12.12-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.12.12/2424f05075bc08b19d8aa06b7d88250e2e068ce3/okhttp-3.12.12-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: com.squareup.okio:okio:1.15.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.15.0/bc28b5a964c8f5721eb58ee3f3c47a9bcbf4f4d8/okio-1.15.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.15.0/a504577b8e4cfecd3e4148a697faf9742c767180/okio-1.15.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.15.0/5667938926bdda03add0eac8c522164ce4180e5e/okio-1.15.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.json:json:20090211">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="game.core" />

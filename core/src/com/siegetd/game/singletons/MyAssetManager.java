@@ -20,13 +20,17 @@ public class MyAssetManager{
         return assetManagerInstance;
     }
 
-    private void queueAssetsFromList(List<String> paths,Class<?> type ){
+    public void queueAssetsFromList(List<String> paths,Class<?> type ){
         for (String path:paths) {
             assMan.load(path, type);
         }
     }
 
-    private void queueAsset(String path, Class<?> type){
+    public void queueAsset(String path, Class<?> type){
         assMan.load(path,type);
+    }
+
+    public AssetManager getAssMan(){
+        return assMan;
     }
 }

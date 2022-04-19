@@ -2,10 +2,16 @@ package com.siegetd.game.controllers;
 
 import com.siegetd.game.SiegeTd;
 import com.siegetd.game.views.GameState;
+import com.siegetd.game.views.states.HostGameState;
+import com.siegetd.game.views.states.InMultiPlayerGameState;
+import com.siegetd.game.views.states.InSingePlayerGameState;
+import com.siegetd.game.views.states.JoinGameState;
 import com.siegetd.game.views.states.LobbyState;
 import com.siegetd.game.views.states.MainMenuState;
+import com.siegetd.game.views.states.MultiPlayerMenuState;
 import com.siegetd.game.views.states.PlayState;
 import com.siegetd.game.views.states.SettingsState;
+import com.siegetd.game.views.states.SinglePlayerMenuState;
 import com.siegetd.game.views.states.SplashState;
 
 import java.util.Stack;
@@ -21,7 +27,13 @@ public class GameStateController {
         MENU,
         SETTINGS,
         LOBBY,
-        PLAY
+        PLAY,
+        MULTI,
+        SINGLE,
+        JOIN,
+        HOST,
+        IN_GAME_SINGLE,
+        IN_GAME_MULTI
     }
 
     public GameStateController(final SiegeTd app){
@@ -68,6 +80,18 @@ public class GameStateController {
                 return new LobbyState(this);
             case SETTINGS:
                 return new SettingsState(this);
+            case MULTI:
+                return new MultiPlayerMenuState(this);
+            case SINGLE:
+                return new SinglePlayerMenuState(this);
+            case JOIN:
+                return new JoinGameState(this);
+            case HOST:
+                return new HostGameState(this);
+            case IN_GAME_SINGLE:
+                return new InSingePlayerGameState(this);
+            case IN_GAME_MULTI:
+                return new InMultiPlayerGameState(this);
         }
         return null;
     }
