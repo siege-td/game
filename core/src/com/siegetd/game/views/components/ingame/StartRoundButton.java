@@ -17,7 +17,6 @@ public class StartRoundButton extends ButtonComponent {
     public Button button;
 
     private LevelController levelController;
-    private int currRoundIndex = 0;
 
     public StartRoundButton() {
         this.buttonComponent = new ButtonComponent();
@@ -32,8 +31,7 @@ public class StartRoundButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                levelController.startRound(currRoundIndex);
-                currRoundIndex++;
+                levelController.startRound();
             }
         });
     }

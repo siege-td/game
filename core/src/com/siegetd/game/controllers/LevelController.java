@@ -22,18 +22,19 @@ import java.util.ArrayList;
 public class LevelController {
 
     private Level levelData;
+    private int currRound = 0;
 
     public LevelController(int level) {
         loadData(level);
     }
 
-    public void startRound(int round) {
+    public void startRound() {
         if (isRoundFinished()) {
             EngineState.ecsEngine.removeAllEntities();
 
             EntitySpawner entitySpawner = new EntitySpawner();
 
-            Round currentRound = levelData.getRounds().get(round);
+            Round currentRound = levelData.getRounds().get(currRound);
 
             // Spawn scorpions
             if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
@@ -62,7 +63,10 @@ public class LevelController {
                         levelData.getEntitySpawnPos()
                 );
             }
+
+            currRound++;
         }
+        // TODO: ADD handler for when level is done
     }
 
     private boolean isRoundFinished() {
