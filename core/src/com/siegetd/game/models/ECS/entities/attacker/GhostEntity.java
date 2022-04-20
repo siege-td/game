@@ -33,8 +33,8 @@ public class GhostEntity implements IEntity {
 
         Pixmap origGhostImg = new Pixmap(Gdx.files.internal("towers/ghost.png"));
         Pixmap scaledGhostImg = new Pixmap(
-                ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN),
-                ((TILE_SIZE * TILE_ROW) / TILE_ROW),
+                ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN) * 2,
+                ((TILE_SIZE * TILE_ROW) / TILE_ROW) * 2,
                 origGhostImg.getFormat()
         );
         scaledGhostImg.drawPixmap(origGhostImg,

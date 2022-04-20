@@ -1,5 +1,9 @@
 package com.siegetd.game.models.ecs.components;
 
+import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
+import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
+import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
+
 import com.badlogic.ashley.core.Component;
 import com.siegetd.game.Globals;
 import com.siegetd.game.models.map.tile.MovableTile;
@@ -11,18 +15,23 @@ public class VelocityComponent implements Component {
     public float xSpeed;
     public float ySpeed;
 
+    private float origXSpeed;
+    private float origYSpeed;
+
     private List<MovableTile> path;
     private int pathIndex;
     private float nextX;
     private float nextY;
 
     public VelocityComponent(float xSpeed, float ySpeed) {
+        this.origXSpeed = xSpeed;
+        this.origYSpeed = ySpeed;
+
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
 
         this.pathIndex = 0;
         this.path = Globals.gameMap.getMovableTiles();
-
         this.getNextPos();
     }
 
@@ -34,19 +43,19 @@ public class VelocityComponent implements Component {
             pathIndex++;
             getNextPos();
         } else {
-            this.xSpeed = 256 * Integer.signum((int) xDis);
-            this.ySpeed = 256 * Integer.signum((int) yDis);
+            this.xSpeed = this.origXSpeed * Integer.signum((int) xDis);
+            this.ySpeed = this.origYSpeed * Integer.signum((int) yDis);
         }
     }
 
     private void getNextPos() {
-        if (pathIndex > path.size()) {
+        if (pathIndex >= path.size()) {
             this.xSpeed = 0;
             this.ySpeed = 0;
             return;
         }
 
-        this.nextX = path.get(pathIndex).getX();
-        this.nextY = path.get(pathIndex).getY();
+        this.nextX = path.get(pathIndex).getX() + 50;
+        this.nextY = path.get(pathIndex).getY() + 60;
     }
 }

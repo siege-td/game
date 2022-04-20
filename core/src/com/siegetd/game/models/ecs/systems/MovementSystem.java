@@ -27,7 +27,7 @@ public class MovementSystem extends IteratingSystem {
         TransformComponent transformComponent = transformMapper.get(entity);
         VelocityComponent velocityComponent = velocityMapper.get(entity);
 
-        velocityComponent.updateMovement(transformComponent.position.x, transformComponent.position.y);
+        velocityComponent.updateMovement((int) transformComponent.position.x, (int) transformComponent.position.y);
 
         transformComponent.position.x += velocityComponent.xSpeed * deltaTime;
         transformComponent.position.y += velocityComponent.ySpeed * deltaTime;

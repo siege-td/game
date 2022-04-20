@@ -33,8 +33,8 @@ public class OgreEntity implements IEntity {
 
         Pixmap origOgreImg = new Pixmap(Gdx.files.internal("towers/ogre.png"));
         Pixmap scaledOgreImg = new Pixmap(
-                ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN),
-                ((TILE_SIZE * TILE_ROW) / TILE_ROW),
+                ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN) * 2,
+                ((TILE_SIZE * TILE_ROW) / TILE_ROW) * 2,
                 origOgreImg.getFormat()
         );
         scaledOgreImg.drawPixmap(origOgreImg,
