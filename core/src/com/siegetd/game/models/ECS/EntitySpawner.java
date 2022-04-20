@@ -10,11 +10,7 @@ import com.siegetd.game.models.ecs.entities.attacker.ScorpionEntity;
 
 public class EntitySpawner {
 
-    private PooledEngine engine;
-
-    public EntitySpawner(PooledEngine engine) {
-        this.engine = engine;
-    }
+    public EntitySpawner() { }
 
     public void spawnAttackerAtInterval(
             int intervalInSec,
@@ -28,13 +24,13 @@ public class EntitySpawner {
             public void run() {
                 switch (attackerType) {
                     case SCORPION:
-                        new ScorpionEntity(engine, spawnPos, new Vector2(200f, 200f)).create();
+                        new ScorpionEntity(spawnPos, new Vector2(200f, 200f)).create();
                         break;
                     case OGRE:
-                        new OgreEntity(engine, spawnPos, new Vector2(100f, 100f)).create();
+                        new OgreEntity(spawnPos, new Vector2(100f, 100f)).create();
                         break;
                     case GHOST:
-                        new GhostEntity(engine, spawnPos, new Vector2(300f, 300f)).create();
+                        new GhostEntity(spawnPos, new Vector2(300f, 300f)).create();
                         break;
                 }
             }

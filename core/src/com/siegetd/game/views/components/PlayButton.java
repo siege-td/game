@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.Globals;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 
@@ -53,7 +53,7 @@ public class PlayButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                socket.emit("start_game", Globals.pin);
+                socket.emit("start_game", EngineState.pin);
                 gsc.setState(GameStateController.State.IN_GAME_MULTI);
             }
         });

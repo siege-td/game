@@ -21,8 +21,8 @@ public class LevelController {
         loadData(level);
     }
 
-    public void startRound(int round, PooledEngine engine) {
-        EntitySpawner entitySpawner = new EntitySpawner(engine);
+    public void startRound(int round) {
+        EntitySpawner entitySpawner = new EntitySpawner();
 
         Round currentRound = levelData.getRounds().get(round);
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.siegetd.game.Globals;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
 
 import org.json.JSONArray;
@@ -25,18 +25,15 @@ public class GameStats {
     private FreeTypeFontGenerator.FreeTypeFontParameter fontParameter;
 
     private BitmapFont font;
-    private SpriteBatch batch;
 
     private Socket socket;
 
     private ArrayList<GameStat> gameStatList;
 
-    public GameStats(SpriteBatch batch) throws URISyntaxException {
+    public GameStats() throws URISyntaxException {
         this.socket = SocketConnection.getInstance().getSocket();
 
         this.gameStatList = new ArrayList<>();
-
-        this.batch = batch;
 
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
         fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -54,7 +51,7 @@ public class GameStats {
         this.socket.on("updated_data", onNewData);
 
         // init arraylist with game data
-        this.socket.emit("get_game_data_in_room", Globals.pin);
+        this.socket.emit("get_game_data_in_room", EngineState.pin);
     }
 
     public void drawStats() {
@@ -62,7 +59,7 @@ public class GameStats {
 
         for (GameStat stat : gameStatList) {
             font.draw(
-                    batch,
+                    EngineState.batch,
                     "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
                     xPos,
                     2530f
@@ -108,9 +105,6 @@ public class GameStats {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     };
-
-
 }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.siegetd.game.Globals;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.controllers.InputController;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
@@ -29,49 +29,48 @@ public class InSingePlayerGameState extends GameState {
     private GameMap gameMap;
 
     // Ecs fields
-    private SpriteBatch batch;
     private OrthographicCamera camera;
     private PooledEngine engine;
     private RenderingSystem renderingSystem;
 
     // Other fields
-    private GameStats gameStats;
     private InputController inputController;
-    private Stage stage;
-    private InGameGUI inGameGUI;
 
     public InSingePlayerGameState(GameStateController gsc) {
         super(gsc);
 
-        batch = new SpriteBatch();
+        EngineState.batch = new SpriteBatch();
 
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
         this.camera.position.set(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
         this.camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
 
+        EngineState.camera = camera;
+
         engine = new PooledEngine();
 
         try {
-            gameStats = new GameStats(this.batch);
-            renderingSystem = new RenderingSystem(batch, this.camera, this.gameStats);
+            renderingSystem = new RenderingSystem();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 
         this.gameMap = new GameMap(camera);
-        Globals.gameMap = this.gameMap;
+
+        EngineState.gameMap = this.gameMap;
 
         engine.addSystem(new AnimationSystem());
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
 
+        EngineState.ecsEngine = engine;
 
-        this.stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
+        EngineState.stage = new Stage();
+        Gdx.input.setInputProcessor(EngineState.stage);
 
-        this.inputController = new InputController(camera, stage, engine);
+        this.inputController = new InputController();
 
-        this.inGameGUI = new InGameGUI(camera, stage, engine);
+        new InGameGUI();
     }
 
     @Override
@@ -81,10 +80,10 @@ public class InSingePlayerGameState extends GameState {
     public void render() {
         Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameMap.render();
+        EngineState.gameMap.render();
         inputController.listen();
-        engine.update(Gdx.graphics.getDeltaTime());
-        stage.draw();
+        EngineState.ecsEngine.update(Gdx.graphics.getDeltaTime());
+        EngineState.stage.draw();
     }
 
     @Override
