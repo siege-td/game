@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.components.VelocityComponent;
 import com.siegetd.game.models.ecs.entities.IEntity;
 
@@ -44,6 +45,7 @@ public class GhostEntity implements IEntity {
         entity.add(new TransformComponent(pos.x, pos.y));
         entity.add(new TextureComponent(new Texture(scaledGhostImg)));
         entity.add(new VelocityComponent(speed.x, speed.y));
+        entity.add(new TypeComponent());
 
         EngineState.ecsEngine.addEntity(entity);
     }

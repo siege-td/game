@@ -1,11 +1,17 @@
 package com.siegetd.game.controllers;
 
-import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.EntitySpawner;
+import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.entities.attacker.Attacker;
 import com.siegetd.game.models.level.Level;
 import com.siegetd.game.models.level.Round;
@@ -22,37 +28,69 @@ public class LevelController {
     }
 
     public void startRound(int round) {
-        EntitySpawner entitySpawner = new EntitySpawner();
+        if (isRoundFinished()) {
+            EngineState.ecsEngine.removeAllEntities();
 
-        Round currentRound = levelData.getRounds().get(round);
+            EntitySpawner entitySpawner = new EntitySpawner();
 
-        // Spawn scorpions
-        if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
-            entitySpawner.spawnAttackerAtInterval(
-                    currentRound.getSpawnRate().getScorpionSpawnRate(),
-                    Attacker.SCORPION,
-                    currentRound.getNumOfScorpions(),
-                    levelData.getEntitySpawnPos()
-            );
+            Round currentRound = levelData.getRounds().get(round);
+
+            // Spawn scorpions
+            if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
+                entitySpawner.spawnAttackerAtInterval(
+                        currentRound.getSpawnRate().getScorpionSpawnRate(),
+                        Attacker.SCORPION,
+                        currentRound.getNumOfScorpions(),
+                        levelData.getEntitySpawnPos()
+                );
+            }
+            // Spawn ogres
+            if (currentRound.getSpawnRate().getOgreSpawnRate() > 0) {
+                entitySpawner.spawnAttackerAtInterval(
+                        currentRound.getSpawnRate().getOgreSpawnRate(),
+                        Attacker.OGRE,
+                        currentRound.getNumOfOgres(),
+                        levelData.getEntitySpawnPos()
+                );
+            }
+            // Spawn ghosts
+            if (currentRound.getSpawnRate().getGhostSpawnRate() > 0) {
+                entitySpawner.spawnAttackerAtInterval(
+                        currentRound.getSpawnRate().getGhostSpawnRate(),
+                        Attacker.GHOST,
+                        currentRound.getNumOfOgres(),
+                        levelData.getEntitySpawnPos()
+                );
+            }
         }
-        // Spawn ogres
-        if (currentRound.getSpawnRate().getOgreSpawnRate() > 0) {
-            entitySpawner.spawnAttackerAtInterval(
-                    currentRound.getSpawnRate().getOgreSpawnRate(),
-                    Attacker.OGRE,
-                    currentRound.getNumOfOgres(),
-                    levelData.getEntitySpawnPos()
-            );
+    }
+
+    private boolean isRoundFinished() {
+        boolean isFinished = false;
+
+        ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
+        ArrayList<Entity> attackers = new ArrayList<>();
+        ArrayList<Entity> attackersAtEnd = new ArrayList<>();
+
+        for (Entity entity : entities) {
+            for (Component component : entity.getComponents()) {
+                if (component.getClass() == TypeComponent.class) {
+                    attackers.add(entity);
+                }
+            }
         }
-        // Spawn ghosts
-        if (currentRound.getSpawnRate().getGhostSpawnRate() > 0) {
-            entitySpawner.spawnAttackerAtInterval(
-                    currentRound.getSpawnRate().getGhostSpawnRate(),
-                    Attacker.GHOST,
-                    currentRound.getNumOfOgres(),
-                    levelData.getEntitySpawnPos()
-            );
+
+        for (Entity attacker : attackers) {
+            if ((attacker.getComponent(TransformComponent.class).position.y >= levelData.getEntityEndPos().y) && (attacker.getComponent(TransformComponent.class).position.x >= levelData.getEntityEndPos().x)) {
+                attackersAtEnd.add(attacker);
+            }
         }
+
+        if (attackers.size() == attackersAtEnd.size()) {
+            isFinished = true;
+        }
+
+        return isFinished;
     }
 
     private void loadData(int level) {
