@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.siegetd.game.models.ECS.components.TransformComponent;
 import com.siegetd.game.models.ECS.components.Type;
 import com.siegetd.game.models.ECS.components.TypeComponent;
@@ -27,14 +28,13 @@ import java.util.concurrent.Callable;
 public class CollisionController {
 
     private PooledEngine engine;
-    private ArrayList<DefendAttackPair> defendAttackPairs;
+    private Array<DefendAttackPair> defendAttackPairs = new Array<>();
     private SpriteBatch batch;
     private Texture img = new Texture(Gdx.files.internal("ammo/stone_small.png"));
     private OrthographicCamera camera;
 
     public CollisionController(PooledEngine engine, SpriteBatch batch, OrthographicCamera camera) {
         this.engine = engine;
-        this.defendAttackPairs = new ArrayList<DefendAttackPair>();
         this.batch = batch;
         this.camera = camera;
     }
@@ -48,11 +48,32 @@ public class CollisionController {
 
     public void update(){
 
+        /*
+         try{
+            for (DefendAttackPair defendAttackPair : defendAttackPairs){
+                batch.begin();
+                batch.draw(img, camera.viewportWidth / 2, camera.viewportHeight / 2, img.getWidth(), img.getHeight());
+                batch.end();
+            }
+        } catch (Exception e){
+            System.out.println(e.toString());
+        }
+         */
+
         batch.begin();
         batch.draw(img, camera.viewportWidth / 2, camera.viewportHeight / 2, img.getWidth(), img.getHeight());
         batch.end();
 
+    }
 
+    public boolean checkIfExists(DefendAttackPair newDefendAttackPair){
+        for (DefendAttackPair defendAttackPair : defendAttackPairs){
+            if(defendAttackPair.attacker.equals(newDefendAttackPair.attacker) && defendAttackPair.defender.equals(newDefendAttackPair.defender)){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void listen() {
@@ -68,9 +89,20 @@ public class CollisionController {
 
                         if (towerRect.intersects(attackerRect)) {
                             System.out.println("SHOOT!");
-                            DefendAttackPair defendAttackPair = new DefendAttackPair(engine.getEntities().get(i), engine.getEntities().get(j));
-                            defendAttackPairs.add(defendAttackPair);
-                            //engine.removeEntity(engine.getEntities().get(j));
+                            DefendAttackPair newDefendAttackPair = new DefendAttackPair(engine.getEntities().get(i), engine.getEntities().get(j));
+
+                            if(defendAttackPairs.size == 0){
+                                defendAttackPairs.add(newDefendAttackPair);
+                            } else {
+                                if(!checkIfExists(newDefendAttackPair)){
+                                    defendAttackPairs.add(newDefendAttackPair);
+                                }
+                            }
+
+                            System.out.println(defendAttackPairs.size);
+
+                            //System.out.println(engine.getEntities().size());
+                            System.out.println(defendAttackPairs.size);
                         }
                     }
                 }

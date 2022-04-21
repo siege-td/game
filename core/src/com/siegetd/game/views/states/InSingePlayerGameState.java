@@ -99,10 +99,10 @@ public class InSingePlayerGameState extends GameState {
         collisionController.listen();
         collisionController.update();
 
-
-
     }
 
     @Override
-    public void dispose() { }
+    public void dispose() {
+        batch.dispose();
+    }
 }
