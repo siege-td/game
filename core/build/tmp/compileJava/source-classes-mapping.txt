@@ -90,8 +90,8 @@ com/siegetd/game/views/states/JoinGameState.java
  com.siegetd.game.views.states.JoinGameState$1
 com/siegetd/game/Globals.java
  com.siegetd.game.Globals
-com/siegetd/game/controllers/DefendAttackPair.java
- com.siegetd.game.controllers.DefendAttackPair
+com/siegetd/game/models/ECS/components/AnimationComponent.java
+ com.siegetd.game.models.ECS.components.AnimationComponent
 com/siegetd/game/singletons/MyAssetManager.java
  com.siegetd.game.singletons.MyAssetManager
 com/siegetd/game/singletons/Currency.java
@@ -157,8 +157,8 @@ com/siegetd/game/views/components/SettingsButton.java
  com.siegetd.game.views.components.SettingsButton$1
 com/siegetd/game/views/states/LobbyState.java
  com.siegetd.game.views.states.LobbyState
-com/siegetd/game/models/ECS/components/AnimationComponent.java
- com.siegetd.game.models.ECS.components.AnimationComponent
+com/siegetd/game/controllers/DefendAttackPair.java
+ com.siegetd.game.controllers.DefendAttackPair
 com/siegetd/game/views/states/InSingePlayerGameState.java
  com.siegetd.game.views.states.InSingePlayerGameState
 com/siegetd/game/controllers/CollisionController.java

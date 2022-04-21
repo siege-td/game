@@ -30,7 +30,7 @@ public class CollisionController {
     private PooledEngine engine;
     private Array<DefendAttackPair> defendAttackPairs = new Array<>();
     private SpriteBatch batch;
-    private Texture img = new Texture(Gdx.files.internal("ammo/stone_small.png"));
+    private Texture ammo = new Texture(Gdx.files.internal("ammo/stone_small.png"));
     private OrthographicCamera camera;
 
     public CollisionController(PooledEngine engine, SpriteBatch batch, OrthographicCamera camera) {
@@ -48,21 +48,6 @@ public class CollisionController {
 
     public void update(){
 
-        /*
-         try{
-            for (DefendAttackPair defendAttackPair : defendAttackPairs){
-                batch.begin();
-                batch.draw(img, camera.viewportWidth / 2, camera.viewportHeight / 2, img.getWidth(), img.getHeight());
-                batch.end();
-            }
-        } catch (Exception e){
-            System.out.println(e.toString());
-        }
-         */
-
-        batch.begin();
-        batch.draw(img, camera.viewportWidth / 2, camera.viewportHeight / 2, img.getWidth(), img.getHeight());
-        batch.end();
 
     }
 
@@ -89,20 +74,21 @@ public class CollisionController {
 
                         if (towerRect.intersects(attackerRect)) {
                             System.out.println("SHOOT!");
-                            DefendAttackPair newDefendAttackPair = new DefendAttackPair(engine.getEntities().get(i), engine.getEntities().get(j));
+                            DefendAttackPair newDefendAttackPair = new DefendAttackPair(batch, engine.getEntities().get(i), engine.getEntities().get(j));
 
-                            if(defendAttackPairs.size == 0){
+
+
+                            if(!checkIfExists(newDefendAttackPair)){
                                 defendAttackPairs.add(newDefendAttackPair);
-                            } else {
-                                if(!checkIfExists(newDefendAttackPair)){
-                                    defendAttackPairs.add(newDefendAttackPair);
-                                }
                             }
 
-                            System.out.println(defendAttackPairs.size);
-
-                            //System.out.println(engine.getEntities().size());
-                            System.out.println(defendAttackPairs.size);
+                            try{
+                                for (DefendAttackPair defendAttackPair : defendAttackPairs){
+                                    defendAttackPair.draw();
+                                }
+                            } catch (Exception e){
+                                System.out.println(e.toString());
+                            }
                         }
                     }
                 }

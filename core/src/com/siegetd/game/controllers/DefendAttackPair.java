@@ -9,51 +9,63 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.models.ECS.components.TransformComponent;
 
+import java.awt.Point;
+import java.awt.Rectangle;
+
 public class DefendAttackPair {
-    Entity attacker = null;
-    Entity defender = null;
-    int imgWidth;
-    int imgHeight;
-    SpriteBatch batch;
-    Texture img;
-    float speedX = 3f;
-    float speedY = 3f;
-    int x;
-    int y;
+    Entity attacker;
+    Entity defender;
+    private SpriteBatch batch;
+    private Texture ammo = new Texture(Gdx.files.internal("ammo/stone_small.png"));
+
+    private Vector2 position;
+    private Vector2 speed;
+    private Vector2 direction;
 
 
-    private Pixmap origScorpionImg = new Pixmap(Gdx.files.internal("ammo/stone_small.png"));
-    private Pixmap scaledScorpionImg = new Pixmap(
-            ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN) * 1,
-            ((TILE_SIZE * TILE_ROW) / TILE_ROW) * 1,
-            origScorpionImg.getFormat()
-    );
-
-    public DefendAttackPair(Entity defender, Entity attacker){
+    public DefendAttackPair(SpriteBatch batch, Entity defender, Entity attacker){
         this.attacker = attacker;
         this.defender = defender;
+        this.batch = batch;
 
-        this.scaledScorpionImg.drawPixmap(origScorpionImg,
-                0, 0, origScorpionImg.getWidth(), origScorpionImg.getHeight(),
-                0, 0, scaledScorpionImg.getWidth(), scaledScorpionImg.getHeight()
-        );
-
-        img = new Texture(scaledScorpionImg);
-        x = Gdx.graphics.getWidth()/2;
-        y = Gdx.graphics.getHeight()/2;
-        imgWidth = img.getWidth();
-        imgHeight = img.getHeight();
-
+        this.position = new Vector2(defender.getComponent(TransformComponent.class).position.x, defender.getComponent(TransformComponent.class).position.y);
+        this.speed = new Vector2(attacker.getComponent(TransformComponent.class).position.x, attacker.getComponent(TransformComponent.class).position.y);
 
     }
 
-    public void update(float delta){
-        if(defender != null && attacker != null){
-            batch.begin();
-            batch.draw(img, x - img.getWidth()/2, y - img.getHeight()/2, imgWidth, imgHeight, 0, 0, imgWidth, imgHeight);
-            batch.end();
+    private void calculateDirection(){
+        Vector2 attackerPosition = attacker.getComponent(TransformComponent.class).position;
+        Vector2 defenderPosition = defender.getComponent(TransformComponent.class).position;
+
+        direction = new Vector2(attackerPosition.x - defenderPosition.x, attackerPosition.y - defenderPosition.y).nor();
+    }
+
+    private void checkIfReachedTarget(){
+        Vector2 defenderPosition = defender.getComponent(TransformComponent.class).position;
+        Vector2 attackerPosition = attacker.getComponent(TransformComponent.class).position;
+
+        java.awt.Rectangle attackerHitBox = new Rectangle((int) attackerPosition.x, (int) attackerPosition.y, TILE_SIZE / 2 , TILE_SIZE / 2);
+
+        if(attackerHitBox.contains(new Point((int) position.x,(int) position.y))){
+            position.x = defenderPosition.x;
+            position.y = defenderPosition.y;
+            //TODO: Explosion animation
         }
+    }
+
+    public void draw(){
+        calculateDirection();
+        checkIfReachedTarget();
+
+        batch.begin();
+        batch.draw(ammo, position.x, position.y, ammo.getWidth(), ammo.getHeight());
+        batch.end();
+
+        position.x += direction.x * 200 * Gdx.graphics.getDeltaTime();
+        position.y += direction.y * 200 * Gdx.graphics.getDeltaTime();
+
     }
 }
