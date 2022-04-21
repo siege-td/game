@@ -21,6 +21,8 @@ import com.siegetd.game.views.components.WindowComponent;
 
 import java.net.URISyntaxException;
 
+import io.socket.emitter.Emitter;
+
 public class HostGameState extends GameState {
     private Texture background;
     private BackButton backButton;
@@ -56,6 +58,14 @@ public class HostGameState extends GameState {
         stageComponents();
 
         hasHostedLobby = false;
+
+        //socket event listeners
+        try {
+            SocketConnection.getInstance().getSocket().on("create_pin_valid", pinValid);
+            SocketConnection.getInstance().getSocket().on("create_pin_exists", pinAlreadyExists);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -83,7 +93,7 @@ public class HostGameState extends GameState {
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
-                table.getBottomCenter().y + (float)(table.windowHeight * 0.9));
+                table.getBottomCenter().y + (float)(table.windowHeight * 0.85));
         batch.end();
         stage.draw();
     }
@@ -128,13 +138,13 @@ public class HostGameState extends GameState {
     }
 
     private void updateText() throws URISyntaxException {
-        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")) {
+        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")
+        || inputButton.listener.getText().equalsIgnoreCase("PIN ALREADY EXISTS")) {
             pin = "LOBBY-PIN:\n" + inputButton.listener.getText(); // + getLobbyPinApiCall
         } else {
             pin = "LOBBY-PIN:\n" + inputButton.listener.getText();
             if (!hasHostedLobby) {
                 SocketConnection.getInstance().getSocket().emit("new_lobby", Globals.pin);
-                hasHostedLobby = true;
             }
         }
         glyphLayout.setText(font, pin);
@@ -161,4 +171,21 @@ public class HostGameState extends GameState {
         font.dispose();
         fontGenerator.dispose();
     }
+
+    private Emitter.Listener pinAlreadyExists = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            inputButton.listener.pinAlreadyExists();
+            hasHostedLobby = false;
+        }
+    };
+
+    private Emitter.Listener pinValid = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            hasHostedLobby = true;
+            inputButton.button.setVisible(false);
+        }
+    };
+
 }

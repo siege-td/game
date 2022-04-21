@@ -25,4 +25,8 @@ public class InputListener implements Input.TextInputListener {
         return this.text;
     }
 
+    public void pinAlreadyExists(){
+        text = "Pin already exists";
+    }
+
 }

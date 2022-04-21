@@ -85,7 +85,7 @@ public class JoinGameState extends GameState {
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
-                table.getBottomCenter().y + (float)(table.windowHeight * 0.9));
+                table.getBottomCenter().y + (float)(table.windowHeight * 0.85));
         batch.end();
         stage.draw();
         //try catch invalidPin
@@ -144,10 +144,8 @@ public class JoinGameState extends GameState {
         if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")
                 || inputButton.listener.getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
         {
-            font.setColor(Color.RED);
             pin = "PIN: " + inputButton.listener.getText();
         } else if (hasJoinedLobby){
-            font.setColor(Color.WHITE);
             pin = "PIN: " + inputButton.listener.getText() + "\nWaiting for host to start..";
             if (!hasJoinedLobby) {
                 SocketConnection.getInstance().getSocket().emit("join_lobby", Globals.pin);

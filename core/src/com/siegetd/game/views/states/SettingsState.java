@@ -53,7 +53,8 @@ public class SettingsState extends GameState{
     private void createButtons() {
         musicButton = new MusicButton(table);
         musicButton.addButtonListners(gsc);
-        buttonTable.add(musicButton.button);
+        buttonTable.add(musicButton.buttonOn);
+        buttonTable.add(musicButton.buttonOff);
 
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
