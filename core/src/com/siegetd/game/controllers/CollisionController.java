@@ -66,29 +66,19 @@ public class CollisionController {
             for (int i=0; i < engine.getEntities().size(); i++) {
                 for (int j=0; j < engine.getEntities().size(); j++) {
                     if (engine.getEntities().get(i).getComponent(TypeComponent.class).type == Type.DEFENDER && engine.getEntities().get(j).getComponent(TypeComponent.class).type == Type.ATTACKER) {
-                        Vector2 defenderPos = transformPosition(engine.getEntities().get(i).getComponent(TransformComponent.class).position);
-                        Vector2 attackerPos = transformPosition(engine.getEntities().get(j).getComponent(TransformComponent.class).position);
 
-                        java.awt.Rectangle towerRect = new Rectangle((int) defenderPos.x, (int) defenderPos.y, TILE_SIZE , TILE_SIZE);
-                        java.awt.Rectangle attackerRect = new Rectangle((int) attackerPos.x, (int) attackerPos.y, TILE_SIZE , TILE_SIZE);
+                        DefendAttackPair newDefendAttackPair = new DefendAttackPair(batch, engine.getEntities().get(i), engine.getEntities().get(j));
 
-                        if (towerRect.intersects(attackerRect)) {
-                            System.out.println("SHOOT!");
-                            DefendAttackPair newDefendAttackPair = new DefendAttackPair(batch, engine.getEntities().get(i), engine.getEntities().get(j));
+                        if(!checkIfExists(newDefendAttackPair)){
+                            defendAttackPairs.add(newDefendAttackPair);
+                        }
 
-
-
-                            if(!checkIfExists(newDefendAttackPair)){
-                                defendAttackPairs.add(newDefendAttackPair);
+                        try{
+                            for (DefendAttackPair defendAttackPair : defendAttackPairs){
+                                defendAttackPair.draw();
                             }
-
-                            try{
-                                for (DefendAttackPair defendAttackPair : defendAttackPairs){
-                                    defendAttackPair.draw();
-                                }
-                            } catch (Exception e){
-                                System.out.println(e.toString());
-                            }
+                        } catch (Exception e){
+                            System.out.println(e.toString());
                         }
                     }
                 }

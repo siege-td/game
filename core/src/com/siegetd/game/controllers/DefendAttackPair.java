@@ -21,9 +21,14 @@ public class DefendAttackPair {
     private SpriteBatch batch;
     private Texture ammo = new Texture(Gdx.files.internal("ammo/stone_small.png"));
 
-    private Vector2 position;
-    private Vector2 speed;
-    private Vector2 direction;
+    private Vector2 bulletPosition;
+    private Vector2 bulletDirection;
+
+    private Boolean intersects;
+    private Vector2 attackerPosition;
+    private Vector2 defenderPosition;
+
+    private int TOWER_RADIUS = TILE_SIZE * 5;
 
 
     public DefendAttackPair(SpriteBatch batch, Entity defender, Entity attacker){
@@ -31,41 +36,48 @@ public class DefendAttackPair {
         this.defender = defender;
         this.batch = batch;
 
-        this.position = new Vector2(defender.getComponent(TransformComponent.class).position.x, defender.getComponent(TransformComponent.class).position.y);
-        this.speed = new Vector2(attacker.getComponent(TransformComponent.class).position.x, attacker.getComponent(TransformComponent.class).position.y);
+        this.attackerPosition = attacker.getComponent(TransformComponent.class).position;
+        this.defenderPosition = defender.getComponent(TransformComponent.class).position;
 
+        this.bulletPosition = new Vector2(defender.getComponent(TransformComponent.class).position.x, defender.getComponent(TransformComponent.class).position.y);
+        checkIfIntersects();
+    }
+
+    private void checkIfIntersects(){
+        java.awt.Rectangle towerRect = new Rectangle((int) defenderPosition.x - (TOWER_RADIUS / 2), (int) defenderPosition.y - (TOWER_RADIUS / 2), TOWER_RADIUS , TOWER_RADIUS);
+        java.awt.Rectangle attackerRect = new Rectangle((int) attackerPosition.x - (TILE_SIZE / 2), (int) attackerPosition.y - (TILE_SIZE / 2), TILE_SIZE , TILE_SIZE);
+
+        this.intersects = towerRect.intersects(attackerRect);
     }
 
     private void calculateDirection(){
-        Vector2 attackerPosition = attacker.getComponent(TransformComponent.class).position;
-        Vector2 defenderPosition = defender.getComponent(TransformComponent.class).position;
-
-        direction = new Vector2(attackerPosition.x - defenderPosition.x, attackerPosition.y - defenderPosition.y).nor();
+        this.bulletDirection = new Vector2(attackerPosition.x - defenderPosition.x, attackerPosition.y - defenderPosition.y).nor();
     }
 
     private void checkIfReachedTarget(){
-        Vector2 defenderPosition = defender.getComponent(TransformComponent.class).position;
-        Vector2 attackerPosition = attacker.getComponent(TransformComponent.class).position;
+        java.awt.Rectangle attackerHitBox = new Rectangle((int) attackerPosition.x - (TILE_SIZE / 2), (int) attackerPosition.y - (TILE_SIZE / 2), TILE_SIZE / 2 , TILE_SIZE / 2);
 
-        java.awt.Rectangle attackerHitBox = new Rectangle((int) attackerPosition.x, (int) attackerPosition.y, TILE_SIZE / 2 , TILE_SIZE / 2);
-
-        if(attackerHitBox.contains(new Point((int) position.x,(int) position.y))){
-            position.x = defenderPosition.x;
-            position.y = defenderPosition.y;
+        if(attackerHitBox.contains(new Point((int) bulletPosition.x,(int) bulletPosition.y))){
+            this.bulletPosition.x = defenderPosition.x;
+            this.bulletPosition.y = defenderPosition.y;
             //TODO: Explosion animation
         }
     }
 
     public void draw(){
-        calculateDirection();
-        checkIfReachedTarget();
+        checkIfIntersects();
 
-        batch.begin();
-        batch.draw(ammo, position.x, position.y, ammo.getWidth(), ammo.getHeight());
-        batch.end();
+        if(intersects){
+            calculateDirection();
+            checkIfReachedTarget();
 
-        position.x += direction.x * 200 * Gdx.graphics.getDeltaTime();
-        position.y += direction.y * 200 * Gdx.graphics.getDeltaTime();
+            batch.begin();
+            batch.draw(ammo, bulletPosition.x, bulletPosition.y, ammo.getWidth(), ammo.getHeight());
+            batch.end();
+
+            bulletPosition.x += bulletDirection.x * 400 * Gdx.graphics.getDeltaTime();
+            bulletPosition.y += bulletDirection.y * 400 * Gdx.graphics.getDeltaTime();
+        }
 
     }
 }

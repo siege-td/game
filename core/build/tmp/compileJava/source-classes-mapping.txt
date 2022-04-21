@@ -42,10 +42,8 @@ com/siegetd/game/models/ECS/components/TypeComponent.java
  com.siegetd.game.models.ECS.components.TypeComponent
 com/siegetd/game/models/ECS/systems/MovementSystem.java
  com.siegetd.game.models.ECS.systems.MovementSystem
-com/siegetd/game/controllers/GameStateController.java
- com.siegetd.game.controllers.GameStateController
- com.siegetd.game.controllers.GameStateController$1
- com.siegetd.game.controllers.GameStateController$State
+com/siegetd/game/controllers/InputController.java
+ com.siegetd.game.controllers.InputController
 com/siegetd/game/views/states/SplashState.java
  com.siegetd.game.views.states.SplashState
 com/siegetd/game/views/components/HostButton.java
@@ -102,8 +100,8 @@ com/siegetd/game/views/GameState.java
  com.siegetd.game.views.GameState
 com/siegetd/game/models/ECS/systems/AnimationSystem.java
  com.siegetd.game.models.ECS.systems.AnimationSystem
-com/siegetd/game/controllers/InputController.java
- com.siegetd.game.controllers.InputController
+com/siegetd/game/views/states/LobbyState.java
+ com.siegetd.game.views.states.LobbyState
 com/siegetd/game/models/ECS/components/HitpointComponent.java
  com.siegetd.game.models.ECS.components.HitpointComponent
 com/siegetd/game/models/ECS/entities/defender/ZappEntity.java
@@ -155,11 +153,13 @@ com/siegetd/game/views/states/MainMenuState.java
 com/siegetd/game/views/components/SettingsButton.java
  com.siegetd.game.views.components.SettingsButton
  com.siegetd.game.views.components.SettingsButton$1
-com/siegetd/game/views/states/LobbyState.java
- com.siegetd.game.views.states.LobbyState
-com/siegetd/game/controllers/DefendAttackPair.java
- com.siegetd.game.controllers.DefendAttackPair
+com/siegetd/game/controllers/GameStateController.java
+ com.siegetd.game.controllers.GameStateController
+ com.siegetd.game.controllers.GameStateController$1
+ com.siegetd.game.controllers.GameStateController$State
 com/siegetd/game/views/states/InSingePlayerGameState.java
  com.siegetd.game.views.states.InSingePlayerGameState
+com/siegetd/game/controllers/DefendAttackPair.java
+ com.siegetd.game.controllers.DefendAttackPair
 com/siegetd/game/controllers/CollisionController.java
  com.siegetd.game.controllers.CollisionController
