@@ -1,4 +1,4 @@
-package com.siegetd.game.models.ECS.entities.ammo;
+package com.siegetd.game.models.ecs.entities.ammo;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
@@ -10,10 +10,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.siegetd.game.models.ECS.components.TextureComponent;
-import com.siegetd.game.models.ECS.components.TransformComponent;
-import com.siegetd.game.models.ECS.components.VelocityComponent;
-import com.siegetd.game.models.ECS.entities.IEntity;
+import com.siegetd.game.models.ecs.components.TextureComponent;
+import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.VelocityComponent;
+import com.siegetd.game.models.ecs.entities.IEntity;
 
 public class AmmoEntity implements IEntity {
 
@@ -35,7 +35,7 @@ public class AmmoEntity implements IEntity {
     public void create() {
         Entity entity = engine.createEntity();
 
-        Pixmap origScorpionImg = new Pixmap(Gdx.files.internal("ammo/stone_small.png"));
+        Pixmap origScorpionImg = new Pixmap(Gdx.files.internal("projectile/stone_small.png"));
         Pixmap scaledScorpionImg = new Pixmap(
                 ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN) * 1,
                 ((TILE_SIZE * TILE_ROW) / TILE_ROW) * 1,

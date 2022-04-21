@@ -7,22 +7,23 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.siegetd.game.EngineState;
 
 public class TileBorder {
 
     private ShapeRenderer shapeRenderer;
     private Rectangle rectangle;
 
-    public TileBorder(float x, float y, OrthographicCamera camera) {
+    public TileBorder(float x, float y) {
         this.shapeRenderer = new ShapeRenderer();
         this.shapeRenderer.setAutoShapeType(true);
-        this.shapeRenderer.setProjectionMatrix(camera.combined);
+        this.shapeRenderer.setProjectionMatrix(EngineState.camera.combined);
 
         this.rectangle = new Rectangle(
-                x - (x % (camera.viewportWidth / TILE_COLUMN)),
-                y - (y % (camera.viewportHeight / TILE_ROW)),
-                camera.viewportWidth / TILE_COLUMN,
-                camera.viewportHeight / TILE_ROW
+                x - (x % (EngineState.camera.viewportWidth / TILE_COLUMN)),
+                y - (y % (EngineState.camera.viewportHeight / TILE_ROW)),
+                EngineState.camera.viewportWidth / TILE_COLUMN,
+                EngineState.camera.viewportHeight / TILE_ROW
         );
     }
 

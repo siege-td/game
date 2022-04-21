@@ -1,30 +1,45 @@
 {
   "spawnPos": {
-    "x": 10,
-    "y": 10
+    "x": 810,
+    "y": 0
   },
   "endPos": {
-    "x": 10,
-    "y": 10
+    "x": 3840,
+    "y": 2304
   },
   "rounds": [
     {
       "roundId": 1,
       "scorpions": 10,
       "ogres": 0,
-      "ghosts": 0
+      "ghosts": 0,
+      "spawnRates": {
+        "scorpion": 2,
+        "ogre": -1,
+        "ghosts": -1
+      }
     },
     {
       "roundId": 2,
       "scorpions": 10,
       "ogres": 10,
-      "ghosts": 0
+      "ghosts": 0,
+      "spawnRates": {
+        "scorpion": 2,
+        "ogre": 4,
+        "ghosts": -1
+      }
     },
     {
       "roundId": 3,
       "scorpions": 10,
       "ogres": 10,
-      "ghosts": 10
+      "ghosts": 10,
+      "spawnRates": {
+        "scorpion": 2,
+        "ogre": 4,
+        "ghosts": 1
+      }
     }
   ]
 }

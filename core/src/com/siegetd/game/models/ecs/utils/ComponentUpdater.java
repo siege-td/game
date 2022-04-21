@@ -1,11 +1,11 @@
-package com.siegetd.game.models.ECS.utils;
+package com.siegetd.game.models.ecs.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.siegetd.game.Globals;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
-import com.siegetd.game.models.ECS.components.CurrencyComponent;
-import com.siegetd.game.models.ECS.components.HitpointComponent;
+import com.siegetd.game.models.ecs.components.CurrencyComponent;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +43,7 @@ public class ComponentUpdater {
 
         // Create JSON object
         JSONObject object = new JSONObject();
-        object.put("pin", Globals.pin);
+        object.put("pin", EngineState.pin);
         object.put("playerName", "pelton");
         object.put("hitpoints", hitpointMapper.get(entity).hitpoints);
         object.put("currency", currencyMapper.get(entity).currency);

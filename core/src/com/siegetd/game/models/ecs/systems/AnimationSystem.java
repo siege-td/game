@@ -1,12 +1,12 @@
-package com.siegetd.game.models.ECS.systems;
+package com.siegetd.game.models.ecs.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.siegetd.game.models.ECS.components.AnimationComponent;
-import com.siegetd.game.models.ECS.components.StateComponent;
-import com.siegetd.game.models.ECS.components.TextureComponent;
+import com.siegetd.game.models.ecs.components.AnimationComponent;
+import com.siegetd.game.models.ecs.components.StateComponent;
+import com.siegetd.game.models.ecs.components.TextureComponent;
 
 public class AnimationSystem extends IteratingSystem {
 

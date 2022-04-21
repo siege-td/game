@@ -10,7 +10,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.siegetd.game.models.ECS.components.TransformComponent;
+import com.siegetd.game.EngineState;
+import com.siegetd.game.models.ecs.components.TransformComponent;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -19,7 +20,15 @@ public class DefendAttackPair {
     Entity attacker;
     Entity defender;
     private SpriteBatch batch;
-    private Texture ammo = new Texture(Gdx.files.internal("ammo/stone_small.png"));
+
+    Pixmap origProjectileImg = new Pixmap(Gdx.files.internal("projectile/stone_small.png"));
+    Pixmap scaledProjectileImg = new Pixmap(
+            ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN),
+            ((TILE_SIZE * TILE_ROW) / TILE_ROW),
+            origProjectileImg.getFormat()
+    );
+
+    private Texture ammo;
 
     private Vector2 bulletPosition;
     private Vector2 bulletDirection;
@@ -41,6 +50,14 @@ public class DefendAttackPair {
 
         this.bulletPosition = new Vector2(defender.getComponent(TransformComponent.class).position.x, defender.getComponent(TransformComponent.class).position.y);
         checkIfIntersects();
+
+        scaledProjectileImg.drawPixmap(scaledProjectileImg,
+                0, 0, origProjectileImg.getWidth(), origProjectileImg.getHeight(),
+                0, 0, scaledProjectileImg.getWidth(), scaledProjectileImg.getHeight()
+        );
+
+        //ammo = new Texture(scaledProjectileImg);
+        ammo = new Texture("projectile/stone_small.png");
     }
 
     private void checkIfIntersects(){
@@ -68,15 +85,16 @@ public class DefendAttackPair {
         checkIfIntersects();
 
         if(intersects){
+
             calculateDirection();
             checkIfReachedTarget();
 
-            batch.begin();
-            batch.draw(ammo, bulletPosition.x, bulletPosition.y, ammo.getWidth(), ammo.getHeight());
-            batch.end();
+            EngineState.batch.begin();
+            EngineState.batch.draw(ammo, bulletPosition.x, bulletPosition.y, ammo.getWidth(), ammo.getHeight());
+            EngineState.batch.end();
 
-            bulletPosition.x += bulletDirection.x * 400 * Gdx.graphics.getDeltaTime();
-            bulletPosition.y += bulletDirection.y * 400 * Gdx.graphics.getDeltaTime();
+            bulletPosition.x += bulletDirection.x * 200 * Gdx.graphics.getDeltaTime();
+            bulletPosition.y += bulletDirection.y * 200 * Gdx.graphics.getDeltaTime();
         }
 
     }

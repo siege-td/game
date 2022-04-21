@@ -1,17 +1,17 @@
-package com.siegetd.game.models.ECS.entities;
+package com.siegetd.game.models.ecs.entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Texture;
-import com.siegetd.game.models.ECS.components.CurrencyComponent;
-import com.siegetd.game.models.ECS.components.HitpointComponent;
-import com.siegetd.game.models.ECS.components.State;
-import com.siegetd.game.models.ECS.components.StateComponent;
-import com.siegetd.game.models.ECS.components.TextureComponent;
-import com.siegetd.game.models.ECS.components.TransformComponent;
-import com.siegetd.game.models.ECS.components.Type;
-import com.siegetd.game.models.ECS.components.TypeComponent;
-import com.siegetd.game.models.ECS.components.VelocityComponent;
+import com.siegetd.game.models.ecs.components.CurrencyComponent;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
+import com.siegetd.game.models.ecs.components.State;
+import com.siegetd.game.models.ecs.components.StateComponent;
+import com.siegetd.game.models.ecs.components.TextureComponent;
+import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.Type;
+import com.siegetd.game.models.ecs.components.TypeComponent;
+import com.siegetd.game.models.ecs.components.VelocityComponent;
 
 public class TestEntity implements IEntity {
 
