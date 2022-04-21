@@ -41,6 +41,7 @@ public class LevelController {
 
                     Round currentRound = levelData.getRounds().get(currRound);
 
+                    // TODO: ITERATE OVER ALL INSTEAD OF USING IFS
                     // Spawn scorpions
                     if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
                         entitySpawner.spawnAttackerAtInterval(
