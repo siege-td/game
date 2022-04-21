@@ -164,6 +164,7 @@ com/siegetd/game/views/components/ingame/InGameGUI.java
  com.siegetd.game.views.components.ingame.InGameGUI
 com/siegetd/game/controllers/LevelController.java
  com.siegetd.game.controllers.LevelController
+ com.siegetd.game.controllers.LevelController$1
 com/siegetd/game/views/components/ingame/StartRoundButton.java
  com.siegetd.game.views.components.ingame.StartRoundButton
  com.siegetd.game.views.components.ingame.StartRoundButton$1

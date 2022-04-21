@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.Timer;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.EntitySpawner;
 import com.siegetd.game.models.ecs.components.TransformComponent;
@@ -30,41 +31,47 @@ public class LevelController {
 
     public void startRound() {
         if (isRoundFinished()) {
-            EngineState.ecsEngine.removeAllEntities();
+            this.removeAllAttackers();
 
-            EntitySpawner entitySpawner = new EntitySpawner();
+            // Wait for attackers to be deleted
+            new Timer().scheduleTask(new Timer.Task() {
+                @Override
+                public void run() {
+                    EntitySpawner entitySpawner = new EntitySpawner();
 
-            Round currentRound = levelData.getRounds().get(currRound);
+                    Round currentRound = levelData.getRounds().get(currRound);
 
-            // Spawn scorpions
-            if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
-                entitySpawner.spawnAttackerAtInterval(
-                        currentRound.getSpawnRate().getScorpionSpawnRate(),
-                        Attacker.SCORPION,
-                        currentRound.getNumOfScorpions(),
-                        levelData.getEntitySpawnPos()
-                );
-            }
-            // Spawn ogres
-            if (currentRound.getSpawnRate().getOgreSpawnRate() > 0) {
-                entitySpawner.spawnAttackerAtInterval(
-                        currentRound.getSpawnRate().getOgreSpawnRate(),
-                        Attacker.OGRE,
-                        currentRound.getNumOfOgres(),
-                        levelData.getEntitySpawnPos()
-                );
-            }
-            // Spawn ghosts
-            if (currentRound.getSpawnRate().getGhostSpawnRate() > 0) {
-                entitySpawner.spawnAttackerAtInterval(
-                        currentRound.getSpawnRate().getGhostSpawnRate(),
-                        Attacker.GHOST,
-                        currentRound.getNumOfOgres(),
-                        levelData.getEntitySpawnPos()
-                );
-            }
+                    // Spawn scorpions
+                    if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
+                        entitySpawner.spawnAttackerAtInterval(
+                                currentRound.getSpawnRate().getScorpionSpawnRate(),
+                                Attacker.SCORPION,
+                                currentRound.getNumOfScorpions(),
+                                levelData.getEntitySpawnPos()
+                        );
+                    }
+                    // Spawn ogres
+                    if (currentRound.getSpawnRate().getOgreSpawnRate() > 0) {
+                        entitySpawner.spawnAttackerAtInterval(
+                                currentRound.getSpawnRate().getOgreSpawnRate(),
+                                Attacker.OGRE,
+                                currentRound.getNumOfOgres(),
+                                levelData.getEntitySpawnPos()
+                        );
+                    }
+                    // Spawn ghosts
+                    if (currentRound.getSpawnRate().getGhostSpawnRate() > 0) {
+                        entitySpawner.spawnAttackerAtInterval(
+                                currentRound.getSpawnRate().getGhostSpawnRate(),
+                                Attacker.GHOST,
+                                currentRound.getNumOfOgres(),
+                                levelData.getEntitySpawnPos()
+                        );
+                    }
 
-            currRound++;
+                    currRound++;
+                }
+            }, 1, 1, 0);
         }
         // TODO: ADD handler for when level is done
     }
@@ -95,6 +102,24 @@ public class LevelController {
         }
 
         return isFinished;
+    }
+
+    private void removeAllAttackers() {
+        ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
+        ArrayList<Entity> attackers = new ArrayList<>();
+
+        for (Entity entity : entities) {
+            for (Component component : entity.getComponents()) {
+                if (component.getClass() == TypeComponent.class) {
+                    attackers.add(entity);
+                }
+            }
+        }
+
+        for (Entity attacker : attackers) {
+            EngineState.ecsEngine.removeEntity(attacker);
+            System.out.println("Remove");
+        }
     }
 
     private void loadData(int level) {
