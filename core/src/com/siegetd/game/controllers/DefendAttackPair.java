@@ -1,12 +1,8 @@
 package com.siegetd.game.controllers;
-
-import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
-import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -19,16 +15,9 @@ import java.awt.Rectangle;
 public class DefendAttackPair {
     Entity attacker;
     Entity defender;
-    private SpriteBatch batch;
 
-    Pixmap origProjectileImg = new Pixmap(Gdx.files.internal("projectile/stone_small.png"));
-    Pixmap scaledProjectileImg = new Pixmap(
-            ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN),
-            ((TILE_SIZE * TILE_ROW) / TILE_ROW),
-            origProjectileImg.getFormat()
-    );
+    private Texture ammo = new Texture("projectile/stone_small.png");
 
-    private Texture ammo;
 
     private Vector2 bulletPosition;
     private Vector2 bulletDirection;
@@ -40,24 +29,15 @@ public class DefendAttackPair {
     private int TOWER_RADIUS = TILE_SIZE * 5;
 
 
-    public DefendAttackPair(SpriteBatch batch, Entity defender, Entity attacker){
+    public DefendAttackPair(Entity defender, Entity attacker){
         this.attacker = attacker;
         this.defender = defender;
-        this.batch = batch;
 
         this.attackerPosition = attacker.getComponent(TransformComponent.class).position;
         this.defenderPosition = defender.getComponent(TransformComponent.class).position;
 
         this.bulletPosition = new Vector2(defender.getComponent(TransformComponent.class).position.x, defender.getComponent(TransformComponent.class).position.y);
         checkIfIntersects();
-
-        scaledProjectileImg.drawPixmap(scaledProjectileImg,
-                0, 0, origProjectileImg.getWidth(), origProjectileImg.getHeight(),
-                0, 0, scaledProjectileImg.getWidth(), scaledProjectileImg.getHeight()
-        );
-
-        //ammo = new Texture(scaledProjectileImg);
-        ammo = new Texture("projectile/stone_small.png");
     }
 
     private void checkIfIntersects(){
@@ -77,6 +57,7 @@ public class DefendAttackPair {
         if(attackerHitBox.contains(new Point((int) bulletPosition.x,(int) bulletPosition.y))){
             this.bulletPosition.x = defenderPosition.x;
             this.bulletPosition.y = defenderPosition.y;
+            //TODO: Decrease unit health
             //TODO: Explosion animation
         }
     }
@@ -85,7 +66,6 @@ public class DefendAttackPair {
         checkIfIntersects();
 
         if(intersects){
-
             calculateDirection();
             checkIfReachedTarget();
 
@@ -93,8 +73,8 @@ public class DefendAttackPair {
             EngineState.batch.draw(ammo, bulletPosition.x, bulletPosition.y, ammo.getWidth(), ammo.getHeight());
             EngineState.batch.end();
 
-            bulletPosition.x += bulletDirection.x * 200 * Gdx.graphics.getDeltaTime();
-            bulletPosition.y += bulletDirection.y * 200 * Gdx.graphics.getDeltaTime();
+            bulletPosition.x += (bulletDirection.x * 600) * Gdx.graphics.getDeltaTime();
+            bulletPosition.y += (bulletDirection.y * 600) * Gdx.graphics.getDeltaTime();
         }
 
     }

@@ -74,15 +74,9 @@ public class InSingePlayerGameState extends GameState {
         Gdx.input.setInputProcessor(EngineState.stage);
 
         this.inputController = new InputController();
-        this.collisionController = new CollisionController(engine, batch, camera);
+        this.collisionController = new CollisionController();
 
         new InGameGUI();
-
-
-        /*
-                ScorpionEntity scorpion = new ScorpionEntity(engine, new Vector2(2, 2), new Vector2(50,50));
-        scorpion.create();
-         */
     }
 
     @Override
@@ -98,7 +92,6 @@ public class InSingePlayerGameState extends GameState {
         EngineState.stage.draw();
 
         collisionController.listen();
-        collisionController.update();
     }
 
     @Override

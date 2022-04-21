@@ -35,10 +35,8 @@ com/siegetd/game/views/states/HostGameState.java
  com.siegetd.game.views.states.HostGameState
 com/siegetd/game/views/components/map/TileBorder.java
  com.siegetd.game.views.components.map.TileBorder
-com/siegetd/game/controllers/GameStateController.java
- com.siegetd.game.controllers.GameStateController
- com.siegetd.game.controllers.GameStateController$1
- com.siegetd.game.controllers.GameStateController$State
+com/siegetd/game/models/ecs/entities/ammo/AmmoEntity.java
+ com.siegetd.game.models.ecs.entities.ammo.AmmoEntity
 com/siegetd/game/views/states/SplashState.java
  com.siegetd.game.views.states.SplashState
 com/siegetd/game/models/ecs/entities/defender/ArcherEntity.java
@@ -140,8 +138,8 @@ com/siegetd/game/models/ecs/components/Type.java
  com.siegetd.game.models.ecs.components.Type
 com/siegetd/game/models/map/tile/Tile.java
  com.siegetd.game.models.map.tile.Tile
-com/siegetd/game/views/states/InSingePlayerGameState.java
- com.siegetd.game.views.states.InSingePlayerGameState
+com/siegetd/game/models/ecs/entities/TestEntity.java
+ com.siegetd.game.models.ecs.entities.TestEntity
 com/siegetd/game/models/ecs/components/TransformComponent.java
  com.siegetd.game.models.ecs.components.TransformComponent
 com/siegetd/game/models/map/GameMap.java
@@ -162,15 +160,17 @@ com/siegetd/game/models/ecs/entities/attacker/GhostEntity.java
  com.siegetd.game.models.ecs.entities.attacker.GhostEntity
 com/siegetd/game/models/ecs/systems/MovementSystem.java
  com.siegetd.game.models.ecs.systems.MovementSystem
-com/siegetd/game/controllers/DefendAttackPair.java
- com.siegetd.game.controllers.DefendAttackPair
-com/siegetd/game/models/ecs/components/VelocityComponent.java
- com.siegetd.game.models.ecs.components.VelocityComponent
-com/siegetd/game/models/ecs/entities/ammo/AmmoEntity.java
- com.siegetd.game.models.ecs.entities.ammo.AmmoEntity
-com/siegetd/game/models/ecs/entities/TestEntity.java
- com.siegetd.game.models.ecs.entities.TestEntity
 com/siegetd/game/models/ecs/entities/attacker/ScorpionEntity.java
  com.siegetd.game.models.ecs.entities.attacker.ScorpionEntity
+com/siegetd/game/models/ecs/components/VelocityComponent.java
+ com.siegetd.game.models.ecs.components.VelocityComponent
+com/siegetd/game/controllers/GameStateController.java
+ com.siegetd.game.controllers.GameStateController
+ com.siegetd.game.controllers.GameStateController$1
+ com.siegetd.game.controllers.GameStateController$State
+com/siegetd/game/views/states/InSingePlayerGameState.java
+ com.siegetd.game.views.states.InSingePlayerGameState
+com/siegetd/game/controllers/DefendAttackPair.java
+ com.siegetd.game.controllers.DefendAttackPair
 com/siegetd/game/controllers/CollisionController.java
  com.siegetd.game.controllers.CollisionController
