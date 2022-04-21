@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.Globals;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.views.GameState;
@@ -133,7 +133,7 @@ public class HostGameState extends GameState {
         } else {
             pin = "LOBBY-PIN:\n" + inputButton.listener.getText();
             if (!hasHostedLobby) {
-                SocketConnection.getInstance().getSocket().emit("new_lobby", Globals.pin);
+                SocketConnection.getInstance().getSocket().emit("new_lobby", EngineState.pin);
                 hasHostedLobby = true;
             }
         }

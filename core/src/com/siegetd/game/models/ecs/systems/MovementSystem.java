@@ -6,6 +6,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.VelocityComponent;
+import com.siegetd.game.models.map.tile.MovableTile;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class MovementSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transformMapper;
@@ -22,6 +26,8 @@ public class MovementSystem extends IteratingSystem {
     public void processEntity(Entity entity, float deltaTime) {
         TransformComponent transformComponent = transformMapper.get(entity);
         VelocityComponent velocityComponent = velocityMapper.get(entity);
+
+        velocityComponent.updateMovement((int) transformComponent.position.x, (int) transformComponent.position.y);
 
         transformComponent.position.x += velocityComponent.xSpeed * deltaTime;
         transformComponent.position.y += velocityComponent.ySpeed * deltaTime;

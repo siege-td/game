@@ -23,7 +23,7 @@ public class GameMap extends Stage {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    private LinkedList<MovableTile> movableTiles;
+    private List<MovableTile> movableTiles;
 
     public GameMap(OrthographicCamera camera){
         tiledMap = new TmxMapLoader().load("level1/level1map.tmx");
@@ -32,26 +32,33 @@ public class GameMap extends Stage {
         this.camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
         //this.camera.update();
 
-        generateTileTypes();
+        this.movableTiles = generateMovableTiles();
     }
 
-    private void generateTileTypes(){
+    private List<MovableTile> generateMovableTiles(){
         MapLayers mapLayers = tiledMap.getLayers();
         TiledMapTileLayer moveableLayer = (TiledMapTileLayer) mapLayers.get("Moveable");
+        TiledMapTileLayer endLayer = (TiledMapTileLayer) mapLayers.get("End");
 
-        this.movableTiles = new LinkedList<>();
+        LinkedList<MovableTile> movables = new LinkedList<>();
 
         for (int col = 0; col < TILE_COLUMN; col++) {
             for (int row = 0; row < TILE_ROW; row++) {
-                TiledMapTileLayer.Cell movableCell = moveableLayer.getCell(col,row);
+                TiledMapTileLayer.Cell movableCell = moveableLayer.getCell(col, row);
+                TiledMapTileLayer.Cell endCell = endLayer.getCell(col, row);
 
-                MovableTile movableTile = new MovableTile(col, row, movableCell);
-
-                if(movableCell != null){
-                    this.movableTiles.add(movableTile);
+                if (movableCell != null) {
+                    MovableTile movableTile = new MovableTile(col, row, movableCell);
+                    movables.add(movableTile);
+                }
+                if (endCell != null) {
+                    MovableTile endMovableTile = new MovableTile(col, row, endCell);
+                    movables.add(endMovableTile);
                 }
             }
         }
+
+        return movables;
     }
 
     public List<MovableTile> getMovableTiles(){
