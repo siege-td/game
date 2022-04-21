@@ -1,7 +1,7 @@
 package com.siegetd.game.views.components;
 
 import com.badlogic.gdx.Input;
-import com.siegetd.game.Globals;
+import com.siegetd.game.EngineState;
 
 public class InputListener implements Input.TextInputListener {
 
@@ -9,7 +9,7 @@ public class InputListener implements Input.TextInputListener {
     @Override
     public void input(String text) {
         this.text = text;
-        Globals.pin = text;
+        EngineState.pin = text;
     }
 
     @Override

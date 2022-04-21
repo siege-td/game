@@ -8,6 +8,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.views.components.gamestats.GameStats;
@@ -17,22 +18,16 @@ import java.net.URISyntaxException;
 public class RenderingSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
-    private SpriteBatch batch;
-    private OrthographicCamera camera;
-
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
 
     private GameStats gameStats;
 
-    public RenderingSystem(SpriteBatch batch, OrthographicCamera camera, GameStats gameStats) throws URISyntaxException {
+    public RenderingSystem() throws URISyntaxException {
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
-        this.camera = camera;
-        this.batch = batch;
-
-        this.gameStats = gameStats;
+        this.gameStats = new GameStats();
     }
 
     @Override
@@ -47,8 +42,8 @@ public class RenderingSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-        batch.begin();
-        batch.setProjectionMatrix(camera.combined);
+        EngineState.batch.begin();
+        EngineState.batch.setProjectionMatrix(EngineState.camera.combined);
 
         gameStats.drawStats();
 
@@ -65,7 +60,7 @@ public class RenderingSystem extends EntitySystem {
             float textureOriginX = textureWidth / 2f;
             float textureOriginY = textureHeight / 2f;
 
-            batch.draw(
+            EngineState.batch.draw(
                     textureComponent.region,
                     transformComponent.position.x,
                     transformComponent.position.y,
@@ -79,6 +74,6 @@ public class RenderingSystem extends EntitySystem {
             );
         }
 
-        batch.end();
+        EngineState.batch.end();
     }
 }
