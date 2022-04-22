@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.siegetd.game.controllers.GameStateController;
 
 public class SiegeTd extends ApplicationAdapter {
+	public static final String APP_TITLE = "SiegeTD";
+	public static final int APP_HEIGHT = 414 ;
+	public static final int APP_WIDTH = 896 ;
+	public static final int APP_FPS = 60 ;
 
 	private SpriteBatch batch;
 	private GameStateController gsm;

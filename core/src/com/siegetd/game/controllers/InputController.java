@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.views.components.map.TileBorder;
 import com.siegetd.game.views.components.AddEntityButton;
 
@@ -19,12 +20,9 @@ import java.util.concurrent.Callable;
 
 public class InputController {
 
-    private OrthographicCamera camera;
-
     private Vector3 lastTouchCoordinates = null;
 
     private AddEntityButton addEntityButton;
-    private Stage stage;
 
     private ArrayList<Vector3> touchCoordinates;
 
@@ -32,23 +30,15 @@ public class InputController {
     private float tileY = 0f;
     private boolean tilePosSet = false;
 
-    private PooledEngine engine;
-
-    public InputController(OrthographicCamera camera, Stage stage, PooledEngine engine) {
-        this.camera = camera;
-        this.stage = stage;
-
+    public InputController() {
         this.touchCoordinates = new ArrayList<>();
-
-        this.engine = engine;
     }
 
     public void listen() {
         if (Gdx.input.justTouched()) {
-            lastTouchCoordinates = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+            lastTouchCoordinates = EngineState.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             touchCoordinates.add(lastTouchCoordinates);
-            addEntityButton = new AddEntityButton(camera, stage);
-
+            addEntityButton = new AddEntityButton();
         }
 
         if (lastTouchCoordinates != null) {
@@ -56,10 +46,10 @@ public class InputController {
             if (!Intersector.intersectRectangles(
                     addEntityButton.getTransparentRectangle(),
                     new Rectangle(
-                            lastTouchCoordinates.x - (lastTouchCoordinates.x % (camera.viewportWidth / TILE_COLUMN)),
-                            lastTouchCoordinates.y - (lastTouchCoordinates.y % (camera.viewportHeight / TILE_ROW)),
-                            camera.viewportWidth / TILE_COLUMN,
-                            camera.viewportHeight / TILE_ROW
+                            lastTouchCoordinates.x - (lastTouchCoordinates.x % (EngineState.camera.viewportWidth / TILE_COLUMN)),
+                            lastTouchCoordinates.y - (lastTouchCoordinates.y % (EngineState.camera.viewportHeight / TILE_ROW)),
+                            EngineState.camera.viewportWidth / TILE_COLUMN,
+                            EngineState.camera.viewportHeight / TILE_ROW
                     ),
                     addEntityButton.getTransparentRectangle()
             )) {
@@ -73,13 +63,12 @@ public class InputController {
                 tilePosSet = true;
             }
 
-            stage.addActor(addEntityButton.button);
-            addEntityButton.addButtonListeners(engine, new Vector2(tileX, tileY), onEntitySpawned());
+            EngineState.stage.addActor(addEntityButton.button);
+            addEntityButton.addButtonListeners(new Vector2(tileX, tileY), onEntitySpawned());
 
             TileBorder tileBorder = new TileBorder(
                     tileX,
-                    tileY,
-                    this.camera
+                    tileY
             );
 
             tileBorder.drawTileBorder();

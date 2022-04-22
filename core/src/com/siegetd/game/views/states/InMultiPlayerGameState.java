@@ -9,13 +9,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.controllers.GameStateController;
+import com.siegetd.game.controllers.InputController;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.gamestats.GameStats;
+import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
 
@@ -25,37 +29,47 @@ public class InMultiPlayerGameState extends GameState {
     private GameMap gameMap;
 
     // Ecs fields
-    private SpriteBatch batch;
     private OrthographicCamera camera;
     private PooledEngine engine;
     private RenderingSystem renderingSystem;
 
-    private GameStats gameStats;
+    private InputController inputController;
 
     public InMultiPlayerGameState(GameStateController gsc) {
         super(gsc);
 
-        batch = new SpriteBatch();
-
+        EngineState.batch = new SpriteBatch();
 
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
         this.camera.position.set(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
         this.camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
 
+        EngineState.camera = camera;
+
         engine = new PooledEngine();
 
         try {
-            gameStats = new GameStats(this.batch);
-            renderingSystem = new RenderingSystem(batch, this.camera, this.gameStats);
+            renderingSystem = new RenderingSystem();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+
+        this.gameMap = new GameMap(camera);
+
+        EngineState.gameMap = this.gameMap;
 
         engine.addSystem(new AnimationSystem());
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
 
-        this.gameMap = new GameMap(camera);
+        EngineState.ecsEngine = engine;
+
+        EngineState.stage = new Stage();
+        Gdx.input.setInputProcessor(EngineState.stage);
+
+        this.inputController = new InputController();
+
+        new InGameGUI();
     }
 
     @Override
@@ -66,7 +80,9 @@ public class InMultiPlayerGameState extends GameState {
         Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameMap.render();
+        inputController.listen();
         engine.update(Gdx.graphics.getDeltaTime());
+        EngineState.stage.draw();
     }
 
     @Override

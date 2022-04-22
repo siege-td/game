@@ -9,7 +9,6 @@ import com.siegetd.game.views.states.JoinGameState;
 import com.siegetd.game.views.states.LobbyState;
 import com.siegetd.game.views.states.MainMenuState;
 import com.siegetd.game.views.states.MultiPlayerMenuState;
-import com.siegetd.game.views.states.PlayState;
 import com.siegetd.game.views.states.SettingsState;
 import com.siegetd.game.views.states.SinglePlayerMenuState;
 import com.siegetd.game.views.states.SplashState;
@@ -72,8 +71,6 @@ public class GameStateController {
         switch (state){
             case SPLASH:
                 return new SplashState(this);
-            case PLAY:
-                return new PlayState(this);
             case MENU:
                 return new MainMenuState(this);
             case LOBBY:

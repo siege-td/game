@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.views.components.selectentity.SelectEntityModal;
 
 import java.util.concurrent.Callable;
@@ -30,30 +31,26 @@ public class AddEntityButton extends ButtonComponent {
     private ShapeRenderer shapeRenderer;
     private Rectangle transparentRectangle;
 
-    private OrthographicCamera camera;
-    private Stage stage;
-
     private SelectEntityModal selectEntityModal = null;
 
-
-    public AddEntityButton(OrthographicCamera camera, Stage stage) {
+    public AddEntityButton() {
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/open_shop.png");
         this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(camera.viewportWidth / 80, camera.viewportWidth / 80);
+        this.button.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
         this.button.setPosition(10, 10);
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         this.shapeRenderer = new ShapeRenderer();
         this.shapeRenderer.setAutoShapeType(true);
-        this.shapeRenderer.setProjectionMatrix(camera.combined);
+        this.shapeRenderer.setProjectionMatrix(EngineState.camera.combined);
 
         this.transparentRectangle = new Rectangle(
                 0,
                 0,
-                (camera.viewportWidth / TILE_COLUMN) * 3,
-                (camera.viewportHeight / TILE_ROW) * 2
+                (EngineState.camera.viewportWidth / TILE_COLUMN) * 3,
+                (EngineState.camera.viewportHeight / TILE_ROW) * 2
         );
 
         this.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -66,23 +63,32 @@ public class AddEntityButton extends ButtonComponent {
         );
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
-
-        this.camera = camera;
-        this.stage = stage;
     }
 
-    public void addButtonListeners(final PooledEngine engine, final Vector2 entitySpawnPos, final Callable<Void> entitySpawned) {
+    public void addButtonListeners(final Vector2 entitySpawnPos, final Callable<Void> entitySpawned) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectEntityModal == null) {
-                    selectEntityModal = new SelectEntityModal(camera);
+                    selectEntityModal = new SelectEntityModal();
                     selectEntityModal.showModal();
-                    selectEntityModal.addButtonListeners(engine, entitySpawnPos, entitySpawned);
-                    stage.addActor(selectEntityModal.getArcherButton());
-                    stage.addActor(selectEntityModal.getMageButton());
-                    stage.addActor(selectEntityModal.getZappButton());
+                    selectEntityModal.addButtonListeners(entitySpawnPos, entitySpawned);
+                    EngineState.stage.addActor(selectEntityModal.getArcherButton());
+                    EngineState.stage.addActor(selectEntityModal.getMageButton());
+                    EngineState.stage.addActor(selectEntityModal.getZappButton());
+                    addStageListeners();
                 }
+            }
+        });
+    }
+
+    private void addStageListeners(){
+        Gdx.input.setInputProcessor(EngineState.stage);
+        EngineState.stage.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //Hide building options
+                selectEntityModal.hideModal();
             }
         });
     }

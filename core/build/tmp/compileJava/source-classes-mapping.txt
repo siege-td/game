@@ -86,6 +86,8 @@ com/siegetd/game/Globals.java
  com.siegetd.game.Globals
 com/siegetd/game/singletons/MyAssetManager.java
  com.siegetd.game.singletons.MyAssetManager
+com/siegetd/game/models/level/SpawnRate.java
+ com.siegetd.game.models.level.SpawnRate
 com/siegetd/game/models/ecs/components/State.java
  com.siegetd.game.models.ecs.components.State
 com/siegetd/game/models/ecs/components/AnimationComponent.java
@@ -118,8 +120,6 @@ com/siegetd/game/models/ecs/EntitySpawner.java
  com.siegetd.game.models.ecs.EntitySpawner
 com/siegetd/game/models/ecs/components/Type.java
  com.siegetd.game.models.ecs.components.Type
-com/siegetd/game/models/map/tile/MovableTile.java
- com.siegetd.game.models.map.tile.MovableTile
 com/siegetd/game/models/map/tile/Tile.java
  com.siegetd.game.models.map.tile.Tile
 com/siegetd/game/models/ecs/systems/MovementSystem.java
