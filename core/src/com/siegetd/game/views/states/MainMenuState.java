@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.singletons.MyAssetManager;
 import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.MultiPlayerButton;
 import com.siegetd.game.views.components.SettingsButton;

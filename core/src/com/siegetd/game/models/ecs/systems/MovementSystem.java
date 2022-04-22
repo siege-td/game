@@ -4,15 +4,10 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.VelocityComponent;
-import com.siegetd.game.models.map.tile.MovableTile;
-import com.siegetd.game.singletons.ScoreHandler;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.siegetd.game.controllers.ScoreController;
 
 public class MovementSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transformMapper;
@@ -53,8 +48,8 @@ public class MovementSystem extends IteratingSystem {
     private void getNextPos(Entity curEntity) {
         if (this.velocityComponent.pathIndex >= this.velocityComponent.path.size()) {
             EngineState.ecsEngine.removeEntity(curEntity);
-            ScoreHandler.getInstance().setHealth(ScoreHandler.getInstance().getHealth()-10);
-            System.out.println(ScoreHandler.getInstance().getHealth());
+            ScoreController.getInstance().setHealth(ScoreController.getInstance().getHealth()-10);
+            System.out.println(ScoreController.getInstance().getHealth());
             return;
         }
 
