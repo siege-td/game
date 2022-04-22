@@ -11,29 +11,48 @@ public class MusicButton extends ButtonComponent {
 
     private ButtonComponent buttonComponent;
     private Texture buttonImg;
+    private Texture buttonImgOff;
     private Vector2 pos;
     private boolean enabled;
-    public Button button;
+    public Button buttonOn;
+    public Button buttonOff;
 
     public MusicButton(WindowComponent table) {
         pos = table.getTopLeft();
         this.enabled = true;
         this.buttonComponent = new ButtonComponent();
         this.buttonImg = new Texture("GUI/button_music.png");
-        this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(table.windowWidth /10, table.windowWidth /10);
-        this.button.setPosition(
-                (float) (pos.x - (button.getWidth()* 0.25)),
-                (float) (pos.y - (button.getHeight() * 0.75))
+        this.buttonImgOff = new Texture("GUI/button_music_off.png");
+        this.buttonOn = this.buttonComponent.createButton(this.buttonImg);
+        this.buttonOn.setSize(table.windowWidth /10, table.windowWidth /10);
+        this.buttonOn.setPosition(
+                (float) (pos.x - (buttonOn.getWidth()* 0.25)),
+                (float) (pos.y - (buttonOn.getHeight() * 0.75))
         );
+        this.buttonOff = this.buttonComponent.createButton(this.buttonImgOff);
+        this.buttonOff.setSize(table.windowWidth /10, table.windowWidth /10);
+        this.buttonOff.setPosition(
+                (float) (pos.x - (buttonOff.getWidth()* 0.25)),
+                (float) (pos.y - (buttonOff.getHeight() * 0.75))
+        );
+        this.buttonOff.setVisible(false);
     }
 
     public void addButtonListners(final GameStateController gsc) {
-        this.button.addListener(new ClickListener() {
+        this.buttonOn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("enabled :" + enabled);
-                dispose(buttonImg);
+                if(enabled){
+                    disableMusic();
+                }else{
+                    enableMusic();
+                }
+                System.out.println("enabled changed to :" + enabled);
+            }
+        });
+        this.buttonOff.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
                 if(enabled){
                     disableMusic();
                 }else{
@@ -46,11 +65,14 @@ public class MusicButton extends ButtonComponent {
 
     private void enableMusic(){
         this.enabled = true;
-        this.buttonImg = new Texture("GUI/button_music.png");
+        this.buttonOff.setVisible(false);
+        this.buttonOn.setVisible(true);
     }
 
     private void disableMusic(){
         this.enabled = false;
-        this.buttonImg = new Texture("GUI/button_music_off.png");
+        this.buttonOff.setVisible(true);
+        this.buttonOn.setVisible(false);
+
     }
 }

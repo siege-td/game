@@ -6,9 +6,8 @@ com/siegetd/game/views/components/selectentity/SelectEntityModal.java
 com/siegetd/game/views/components/MultiPlayerButton.java
  com.siegetd.game.views.components.MultiPlayerButton
  com.siegetd.game.views.components.MultiPlayerButton$1
-com/siegetd/game/views/components/MusicButton.java
- com.siegetd.game.views.components.MusicButton
- com.siegetd.game.views.components.MusicButton$1
+com/siegetd/game/models/ecs/systems/AnimationSystem.java
+ com.siegetd.game.models.ecs.systems.AnimationSystem
 com/siegetd/game/models/ecs/systems/RenderingSystem.java
  com.siegetd.game.models.ecs.systems.RenderingSystem
 com/siegetd/game/views/components/gamestats/GameStats.java
@@ -20,6 +19,8 @@ com/siegetd/game/models/ecs/entities/TestEntity.java
 com/siegetd/game/views/components/SinglePlayerButton.java
  com.siegetd.game.views.components.SinglePlayerButton
  com.siegetd.game.views.components.SinglePlayerButton$1
+com/siegetd/game/utils/EntitySpawner.java
+ com.siegetd.game.utils.EntitySpawner
 com/siegetd/game/singletons/ScoreHandler.java
  com.siegetd.game.singletons.ScoreHandler
 com/siegetd/game/views/states/SettingsState.java
@@ -79,6 +80,10 @@ com/siegetd/game/views/components/InputListener.java
 com/siegetd/game/views/states/JoinGameState.java
  com.siegetd.game.views.states.JoinGameState
  com.siegetd.game.views.states.JoinGameState$1
+ com.siegetd.game.views.states.JoinGameState$2
+ com.siegetd.game.views.states.JoinGameState$3
+com/siegetd/game/Globals.java
+ com.siegetd.game.Globals
 com/siegetd/game/singletons/MyAssetManager.java
  com.siegetd.game.singletons.MyAssetManager
 com/siegetd/game/models/level/SpawnRate.java
@@ -111,8 +116,6 @@ com/siegetd/game/views/components/WindowComponent.java
  com.siegetd.game.views.components.WindowComponent
 com/siegetd/game/models/ecs/entities/defender/MageEntity.java
  com.siegetd.game.models.ecs.entities.defender.MageEntity
-com/siegetd/game/models/ecs/entities/defender/Defender.java
- com.siegetd.game.models.ecs.entities.defender.Defender
 com/siegetd/game/models/map/tile/PlaceableTile.java
  com.siegetd.game.models.map.tile.PlaceableTile
 com/siegetd/game/views/components/RopeComponent.java
