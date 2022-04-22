@@ -23,13 +23,10 @@ public class RenderingSystem extends EntitySystem {
 
     private GameStats gameStats;
 
-    private Boolean multiplayer;
-
-    public RenderingSystem(Boolean multi) throws URISyntaxException {
+    public RenderingSystem() throws URISyntaxException {
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
-        this.multiplayer = multi;
         this.gameStats = new GameStats();
     }
 
@@ -48,7 +45,7 @@ public class RenderingSystem extends EntitySystem {
         EngineState.batch.begin();
         EngineState.batch.setProjectionMatrix(EngineState.camera.combined);
 
-        gameStats.drawStats(multiplayer);
+        gameStats.drawStats();
 
 
         for (int i = 0; i < entities.size(); i++) {

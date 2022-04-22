@@ -1,18 +1,15 @@
 package com.siegetd.game.views.components.gamestats;
 
-import com.siegetd.game.singletons.Currency;
-import com.siegetd.game.singletons.ScoreHandler;
-
 public class GameStat {
 
     private String name;
-    Currency currency = Currency.getInstance();
-    ScoreHandler health = ScoreHandler.getInstance();
+    private int hitpoints;
+    private int currency;
 
     public GameStat(String name, int hitpoints, int currency) {
         this.name = name;
-        //this.hitpoints = hitpoints;
-        //this.currency = currency;
+        this.hitpoints = hitpoints;
+        this.currency = currency;
     }
 
     public String getName() {
@@ -20,11 +17,11 @@ public class GameStat {
     }
 
     public int getHitpoints() {
-        return health.getHealth();
+        return hitpoints;
     }
 
     public int getCurrency() {
-        return currency.getCurrency();
+        return currency;
     }
 
 }

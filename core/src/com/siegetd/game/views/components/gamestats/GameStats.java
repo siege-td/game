@@ -1,14 +1,13 @@
 package com.siegetd.game.views.components.gamestats;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
+import com.siegetd.game.singletons.ScoreHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,13 +29,11 @@ public class GameStats {
     private Socket socket;
 
     private ArrayList<GameStat> gameStatList;
-    private GameStat gameStat;
 
     public GameStats() throws URISyntaxException {
         this.socket = SocketConnection.getInstance().getSocket();
 
         this.gameStatList = new ArrayList<>();
-        this.gameStat = new GameStat("Solobolo", 10, 10);
 
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
         fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -57,26 +54,27 @@ public class GameStats {
         this.socket.emit("get_game_data_in_room", EngineState.pin);
     }
 
-    public void drawStats(Boolean multiplayer) {
-        if(!multiplayer){
-            font.draw(
-                    EngineState.batch,
-                    "Player: " + gameStat.getName() + "\nHitpoints: " + gameStat.getHitpoints()  + "\nCurrency: " + gameStat.getCurrency() ,
-                    20f,
-                    2530f
-            );
-        }else{
+    public void drawStats() {
         float xPos = 20f;
-        for (GameStat stat : gameStatList) {
+        if (gameStatList.size() == 0) {
             font.draw(
                     EngineState.batch,
-                    "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
+                    "Player: Solo player\nHitpoints: " + ScoreHandler.getInstance().getHealth() + "\nCurrency: " + ScoreHandler.getInstance().getCurrency(),
                     xPos,
                     2530f
             );
-            xPos += 1000f;
+        } else {
+            for (GameStat stat : gameStatList) {
+                font.draw(
+                        EngineState.batch,
+                        "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
+                        xPos,
+                        2530f
+                );
+                xPos += 1000f;
+            }
         }
-    }}
+    }
 
     private ArrayList<GameStat> jsonArrayToArrayList(JSONArray array) throws JSONException {
         ArrayList<GameStat> gameStats = new ArrayList<>();
@@ -111,7 +109,7 @@ public class GameStats {
         public void call(Object... args) {
             try {
                 gameStatList = jsonArrayToArrayList((JSONArray) args[0]);
-                drawStats(true);
+                drawStats();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
