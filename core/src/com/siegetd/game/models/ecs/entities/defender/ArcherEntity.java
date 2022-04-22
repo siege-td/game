@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.EngineState;
+import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.Type;
@@ -46,7 +47,8 @@ public class ArcherEntity implements IEntity {
                 (pos.y - (pos.y % (EngineState.camera.viewportHeight / TILE_ROW)))
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
-        entity.add(new TypeComponent(Type.DEFENDER));
+        entity.add(new TypeComponent(Type.DEFENDER, Defender.ARCHER));
+        entity.add(new CharacteristicsComponent(5, 700, 1));
 
         origMageImg.dispose();
         scaledMageImg.dispose();
