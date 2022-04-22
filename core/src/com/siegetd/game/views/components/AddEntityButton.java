@@ -76,7 +76,19 @@ public class AddEntityButton extends ButtonComponent {
                     EngineState.stage.addActor(selectEntityModal.getArcherButton());
                     EngineState.stage.addActor(selectEntityModal.getMageButton());
                     EngineState.stage.addActor(selectEntityModal.getZappButton());
+                    addStageListeners();
                 }
+            }
+        });
+    }
+
+    private void addStageListeners(){
+        Gdx.input.setInputProcessor(EngineState.stage);
+        EngineState.stage.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //Hide building options
+                selectEntityModal.hideModal();
             }
         });
     }

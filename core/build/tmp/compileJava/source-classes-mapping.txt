@@ -94,8 +94,8 @@ com/siegetd/game/controllers/LevelController.java
  com.siegetd.game.controllers.LevelController$1
 com/siegetd/game/views/GameState.java
  com.siegetd.game.views.GameState
-com/siegetd/game/controllers/InputController.java
- com.siegetd.game.controllers.InputController
+com/siegetd/game/singletons/ScoreHandler.java
+ com.siegetd.game.singletons.ScoreHandler
 com/siegetd/game/models/ecs/components/CurrencyComponent.java
  com.siegetd.game.models.ecs.components.CurrencyComponent
 com/siegetd/game/models/ecs/entities/attacker/GhostEntity.java
@@ -158,13 +158,14 @@ com/siegetd/game/views/components/SettingsButton.java
  com.siegetd.game.views.components.SettingsButton$1
 com/siegetd/game/views/components/gamestats/GameStat.java
  com.siegetd.game.views.components.gamestats.GameStat
-com/siegetd/game/singletons/ScoreHandler.java
- com.siegetd.game.singletons.ScoreHandler
-com/siegetd/game/views/components/AddEntityButton.java
- com.siegetd.game.views.components.AddEntityButton
- com.siegetd.game.views.components.AddEntityButton$1
 com/siegetd/game/views/components/selectentity/SelectEntityModal.java
  com.siegetd.game.views.components.selectentity.SelectEntityModal
  com.siegetd.game.views.components.selectentity.SelectEntityModal$1
  com.siegetd.game.views.components.selectentity.SelectEntityModal$2
  com.siegetd.game.views.components.selectentity.SelectEntityModal$3
+com/siegetd/game/views/components/AddEntityButton.java
+ com.siegetd.game.views.components.AddEntityButton
+ com.siegetd.game.views.components.AddEntityButton$1
+ com.siegetd.game.views.components.AddEntityButton$2
+com/siegetd/game/controllers/InputController.java
+ com.siegetd.game.controllers.InputController

@@ -65,7 +65,7 @@ public class SelectEntityModal {
         }
     }
 
-    private void hideModal() {
+    public void hideModal() {
         this.archerButton.setVisible(false);
         this.mageButton.setVisible(false);
         this.zappButton.setVisible(false);
