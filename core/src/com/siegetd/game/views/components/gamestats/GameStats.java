@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
-import com.siegetd.game.singletons.ScoreHandler;
+import com.siegetd.game.controllers.ScoreController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +59,7 @@ public class GameStats {
         if (gameStatList.size() == 0) {
             font.draw(
                     EngineState.batch,
-                    "Player: Solo player\nHitpoints: " + ScoreHandler.getInstance().getHealth() + "\nCurrency: " + ScoreHandler.getInstance().getCurrency(),
+                    "Player: Solo player\nHitpoints: " + ScoreController.getInstance().getHealth() + "\nCurrency: " + ScoreController.getInstance().getCurrency(),
                     xPos,
                     2530f
             );

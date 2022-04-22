@@ -1,4 +1,4 @@
-package com.siegetd.game.singletons;
+package com.siegetd.game.controllers;
 
 import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
@@ -7,22 +7,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
-import java.util.HashMap;
 
-public class ScoreHandler {
-    private static ScoreHandler scoreInstance = null;
+public class ScoreController {
+    private static ScoreController scoreInstance = null;
 
     private int health;
     private int currency;
 
-    private ScoreHandler(){
+    private ScoreController(){
         health = 30;
         currency = 100;
     }
 
-    public static ScoreHandler getInstance(){
+    public static ScoreController getInstance(){
         if(scoreInstance == null){
-            scoreInstance = new ScoreHandler();
+            scoreInstance = new ScoreController();
         }
         return scoreInstance;
     }
