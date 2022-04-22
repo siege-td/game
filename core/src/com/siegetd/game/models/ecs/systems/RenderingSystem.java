@@ -1,67 +1,58 @@
 package com.siegetd.game.models.ecs.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.SortedIteratingSystem;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
+import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
-import com.siegetd.game.models.ecs.utils.RenderUtils;
-import com.siegetd.game.models.ecs.utils.ZComparator;
+import com.siegetd.game.views.components.gamestats.GameStats;
 
-import java.util.Comparator;
+import java.net.URISyntaxException;
 
-public class RenderingSystem extends SortedIteratingSystem {
-
-    private SpriteBatch batch;
-    private Array<Entity> renderQueue;
-    private Comparator<Entity> comparator;
-    private OrthographicCamera camera;
+public class RenderingSystem extends EntitySystem {
+    private ImmutableArray<Entity> entities;
 
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
 
-    private RenderUtils renderUtils;
+    private GameStats gameStats;
 
-    public RenderingSystem(SpriteBatch batch) {
-        super(Family.all(TransformComponent.class, TextureComponent.class).get(), new ZComparator());
-
-        renderUtils = new RenderUtils();
-
+    public RenderingSystem() throws URISyntaxException {
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
-        renderQueue = new Array<>();
+        this.gameStats = new GameStats();
+    }
 
-        this.batch = batch;
+    @Override
+    public void addedToEngine (Engine engine) {
+        entities = engine.getEntitiesFor(Family.all(TransformComponent.class, TextureComponent.class).get());
+    }
 
-        camera = new OrthographicCamera(renderUtils.getFrustumWidth(), renderUtils.getFrustumHeight());
-        camera.setToOrtho(false);
-        camera.position.set(renderUtils.getFrustumWidth() / 2f, renderUtils.getFrustumHeight() / 2f, 0);
+    @Override
+    public void removedFromEngine (Engine engine) {
+
     }
 
     @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
+        EngineState.batch.begin();
+        EngineState.batch.setProjectionMatrix(EngineState.camera.combined);
 
-        renderQueue.sort(comparator);
+        gameStats.drawStats();
 
-        camera.update();
 
-        batch.setProjectionMatrix(camera.combined);
-        batch.enableBlending();
-        batch.begin();
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
 
-        for (Entity entity : renderQueue) {
             TextureComponent textureComponent = textureMapper.get(entity);
             TransformComponent transformComponent = transformMapper.get(entity);
-
-            if (textureComponent.region == null || transformComponent.isHidden) {
-                continue;
-            }
 
             float textureWidth = textureComponent.region.getRegionWidth();
             float textureHeight = textureComponent.region.getRegionHeight();
@@ -69,30 +60,20 @@ public class RenderingSystem extends SortedIteratingSystem {
             float textureOriginX = textureWidth / 2f;
             float textureOriginY = textureHeight / 2f;
 
-            batch.draw(
+            EngineState.batch.draw(
                     textureComponent.region,
-                    transformComponent.position.x - textureOriginX,
-                    transformComponent.position.y - textureOriginY,
-                    textureOriginX,
-                    textureOriginY,
+                    transformComponent.position.x,
+                    transformComponent.position.y,
                     textureWidth,
                     textureHeight,
-                    renderUtils.convertPixelsToMeters(transformComponent.scale.x),
-                    renderUtils.convertPixelsToMeters(transformComponent.scale.y),
-                    transformComponent.rotation
+                    textureOriginX,
+                    textureOriginY,
+                    1f,
+                    1f,
+                    0f
             );
-
-            batch.end();
-            renderQueue.clear();
         }
-    }
 
-    @Override
-    protected void processEntity(Entity entity, float deltaTime) {
-        renderQueue.add(entity);
-    }
-
-    public OrthographicCamera getCamera() {
-        return camera;
+        EngineState.batch.end();
     }
 }

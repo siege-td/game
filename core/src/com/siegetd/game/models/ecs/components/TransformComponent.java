@@ -2,11 +2,14 @@ package com.siegetd.game.models.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 public class TransformComponent implements Component {
-    public final Vector3 position = new Vector3();
+    public Vector2 position;
     public final Vector2 scale = new Vector2(1f, 1f);
     public float rotation = 0f;
     public boolean isHidden = false;
+
+    public TransformComponent(float xPos, float yPos) {
+        this.position = new Vector2(xPos, yPos);
+    }
 }

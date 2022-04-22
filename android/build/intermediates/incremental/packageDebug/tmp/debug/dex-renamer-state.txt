@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 #Tue Mar 29 14:39:58 CEST 2022
 base.0=D\:\\Github\\game\\android\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
+=======
+#Tue Apr 05 15:30:03 CEST 2022
+base.0=C\:\\Users\\sigur\\Documents\\Master\\2_semester\\Programvarearkitektur\\Project\\game\\android\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
+>>>>>>> main

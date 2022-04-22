@@ -1,5 +1,5 @@
 buildscript {
-    
+
 
     repositories {
         mavenLocal()
@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.4'
-        
+
 
     }
 }
@@ -48,7 +48,10 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
-        
+        api "io.socket:socket.io-client:2.0.1"
+        implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
+        implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
     }
 }
 
@@ -71,7 +74,14 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        
+        api "io.socket:socket.io-client:2.0.1"
+        implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
     }
 }
 
@@ -84,6 +94,9 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        
+        api "io.socket:socket.io-client:2.0.1"
+        implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     }
 }
