@@ -77,7 +77,6 @@ public class SelectEntityModal {
                 if (ScoreController.getInstance().getCurrency() >= archerCost) {
                     new ArcherEntity(entitySpawnPos).create();
                     ScoreController.getInstance().subtractCurrency(archerCost);
-                    System.out.println("Current currency: " + ScoreController.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
                     try {
                         entitySpawned.call();
                     } catch (Exception e) {
@@ -95,7 +94,6 @@ public class SelectEntityModal {
                 if (ScoreController.getInstance().getCurrency() >= mageCost) {
                     new MageEntity(entitySpawnPos).create();
                     ScoreController.getInstance().subtractCurrency(mageCost);
-                    System.out.println("Current currency: " + ScoreController.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
                     try {
                         entitySpawned.call();
                     } catch (Exception e) {
@@ -112,7 +110,6 @@ public class SelectEntityModal {
                 if (ScoreController.getInstance().getCurrency() >= zappCost) {
                     new ZappEntity(entitySpawnPos).create();
                     ScoreController.getInstance().subtractCurrency(zappCost);
-                    System.out.println("Current currency: " + ScoreController.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
                     try {
                         entitySpawned.call();
                     } catch (Exception e) {
