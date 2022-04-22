@@ -52,6 +52,14 @@ public class JoinGameState extends GameState {
         stageComponents();
 
         hasJoinedLobby = false;
+
+        //socket event listeners
+        try {
+            SocketConnection.getInstance().getSocket().on("join_pin_invalid", invalidPin);
+            SocketConnection.getInstance().getSocket().on("join_pin_valid", validPin);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -77,9 +85,10 @@ public class JoinGameState extends GameState {
         font.draw(batch,
                 glyphLayout,
                 (Gdx.graphics.getWidth() - textWidth)/2,
-                table.getBottomCenter().y + (float)(table.windowHeight * 0.9));
+                table.getBottomCenter().y + (float)(table.windowHeight * 0.85));
         batch.end();
         stage.draw();
+        //try catch invalidPin
         try {
             SocketConnection.getInstance().getSocket().on("game_started", onGameStarted);
         } catch (URISyntaxException e) {
@@ -132,14 +141,17 @@ public class JoinGameState extends GameState {
     }
 
     private void updateText() throws URISyntaxException {
-        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")) {
+        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")
+                || inputButton.listener.getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
+        {
             pin = "PIN: " + inputButton.listener.getText();
-        } else {
-            pin = "PIN: " + inputButton.listener.getText() + "\nHost will start game";
+        } else if (hasJoinedLobby){
+            pin = "PIN: " + inputButton.listener.getText() + "\nWaiting for host to start..";
             if (!hasJoinedLobby) {
                 SocketConnection.getInstance().getSocket().emit("join_lobby", EngineState.pin);
-                hasJoinedLobby = true;
             }
+        } else {
+            inputButton.listener.incorrectPin();
         }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
@@ -172,6 +184,21 @@ public class JoinGameState extends GameState {
         @Override
         public void call(Object... args) {
             gsc.setState(GameStateController.State.IN_GAME_MULTI);
+        }
+    };
+
+    private Emitter.Listener invalidPin = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            hasJoinedLobby = false;
+            inputButton.listener.incorrectPin();
+        }
+    };
+
+    private Emitter.Listener validPin = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            hasJoinedLobby = true;
         }
     };
 }
