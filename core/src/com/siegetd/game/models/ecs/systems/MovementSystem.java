@@ -10,9 +10,11 @@ import com.siegetd.game.models.ecs.components.VelocityComponent;
 import com.siegetd.game.controllers.ScoreController;
 
 public class MovementSystem extends IteratingSystem {
+
     private ComponentMapper<TransformComponent> transformMapper;
     private ComponentMapper<VelocityComponent> velocityMapper;
     private VelocityComponent velocityComponent;
+
     public MovementSystem() {
         super(Family.all(TransformComponent.class, VelocityComponent.class).get());
 
