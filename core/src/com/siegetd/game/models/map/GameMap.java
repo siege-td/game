@@ -7,25 +7,17 @@ import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-<<<<<<< HEAD
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
-=======
->>>>>>> main
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-<<<<<<< HEAD
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-=======
 import com.badlogic.gdx.scenes.scene2d.Stage;
->>>>>>> main
 import com.siegetd.game.models.map.tile.MovableTile;
 
 import java.util.LinkedList;
@@ -38,8 +30,8 @@ public class GameMap extends Stage {
 
     private List<MovableTile> movableTiles;
 
-    private int selectedCellX;
-    private int selectedCellY;
+    public int selectedCellX;
+    public int selectedCellY;
     private TiledMapTileLayer.Cell selectedCell;
 
     public GameMap(OrthographicCamera camera){
@@ -78,41 +70,10 @@ public class GameMap extends Stage {
         return movables;
     }
 
-<<<<<<< HEAD
-    public void update(){
-        if(selectedCell != null){
-
-        }
-        handleUserClick();
-    }
-
-    private void handleUserClick(){
-        if(Gdx.input.justTouched()){
-            if(selectedCell != null){
-                unselectCell();
-                return;
-            }
-            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-
-            camera.unproject(mousePos);
-
-            selectedCellX = (int) mousePos.x/TILE_SIZE;
-            selectedCellY = (int) mousePos.y/TILE_SIZE;
-
-            TiledMapTileLayer tileLayer = (TiledMapTileLayer) getTileLayers("Placeable");
-            selectedCell = tileLayer.getCell(selectedCellX, selectedCellY);
-            if(selectedCell == null){
-                return;
-            }
-
-            selectCell();
-        }
-    }
-
     /**
      * Adds highlighting to a chosen cell
      */
-    private void selectCell(){
+    public void selectCell(){
         TextureRegion selectedTileTexture = new TextureRegion(new Texture("level1/tiles/43.png"));
         StaticTiledMapTile selectedTile = new StaticTiledMapTile(selectedTileTexture);
         selectedCell.setTile(selectedTile);
@@ -121,19 +82,44 @@ public class GameMap extends Stage {
     /**
      * Removes highlight from a chosen cell
      */
-    private void unselectCell(){
+    public void unselectCell(){
         TextureRegion unselectedTileTexture = new TextureRegion(new Texture("level1/tiles/22.png"));
         StaticTiledMapTile unselectedTile = new StaticTiledMapTile(unselectedTileTexture);
         selectedCell.setTile(unselectedTile);
         selectedCell = null;
     }
 
-    private MapLayer getTileLayers(String layer){
+    /**
+     * Get the currently selected cell
+     * @return selected cell
+     */
+    public TiledMapTileLayer.Cell getSelectedCell(){
+        return selectedCell;
+    }
+
+    /**
+     * Sets the selected cell
+     * @param newCell the new cell to set to
+     */
+    public void setSelectedCell(TiledMapTileLayer.Cell newCell){
+        this.selectedCell = newCell;
+    }
+
+    /**
+     * returns the maplayers for the selected layers
+     * @param layer the layer to get
+     * @return Maplayer for the selected layer
+     */
+    public MapLayer getTileLayers(String layer) {
         return tiledMap.getLayers().get(layer);
-=======
+    }
+
+    /**
+     * Returns the movable tiles for the path
+     * @return the movable tiles
+     */
     public List<MovableTile> getMovableTiles(){
         return this.movableTiles;
->>>>>>> main
     }
 
     public void render(){

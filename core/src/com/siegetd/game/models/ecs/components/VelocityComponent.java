@@ -35,7 +35,7 @@ public class VelocityComponent implements Component {
         float xDis = this.nextX - currentX;
         float yDis = this.nextY - currentY;
 
-        if (xDis == 0 && yDis == 0) {
+        if (xDis <= 1 && yDis <= 1) {
             pathIndex++;
             getNextPos();
         } else {

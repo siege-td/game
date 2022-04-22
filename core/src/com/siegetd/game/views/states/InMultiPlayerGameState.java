@@ -1,13 +1,9 @@
 package com.siegetd.game.views.states;
 
-<<<<<<< HEAD:core/src/com/siegetd/game/views/states/PlayState.java
-import com.badlogic.ashley.core.Entity;
-=======
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 
->>>>>>> main:core/src/com/siegetd/game/views/states/InMultiPlayerGameState.java
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,7 +18,6 @@ import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
 import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.gamestats.GameStats;
 import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
@@ -71,19 +66,14 @@ public class InMultiPlayerGameState extends GameState {
         EngineState.stage = new Stage();
         Gdx.input.setInputProcessor(EngineState.stage);
 
-        this.inputController = new InputController();
+        this.inputController = new InputController(gameMap);
 
         new InGameGUI();
     }
 
     @Override
-<<<<<<< HEAD:core/src/com/siegetd/game/views/states/PlayState.java
     public void update(float delta) {
-        gameMap.update();
     }
-=======
-    public void update(float delta) { }
->>>>>>> main:core/src/com/siegetd/game/views/states/InMultiPlayerGameState.java
 
     @Override
     public void render() {

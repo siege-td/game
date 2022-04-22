@@ -68,7 +68,7 @@ public class InSingePlayerGameState extends GameState {
         EngineState.stage = new Stage();
         Gdx.input.setInputProcessor(EngineState.stage);
 
-        this.inputController = new InputController();
+        this.inputController = new InputController(gameMap);
 
         new InGameGUI();
     }
