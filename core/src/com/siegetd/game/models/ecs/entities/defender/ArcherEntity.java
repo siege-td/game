@@ -48,7 +48,7 @@ public class ArcherEntity implements IEntity {
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
         entity.add(new TypeComponent(Type.DEFENDER, Defender.ARCHER));
-        entity.add(new CharacteristicsComponent(5, 700, 1));
+        entity.add(new CharacteristicsComponent(5, 700, 2));
 
         origMageImg.dispose();
         scaledMageImg.dispose();

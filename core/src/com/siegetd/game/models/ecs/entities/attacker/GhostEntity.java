@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.EngineState;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.Type;
@@ -47,6 +48,7 @@ public class GhostEntity implements IEntity {
         entity.add(new TextureComponent(new Texture(scaledGhostImg)));
         entity.add(new VelocityComponent(speed.x, speed.y));
         entity.add(new TypeComponent(Type.ATTACKER));
+        entity.add(new HitpointComponent(50));
 
         EngineState.ecsEngine.addEntity(entity);
     }

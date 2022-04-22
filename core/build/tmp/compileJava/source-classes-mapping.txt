@@ -48,8 +48,8 @@ com/siegetd/game/views/components/HostButton.java
 com/siegetd/game/views/components/InputButton.java
  com.siegetd.game.views.components.InputButton
  com.siegetd.game.views.components.InputButton$1
-com/siegetd/game/models/ecs/entities/attacker/ScorpionEntity.java
- com.siegetd.game.models.ecs.entities.attacker.ScorpionEntity
+com/siegetd/game/models/ecs/entities/defender/ZappEntity.java
+ com.siegetd.game.models.ecs.entities.defender.ZappEntity
 com/siegetd/game/views/components/JoinButton.java
  com.siegetd.game.views.components.JoinButton
  com.siegetd.game.views.components.JoinButton$1
@@ -124,10 +124,8 @@ com/siegetd/game/views/components/RopeComponent.java
  com.siegetd.game.views.components.RopeComponent
 com/siegetd/game/models/map/utils/MapGlobals.java
  com.siegetd.game.models.map.utils.MapGlobals
-com/siegetd/game/models/ecs/EntitySpawner.java
- com.siegetd.game.models.ecs.EntitySpawner
- com.siegetd.game.models.ecs.EntitySpawner$1
- com.siegetd.game.models.ecs.EntitySpawner$2
+com/siegetd/game/models/ecs/components/CharacteristicsComponent.java
+ com.siegetd.game.models.ecs.components.CharacteristicsComponent
 com/siegetd/game/EngineState.java
  com.siegetd.game.EngineState
 com/siegetd/game/models/map/tile/MovableTile.java
@@ -152,8 +150,8 @@ com/siegetd/game/models/ecs/entities/IEntity.java
  com.siegetd.game.models.ecs.entities.IEntity
 com/siegetd/game/models/ecs/systems/AnimationSystem.java
  com.siegetd.game.models.ecs.systems.AnimationSystem
-com/siegetd/game/views/states/InSingePlayerGameState.java
- com.siegetd.game.views.states.InSingePlayerGameState
+com/siegetd/game/models/ecs/entities/attacker/ScorpionEntity.java
+ com.siegetd.game.models.ecs.entities.attacker.ScorpionEntity
 com/siegetd/game/models/ecs/entities/attacker/OgreEntity.java
  com.siegetd.game.models.ecs.entities.attacker.OgreEntity
 com/siegetd/game/controllers/LevelController.java
@@ -161,8 +159,10 @@ com/siegetd/game/controllers/LevelController.java
  com.siegetd.game.controllers.LevelController$1
 com/siegetd/game/models/ecs/entities/defender/MageEntity.java
  com.siegetd.game.models.ecs.entities.defender.MageEntity
-com/siegetd/game/models/ecs/components/CharacteristicsComponent.java
- com.siegetd.game.models.ecs.components.CharacteristicsComponent
+com/siegetd/game/models/ecs/EntitySpawner.java
+ com.siegetd.game.models.ecs.EntitySpawner
+ com.siegetd.game.models.ecs.EntitySpawner$1
+ com.siegetd.game.models.ecs.EntitySpawner$2
 com/siegetd/game/views/components/selectentity/SelectEntityModal.java
  com.siegetd.game.views.components.selectentity.SelectEntityModal
  com.siegetd.game.views.components.selectentity.SelectEntityModal$1
@@ -173,7 +173,7 @@ com/siegetd/game/controllers/DefendAttackPair.java
  com.siegetd.game.controllers.DefendAttackPair$1
 com/siegetd/game/models/ecs/entities/defender/ArcherEntity.java
  com.siegetd.game.models.ecs.entities.defender.ArcherEntity
-com/siegetd/game/models/ecs/entities/defender/ZappEntity.java
- com.siegetd.game.models.ecs.entities.defender.ZappEntity
+com/siegetd/game/views/states/InSingePlayerGameState.java
+ com.siegetd.game.views.states.InSingePlayerGameState
 com/siegetd/game/controllers/CollisionController.java
  com.siegetd.game.controllers.CollisionController

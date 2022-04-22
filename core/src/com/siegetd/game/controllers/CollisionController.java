@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.siegetd.game.EngineState;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.Type;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 
@@ -29,6 +30,25 @@ public class CollisionController {
         return false;
     }
 
+    private void updatePairArray(){
+        Array<DefendAttackPair> defendAttackPairsCopy = new Array<>();
+        for (DefendAttackPair defendAttackPair : defendAttackPairs){
+            defendAttackPair.draw();
+
+            if(defendAttackPair.attacker.getComponent(HitpointComponent.class).hitpoints <= 0){
+                defendAttackPairsCopy.add(defendAttackPair);
+            }
+        }
+
+        for (DefendAttackPair defendAttackPair : defendAttackPairs){
+            for (DefendAttackPair defendAttackPair1 : defendAttackPairsCopy){
+                if(defendAttackPair.equals(defendAttackPair1)){
+                    defendAttackPairs.removeValue(defendAttackPair, false);
+                }
+            }
+        }
+    }
+
     public void listen() {
         try{
             for (int i=0; i < EngineState.ecsEngine.getEntities().size(); i++) {
@@ -43,10 +63,7 @@ public class CollisionController {
                     }
                 }
             }
-
-        for (DefendAttackPair defendAttackPair : defendAttackPairs){
-            defendAttackPair.draw();
-        }
+            updatePairArray();
         }catch (Exception e){
             System.out.println(e.toString());
         }

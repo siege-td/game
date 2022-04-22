@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.Type;
 import com.siegetd.game.models.ecs.components.TypeComponent;
@@ -60,7 +61,6 @@ public class DefendAttackPair {
             case ZAPP:
                 this.ammo = new Texture("projectile/zapp_projectile.png");
                 break;
-
         }
     }
 
@@ -81,6 +81,10 @@ public class DefendAttackPair {
         if(attackerHitBox.contains(new Point((int) bulletPosition.x,(int) bulletPosition.y))){
             this.bulletPosition.x = defenderPosition.x;
             this.bulletPosition.y = defenderPosition.y;
+            attacker.getComponent(HitpointComponent.class).hitpoints -= defender.getComponent(CharacteristicsComponent.class).attack_damage;
+            if(attacker.getComponent(HitpointComponent.class).hitpoints <= 0){
+                EngineState.ecsEngine.removeEntity(attacker);
+            }
             //TODO: Decrease unit health
             //TODO: Explosion animation
         }
@@ -88,16 +92,13 @@ public class DefendAttackPair {
 
     public void draw(){
         checkIfIntersects();
+        calculateDirection();
 
         if(intersects){
-            calculateDirection();
             checkIfReachedTarget();
-
             EngineState.batch.begin();
             EngineState.batch.draw(ammo, bulletPosition.x, bulletPosition.y, ammo.getWidth(), ammo.getHeight());
             EngineState.batch.end();
-
-
 
             bulletPosition.x += (bulletDirection.x * defender.getComponent(CharacteristicsComponent.class).attack_speed) * Gdx.graphics.getDeltaTime();
             bulletPosition.y += (bulletDirection.y * defender.getComponent(CharacteristicsComponent.class).attack_speed) * Gdx.graphics.getDeltaTime();
