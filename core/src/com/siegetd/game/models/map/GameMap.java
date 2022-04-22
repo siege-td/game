@@ -7,11 +7,16 @@ import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.models.map.tile.MovableTile;
 
@@ -24,6 +29,10 @@ public class GameMap extends Stage {
     private OrthographicCamera camera;
 
     private List<MovableTile> movableTiles;
+
+    public int selectedCellX;
+    public int selectedCellY;
+    private TiledMapTileLayer.Cell selectedCell;
 
     public GameMap(OrthographicCamera camera){
         tiledMap = new TmxMapLoader().load("level1/level1map.tmx");
@@ -61,6 +70,54 @@ public class GameMap extends Stage {
         return movables;
     }
 
+    /**
+     * Adds highlighting to a chosen cell
+     */
+    public void selectCell(){
+        TextureRegion selectedTileTexture = new TextureRegion(new Texture("level1/tiles/43.png"));
+        StaticTiledMapTile selectedTile = new StaticTiledMapTile(selectedTileTexture);
+        selectedCell.setTile(selectedTile);
+    }
+
+    /**
+     * Removes highlight from a chosen cell
+     */
+    public void unselectCell(){
+        TextureRegion unselectedTileTexture = new TextureRegion(new Texture("level1/tiles/22.png"));
+        StaticTiledMapTile unselectedTile = new StaticTiledMapTile(unselectedTileTexture);
+        selectedCell.setTile(unselectedTile);
+        selectedCell = null;
+    }
+
+    /**
+     * Get the currently selected cell
+     * @return selected cell
+     */
+    public TiledMapTileLayer.Cell getSelectedCell(){
+        return selectedCell;
+    }
+
+    /**
+     * Sets the selected cell
+     * @param newCell the new cell to set to
+     */
+    public void setSelectedCell(TiledMapTileLayer.Cell newCell){
+        this.selectedCell = newCell;
+    }
+
+    /**
+     * returns the maplayers for the selected layers
+     * @param layer the layer to get
+     * @return Maplayer for the selected layer
+     */
+    public MapLayer getTileLayers(String layer) {
+        return tiledMap.getLayers().get(layer);
+    }
+
+    /**
+     * Returns the movable tiles for the path
+     * @return the movable tiles
+     */
     public List<MovableTile> getMovableTiles(){
         return this.movableTiles;
     }

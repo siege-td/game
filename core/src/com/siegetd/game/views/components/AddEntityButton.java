@@ -66,18 +66,30 @@ public class AddEntityButton extends ButtonComponent {
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
-    public void addButtonListeners(final Vector2 entitySpawnPos, final Callable<Void> entitySpawned) {
+    public void addButtonListeners(final Vector2 entitySpawnPos) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectEntityModal == null) {
                     selectEntityModal = new SelectEntityModal();
                     selectEntityModal.showModal();
-                    selectEntityModal.addButtonListeners(entitySpawnPos, entitySpawned);
+                    selectEntityModal.addButtonListeners(entitySpawnPos);
                     EngineState.stage.addActor(selectEntityModal.getArcherButton());
                     EngineState.stage.addActor(selectEntityModal.getMageButton());
                     EngineState.stage.addActor(selectEntityModal.getZappButton());
+                    addStageListeners();
                 }
+            }
+        });
+    }
+
+    private void addStageListeners(){
+        Gdx.input.setInputProcessor(EngineState.stage);
+        EngineState.stage.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //Hide building options
+                selectEntityModal.hideModal();
             }
         });
     }

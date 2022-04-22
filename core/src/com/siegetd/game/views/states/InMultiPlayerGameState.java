@@ -18,7 +18,6 @@ import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
 import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.gamestats.GameStats;
 import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
@@ -73,7 +72,8 @@ public class InMultiPlayerGameState extends GameState {
     }
 
     @Override
-    public void update(float delta) { }
+    public void update(float delta) {
+    }
 
     @Override
     public void render() {

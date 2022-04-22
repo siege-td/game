@@ -11,13 +11,13 @@ public class VelocityComponent implements Component {
     public float xSpeed;
     public float ySpeed;
 
-    private float origXSpeed;
-    private float origYSpeed;
+    public float origXSpeed;
+    public float origYSpeed;
 
-    private List<MovableTile> path;
-    private int pathIndex;
-    private float nextX;
-    private float nextY;
+    public List<MovableTile> path;
+    public int pathIndex;
+    public float nextX;
+    public float nextY;
 
     public VelocityComponent(float xSpeed, float ySpeed) {
         this.origXSpeed = xSpeed;
@@ -28,30 +28,5 @@ public class VelocityComponent implements Component {
 
         this.pathIndex = 0;
         this.path = EngineState.gameMap.getMovableTiles();
-        this.getNextPos();
-    }
-
-    public void updateMovement(float currentX, float currentY) {
-        float xDis = this.nextX - currentX;
-        float yDis = this.nextY - currentY;
-
-        if (xDis <= 1 && yDis <= 1) {
-            pathIndex++;
-            getNextPos();
-        } else {
-            this.xSpeed = this.origXSpeed * Integer.signum((int) xDis);
-            this.ySpeed = this.origYSpeed * Integer.signum((int) yDis);
-        }
-    }
-
-    private void getNextPos() {
-        if (pathIndex >= path.size()) {
-            this.xSpeed = 0;
-            this.ySpeed = 0;
-            return;
-        }
-
-        this.nextX = path.get(pathIndex).getX() + 50;
-        this.nextY = path.get(pathIndex).getY() + 60;
     }
 }
