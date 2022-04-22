@@ -5,7 +5,7 @@ import com.siegetd.game.singletons.Currency;
 public class GameStat {
 
     private String name;
-    private int hitpoints = 10;
+    private int hitpoints;
     Currency currency = Currency.getInstance();
 
     public GameStat(String name, int hitpoints, int currency) {

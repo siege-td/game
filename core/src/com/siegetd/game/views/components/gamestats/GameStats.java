@@ -30,11 +30,13 @@ public class GameStats {
     private Socket socket;
 
     private ArrayList<GameStat> gameStatList;
+    private GameStat gameStat;
 
     public GameStats() throws URISyntaxException {
         this.socket = SocketConnection.getInstance().getSocket();
 
         this.gameStatList = new ArrayList<>();
+        this.gameStat = new GameStat("Solobolo", 10, 100);
 
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
         fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -55,9 +57,16 @@ public class GameStats {
         this.socket.emit("get_game_data_in_room", EngineState.pin);
     }
 
-    public void drawStats() {
+    public void drawStats(Boolean multiplayer) {
+        if(!multiplayer){
+            font.draw(
+                    EngineState.batch,
+                    "Player: " + gameStat.getName() + "\nHitpoints: " + gameStat.getHitpoints()  + "\nCurrency: " + gameStat.getCurrency() ,
+                    20f,
+                    2530f
+            );
+        }else{
         float xPos = 20f;
-
         for (GameStat stat : gameStatList) {
             font.draw(
                     EngineState.batch,
@@ -67,7 +76,7 @@ public class GameStats {
             );
             xPos += 1000f;
         }
-    }
+    }}
 
     private ArrayList<GameStat> jsonArrayToArrayList(JSONArray array) throws JSONException {
         ArrayList<GameStat> gameStats = new ArrayList<>();
@@ -102,7 +111,7 @@ public class GameStats {
         public void call(Object... args) {
             try {
                 gameStatList = jsonArrayToArrayList((JSONArray) args[0]);
-                drawStats();
+                drawStats(true);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

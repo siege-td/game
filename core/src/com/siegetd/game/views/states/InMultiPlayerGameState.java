@@ -49,7 +49,7 @@ public class InMultiPlayerGameState extends GameState {
         engine = new PooledEngine();
 
         try {
-            renderingSystem = new RenderingSystem();
+            renderingSystem = new RenderingSystem(true);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

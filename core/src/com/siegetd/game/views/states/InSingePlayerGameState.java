@@ -50,7 +50,7 @@ public class InSingePlayerGameState extends GameState {
         engine = new PooledEngine();
 
         try {
-            renderingSystem = new RenderingSystem();
+            renderingSystem = new RenderingSystem(false);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
