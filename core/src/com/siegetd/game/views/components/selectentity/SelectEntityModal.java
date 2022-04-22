@@ -11,7 +11,7 @@ import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.entities.defender.ArcherEntity;
 import com.siegetd.game.models.ecs.entities.defender.MageEntity;
 import com.siegetd.game.models.ecs.entities.defender.ZappEntity;
-import com.siegetd.game.singletons.ScoreHandler;
+import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.views.components.ButtonComponent;
 
 import java.util.concurrent.Callable;
@@ -39,7 +39,7 @@ public class SelectEntityModal {
                 ((Gdx.graphics.getWidth() / 2) - (this.archerButton.getWidth() / 2)) - 80,
                 ((Gdx.graphics.getHeight() / 2) - (this.archerButton.getHeight() / 2))
         );
-        if (ScoreHandler.getInstance().getCurrency() < archerCost) {
+        if (ScoreController.getInstance().getCurrency() < archerCost) {
             this.archerButton.setColor(Color.RED);
         }
 
@@ -49,7 +49,7 @@ public class SelectEntityModal {
                 ((Gdx.graphics.getWidth() / 2) - (this.mageButton.getWidth() / 2)),
                 ((Gdx.graphics.getHeight() / 2) - ((this.mageButton.getHeight() / 2)))
         );
-        if (ScoreHandler.getInstance().getCurrency() < mageCost) {
+        if (ScoreController.getInstance().getCurrency() < mageCost) {
             this.mageButton.setColor(Color.RED);
         }
 
@@ -59,7 +59,7 @@ public class SelectEntityModal {
                 (((Gdx.graphics.getWidth() / 2) - (this.zappButton.getWidth() / 2))) + 80,
                 ((Gdx.graphics.getHeight() / 2) - ((this.zappButton.getHeight() / 2)))
         );
-        if (ScoreHandler.getInstance().getCurrency() < zappCost) {
+        if (ScoreController.getInstance().getCurrency() < zappCost) {
             this.zappButton.setColor(Color.RED);
         }
     }
@@ -74,10 +74,9 @@ public class SelectEntityModal {
         this.archerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (ScoreHandler.getInstance().getCurrency() >= archerCost) {
+                if (ScoreController.getInstance().getCurrency() >= archerCost) {
                     new ArcherEntity(entitySpawnPos).create();
-                    ScoreHandler.getInstance().subtractCurrency(archerCost);
-                    System.out.println("Current currency: " + ScoreHandler.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
+                    ScoreController.getInstance().subtractCurrency(archerCost);
                 }
                 hideModal();
             }
@@ -87,10 +86,9 @@ public class SelectEntityModal {
         this.mageButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (ScoreHandler.getInstance().getCurrency() >= mageCost) {
+                if (ScoreController.getInstance().getCurrency() >= mageCost) {
                     new MageEntity(entitySpawnPos).create();
-                    ScoreHandler.getInstance().subtractCurrency(mageCost);
-                    System.out.println("Current currency: " + ScoreHandler.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
+                    ScoreController.getInstance().subtractCurrency(mageCost);
                 }
                 hideModal();
             }
@@ -99,10 +97,9 @@ public class SelectEntityModal {
         this.zappButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (ScoreHandler.getInstance().getCurrency() >= zappCost) {
+                if (ScoreController.getInstance().getCurrency() >= zappCost) {
                     new ZappEntity(entitySpawnPos).create();
-                    ScoreHandler.getInstance().subtractCurrency(zappCost);
-                    System.out.println("Current currency: " + ScoreHandler.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
+                    ScoreController.getInstance().subtractCurrency(zappCost);
                 }
                 hideModal();
             }

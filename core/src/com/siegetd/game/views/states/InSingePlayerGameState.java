@@ -17,8 +17,8 @@ import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
+import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.gamestats.GameStats;
 import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
@@ -74,7 +74,11 @@ public class InSingePlayerGameState extends GameState {
     }
 
     @Override
-    public void update(float delta) { }
+    public void update(float delta) {
+        if(ScoreController.getInstance().getHealth()<=0){
+            Gdx.app.exit();
+        }
+    }
 
     @Override
     public void render() {
