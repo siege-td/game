@@ -15,7 +15,10 @@
         android:icon="@drawable/ic_launcher"
         android:isGame="true"
         android:label="@string/app_name"
+<<<<<<< HEAD
+=======
         android:testOnly="true"
+>>>>>>> main
         android:theme="@style/GdxTheme" >
         <activity
             android:name="com.siegetd.game.AndroidLauncher"
