@@ -66,7 +66,7 @@ public class InMultiPlayerGameState extends GameState {
         EngineState.stage = new Stage();
         Gdx.input.setInputProcessor(EngineState.stage);
 
-        this.inputController = new InputController(gameMap);
+        this.inputController = new InputController();
 
         new InGameGUI();
     }

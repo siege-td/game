@@ -22,18 +22,15 @@ public class InputController {
 
     private AddEntityButton addEntityButton;
 
-    private GameMap gameMap;
-
-    public InputController(GameMap gameMap) {
-        this.gameMap = gameMap;
+    public InputController() {
     }
 
     public void listen() {
         if (Gdx.input.justTouched()) {
 
             //Uncheck hover effect on second click
-            if(this.gameMap.getSelectedCell() != null){
-                this.gameMap.unselectCell();
+            if(EngineState.gameMap.getSelectedCell() != null){
+                EngineState.gameMap.unselectCell();
                 if(addEntityButton.button != null) {
                     addEntityButton.button.setVisible(false);
                 }
@@ -44,8 +41,8 @@ public class InputController {
 
             EngineState.camera.unproject(mousePos);
 
-            this.gameMap.selectedCellX = (int) mousePos.x/TILE_SIZE;
-            this.gameMap.selectedCellY = (int) mousePos.y/TILE_SIZE;
+            EngineState.gameMap.selectedCellX = (int) mousePos.x/TILE_SIZE;
+            EngineState.gameMap.selectedCellY = (int) mousePos.y/TILE_SIZE;
 
             // Check if turret is in pressed tile
             if(turretInTile()){
@@ -53,15 +50,15 @@ public class InputController {
             }
 
             // Check if tile is placeable
-            TiledMapTileLayer tileLayer = (TiledMapTileLayer) this.gameMap.getTileLayers("Placeable");
-            this.gameMap.setSelectedCell(tileLayer.getCell(this.gameMap.selectedCellX, this.gameMap.selectedCellY));
-            if(this.gameMap.getSelectedCell() == null){
+            TiledMapTileLayer tileLayer = (TiledMapTileLayer) EngineState.gameMap.getTileLayers("Placeable");
+            EngineState.gameMap.setSelectedCell(tileLayer.getCell(EngineState.gameMap.selectedCellX, EngineState.gameMap.selectedCellY));
+            if(EngineState.gameMap.getSelectedCell() == null){
                 return;
             }
-            this.gameMap.selectCell();
+            EngineState.gameMap.selectCell();
             EngineState.stage.addActor(addEntityButton.button);
-            int tileX = this.gameMap.selectedCellX * TILE_SIZE;
-            int tileY = this.gameMap.selectedCellY * TILE_SIZE;
+            int tileX = EngineState.gameMap.selectedCellX * TILE_SIZE;
+            int tileY = EngineState.gameMap.selectedCellY * TILE_SIZE;
             addEntityButton.addButtonListeners(new Vector2(tileX, tileY), onEntitySpawned());
         }
     }
@@ -89,7 +86,7 @@ public class InputController {
         for (Entity defender : defenders) {
             int defenderX = (int) defender.getComponent(TransformComponent.class).position.x;
             int defenderY = (int) defender.getComponent(TransformComponent.class).position.y;
-            if(defenderX == this.gameMap.selectedCellX*TILE_SIZE && defenderY == this.gameMap.selectedCellY*TILE_SIZE) {
+            if(defenderX == EngineState.gameMap.selectedCellX*TILE_SIZE && defenderY == EngineState.gameMap.selectedCellY*TILE_SIZE) {
                 return true;
             }
         }
