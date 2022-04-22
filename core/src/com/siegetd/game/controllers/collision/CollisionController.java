@@ -1,13 +1,5 @@
-package com.siegetd.game.controllers;
+package com.siegetd.game.controllers.collision;
 
-import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
-
-import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.HitpointComponent;
@@ -22,7 +14,7 @@ public class CollisionController {
 
     public boolean checkIfExists(DefendAttackPair newDefendAttackPair){
         for (DefendAttackPair defendAttackPair : defendAttackPairs){
-            if(defendAttackPair.attacker.equals(newDefendAttackPair.attacker) && defendAttackPair.defender.equals(newDefendAttackPair.defender)){
+            if(defendAttackPair.getAttacker().equals(newDefendAttackPair.getAttacker()) && defendAttackPair.getDefender().equals(newDefendAttackPair.getDefender())){
                 return true;
             }
         }
@@ -35,7 +27,7 @@ public class CollisionController {
         for (DefendAttackPair defendAttackPair : defendAttackPairs){
             defendAttackPair.draw();
 
-            if(defendAttackPair.attacker.getComponent(HitpointComponent.class).hitpoints <= 0){
+            if(defendAttackPair.getAttacker().getComponent(HitpointComponent.class).hitpoints <= 0){
                 defendAttackPairsCopy.add(defendAttackPair);
             }
         }
@@ -63,7 +55,22 @@ public class CollisionController {
                     }
                 }
             }
-            updatePairArray();
+            Array<DefendAttackPair> defendAttackPairsCopy = new Array<>();
+            for (DefendAttackPair defendAttackPair : defendAttackPairs){
+                defendAttackPair.draw();
+
+                if(defendAttackPair.getAttacker().getComponent(HitpointComponent.class).hitpoints <= 0){
+                    defendAttackPairsCopy.add(defendAttackPair);
+                }
+            }
+
+            for (DefendAttackPair defendAttackPair : defendAttackPairs){
+                for (DefendAttackPair defendAttackPair1 : defendAttackPairsCopy){
+                    if(defendAttackPair.equals(defendAttackPair1)){
+                        defendAttackPairs.removeValue(defendAttackPair, false);
+                    }
+                }
+            }
         }catch (Exception e){
             System.out.println(e.toString());
         }
