@@ -64,7 +64,7 @@ public class InputController {
             }
 
             EngineState.stage.addActor(addEntityButton.button);
-            addEntityButton.addButtonListeners(new Vector2(tileX, tileY), onEntitySpawned());
+            addEntityButton.addButtonListeners(new Vector2(tileX, tileY));
 
             TileBorder tileBorder = new TileBorder(
                     tileX,
@@ -75,8 +75,4 @@ public class InputController {
         }
     }
 
-    public Callable<Void> onEntitySpawned() {
-        tilePosSet = false;
-        return null;
-    }
 }

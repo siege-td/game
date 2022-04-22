@@ -70,18 +70,13 @@ public class SelectEntityModal {
         this.zappButton.setVisible(false);
     }
 
-    public void addButtonListeners(final Vector2 entitySpawnPos, final Callable<Void> entitySpawned) {
+    public void addButtonListeners(final Vector2 entitySpawnPos) {
         this.archerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (ScoreController.getInstance().getCurrency() >= archerCost) {
                     new ArcherEntity(entitySpawnPos).create();
                     ScoreController.getInstance().subtractCurrency(archerCost);
-                    try {
-                        entitySpawned.call();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 hideModal();
             }
@@ -94,11 +89,6 @@ public class SelectEntityModal {
                 if (ScoreController.getInstance().getCurrency() >= mageCost) {
                     new MageEntity(entitySpawnPos).create();
                     ScoreController.getInstance().subtractCurrency(mageCost);
-                    try {
-                        entitySpawned.call();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 hideModal();
             }
@@ -110,11 +100,6 @@ public class SelectEntityModal {
                 if (ScoreController.getInstance().getCurrency() >= zappCost) {
                     new ZappEntity(entitySpawnPos).create();
                     ScoreController.getInstance().subtractCurrency(zappCost);
-                    try {
-                        entitySpawned.call();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 hideModal();
             }
