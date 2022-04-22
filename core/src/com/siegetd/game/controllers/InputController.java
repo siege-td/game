@@ -57,14 +57,10 @@ public class InputController {
             }
             EngineState.gameMap.selectCell();
             EngineState.stage.addActor(addEntityButton.button);
-            int tileX = EngineState.gameMap.selectedCellX * TILE_SIZE;
-            int tileY = EngineState.gameMap.selectedCellY * TILE_SIZE;
-            addEntityButton.addButtonListeners(new Vector2(tileX, tileY), onEntitySpawned());
+            int tileX = this.gameMap.selectedCellX * TILE_SIZE;
+            int tileY = this.gameMap.selectedCellY * TILE_SIZE;
+            addEntityButton.addButtonListeners(new Vector2(tileX, tileY));
         }
-    }
-
-    public Callable<Void> onEntitySpawned() {
-        return null;
     }
 
     /**

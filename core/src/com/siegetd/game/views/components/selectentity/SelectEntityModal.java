@@ -70,7 +70,7 @@ public class SelectEntityModal {
         this.zappButton.setVisible(false);
     }
 
-    public void addButtonListeners(final Vector2 entitySpawnPos, final Callable<Void> entitySpawned) {
+    public void addButtonListeners(final Vector2 entitySpawnPos) {
         this.archerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -78,11 +78,6 @@ public class SelectEntityModal {
                     new ArcherEntity(entitySpawnPos).create();
                     ScoreHandler.getInstance().subtractCurrency(archerCost);
                     System.out.println("Current currency: " + ScoreHandler.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
-                    try {
-                        entitySpawned.call();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 hideModal();
             }
@@ -96,11 +91,6 @@ public class SelectEntityModal {
                     new MageEntity(entitySpawnPos).create();
                     ScoreHandler.getInstance().subtractCurrency(mageCost);
                     System.out.println("Current currency: " + ScoreHandler.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
-                    try {
-                        entitySpawned.call();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 hideModal();
             }
@@ -113,11 +103,6 @@ public class SelectEntityModal {
                     new ZappEntity(entitySpawnPos).create();
                     ScoreHandler.getInstance().subtractCurrency(zappCost);
                     System.out.println("Current currency: " + ScoreHandler.getInstance().getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
-                    try {
-                        entitySpawned.call();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 hideModal();
             }
