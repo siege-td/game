@@ -15,11 +15,11 @@ public class Currency {
         }
         return currencyInstance;
     }
-    private void addCurrency(int amount){
+    public void addCurrency(int amount){
         currency += amount;
     }
 
-    private void subtractCurrency(int amount){
+    public void subtractCurrency(int amount){
         currency -= amount;
     }
 

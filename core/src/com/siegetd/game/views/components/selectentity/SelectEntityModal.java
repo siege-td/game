@@ -12,6 +12,7 @@ import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.entities.defender.ArcherEntity;
 import com.siegetd.game.models.ecs.entities.defender.MageEntity;
 import com.siegetd.game.models.ecs.entities.defender.ZappEntity;
+import com.siegetd.game.singletons.Currency;
 import com.siegetd.game.views.components.ButtonComponent;
 
 import java.util.concurrent.Callable;
@@ -21,6 +22,11 @@ public class SelectEntityModal {
     private Button archerButton;
     private Button mageButton;
     private Button zappButton;
+    Currency currency = Currency.getInstance();
+    //Cost of each tower
+    private static final int archerCost = 30;
+    private static final int mageCost = 40;
+    private static final int zappCost = 60;
 
     public SelectEntityModal() { }
 
@@ -59,39 +65,58 @@ public class SelectEntityModal {
         this.archerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if(currency.getCurrency() >= archerCost){
                 new ArcherEntity(entitySpawnPos).create();
+                currency.subtractCurrency(archerCost);
+                System.out.println("Current currency: " + currency.getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
                 try {
                     entitySpawned.call();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 hideModal();
+            }else{
+                    hideModal();
+                }
             }
+
         });
 
         this.mageButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if(currency.getCurrency() >= mageCost){
                 new MageEntity(entitySpawnPos).create();
+                currency.subtractCurrency(mageCost);
+                System.out.println("Current currency: " + currency.getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
                 try {
                     entitySpawned.call();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 hideModal();
+            }else{
+                    hideModal();
+                }
             }
         });
 
         this.zappButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if(currency.getCurrency() >= zappCost){
                 new ZappEntity(entitySpawnPos).create();
+                currency.subtractCurrency(zappCost);
+                System.out.println("Current currency: " + currency.getCurrency()); //REMOVE ME!!!!!!!!!!!!!!!!!!!!!
                 try {
                     entitySpawned.call();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 hideModal();
+            }else{
+                    hideModal();
+                }
             }
         });
     }
