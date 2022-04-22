@@ -2,6 +2,7 @@ package com.siegetd.game.views.components.selectentity;
 
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -39,6 +40,9 @@ public class SelectEntityModal {
                 ((Gdx.graphics.getWidth() / 2) - (this.archerButton.getWidth() / 2)) - 80,
                 ((Gdx.graphics.getHeight() / 2) - (this.archerButton.getHeight() / 2))
         );
+        if(currency.getCurrency() < archerCost){
+            this.archerButton.setColor(Color.RED);
+        }
 
         this.mageButton = buttonComponent.createButton(new Texture("GUI/add_mage.png"));
         this.mageButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
@@ -46,6 +50,9 @@ public class SelectEntityModal {
                 ((Gdx.graphics.getWidth() / 2) - (this.mageButton.getWidth() / 2)),
                 ((Gdx.graphics.getHeight() / 2) - ((this.mageButton.getHeight() / 2)))
         );
+        if(currency.getCurrency() < mageCost){
+            this.mageButton.setColor(Color.RED);
+        }
 
         this.zappButton = buttonComponent.createButton(new Texture("GUI/add_zapp.png"));
         this.zappButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
@@ -53,6 +60,9 @@ public class SelectEntityModal {
                 (((Gdx.graphics.getWidth() / 2) - (this.zappButton.getWidth() / 2))) + 80,
                 ((Gdx.graphics.getHeight() / 2) - ((this.zappButton.getHeight() / 2)))
         );
+        if(currency.getCurrency() < zappCost){
+            this.zappButton.setColor(Color.RED);
+        }
     }
 
     private void hideModal() {
