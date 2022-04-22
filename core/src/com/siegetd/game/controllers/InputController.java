@@ -62,12 +62,8 @@ public class InputController {
             EngineState.stage.addActor(addEntityButton.button);
             int tileX = this.gameMap.selectedCellX * TILE_SIZE;
             int tileY = this.gameMap.selectedCellY * TILE_SIZE;
-            addEntityButton.addButtonListeners(new Vector2(tileX, tileY), onEntitySpawned());
+            addEntityButton.addButtonListeners(new Vector2(tileX, tileY));
         }
-    }
-
-    public Callable<Void> onEntitySpawned() {
-        return null;
     }
 
     /**
