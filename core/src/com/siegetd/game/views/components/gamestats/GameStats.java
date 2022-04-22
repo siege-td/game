@@ -36,7 +36,7 @@ public class GameStats {
         this.socket = SocketConnection.getInstance().getSocket();
 
         this.gameStatList = new ArrayList<>();
-        this.gameStat = new GameStat("Solobolo", 10, 100);
+        this.gameStat = new GameStat("Solobolo", 10, 10);
 
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DimboRegular.ttf"));
         fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

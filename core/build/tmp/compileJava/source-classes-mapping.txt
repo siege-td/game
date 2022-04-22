@@ -19,8 +19,8 @@ com/siegetd/game/models/ecs/entities/TestEntity.java
 com/siegetd/game/views/components/SinglePlayerButton.java
  com.siegetd.game.views.components.SinglePlayerButton
  com.siegetd.game.views.components.SinglePlayerButton$1
-com/siegetd/game/singletons/ScoreHandler.java
- com.siegetd.game.singletons.ScoreHandler
+com/siegetd/game/views/states/LobbyState.java
+ com.siegetd.game.views.states.LobbyState
 com/siegetd/game/views/states/SettingsState.java
  com.siegetd.game.views.states.SettingsState
 com/siegetd/game/models/level/Level.java
@@ -158,10 +158,10 @@ com/siegetd/game/views/states/MainMenuState.java
 com/siegetd/game/views/components/SettingsButton.java
  com.siegetd.game.views.components.SettingsButton
  com.siegetd.game.views.components.SettingsButton$1
-com/siegetd/game/views/states/LobbyState.java
- com.siegetd.game.views.states.LobbyState
 com/siegetd/game/views/components/gamestats/GameStat.java
  com.siegetd.game.views.components.gamestats.GameStat
+com/siegetd/game/singletons/ScoreHandler.java
+ com.siegetd.game.singletons.ScoreHandler
 com/siegetd/game/models/ecs/systems/RenderingSystem.java
  com.siegetd.game.models.ecs.systems.RenderingSystem
 com/siegetd/game/views/components/gamestats/GameStats.java

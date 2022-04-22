@@ -4,11 +4,10 @@ import java.util.HashMap;
 
 public class ScoreHandler {
     private static ScoreHandler scoreInstance = null;
-    private HashMap<String,Integer> playerScores;
-    private final int HEALTH = 30;
+    private int health;
 
     private ScoreHandler(){
-        playerScores = new HashMap<>();
+        health = 30;
     }
 
     public static ScoreHandler getInstance(){
@@ -18,19 +17,11 @@ public class ScoreHandler {
         return scoreInstance;
     }
 
-    private HashMap<String, Integer> getPlayerScores() {
-        return playerScores;
+    public void setHealth(int health){
+        this.health = health;
     }
 
-    private int getScoreByID(String playerId){
-        return playerScores.get(playerId);
-    }
-
-    private void subtractScore(String playerId, int amount){
-        playerScores.put(playerId,playerScores.get(playerId) - amount);
-    }
-
-    private void addPlayerToScores(String id){
-        playerScores.put(id,HEALTH);
+    public int getHealth(){
+        return this.health;
     }
 }
