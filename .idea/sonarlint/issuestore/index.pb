@@ -39,14 +39,8 @@ q
 Acore/src/com/siegetd/game/models/ecs/systems/RenderingSystem.java,5/3/53fb0e87058c4146c158735b8e5572f7cb73edf5
 j
 :core/src/com/siegetd/game/models/map/tile/MovableTile.java,8/e/8edce4a9f94a054f58dd5169fc54e7ecbaaa4755
-j
-:core/src/com/siegetd/game/models/map/utils/MapGlobals.java,3/0/304b423c9e1d99c07e11a8686aabb5eb8c309112
 r
 Bcore/src/com/siegetd/game/views/states/InMultiPlayerGameState.java,4/8/48d5c4bc1d86e20bc34e05a9cec4ceb9a1eff489
-l
-<core/src/com/siegetd/game/models/map/tile/PlaceableTile.java,2/5/2524f3c3817a938469c35676c78016a3a078161a
-c
-3core/src/com/siegetd/game/models/map/tile/Tile.java,3/9/390d6601ec0c1284ebee22531a3a639dd9e6fbc2
 i
 9core/src/com/siegetd/game/views/states/HostGameState.java,0/e/0e865ea7f4a4509b48dca197c29ba9947931ba15
 a
@@ -67,8 +61,6 @@ m
 =core/src/com/siegetd/game/models/ecs/entities/TestEntity.java,1/5/1573d62e7c393388ea79c1cec9454cc9e6ffdd25
 o
 ?core/src/com/siegetd/game/views/components/ButtonComponent.java,b/f/bf7b73a4202f98c63b207c148e3971bcd8f1f4c4
-j
-:core/src/com/siegetd/game/controllers/InputController.java,6/a/6ad0ce708f01720aa5c8ed6d791bb6a55ae9db2b
 x
 Hcore/src/com/siegetd/game/models/ecs/entities/defender/ArcherEntity.java,c/e/ce721ce46ad76ca5ffaaedb80e1e5d74ceb2700c
 s
