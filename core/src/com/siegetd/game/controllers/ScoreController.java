@@ -1,6 +1,6 @@
 package com.siegetd.game.controllers;
 
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 
 import org.json.JSONException;
@@ -55,7 +55,7 @@ public class ScoreController {
     private void updateGameDataOnServer() {
         try {
             JSONObject object = new JSONObject();
-            object.put("pin", EngineState.pin);
+            object.put("pin", SiegeTdState.pin);
             object.put("playerName", SocketConnection.getInstance().getSocket().id().substring(0, 5));
             object.put("hitpoints", health);
             object.put("currency", currency);

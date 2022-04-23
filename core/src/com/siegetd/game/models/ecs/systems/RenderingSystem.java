@@ -6,9 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.views.components.gamestats.GameStats;
@@ -42,8 +40,8 @@ public class RenderingSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-        EngineState.batch.begin();
-        EngineState.batch.setProjectionMatrix(EngineState.camera.combined);
+        SiegeTdState.batch.begin();
+        SiegeTdState.batch.setProjectionMatrix(SiegeTdState.camera.combined);
 
         gameStats.drawStats();
 
@@ -60,7 +58,7 @@ public class RenderingSystem extends EntitySystem {
             float textureOriginX = textureWidth / 2f;
             float textureOriginY = textureHeight / 2f;
 
-            EngineState.batch.draw(
+            SiegeTdState.batch.draw(
                     textureComponent.region,
                     transformComponent.position.x,
                     transformComponent.position.y,
@@ -74,6 +72,6 @@ public class RenderingSystem extends EntitySystem {
             );
         }
 
-        EngineState.batch.end();
+        SiegeTdState.batch.end();
     }
 }

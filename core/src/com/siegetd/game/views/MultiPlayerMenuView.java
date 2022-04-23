@@ -1,29 +1,28 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.MultiPlayerButton;
-import com.siegetd.game.views.components.SettingsButton;
+import com.siegetd.game.controllers.GameViewController;
+import com.siegetd.game.views.components.buttons.BackButton;
+import com.siegetd.game.views.components.buttons.HostButton;
+import com.siegetd.game.views.components.buttons.JoinButton;
 import com.siegetd.game.views.components.RopeComponent;
-import com.siegetd.game.views.components.SinglePlayerButton;
 import com.siegetd.game.views.components.WindowComponent;
 
-public class MainMenuState extends GameState{
+public class MultiPlayerMenuView extends GameView {
     private Texture background;
-    private WindowComponent window;
+    private BackButton btnBack;
+    private WindowComponent table;
     private RopeComponent rope;
+    private JoinButton joinButton;
+    private HostButton hostButton;
     private Table buttonTable;
-    private SettingsButton settingsButton;
-    private SinglePlayerButton singlePlayerButton;
-    private MultiPlayerButton multiPlayerButton;
     private Stage stage;
 
-    public MainMenuState(final GameStateController gsc){
+    public MultiPlayerMenuView(GameViewController gsc){
         super(gsc);
 
         createStage();
@@ -44,11 +43,10 @@ public class MainMenuState extends GameState{
 
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(window.img, window.windowX, window.windowY, window.windowWidth, window.windowHeight);
+        batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.end();
-
         stage.draw();
     }
 
@@ -59,48 +57,42 @@ public class MainMenuState extends GameState{
 
     private void createBackground() {
         background = new Texture("GUI/bg.png");
-        window = new WindowComponent();
-        rope = new RopeComponent(window);
+        table = new WindowComponent();
+        rope = new RopeComponent(table);
     }
 
     private void createButtonTable() {
         buttonTable = new Table();
         buttonTable.setFillParent(true);
-
     }
 
     private void createButtons() {
-        settingsButton = new SettingsButton();
-        settingsButton.addButtonListners(gsc);
-        buttonTable.add(settingsButton.button).size(
-                (float)(window.windowWidth / 3),
-                (float) (window.windowHeight *0.3))
+        joinButton = new JoinButton();
+        joinButton.addButtonListners(gsc);
+        buttonTable.add(joinButton.getButton()).size(
+                (float)(table.windowWidth / 3),
+                (float) (table.windowHeight *0.3))
+                .row();
+        hostButton = new HostButton();
+        hostButton.addButtonListners(gsc);
+        buttonTable.add(hostButton.getButton()).size(
+                (float)(table.windowWidth / 3),
+                (float) (table.windowHeight *0.3))
                 .row();
 
-        singlePlayerButton = new SinglePlayerButton();
-        singlePlayerButton.addButtonListners(gsc);
-        buttonTable.add(singlePlayerButton.button).size(
-                (float)(window.windowWidth / 3),
-                (float) (window.windowHeight *0.3))
-                .row();
-
-        multiPlayerButton = new MultiPlayerButton();
-        multiPlayerButton.addButtonListners(gsc);
-        buttonTable.add(multiPlayerButton.button).size(
-                (float)(window.windowWidth / 3),
-                (float) (window.windowHeight *0.3))
-                .row();
+        btnBack = new BackButton(table);
+        btnBack.addButtonListners(gsc);
     }
 
-
     private void stageComponents() {
+        stage.addActor(btnBack.getButton());
         stage.addActor(buttonTable);
     }
 
     @Override
     public void dispose() {
         background.dispose();
-        window.dispose();
+        table.dispose();
         rope.dispose();
         stage.dispose();
     }

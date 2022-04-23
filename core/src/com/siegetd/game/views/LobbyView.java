@@ -1,18 +1,16 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.views.GameState;
+import com.siegetd.game.controllers.GameViewController;
 
-public class LobbyState extends GameState{
+public class LobbyView extends GameView {
 
     private CharSequence str;
     private final BitmapFont font;
 
-    public LobbyState(GameStateController gsc){
+    public LobbyView(GameViewController gsc){
         super(gsc);
         font = new BitmapFont();
     }
