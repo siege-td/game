@@ -1,14 +1,10 @@
 
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-w
-Gcore/src/com/siegetd/game/models/ecs/components/AnimationComponent.java,a/9/a9c73a8069784dce8c3dee149618482c3c960832
 r
 Bcore/src/com/siegetd/game/models/ecs/components/TypeComponent.java,c/e/ceb7b87277730632b6c31a0b8d204679d26b8e1d
 s
 Ccore/src/com/siegetd/game/models/ecs/components/StateComponent.java,2/1/21e2560a53f00c7ed3207ca1f9c4d6dca0c51583
-q
-Acore/src/com/siegetd/game/models/ecs/systems/AnimationSystem.java,a/b/ab4e555936d9082c6d8b7dfb9e6df84c417b4ba8
 i
 9desktop/src/com/siegetd/game/desktop/DesktopLauncher.java,1/6/163a3b2052472c184517e0bed7ac2cb83f3aa048
 v
@@ -37,14 +33,10 @@ i
 9core/src/com/siegetd/game/views/states/JoinGameState.java,2/9/29f534f136ed007aa2e546bf34026c67b8bfd5b2
 q
 Acore/src/com/siegetd/game/models/ecs/systems/RenderingSystem.java,5/3/53fb0e87058c4146c158735b8e5572f7cb73edf5
-j
-:core/src/com/siegetd/game/models/map/tile/MovableTile.java,8/e/8edce4a9f94a054f58dd5169fc54e7ecbaaa4755
 r
 Bcore/src/com/siegetd/game/views/states/InMultiPlayerGameState.java,4/8/48d5c4bc1d86e20bc34e05a9cec4ceb9a1eff489
 i
 9core/src/com/siegetd/game/views/states/HostGameState.java,0/e/0e865ea7f4a4509b48dca197c29ba9947931ba15
-a
-1core/src/com/siegetd/game/models/map/GameMap.java,3/8/38ef681e9d85924bf4a9ec73a386973de098dac8
 ^
 .core/src/com/siegetd/game/views/GameState.java,6/6/667ce93fe5a53f8163a03e94165899d23ff799b0
 o

@@ -71,14 +71,15 @@ com/siegetd/game/SiegeTd.java
  com.siegetd.game.SiegeTd
 com/siegetd/game/views/components/InputListener.java
  com.siegetd.game.views.components.InputListener
-com/siegetd/game/views/PlayView.java
- com.siegetd.game.views.PlayView
+com/siegetd/game/controllers/ScoreController.java
+ com.siegetd.game.controllers.ScoreController
 com/siegetd/game/models/ecs/components/State.java
  com.siegetd.game.models.ecs.components.State
 com/siegetd/game/models/level/SpawnRate.java
  com.siegetd.game.models.level.SpawnRate
-com/siegetd/game/models/ecs/components/AnimationComponent.java
- com.siegetd.game.models.ecs.components.AnimationComponent
+com/siegetd/game/views/components/BackButton.java
+ com.siegetd.game.views.components.BackButton
+ com.siegetd.game.views.components.BackButton$1
 com/siegetd/game/controllers/LevelController.java
  com.siegetd.game.controllers.LevelController
  com.siegetd.game.controllers.LevelController$1
@@ -100,8 +101,10 @@ com/siegetd/game/models/ecs/entities/defender/MageEntity.java
  com.siegetd.game.models.ecs.entities.defender.MageEntity
 com/siegetd/game/models/ecs/entities/defender/Defender.java
  com.siegetd.game.models.ecs.entities.defender.Defender
-com/siegetd/game/models/map/tile/PlaceableTile.java
- com.siegetd.game.models.map.tile.PlaceableTile
+com/siegetd/game/views/components/JoinButton.java
+ com.siegetd.game.views.components.JoinButton
+ com.siegetd.game.views.components.JoinButton$1
+ com.siegetd.game.views.components.JoinButton$2
 com/siegetd/game/views/components/RopeComponent.java
  com.siegetd.game.views.components.RopeComponent
 com/siegetd/game/models/map/utils/MapGlobals.java
@@ -132,10 +135,11 @@ com/siegetd/game/models/ecs/entities/IEntity.java
  com.siegetd.game.models.ecs.entities.IEntity
 com/siegetd/game/views/SettingsView.java
  com.siegetd.game.views.SettingsView
-com/siegetd/game/controllers/GameViewController.java
- com.siegetd.game.controllers.GameViewController
- com.siegetd.game.controllers.GameViewController$1
- com.siegetd.game.controllers.GameViewController$View
+com/siegetd/game/views/JoinGameView.java
+ com.siegetd.game.views.JoinGameView
+ com.siegetd.game.views.JoinGameView$1
+ com.siegetd.game.views.JoinGameView$2
+ com.siegetd.game.views.JoinGameView$3
 com/siegetd/game/views/SinglePlayerMenuView.java
  com.siegetd.game.views.SinglePlayerMenuView
 com/siegetd/game/models/map/GameMap.java
@@ -146,19 +150,9 @@ com/siegetd/game/views/components/ingame/StartRoundButton.java
 com/siegetd/game/views/components/SettingsButton.java
  com.siegetd.game.views.components.SettingsButton
  com.siegetd.game.views.components.SettingsButton$1
-com/siegetd/game/controllers/ScoreController.java
- com.siegetd.game.controllers.ScoreController
-com/siegetd/game/views/JoinGameView.java
- com.siegetd.game.views.JoinGameView
- com.siegetd.game.views.JoinGameView$1
- com.siegetd.game.views.JoinGameView$2
- com.siegetd.game.views.JoinGameView$3
-com/siegetd/game/views/components/JoinButton.java
- com.siegetd.game.views.components.JoinButton
- com.siegetd.game.views.components.JoinButton$1
- com.siegetd.game.views.components.JoinButton$2
-com/siegetd/game/views/components/BackButton.java
- com.siegetd.game.views.components.BackButton
- com.siegetd.game.views.components.BackButton$1
-com/siegetd/game/models/ecs/systems/AnimationSystem.java
- com.siegetd.game.models.ecs.systems.AnimationSystem
+com/siegetd/game/controllers/GameViewController.java
+ com.siegetd.game.controllers.GameViewController
+ com.siegetd.game.controllers.GameViewController$1
+ com.siegetd.game.controllers.GameViewController$View
+com/siegetd/game/views/PlayView.java
+ com.siegetd.game.views.PlayView

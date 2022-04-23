@@ -11,13 +11,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.EngineState;
-import com.siegetd.game.controllers.InputController;
 import com.siegetd.game.controllers.GameViewController;
-import com.siegetd.game.models.ecs.systems.AnimationSystem;
+import com.siegetd.game.controllers.InputController;
+import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
-import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
@@ -58,7 +57,6 @@ public class PlayView extends GameView {
 
         EngineState.gameMap = this.gameMap;
 
-        engine.addSystem(new AnimationSystem());
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
 
