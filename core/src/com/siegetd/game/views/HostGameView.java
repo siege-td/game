@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.views.components.buttons.BackButton;
@@ -143,7 +143,7 @@ public class HostGameView extends GameView {
         } else {
             pin = "LOBBY-PIN:\n" + inputButton.getListener().getText();
             if (!hasHostedLobby) {
-                SocketConnection.getInstance().getSocket().emit("new_lobby", EngineState.pin);
+                SocketConnection.getInstance().getSocket().emit("new_lobby", SiegeTdState.pin);
             }
         }
         glyphLayout.setText(font, pin);

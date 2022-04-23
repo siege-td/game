@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.ScoreController;
 
@@ -51,14 +51,14 @@ public class GameStats {
         this.socket.on("updated_data", onNewData);
 
         // init arraylist with game data
-        this.socket.emit("get_game_data_in_room", EngineState.pin);
+        this.socket.emit("get_game_data_in_room", SiegeTdState.pin);
     }
 
     public void drawStats() {
         float xPos = 20f;
         if (gameStatList.size() == 0) {
             font.draw(
-                    EngineState.batch,
+                    SiegeTdState.batch,
                     "Player: Solo player\nHitpoints: " + ScoreController.getInstance().getHealth() + "\nCurrency: " + ScoreController.getInstance().getCurrency(),
                     xPos,
                     2530f
@@ -66,7 +66,7 @@ public class GameStats {
         } else {
             for (GameStat stat : gameStatList) {
                 font.draw(
-                        EngineState.batch,
+                        SiegeTdState.batch,
                         "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
                         xPos,
                         2530f

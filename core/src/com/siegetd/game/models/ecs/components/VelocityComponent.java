@@ -1,7 +1,7 @@
 package com.siegetd.game.models.ecs.components;
 
 import com.badlogic.ashley.core.Component;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.map.tile.MovableTile;
 
 import java.util.List;
@@ -27,6 +27,6 @@ public class VelocityComponent implements Component {
         this.ySpeed = ySpeed;
 
         this.pathIndex = 0;
-        this.path = EngineState.gameMap.getMovableTiles();
+        this.path = SiegeTdState.gameMap.getMovableTiles();
     }
 }

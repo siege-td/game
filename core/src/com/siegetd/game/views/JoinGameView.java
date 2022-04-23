@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.views.components.buttons.BackButton;
@@ -147,7 +147,7 @@ public class JoinGameView extends GameView {
         } else if (hasJoinedLobby){
             pin = "PIN: " + inputButton.getListener().getText() + "\nWaiting for host to start..";
             if (!hasJoinedLobby) {
-                SocketConnection.getInstance().getSocket().emit("join_lobby", EngineState.pin);
+                SocketConnection.getInstance().getSocket().emit("join_lobby", SiegeTdState.pin);
             }
         } else {
             inputButton.getListener().incorrectPin();

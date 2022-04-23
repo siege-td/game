@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.entities.defender.ArcherEntity;
 import com.siegetd.game.models.ecs.entities.defender.MageEntity;
 import com.siegetd.game.models.ecs.entities.defender.ZappEntity;
@@ -30,7 +30,7 @@ public class SelectEntityModal {
 
     public void showModal() {
         this.archerButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_archer.png")));
-        this.archerButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
+        this.archerButton.setSize(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
         this.archerButton.setPosition(
                 ((Gdx.graphics.getWidth() / 2) - (this.archerButton.getWidth() / 2)) - 80,
                 ((Gdx.graphics.getHeight() / 2) - (this.archerButton.getHeight() / 2))
@@ -40,7 +40,7 @@ public class SelectEntityModal {
         }
 
         this.mageButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_mage.png")));
-        this.mageButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
+        this.mageButton.setSize(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
         this.mageButton.setPosition(
                 ((Gdx.graphics.getWidth() / 2) - (this.mageButton.getWidth() / 2)),
                 ((Gdx.graphics.getHeight() / 2) - ((this.mageButton.getHeight() / 2)))
@@ -50,7 +50,7 @@ public class SelectEntityModal {
         }
 
         this.zappButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_zapp.png")));
-        this.zappButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
+        this.zappButton.setSize(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
         this.zappButton.setPosition(
                 (((Gdx.graphics.getWidth() / 2) - (this.zappButton.getWidth() / 2))) + 80,
                 ((Gdx.graphics.getHeight() / 2) - ((this.zappButton.getHeight() / 2)))

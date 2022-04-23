@@ -1,15 +1,12 @@
 package com.siegetd.game.views.components.buttons;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.views.components.WindowComponent;
-import com.siegetd.game.views.components.buttons.GameButton;
 
 import java.net.URISyntaxException;
 
@@ -48,7 +45,7 @@ public class PlayButton extends GameButton {
         this.getButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                socket.emit("start_game", EngineState.pin);
+                socket.emit("start_game", SiegeTdState.pin);
                 gsc.setState(GameViewController.View.PLAY);
             }
         });

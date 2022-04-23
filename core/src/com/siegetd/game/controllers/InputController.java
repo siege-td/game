@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.views.components.buttons.AddEntityButton;
@@ -27,8 +27,8 @@ public class InputController {
         if (Gdx.input.justTouched()) {
 
             //Uncheck hover effect on second click
-            if(EngineState.gameMap.getSelectedCell() != null){
-                EngineState.gameMap.unselectCell();
+            if(SiegeTdState.gameMap.getSelectedCell() != null){
+                SiegeTdState.gameMap.unselectCell();
                 if(addEntityButton.getButton() != null) {
                     addEntityButton.getButton().setVisible(false);
                 }
@@ -37,10 +37,10 @@ public class InputController {
             addEntityButton = new AddEntityButton();
             Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 
-            EngineState.camera.unproject(mousePos);
+            SiegeTdState.camera.unproject(mousePos);
 
-            EngineState.gameMap.selectedCellX = (int) mousePos.x/TILE_SIZE;
-            EngineState.gameMap.selectedCellY = (int) mousePos.y/TILE_SIZE;
+            SiegeTdState.gameMap.selectedCellX = (int) mousePos.x/TILE_SIZE;
+            SiegeTdState.gameMap.selectedCellY = (int) mousePos.y/TILE_SIZE;
 
             // Check if turret is in pressed tile
             if(turretInTile()){
@@ -48,15 +48,15 @@ public class InputController {
             }
 
             // Check if tile is placeable
-            TiledMapTileLayer tileLayer = (TiledMapTileLayer) EngineState.gameMap.getTileLayers("Placeable");
-            EngineState.gameMap.setSelectedCell(tileLayer.getCell(EngineState.gameMap.selectedCellX, EngineState.gameMap.selectedCellY));
-            if(EngineState.gameMap.getSelectedCell() == null){
+            TiledMapTileLayer tileLayer = (TiledMapTileLayer) SiegeTdState.gameMap.getTileLayers("Placeable");
+            SiegeTdState.gameMap.setSelectedCell(tileLayer.getCell(SiegeTdState.gameMap.selectedCellX, SiegeTdState.gameMap.selectedCellY));
+            if(SiegeTdState.gameMap.getSelectedCell() == null){
                 return;
             }
-            EngineState.gameMap.selectCell();
-            EngineState.stage.addActor(addEntityButton.getButton());
-            int tileX = EngineState.gameMap.selectedCellX * TILE_SIZE;
-            int tileY = EngineState.gameMap.selectedCellY * TILE_SIZE;
+            SiegeTdState.gameMap.selectCell();
+            SiegeTdState.stage.addActor(addEntityButton.getButton());
+            int tileX = SiegeTdState.gameMap.selectedCellX * TILE_SIZE;
+            int tileY = SiegeTdState.gameMap.selectedCellY * TILE_SIZE;
             addEntityButton.addButtonListeners(new Vector2(tileX, tileY));
         }
     }
@@ -66,7 +66,7 @@ public class InputController {
      * @return return true if turret is on tile
      */
     private boolean turretInTile(){
-        ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
+        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
         ArrayList<Entity> defenders = new ArrayList<>();
 
         for (Entity entity : entities) {
@@ -80,7 +80,7 @@ public class InputController {
         for (Entity defender : defenders) {
             int defenderX = (int) defender.getComponent(TransformComponent.class).position.x;
             int defenderY = (int) defender.getComponent(TransformComponent.class).position.y;
-            if(defenderX == EngineState.gameMap.selectedCellX*TILE_SIZE && defenderY == EngineState.gameMap.selectedCellY*TILE_SIZE) {
+            if(defenderX == SiegeTdState.gameMap.selectedCellX*TILE_SIZE && defenderY == SiegeTdState.gameMap.selectedCellY*TILE_SIZE) {
                 return true;
             }
         }

@@ -1,7 +1,7 @@
 package com.siegetd.game.views.components.buttons.input;
 
 import com.badlogic.gdx.Input;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 
 public class InputListener implements Input.TextInputListener {
 
@@ -9,7 +9,7 @@ public class InputListener implements Input.TextInputListener {
     @Override
     public void input(String text) {
         this.text = text;
-        EngineState.pin = text;
+        SiegeTdState.pin = text;
     }
 
     @Override

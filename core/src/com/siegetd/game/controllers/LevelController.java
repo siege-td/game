@@ -1,7 +1,6 @@
 package com.siegetd.game.controllers;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Timer;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.EntitySpawner;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.TypeComponent;
@@ -41,7 +40,7 @@ public class LevelController {
 
                     Round currentRound = levelData.getRounds().get(currRound);
 
-                    // TODO: ITERATE OVER ALL INSTEAD OF USING IFS
+                    // TODO: ITERATE OVER ALL INSTEAD OF USING IFS, INCREASES MODIFIABILITY
                     // Spawn scorpions
                     if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
                         entitySpawner.spawnAttackerAtInterval(
@@ -80,7 +79,7 @@ public class LevelController {
     private boolean isRoundFinished() {
         boolean isFinished = false;
 
-        ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
+        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
         ArrayList<Entity> attackers = new ArrayList<>();
         ArrayList<Entity> attackersAtEnd = new ArrayList<>();
 
@@ -106,7 +105,7 @@ public class LevelController {
     }
 
     private void removeAllAttackers() {
-        ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
+        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
         ArrayList<Entity> attackers = new ArrayList<>();
 
         for (Entity entity : entities) {
@@ -118,7 +117,7 @@ public class LevelController {
         }
 
         for (Entity attacker : attackers) {
-            EngineState.ecsEngine.removeEntity(attacker);
+            SiegeTdState.ecsEngine.removeEntity(attacker);
             System.out.println("Remove");
         }
     }
