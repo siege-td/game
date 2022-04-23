@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.entities.defender.ArcherEntity;
 import com.siegetd.game.models.ecs.entities.defender.MageEntity;
@@ -28,9 +29,7 @@ public class SelectEntityModal {
     }
 
     public void showModal() {
-        ButtonComponent buttonComponent = new ButtonComponent();
-
-        this.archerButton = buttonComponent.createButton(new Texture("GUI/add_archer.png"));
+        this.archerButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_archer.png")));
         this.archerButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
         this.archerButton.setPosition(
                 ((Gdx.graphics.getWidth() / 2) - (this.archerButton.getWidth() / 2)) - 80,
@@ -40,7 +39,7 @@ public class SelectEntityModal {
             this.archerButton.setColor(Color.RED);
         }
 
-        this.mageButton = buttonComponent.createButton(new Texture("GUI/add_mage.png"));
+        this.mageButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_mage.png")));
         this.mageButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
         this.mageButton.setPosition(
                 ((Gdx.graphics.getWidth() / 2) - (this.mageButton.getWidth() / 2)),
@@ -50,7 +49,7 @@ public class SelectEntityModal {
             this.mageButton.setColor(Color.RED);
         }
 
-        this.zappButton = buttonComponent.createButton(new Texture("GUI/add_zapp.png"));
+        this.zappButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_zapp.png")));
         this.zappButton.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
         this.zappButton.setPosition(
                 (((Gdx.graphics.getWidth() / 2) - (this.zappButton.getWidth() / 2))) + 80,

@@ -17,7 +17,6 @@ import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
-import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
 
@@ -66,8 +65,6 @@ public class PlayView extends GameView {
         Gdx.input.setInputProcessor(EngineState.stage);
 
         this.inputController = new InputController();
-
-        new InGameGUI();
     }
 
     @Override
