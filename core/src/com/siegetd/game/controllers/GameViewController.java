@@ -11,7 +11,6 @@ import com.siegetd.game.views.MainMenuView;
 import com.siegetd.game.views.MultiPlayerMenuView;
 import com.siegetd.game.views.SettingsView;
 import com.siegetd.game.views.SinglePlayerMenuView;
-import com.siegetd.game.views.SplashView;
 
 import java.util.Stack;
 
@@ -22,7 +21,6 @@ public class GameViewController {
     private final Stack<GameView> states;
 
     public enum View {
-        SPLASH,
         MENU,
         SETTINGS,
         LOBBY,
@@ -37,7 +35,7 @@ public class GameViewController {
     public GameViewController(final SiegeTd app){
         this.app = app;
         this.states = new Stack<GameView>();
-        this.setState(View.SPLASH);
+        this.setState(View.MENU);
     }
 
     public SiegeTd application(){
@@ -68,8 +66,6 @@ public class GameViewController {
 
     private GameView getState(View view){
         switch (view){
-            case SPLASH:
-                return new SplashView(this);
             case MENU:
                 return new MainMenuView(this);
             case LOBBY:

@@ -35,8 +35,6 @@ i
 9core/src/com/siegetd/game/views/states/SettingsState.java,1/7/1762421ab1fded7a369bb3727506d93a4c0d49ea
 m
 =core/src/com/siegetd/game/views/components/InputListener.java,f/4/f4e11e1e3c72a1dfa51a319bf38c2a8ab4c115fd
-k
-;core/src/com/siegetd/game/views/components/InputButton.java,4/6/46fe3e14025b3db7648284e4e916f4c30bc06104
 i
 9core/src/com/siegetd/game/views/states/JoinGameState.java,2/9/29f534f136ed007aa2e546bf34026c67b8bfd5b2
 q
@@ -75,8 +73,6 @@ m
 =core/src/com/siegetd/game/models/ecs/entities/TestEntity.java,1/5/1573d62e7c393388ea79c1cec9454cc9e6ffdd25
 o
 ?core/src/com/siegetd/game/views/components/ButtonComponent.java,b/f/bf7b73a4202f98c63b207c148e3971bcd8f1f4c4
-o
-?core/src/com/siegetd/game/views/components/AddEntityButton.java,b/8/b80087848eb6ab1fddba1400360008aa0e790f11
 j
 :core/src/com/siegetd/game/controllers/InputController.java,6/a/6ad0ce708f01720aa5c8ed6d791bb6a55ae9db2b
 x
