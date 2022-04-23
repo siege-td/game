@@ -22,7 +22,7 @@ public class SinglePlayerButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameViewController.View.IN_GAME_SINGLE);
+                gsc.setState(GameViewController.View.PLAY);
             }
         });
     }

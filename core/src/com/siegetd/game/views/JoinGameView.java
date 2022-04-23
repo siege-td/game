@@ -182,7 +182,7 @@ public class JoinGameView extends GameView {
     private Emitter.Listener onGameStarted = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            gsc.setState(GameViewController.View.IN_GAME_MULTI);
+            gsc.setState(GameViewController.View.PLAY);
         }
     };
 

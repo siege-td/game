@@ -44,7 +44,7 @@ public class JoinButton extends ButtonComponent {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //socket.emit("join_lobby", Globals.pin);
-                gsc.setState(GameViewController.View.IN_GAME_MULTI);
+                gsc.setState(GameViewController.View.PLAY);
             }
         });
     }

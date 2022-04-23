@@ -29,8 +29,6 @@ V
 &core/src/com/siegetd/game/SiegeTd.java,a/5/a58aa743f7066484c26467209b37edb5c5fd9b22
 f
 6core/src/com/siegetd/game/views/states/LobbyState.java,1/e/1ecffccca5d618d0ead7b19d6c243fb052b8360c
-j
-:core/src/com/siegetd/game/views/components/JoinButton.java,c/7/c7a80abfe3cb49df7e496436e0486ea92cdbeb28
 i
 9core/src/com/siegetd/game/views/states/SettingsState.java,1/7/1762421ab1fded7a369bb3727506d93a4c0d49ea
 m
@@ -49,14 +47,10 @@ l
 <core/src/com/siegetd/game/models/map/tile/PlaceableTile.java,2/5/2524f3c3817a938469c35676c78016a3a078161a
 c
 3core/src/com/siegetd/game/models/map/tile/Tile.java,3/9/390d6601ec0c1284ebee22531a3a639dd9e6fbc2
-j
-:core/src/com/siegetd/game/views/components/HostButton.java,4/9/4991f58a9391ffd145661ccd9d51c25d9a3a71df
 i
 9core/src/com/siegetd/game/views/states/HostGameState.java,0/e/0e865ea7f4a4509b48dca197c29ba9947931ba15
 a
 1core/src/com/siegetd/game/models/map/GameMap.java,3/8/38ef681e9d85924bf4a9ec73a386973de098dac8
-j
-:core/src/com/siegetd/game/views/components/PlayButton.java,c/c/cc431acf7cdebae0f21c8e4580fbb0255c4f2932
 ^
 .core/src/com/siegetd/game/views/GameState.java,6/6/667ce93fe5a53f8163a03e94165899d23ff799b0
 o

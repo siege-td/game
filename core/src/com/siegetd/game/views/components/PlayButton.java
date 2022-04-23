@@ -44,7 +44,7 @@ public class PlayButton extends ButtonComponent {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameViewController.View.IN_GAME_SINGLE);
+                gsc.setState(GameViewController.View.PLAY);
             }
         });
     }
@@ -54,7 +54,7 @@ public class PlayButton extends ButtonComponent {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 socket.emit("start_game", EngineState.pin);
-                gsc.setState(GameViewController.View.IN_GAME_MULTI);
+                gsc.setState(GameViewController.View.PLAY);
             }
         });
     }

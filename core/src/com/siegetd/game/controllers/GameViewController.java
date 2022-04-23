@@ -3,12 +3,11 @@ package com.siegetd.game.controllers;
 import com.siegetd.game.SiegeTd;
 import com.siegetd.game.views.GameView;
 import com.siegetd.game.views.HostGameView;
-import com.siegetd.game.views.InMultiPlayerGameView;
-import com.siegetd.game.views.InSingePlayerGameView;
 import com.siegetd.game.views.JoinGameView;
 import com.siegetd.game.views.LobbyView;
 import com.siegetd.game.views.MainMenuView;
 import com.siegetd.game.views.MultiPlayerMenuView;
+import com.siegetd.game.views.PlayView;
 import com.siegetd.game.views.SettingsView;
 import com.siegetd.game.views.SinglePlayerMenuView;
 
@@ -28,8 +27,7 @@ public class GameViewController {
         SINGLE,
         JOIN,
         HOST,
-        IN_GAME_SINGLE,
-        IN_GAME_MULTI
+        PLAY
     }
 
     public GameViewController(final SiegeTd app){
@@ -80,10 +78,8 @@ public class GameViewController {
                 return new JoinGameView(this);
             case HOST:
                 return new HostGameView(this);
-            case IN_GAME_SINGLE:
-                return new InSingePlayerGameView(this);
-            case IN_GAME_MULTI:
-                return new InMultiPlayerGameView(this);
+            case PLAY:
+                return new PlayView(this);
         }
         return null;
     }

@@ -22,7 +22,7 @@ import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
 
-public class InSingePlayerGameView extends GameView {
+public class PlayView extends GameView {
 
     // Tilemap fields
     private GameMap gameMap;
@@ -35,7 +35,7 @@ public class InSingePlayerGameView extends GameView {
     // Other fields
     private InputController inputController;
 
-    public InSingePlayerGameView(GameViewController gsc) {
+    public PlayView(GameViewController gsc) {
         super(gsc);
 
         EngineState.batch = new SpriteBatch();
