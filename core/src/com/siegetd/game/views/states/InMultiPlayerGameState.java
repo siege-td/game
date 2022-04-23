@@ -13,13 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.controllers.InputController;
+import com.siegetd.game.controllers.LevelController;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
 import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.gamestats.GameStats;
-import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
 
@@ -34,6 +33,8 @@ public class InMultiPlayerGameState extends GameState {
     private RenderingSystem renderingSystem;
 
     private InputController inputController;
+    private LevelController levelController;
+    private int count;
 
     public InMultiPlayerGameState(GameStateController gsc) {
         super(gsc);
@@ -68,12 +69,15 @@ public class InMultiPlayerGameState extends GameState {
         Gdx.input.setInputProcessor(EngineState.stage);
 
         this.inputController = new InputController();
+        this.levelController = new LevelController(1);
 
-        new InGameGUI();
+        this.count = 1;
     }
 
     @Override
-    public void update(float delta) { }
+    public void update(float delta) {
+        checkRoundFinished();
+    }
 
     @Override
     public void render() {
@@ -87,4 +91,14 @@ public class InMultiPlayerGameState extends GameState {
 
     @Override
     public void dispose() { }
+
+    public void checkRoundFinished(){
+        this.count++;
+        float test = this.count%60;
+        if(test == 0){
+            levelController.isRoundFinished();
+        }
+    }
+
 }
+

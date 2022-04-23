@@ -2,6 +2,7 @@ package com.siegetd.game.controllers;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Timer;
 import com.siegetd.game.EngineState;
+import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.models.ecs.EntitySpawner;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.TypeComponent;
@@ -18,19 +20,29 @@ import com.siegetd.game.models.level.Level;
 import com.siegetd.game.models.level.Round;
 import com.siegetd.game.models.level.SpawnRate;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+
+import javax.print.URIException;
+
+import io.socket.emitter.Emitter;
 
 public class LevelController {
 
     private Level levelData;
     private int currRound = 0;
+    private boolean roundOngoing = false;
 
     public LevelController(int level) {
         loadData(level);
+        try {
+            SocketConnection.getInstance().getSocket().on("next_round", onNextRound);
+        } catch (URISyntaxException e){
+            e.printStackTrace();
+        }
     }
 
-    public void startRound() {
-        if (isRoundFinished()) {
+    private void startRound() {
             this.removeAllAttackers();
 
             // Wait for attackers to be deleted
@@ -69,17 +81,16 @@ public class LevelController {
                                 levelData.getEntitySpawnPos()
                         );
                     }
-
                     currRound++;
+                    roundOngoing = false;
                 }
             }, 1, 1, 0);
         }
         // TODO: ADD handler for when level is done
-    }
 
-    private boolean isRoundFinished() {
-        boolean isFinished = false;
 
+    public void isRoundFinished() {
+        System.out.println(roundOngoing);
         ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
         ArrayList<Entity> attackers = new ArrayList<>();
         ArrayList<Entity> attackersAtEnd = new ArrayList<>();
@@ -97,12 +108,15 @@ public class LevelController {
                 attackersAtEnd.add(attacker);
             }
         }
-
-        if (attackers.size() == attackersAtEnd.size()) {
-            isFinished = true;
+        if (attackers.size() == attackersAtEnd.size() && !roundOngoing) {
+            roundOngoing = true;
+            try{
+                SocketConnection.getInstance().getSocket().emit("next_round", EngineState.pin);
+            } catch (URISyntaxException e){
+                e.printStackTrace();
+            }
         }
 
-        return isFinished;
     }
 
     private void removeAllAttackers() {
@@ -160,4 +174,10 @@ public class LevelController {
 
         this.levelData = new Level(spawnPos, endPos, rounds);
     }
+    private Emitter.Listener onNextRound = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+          startRound();
+        }
+    };
 }
