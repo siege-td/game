@@ -1,4 +1,4 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -9,13 +9,12 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.BackButton;
-import com.siegetd.game.views.components.InputButton;
-import com.siegetd.game.views.components.PlayButton;
+import com.siegetd.game.controllers.GameViewController;
+import com.siegetd.game.views.components.buttons.BackButton;
+import com.siegetd.game.views.components.buttons.input.InputButton;
+import com.siegetd.game.views.components.buttons.PlayButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
@@ -23,7 +22,7 @@ import java.net.URISyntaxException;
 
 import io.socket.emitter.Emitter;
 
-public class HostGameState extends GameState {
+public class HostGameView extends GameView {
     private Texture background;
     private BackButton backButton;
     private InputButton inputButton;
@@ -42,7 +41,7 @@ public class HostGameState extends GameState {
 
     private boolean hasHostedLobby;
 
-    public HostGameState(GameStateController gsc) {
+    public HostGameView(GameViewController gsc) {
         super(gsc);
         /*TODO:
            View players in lobby(?)
@@ -121,7 +120,7 @@ public class HostGameState extends GameState {
         playButton = new PlayButton(table);
         playButton.addButtonListnersForHostMultiplayer(gsc);
         inputButton = new InputButton();
-        inputButton.addButtonListners(gsc);
+        inputButton.addButtonListners();
     }
 
     private void createFont(){
@@ -138,13 +137,13 @@ public class HostGameState extends GameState {
     }
 
     private void updateText() throws URISyntaxException {
-        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")
-        || inputButton.listener.getText().equalsIgnoreCase("PIN ALREADY EXISTS")) {
-            pin = "LOBBY-PIN:\n" + inputButton.listener.getText(); // + getLobbyPinApiCall
+        if (inputButton.getListener().getText().equalsIgnoreCase("NO PIN ADDED")
+        || inputButton.getListener().getText().equalsIgnoreCase("PIN ALREADY EXISTS")) {
+            pin = "LOBBY-PIN:\n" + inputButton.getListener().getText(); // + getLobbyPinApiCall
         } else {
-            pin = "LOBBY-PIN:\n" + inputButton.listener.getText();
+            pin = "LOBBY-PIN:\n" + inputButton.getListener().getText();
             if (!hasHostedLobby) {
-                SocketConnection.getInstance().getSocket().emit("new_lobby", EngineState.pin);
+                SocketConnection.getInstance().getSocket().emit("new_lobby", SiegeTdState.pin);
             }
         }
         glyphLayout.setText(font, pin);
@@ -152,12 +151,12 @@ public class HostGameState extends GameState {
     }
 
     private void stageComponents(){
-        buttonTable.add(inputButton.button).size(
+        buttonTable.add(inputButton.getButton()).size(
                 (float)(table.windowWidth / 3),
                 (float) (table.windowHeight *0.3))
                 .row();
-        stage.addActor(backButton.button);
-        stage.addActor(playButton.button);
+        stage.addActor(backButton.getButton());
+        stage.addActor(playButton.getButton());
         stage.addActor(buttonTable);
     }
 
@@ -175,7 +174,7 @@ public class HostGameState extends GameState {
     private Emitter.Listener pinAlreadyExists = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            inputButton.listener.pinAlreadyExists();
+            inputButton.getListener().pinAlreadyExists();
             hasHostedLobby = false;
         }
     };
@@ -184,7 +183,7 @@ public class HostGameState extends GameState {
         @Override
         public void call(Object... args) {
             hasHostedLobby = true;
-            inputButton.button.setVisible(false);
+            inputButton.getButton().setVisible(false);
         }
     };
 

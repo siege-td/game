@@ -1,8 +1,6 @@
 package com.siegetd.game.controllers;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
@@ -53,7 +51,7 @@ public class LevelController {
 
                     Round currentRound = levelData.getRounds().get(currRound);
 
-                    // TODO: ITERATE OVER ALL INSTEAD OF USING IFS
+                    // TODO: ITERATE OVER ALL INSTEAD OF USING IFS, INCREASES MODIFIABILITY
                     // Spawn scorpions
                     if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
                         entitySpawner.spawnAttackerAtInterval(
@@ -89,9 +87,7 @@ public class LevelController {
         // TODO: ADD handler for when level is done
 
 
-    public void isRoundFinished() {
-        System.out.println(roundOngoing);
-        ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
+        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
         ArrayList<Entity> attackers = new ArrayList<>();
         ArrayList<Entity> attackersAtEnd = new ArrayList<>();
 
@@ -120,7 +116,7 @@ public class LevelController {
     }
 
     private void removeAllAttackers() {
-        ImmutableArray<Entity> entities = EngineState.ecsEngine.getEntities();
+        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
         ArrayList<Entity> attackers = new ArrayList<>();
 
         for (Entity entity : entities) {
@@ -132,7 +128,7 @@ public class LevelController {
         }
 
         for (Entity attacker : attackers) {
-            EngineState.ecsEngine.removeEntity(attacker);
+            SiegeTdState.ecsEngine.removeEntity(attacker);
             System.out.println("Remove");
         }
     }

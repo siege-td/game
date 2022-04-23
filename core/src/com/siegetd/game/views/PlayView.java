@@ -1,4 +1,4 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
@@ -10,19 +10,17 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
+import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.controllers.InputController;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.controllers.LevelController;
-import com.siegetd.game.models.ecs.systems.AnimationSystem;
+import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
-import com.siegetd.game.views.GameState;
 
 import java.net.URISyntaxException;
 
-public class InSingePlayerGameState extends GameState {
+public class PlayView extends GameView {
 
     // Tilemap fields
     private GameMap gameMap;
@@ -37,16 +35,16 @@ public class InSingePlayerGameState extends GameState {
     private InputController inputController;
     private int count;
 
-    public InSingePlayerGameState(GameStateController gsc) {
+    public PlayView(GameViewController gsc) {
         super(gsc);
 
-        EngineState.batch = new SpriteBatch();
+        SiegeTdState.batch = new SpriteBatch();
 
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
         this.camera.position.set(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
         this.camera.setToOrtho(false, TILE_COLUMN * TILE_SIZE, TILE_ROW * TILE_SIZE);
 
-        EngineState.camera = camera;
+        SiegeTdState.camera = camera;
 
         engine = new PooledEngine();
 
@@ -58,16 +56,15 @@ public class InSingePlayerGameState extends GameState {
 
         this.gameMap = new GameMap(camera);
 
-        EngineState.gameMap = this.gameMap;
+        SiegeTdState.gameMap = this.gameMap;
 
-        engine.addSystem(new AnimationSystem());
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
 
-        EngineState.ecsEngine = engine;
+        SiegeTdState.ecsEngine = engine;
 
-        EngineState.stage = new Stage();
-        Gdx.input.setInputProcessor(EngineState.stage);
+        SiegeTdState.stage = new Stage();
+        Gdx.input.setInputProcessor(SiegeTdState.stage);
 
         this.inputController = new InputController();
         this.levelController = new LevelController(1);
@@ -84,11 +81,10 @@ public class InSingePlayerGameState extends GameState {
     public void render() {
         Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        EngineState.gameMap.render();
+        SiegeTdState.gameMap.render();
         inputController.listen();
-        EngineState.ecsEngine.update(Gdx.graphics.getDeltaTime());
-        levelController.isRoundFinished();
-        EngineState.stage.draw();
+        SiegeTdState.ecsEngine.update(Gdx.graphics.getDeltaTime());
+        SiegeTdState.stage.draw();
     }
 
     @Override

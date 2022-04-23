@@ -1,31 +1,20 @@
-package com.siegetd.game.views.components;
+package com.siegetd.game.views.components.buttons;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.views.components.selectentity.SelectEntityModal;
 
-import java.util.concurrent.Callable;
-
-public class AddEntityButton extends ButtonComponent {
-
-    private ButtonComponent buttonComponent;
-    private Texture buttonImg;
-    public Button button;
+public class AddEntityButton extends GameButton {
 
     // Invisible rectangle used for click detection
     private ShapeRenderer shapeRenderer;
@@ -34,23 +23,21 @@ public class AddEntityButton extends ButtonComponent {
     private SelectEntityModal selectEntityModal = null;
 
     public AddEntityButton() {
-        this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/open_shop.png");
-        this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
-        this.button.setPosition(10, 10);
+        super("GUI/open_shop.png");
+        getButton().setSize(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
+        getButton().setPosition(10, 10);
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         this.shapeRenderer = new ShapeRenderer();
         this.shapeRenderer.setAutoShapeType(true);
-        this.shapeRenderer.setProjectionMatrix(EngineState.camera.combined);
+        this.shapeRenderer.setProjectionMatrix(SiegeTdState.camera.combined);
 
         this.transparentRectangle = new Rectangle(
                 0,
                 0,
-                (EngineState.camera.viewportWidth / TILE_COLUMN) * 3,
-                (EngineState.camera.viewportHeight / TILE_ROW) * 2
+                (SiegeTdState.camera.viewportWidth / TILE_COLUMN) * 3,
+                (SiegeTdState.camera.viewportHeight / TILE_ROW) * 2
         );
 
         this.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -66,16 +53,16 @@ public class AddEntityButton extends ButtonComponent {
     }
 
     public void addButtonListeners(final Vector2 entitySpawnPos) {
-        this.button.addListener(new ClickListener() {
+        getButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectEntityModal == null) {
                     selectEntityModal = new SelectEntityModal();
                     selectEntityModal.showModal();
                     selectEntityModal.addButtonListeners(entitySpawnPos);
-                    EngineState.stage.addActor(selectEntityModal.getArcherButton());
-                    EngineState.stage.addActor(selectEntityModal.getMageButton());
-                    EngineState.stage.addActor(selectEntityModal.getZappButton());
+                    SiegeTdState.stage.addActor(selectEntityModal.getArcherButton());
+                    SiegeTdState.stage.addActor(selectEntityModal.getMageButton());
+                    SiegeTdState.stage.addActor(selectEntityModal.getZappButton());
                     addStageListeners();
                 }
             }
@@ -83,8 +70,8 @@ public class AddEntityButton extends ButtonComponent {
     }
 
     private void addStageListeners(){
-        Gdx.input.setInputProcessor(EngineState.stage);
-        EngineState.stage.addListener(new ClickListener(){
+        Gdx.input.setInputProcessor(SiegeTdState.stage);
+        SiegeTdState.stage.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //Hide building options
