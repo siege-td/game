@@ -21,6 +21,7 @@ import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.CollisionSystem;
 import com.siegetd.game.models.ecs.systems.DefenderAiSystem;
+import com.siegetd.game.models.ecs.systems.HitpointSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
@@ -75,6 +76,7 @@ public class InSingePlayerGameState extends GameState {
         engine.addSystem(new MovementSystem());
         engine.addSystem(new DefenderAiSystem());
         engine.addSystem(new CollisionSystem());
+        engine.addSystem(new HitpointSystem());
 
         EngineState.ecsEngine = engine;
 

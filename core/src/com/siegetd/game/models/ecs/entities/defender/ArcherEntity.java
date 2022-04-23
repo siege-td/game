@@ -15,6 +15,7 @@ import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.TurretComponent;
 import com.siegetd.game.models.ecs.components.Type;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.entities.IEntity;
@@ -48,7 +49,8 @@ public class ArcherEntity implements IEntity {
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
         entity.add(new TypeComponent(Type.DEFENDER, Defender.ARCHER));
-        entity.add(new CharacteristicsComponent(5, 700, 2));
+        entity.add(new CharacteristicsComponent(5, 1f, 10));
+        entity.add(new TurretComponent());
 
         origMageImg.dispose();
         scaledMageImg.dispose();

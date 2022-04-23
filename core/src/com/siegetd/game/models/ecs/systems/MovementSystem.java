@@ -28,8 +28,7 @@ public class MovementSystem extends IteratingSystem {
     public void processEntity(Entity entity, float deltaTime) {
         TransformComponent transformComponent = transformMapper.get(entity);
         this.velocityComponent = velocityMapper.get(entity);
-
-        if(entity.getComponent(TypeComponent.class).type == Type.ATTACKER){
+        if (entity.getComponent(TypeComponent.class).type == Type.ATTACKER) {
             updateAttackerMovement((int) transformComponent.position.x, (int) transformComponent.position.y, entity);
         }
 

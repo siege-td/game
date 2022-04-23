@@ -8,12 +8,13 @@ import com.siegetd.game.models.ecs.entities.defender.Defender;
 
 public class CharacteristicsComponent implements Component {
     public int tower_radius;
-    public int attack_speed;
+    public float attack_rate;
     public int attack_damage;
+    public float shotTimer;
 
-    public CharacteristicsComponent(int tower_radius, int attack_speed, int attack_damage){
+    public CharacteristicsComponent(int tower_radius, float attack_rate, int attack_damage){
         this.tower_radius = tower_radius * TILE_SIZE;
-        this.attack_speed = attack_speed;
+        this.attack_rate = attack_rate;
         this.attack_damage = attack_damage;
     }
 }

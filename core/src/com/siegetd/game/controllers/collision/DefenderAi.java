@@ -103,38 +103,19 @@ public class DefenderAi {
         this.bulletDirection = new Vector2(targetPosition.x - defenderPosition.x, targetPosition.y - defenderPosition.y).nor();
     }
 
-    private void checkIfReachedTarget(){
-        Rectangle attackerHitBox = new Rectangle((int) targetPosition.x - (TILE_SIZE / 2), (int) targetPosition.y - (TILE_SIZE / 2), TILE_SIZE / 2 , TILE_SIZE / 2);
-
-        if(Intersector.overlaps(new Circle((int) bulletPosition.x, (int) bulletPosition.y, 2), attackerHitBox)) {
-            this.bulletPosition.x = defenderPosition.x;
-            this.bulletPosition.y = defenderPosition.y;
-            if(target.getComponent(HitpointComponent.class) == null) {
-                return;
-            }
-            target.getComponent(HitpointComponent.class).hitpoints -= defender.getComponent(CharacteristicsComponent.class).attack_damage;
-            if(target.getComponent(HitpointComponent.class).hitpoints <= 0){
-                EngineState.ecsEngine.removeEntity(target);
-                target = null;
-                targetPosition = null;
-                findBestTarget();
-            }
-        }
-    }
 
     public void draw(){
         if(target == null){
             return;
         }
         calculateDirection();
-        checkIfReachedTarget();
 
         EngineState.batch.begin();
         EngineState.batch.draw(ammo, bulletPosition.x, bulletPosition.y, ammo.getWidth(), ammo.getHeight());
         EngineState.batch.end();
 
-        bulletPosition.x += (bulletDirection.x * defender.getComponent(CharacteristicsComponent.class).attack_speed) * Gdx.graphics.getDeltaTime();
-        bulletPosition.y += (bulletDirection.y * defender.getComponent(CharacteristicsComponent.class).attack_speed) * Gdx.graphics.getDeltaTime();
+        bulletPosition.x += (bulletDirection.x * defender.getComponent(CharacteristicsComponent.class).attack_rate) * Gdx.graphics.getDeltaTime();
+        bulletPosition.y += (bulletDirection.y * defender.getComponent(CharacteristicsComponent.class).attack_rate) * Gdx.graphics.getDeltaTime();
     }
 
     public Entity getTarget() {

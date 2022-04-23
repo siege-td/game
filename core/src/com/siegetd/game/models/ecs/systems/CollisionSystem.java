@@ -13,6 +13,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.AttackerComponent;
 import com.siegetd.game.models.ecs.components.BulletComponent;
+import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 
 public class CollisionSystem extends EntitySystem{
@@ -20,8 +22,11 @@ public class CollisionSystem extends EntitySystem{
     private ImmutableArray<Entity> attackers;
 
     private ComponentMapper<TransformComponent> transformMapper;
+    private ComponentMapper<HitpointComponent> hitpointMapper;
+
 
     public CollisionSystem() {
+        hitpointMapper = ComponentMapper.getFor(HitpointComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
     }
 
@@ -47,8 +52,10 @@ public class CollisionSystem extends EntitySystem{
             TransformComponent bulletPosition = transformMapper.get(bullet);
             for (Entity attacker : attackers) {
                 TransformComponent attackerPosition = transformMapper.get(attacker);
-                Rectangle attackerHitBox = new Rectangle((int) attackerPosition.position.x - (TILE_SIZE / 2), (int) attackerPosition.position.y - (TILE_SIZE / 2), TILE_SIZE / 2 , TILE_SIZE / 2);
+                Rectangle attackerHitBox = new Rectangle((int) attackerPosition.position.x, (int) attackerPosition.position.y, TILE_SIZE, TILE_SIZE);
                 if(Intersector.overlaps(new Circle((int) bulletPosition.position.x, (int) bulletPosition.position.x, 2), attackerHitBox)){
+                    HitpointComponent attackerHp = hitpointMapper.get(attacker);
+                    attackerHp.decreaseHitpoints(bullet.getComponent(BulletComponent.class).bulletDamage);
                     getEngine().removeEntity(bullet);
                 }
             }

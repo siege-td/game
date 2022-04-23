@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Circle;
@@ -13,19 +14,21 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.EngineState;
+import com.siegetd.game.models.ecs.components.AttackerComponent;
 import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
 import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.TurretComponent;
 import com.siegetd.game.models.ecs.components.Type;
 import com.siegetd.game.models.ecs.components.TypeComponent;
-import com.siegetd.game.models.ecs.components.VelocityComponent;
+import com.siegetd.game.models.ecs.entities.ammo.BulletEntity;
 
 public class DefenderAiSystem extends IteratingSystem {
 
     private Entity target;
     private Entity defender;
 
-    private Texture ammo;
+    private Texture bullet_texture;
 
     private Vector2 bulletPosition;
     private Vector2 bulletDirection;
@@ -35,15 +38,16 @@ public class DefenderAiSystem extends IteratingSystem {
 
     private int defenderRadius;
 
+    private ComponentMapper<CharacteristicsComponent> characteristicMapper;
+
     public DefenderAiSystem() {
-        super(Family.all(TypeComponent.class).get());
+        super(Family.all(TurretComponent.class).get());
+
+        characteristicMapper = ComponentMapper.getFor(CharacteristicsComponent.class);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        if(entity.getComponent(TypeComponent.class).type == Type.ATTACKER){
-            return;
-        }
         this.defender = entity;
 
         this.defenderPosition = defender.getComponent(TransformComponent.class).position;
@@ -52,55 +56,68 @@ public class DefenderAiSystem extends IteratingSystem {
         this.defenderRadius = defender.getComponent(CharacteristicsComponent.class).tower_radius;
 
         setProjectile();
-        findBestTarget();
-        draw();
+        shootEnemy(deltaTime);
+        resetEnemy();
+    }
+
+    private void resetEnemy(){
+        target = null;
+        targetPosition = null;
+        this.defender = null;
+    }
+
+    private void shootEnemy(float deltaTime){
+        this.defender.getComponent(CharacteristicsComponent.class).shotTimer += deltaTime;
+        if(this.defender.getComponent(CharacteristicsComponent.class).shotTimer > defender.getComponent(CharacteristicsComponent.class).attack_rate){
+            findBestTarget();
+            if(target != null) {
+                calculateDirection();
+
+                CharacteristicsComponent defenderStats = characteristicMapper.get(defender);
+
+                BulletEntity bullet = new BulletEntity(bullet_texture, (int) defenderPosition.x, (int) defenderPosition.y, bulletDirection.x, bulletDirection.y, defenderStats.attack_damage);
+                EngineState.ecsEngine.addEntity(bullet);
+
+                this.defender.getComponent(CharacteristicsComponent.class).shotTimer = 0;
+            }
+        }
     }
 
 
     private void setProjectile(){
         switch (defender.getComponent(TypeComponent.class).defenderType){
             case MAGE:
-                this.ammo = new Texture("projectile/mage_projectile.png");
+                this.bullet_texture = new Texture("projectile/mage_projectile.png");
                 break;
             case ARCHER:
-                this.ammo = new Texture("projectile/wrecking_ball.png");
+                this.bullet_texture = new Texture("projectile/wrecking_ball.png");
                 break;
             case ZAPP:
-                this.ammo = new Texture("projectile/zapp_projectile.png");
+                this.bullet_texture = new Texture("projectile/zapp_projectile.png");
                 break;
         }
     }
 
-    public void findBestTarget(){
+    private void findBestTarget(){
         Rectangle towerRect = new Rectangle((int) defenderPosition.x - (defenderRadius / 2), (int) defenderPosition.y - (defenderRadius / 2), defenderRadius , defenderRadius);
-        for (Entity entity : EngineState.ecsEngine.getEntities()) {
-            // If entity is not attacker return
-            if (entity.getComponent(TypeComponent.class).type != Type.ATTACKER){
-                return;
-            }
+        ImmutableArray<Entity> attackers = EngineState.ecsEngine.getEntitiesFor(Family.all(AttackerComponent.class).get());
+        for (Entity attacker : attackers) {
 
-            Vector2 attackerPos = entity.getComponent(TransformComponent.class).position;
-            Rectangle attackerRect = new Rectangle((int) attackerPos.x, (int) attackerPos.y, TILE_SIZE, TILE_SIZE);
-            // If attacker is not in tower range return
-
-
+            Vector2 attackerPos = attacker.getComponent(TransformComponent.class).position;
             if(!towerRect.contains(attackerPos)){
                 return;
             }
 
+            // if current target is null set to first attacker
             if(target==null){
-                System.out.println(towerRect);
-                System.out.println(attackerPos);
-                target = entity;
+                target = attacker;
                 targetPosition = attackerPos;
                 return;
             }
 
-            System.out.println(attackerPos.dst2(EngineState.gameMap.getEndPosition()));
             // Check if attacker pos is closer to end tile than currently target enemy change current target
             if(attackerPos.dst2(EngineState.gameMap.getEndPosition()) < target.getComponent(TransformComponent.class).position.dst2(EngineState.gameMap.getEndPosition())){
-                System.out.println(towerRect);
-                target = entity;
+                target = attacker;
                 targetPosition = attackerPos;
             }
         }
@@ -108,43 +125,6 @@ public class DefenderAiSystem extends IteratingSystem {
 
     private void calculateDirection(){
         this.bulletDirection = new Vector2(targetPosition.x - defenderPosition.x, targetPosition.y - defenderPosition.y).nor();
-    }
-
-    private void checkIfReachedTarget(){
-        Rectangle attackerHitBox = new Rectangle((int) targetPosition.x - (TILE_SIZE / 2), (int) targetPosition.y - (TILE_SIZE / 2), TILE_SIZE / 2 , TILE_SIZE / 2);
-
-        if(Intersector.overlaps(new Circle((int) bulletPosition.x, (int) bulletPosition.y, 2), attackerHitBox)) {
-            this.bulletPosition.x = defenderPosition.x;
-            this.bulletPosition.y = defenderPosition.y;
-            if(target.getComponent(HitpointComponent.class) == null) {
-                return;
-            }
-            target.getComponent(HitpointComponent.class).hitpoints -= defender.getComponent(CharacteristicsComponent.class).attack_damage;
-            if(target.getComponent(HitpointComponent.class).hitpoints <= 0){
-                EngineState.ecsEngine.removeEntity(target);
-                target = null;
-                targetPosition = null;
-            }
-        }
-    }
-
-    public void draw(){
-        if(target == null){
-            return;
-        }
-        calculateDirection();
-        checkIfReachedTarget();
-
-        EngineState.batch.begin();
-        EngineState.batch.draw(ammo, bulletPosition.x, bulletPosition.y, ammo.getWidth(), ammo.getHeight());
-        EngineState.batch.end();
-
-        bulletPosition.x += (bulletDirection.x * defender.getComponent(CharacteristicsComponent.class).attack_speed) * Gdx.graphics.getDeltaTime();
-        bulletPosition.y += (bulletDirection.y * defender.getComponent(CharacteristicsComponent.class).attack_speed) * Gdx.graphics.getDeltaTime();
-    }
-
-    public Entity getTarget() {
-        return target;
     }
 
     public Entity getDefender() {
