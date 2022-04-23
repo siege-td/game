@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
+import com.siegetd.game.controllers.ScoreController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,15 +56,23 @@ public class GameStats {
 
     public void drawStats() {
         float xPos = 20f;
-
-        for (GameStat stat : gameStatList) {
+        if (gameStatList.size() == 0) {
             font.draw(
                     EngineState.batch,
-                    "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
+                    "Player: Solo player\nHitpoints: " + ScoreController.getInstance().getHealth() + "\nCurrency: " + ScoreController.getInstance().getCurrency(),
                     xPos,
                     2530f
             );
-            xPos += 1000f;
+        } else {
+            for (GameStat stat : gameStatList) {
+                font.draw(
+                        EngineState.batch,
+                        "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
+                        xPos,
+                        2530f
+                );
+                xPos += 1000f;
+            }
         }
     }
 

@@ -127,4 +127,7 @@
  <tile id="41">
   <image width="256" height="256" source="tiles/31.png"/>
  </tile>
+  <tile id="42">
+   <image width="256" height="256" source="tiles/43.png"/>
+  </tile>
 </tileset>
