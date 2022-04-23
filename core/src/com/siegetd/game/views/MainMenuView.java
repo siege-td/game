@@ -6,10 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.siegetd.game.controllers.GameViewController;
-import com.siegetd.game.views.components.MultiPlayerButton;
-import com.siegetd.game.views.components.SettingsButton;
+import com.siegetd.game.views.components.buttons.MultiPlayerButton;
 import com.siegetd.game.views.components.RopeComponent;
-import com.siegetd.game.views.components.SinglePlayerButton;
+import com.siegetd.game.views.components.buttons.SinglePlayerButton;
 import com.siegetd.game.views.components.WindowComponent;
 
 public class MainMenuView extends GameView {
@@ -17,7 +16,6 @@ public class MainMenuView extends GameView {
     private WindowComponent window;
     private RopeComponent rope;
     private Table buttonTable;
-    private SettingsButton settingsButton;
     private SinglePlayerButton singlePlayerButton;
     private MultiPlayerButton multiPlayerButton;
     private Stage stage;
@@ -69,23 +67,16 @@ public class MainMenuView extends GameView {
     }
 
     private void createButtons() {
-        settingsButton = new SettingsButton();
-        settingsButton.addButtonListners(gsc);
-        buttonTable.add(settingsButton.button).size(
-                (float)(window.windowWidth / 3),
-                (float) (window.windowHeight *0.3))
-                .row();
-
         singlePlayerButton = new SinglePlayerButton();
         singlePlayerButton.addButtonListners(gsc);
-        buttonTable.add(singlePlayerButton.button).size(
+        buttonTable.add(singlePlayerButton.getButton()).size(
                 (float)(window.windowWidth / 3),
                 (float) (window.windowHeight *0.3))
                 .row();
 
         multiPlayerButton = new MultiPlayerButton();
         multiPlayerButton.addButtonListners(gsc);
-        buttonTable.add(multiPlayerButton.button).size(
+        buttonTable.add(multiPlayerButton.getButton()).size(
                 (float)(window.windowWidth / 3),
                 (float) (window.windowHeight *0.3))
                 .row();

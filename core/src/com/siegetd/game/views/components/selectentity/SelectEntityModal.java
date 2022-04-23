@@ -12,9 +12,6 @@ import com.siegetd.game.models.ecs.entities.defender.ArcherEntity;
 import com.siegetd.game.models.ecs.entities.defender.MageEntity;
 import com.siegetd.game.models.ecs.entities.defender.ZappEntity;
 import com.siegetd.game.controllers.ScoreController;
-import com.siegetd.game.views.components.ButtonComponent;
-
-import java.util.concurrent.Callable;
 
 public class SelectEntityModal {
 

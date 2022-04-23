@@ -8,7 +8,6 @@ import com.siegetd.game.views.LobbyView;
 import com.siegetd.game.views.MainMenuView;
 import com.siegetd.game.views.MultiPlayerMenuView;
 import com.siegetd.game.views.PlayView;
-import com.siegetd.game.views.SettingsView;
 import com.siegetd.game.views.SinglePlayerMenuView;
 
 import java.util.Stack;
@@ -21,7 +20,6 @@ public class GameViewController {
 
     public enum View {
         MENU,
-        SETTINGS,
         LOBBY,
         MULTI,
         SINGLE,
@@ -68,8 +66,6 @@ public class GameViewController {
                 return new MainMenuView(this);
             case LOBBY:
                 return new LobbyView(this);
-            case SETTINGS:
-                return new SettingsView(this);
             case MULTI:
                 return new MultiPlayerMenuView(this);
             case SINGLE:

@@ -12,11 +12,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.TypeComponent;
-import com.siegetd.game.models.map.GameMap;
-import com.siegetd.game.views.components.AddEntityButton;
+import com.siegetd.game.views.components.buttons.AddEntityButton;
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
 public class InputController {
 
@@ -31,8 +29,8 @@ public class InputController {
             //Uncheck hover effect on second click
             if(EngineState.gameMap.getSelectedCell() != null){
                 EngineState.gameMap.unselectCell();
-                if(addEntityButton.button != null) {
-                    addEntityButton.button.setVisible(false);
+                if(addEntityButton.getButton() != null) {
+                    addEntityButton.getButton().setVisible(false);
                 }
                 return;
             }
@@ -56,7 +54,7 @@ public class InputController {
                 return;
             }
             EngineState.gameMap.selectCell();
-            EngineState.stage.addActor(addEntityButton.button);
+            EngineState.stage.addActor(addEntityButton.getButton());
             int tileX = EngineState.gameMap.selectedCellX * TILE_SIZE;
             int tileY = EngineState.gameMap.selectedCellY * TILE_SIZE;
             addEntityButton.addButtonListeners(new Vector2(tileX, tileY));

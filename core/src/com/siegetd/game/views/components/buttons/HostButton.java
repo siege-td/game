@@ -1,25 +1,21 @@
-package com.siegetd.game.views.components;
+package com.siegetd.game.views.components.buttons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.controllers.GameViewController;
+import com.siegetd.game.views.components.buttons.GameButton;
 
-public class HostButton {
+public class HostButton extends GameButton {
 
-    private ButtonComponent buttonComponent;
-    private Texture buttonImg;
-    public Button button;
 
     public HostButton(){
-        this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/create_game.png");
-        this.button = this.buttonComponent.createButton( this.buttonImg);
+        super("GUI/create_game.png");
     }
 
     public void addButtonListners(final GameViewController gsc) {
-        this.button.addListener(new ClickListener() {
+        this.getButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gsc.setState(GameViewController.View.HOST);

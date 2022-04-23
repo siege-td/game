@@ -1,4 +1,4 @@
-package com.siegetd.game.views.components;
+package com.siegetd.game.views.components.buttons;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
@@ -17,15 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.EngineState;
+import com.siegetd.game.views.components.buttons.GameButton;
 import com.siegetd.game.views.components.selectentity.SelectEntityModal;
 
 import java.util.concurrent.Callable;
 
-public class AddEntityButton extends ButtonComponent {
-
-    private ButtonComponent buttonComponent;
-    private Texture buttonImg;
-    public Button button;
+public class AddEntityButton extends GameButton {
 
     // Invisible rectangle used for click detection
     private ShapeRenderer shapeRenderer;
@@ -34,11 +31,9 @@ public class AddEntityButton extends ButtonComponent {
     private SelectEntityModal selectEntityModal = null;
 
     public AddEntityButton() {
-        this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/open_shop.png");
-        this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
-        this.button.setPosition(10, 10);
+        super("GUI/open_shop.png");
+        getButton().setSize(EngineState.camera.viewportWidth / 80, EngineState.camera.viewportWidth / 80);
+        getButton().setPosition(10, 10);
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -66,7 +61,7 @@ public class AddEntityButton extends ButtonComponent {
     }
 
     public void addButtonListeners(final Vector2 entitySpawnPos) {
-        this.button.addListener(new ClickListener() {
+        getButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectEntityModal == null) {

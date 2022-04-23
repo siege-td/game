@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.controllers.GameViewController;
-import com.siegetd.game.views.components.BackButton;
-import com.siegetd.game.views.components.PlayButton;
+import com.siegetd.game.views.components.buttons.BackButton;
+import com.siegetd.game.views.components.buttons.PlayButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
@@ -50,8 +50,8 @@ public class SinglePlayerMenuView extends GameView {
     }
 
     private void stageComponents() {
-        stage.addActor(backButton.button);
-        stage.addActor(playButton.button);
+        stage.addActor(backButton.getButton());
+        stage.addActor(playButton.getButton());
     }
 
     @Override

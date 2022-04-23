@@ -1,4 +1,4 @@
-package com.siegetd.game.views.components;
+package com.siegetd.game.views.components.buttons.input;
 
 import com.badlogic.gdx.Input;
 import com.siegetd.game.EngineState;

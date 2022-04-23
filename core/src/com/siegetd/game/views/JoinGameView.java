@@ -12,8 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameViewController;
-import com.siegetd.game.views.components.BackButton;
-import com.siegetd.game.views.components.InputButton;
+import com.siegetd.game.views.components.buttons.BackButton;
+import com.siegetd.game.views.components.buttons.input.InputButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
@@ -118,7 +118,7 @@ public class JoinGameView extends GameView {
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
         inputButton = new InputButton();
-        inputButton.addButtonListners(gsc);
+        inputButton.addButtonListners();
     }
 
     private void createFont(){
@@ -140,24 +140,24 @@ public class JoinGameView extends GameView {
     }
 
     private void updateText() throws URISyntaxException {
-        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")
-                || inputButton.listener.getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
+        if (inputButton.getListener().getText().equalsIgnoreCase("NO PIN ADDED")
+                || inputButton.getListener().getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
         {
-            pin = "PIN: " + inputButton.listener.getText();
+            pin = "PIN: " + inputButton.getListener().getText();
         } else if (hasJoinedLobby){
-            pin = "PIN: " + inputButton.listener.getText() + "\nWaiting for host to start..";
+            pin = "PIN: " + inputButton.getListener().getText() + "\nWaiting for host to start..";
             if (!hasJoinedLobby) {
                 SocketConnection.getInstance().getSocket().emit("join_lobby", EngineState.pin);
             }
         } else {
-            inputButton.listener.incorrectPin();
+            inputButton.getListener().incorrectPin();
         }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
     }
 
     private void stageComponents() {
-        buttonTable.add(inputButton.button).size(
+        buttonTable.add(inputButton.getButton()).size(
                 (float)(table.windowWidth / 3),
                 (float) (table.windowHeight *0.3))
                 .row();
@@ -165,7 +165,7 @@ public class JoinGameView extends GameView {
         //        (float)(table.windowWidth / 3),
         //        (float) (table.windowHeight *0.3))
         //        .row();
-        stage.addActor(backButton.button);
+        stage.addActor(backButton.getButton());
         stage.addActor(buttonTable);
     }
 
@@ -190,7 +190,7 @@ public class JoinGameView extends GameView {
         @Override
         public void call(Object... args) {
             hasJoinedLobby = false;
-            inputButton.listener.incorrectPin();
+            inputButton.getListener().incorrectPin();
         }
     };
 

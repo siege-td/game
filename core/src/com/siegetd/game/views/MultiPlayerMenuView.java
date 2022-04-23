@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.siegetd.game.controllers.GameViewController;
-import com.siegetd.game.views.components.BackButton;
-import com.siegetd.game.views.components.HostButton;
-import com.siegetd.game.views.components.JoinButton;
+import com.siegetd.game.views.components.buttons.BackButton;
+import com.siegetd.game.views.components.buttons.HostButton;
+import com.siegetd.game.views.components.buttons.JoinButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
@@ -69,13 +69,13 @@ public class MultiPlayerMenuView extends GameView {
     private void createButtons() {
         joinButton = new JoinButton();
         joinButton.addButtonListners(gsc);
-        buttonTable.add(joinButton.button).size(
+        buttonTable.add(joinButton.getButton()).size(
                 (float)(table.windowWidth / 3),
                 (float) (table.windowHeight *0.3))
                 .row();
         hostButton = new HostButton();
         hostButton.addButtonListners(gsc);
-        buttonTable.add(hostButton.button).size(
+        buttonTable.add(hostButton.getButton()).size(
                 (float)(table.windowWidth / 3),
                 (float) (table.windowHeight *0.3))
                 .row();
@@ -85,7 +85,7 @@ public class MultiPlayerMenuView extends GameView {
     }
 
     private void stageComponents() {
-        stage.addActor(btnBack.button);
+        stage.addActor(btnBack.getButton());
         stage.addActor(buttonTable);
     }
 

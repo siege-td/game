@@ -1,4 +1,4 @@
-package com.siegetd.game.views.components;
+package com.siegetd.game.views.components.buttons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -8,29 +8,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.controllers.GameViewController;
+import com.siegetd.game.views.components.WindowComponent;
+import com.siegetd.game.views.components.buttons.GameButton;
 
 import java.net.URISyntaxException;
 
 import io.socket.client.Socket;
 
-public class PlayButton extends ButtonComponent {
+public class PlayButton extends GameButton {
 
-    private ButtonComponent buttonComponent;
-    private Texture buttonImg;
     private Vector2 pos;
-    public Button button;
-
     private Socket socket;
 
     public PlayButton(WindowComponent table) {
+        super("GUI/button_play.png");
         pos = table.getBottomCenter();
-        this.buttonComponent = new ButtonComponent();
-        this.buttonImg = new Texture("GUI/button_play.png");
-        this.button = this.buttonComponent.createButton(this.buttonImg);
-        this.button.setSize(table.windowWidth /5, table.windowWidth /5);
-        this.button.setPosition(
-                (float) (pos.x - (button.getWidth()* 0.5)),
-                (float) (pos.y - (button.getHeight() * 0.5))
+        this.getButton().setSize(table.windowWidth /5, table.windowWidth /5);
+        this.getButton().setPosition(
+                (float) (pos.x - (getButton().getWidth()* 0.5)),
+                (float) (pos.y - (getButton().getHeight() * 0.5))
         );
         try {
             this.socket = SocketConnection.getInstance().getSocket();
@@ -40,8 +36,7 @@ public class PlayButton extends ButtonComponent {
     }
 
     public void addButtonListnersForHostSingleplayer(final GameViewController gsc) {
-        // TODO: INIT ALL LEVEL DATA HERE??
-        this.button.addListener(new ClickListener() {
+        this.getButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gsc.setState(GameViewController.View.PLAY);
@@ -50,7 +45,7 @@ public class PlayButton extends ButtonComponent {
     }
 
     public void addButtonListnersForHostMultiplayer(final GameViewController gsc) {
-        this.button.addListener(new ClickListener() {
+        this.getButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 socket.emit("start_game", EngineState.pin);
