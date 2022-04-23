@@ -10,7 +10,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.AttackerComponent;
 import com.siegetd.game.models.ecs.components.BulletComponent;
 import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
@@ -32,13 +32,13 @@ public class CollisionSystem extends EntitySystem{
 
     @Override
     public void update(float deltaTime) {
-        bullets = EngineState.ecsEngine.getEntitiesFor(
+        bullets = SiegeTdState.ecsEngine.getEntitiesFor(
                 Family.all(
                         BulletComponent.class
                 ).get()
         );
 
-        attackers = EngineState.ecsEngine.getEntitiesFor(
+        attackers = SiegeTdState.ecsEngine.getEntitiesFor(
                 Family.all(
                         AttackerComponent.class
                 ).get()

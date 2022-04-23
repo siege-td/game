@@ -3,7 +3,7 @@ package com.siegetd.game.models.ecs.entities.ammo;
 import com.badlogic.ashley.core.Entity;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.BulletComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
@@ -34,7 +34,7 @@ public class BulletEntity extends Entity {
     }
 
     public void create() {
-        Entity entity = EngineState.ecsEngine.createEntity();
+        Entity entity = SiegeTdState.ecsEngine.createEntity();
 
         entity.add(new TypeComponent(Type.PROJECTILE));
         entity.add(new BulletComponent(bulletDamage));
@@ -43,6 +43,6 @@ public class BulletEntity extends Entity {
 
         entity.add(new VelocityComponent((int) xDir, (int) yDir));
 
-        EngineState.ecsEngine.addEntity(entity);
+        SiegeTdState.ecsEngine.addEntity(entity);
     }
 }

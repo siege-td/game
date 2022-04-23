@@ -1,25 +1,19 @@
 package com.siegetd.game.models.ecs.systems;
 
-import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.AttackerComponent;
 import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
-import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.TurretComponent;
-import com.siegetd.game.models.ecs.components.Type;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.entities.ammo.BulletEntity;
 
@@ -29,8 +23,6 @@ public class DefenderAiSystem extends IteratingSystem {
     private Entity defender;
 
     private Texture bullet_texture;
-
-    private Vector2 bulletPosition;
     private Vector2 bulletDirection;
 
     private Vector2 targetPosition;
@@ -52,7 +44,6 @@ public class DefenderAiSystem extends IteratingSystem {
 
         this.defenderPosition = defender.getComponent(TransformComponent.class).position;
 
-        this.bulletPosition = new Vector2(defender.getComponent(TransformComponent.class).position.x, defender.getComponent(TransformComponent.class).position.y);
         this.defenderRadius = defender.getComponent(CharacteristicsComponent.class).tower_radius;
 
         setProjectile();
@@ -76,7 +67,7 @@ public class DefenderAiSystem extends IteratingSystem {
                 CharacteristicsComponent defenderStats = characteristicMapper.get(defender);
 
                 BulletEntity bullet = new BulletEntity(bullet_texture, (int) defenderPosition.x, (int) defenderPosition.y, bulletDirection.x, bulletDirection.y, defenderStats.attack_damage);
-                EngineState.ecsEngine.addEntity(bullet);
+                SiegeTdState.ecsEngine.addEntity(bullet);
 
                 this.defender.getComponent(CharacteristicsComponent.class).shotTimer = 0;
             }
@@ -100,7 +91,7 @@ public class DefenderAiSystem extends IteratingSystem {
 
     private void findBestTarget(){
         Rectangle towerRect = new Rectangle((int) defenderPosition.x - (defenderRadius / 2), (int) defenderPosition.y - (defenderRadius / 2), defenderRadius , defenderRadius);
-        ImmutableArray<Entity> attackers = EngineState.ecsEngine.getEntitiesFor(Family.all(AttackerComponent.class).get());
+        ImmutableArray<Entity> attackers = SiegeTdState.ecsEngine.getEntitiesFor(Family.all(AttackerComponent.class).get());
         for (Entity attacker : attackers) {
 
             Vector2 attackerPos = attacker.getComponent(TransformComponent.class).position;
@@ -116,7 +107,7 @@ public class DefenderAiSystem extends IteratingSystem {
             }
 
             // Check if attacker pos is closer to end tile than currently target enemy change current target
-            if(attackerPos.dst2(EngineState.gameMap.getEndPosition()) < target.getComponent(TransformComponent.class).position.dst2(EngineState.gameMap.getEndPosition())){
+            if(attackerPos.dst2(SiegeTdState.gameMap.getEndPosition()) < target.getComponent(TransformComponent.class).position.dst2(SiegeTdState.gameMap.getEndPosition())){
                 target = attacker;
                 targetPosition = attackerPos;
             }
@@ -125,9 +116,5 @@ public class DefenderAiSystem extends IteratingSystem {
 
     private void calculateDirection(){
         this.bulletDirection = new Vector2(targetPosition.x - defenderPosition.x, targetPosition.y - defenderPosition.y).nor();
-    }
-
-    public Entity getDefender() {
-        return defender;
     }
 }
