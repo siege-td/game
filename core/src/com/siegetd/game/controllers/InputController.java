@@ -2,8 +2,8 @@ package com.siegetd.game.controllers;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -11,10 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.TransformComponent;
-import com.siegetd.game.models.ecs.components.TypeComponent;
+import com.siegetd.game.models.ecs.components.TurretComponent;
 import com.siegetd.game.views.components.buttons.AddEntityButton;
-
-import java.util.ArrayList;
 
 public class InputController {
 
@@ -66,16 +64,7 @@ public class InputController {
      * @return return true if turret is on tile
      */
     private boolean turretInTile(){
-        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
-        ArrayList<Entity> defenders = new ArrayList<>();
-
-        for (Entity entity : entities) {
-            for (Component component : entity.getComponents()) {
-                if (component.getClass() != TypeComponent.class) {
-                    defenders.add(entity);
-                }
-            }
-        }
+        ImmutableArray<Entity> defenders = SiegeTdState.ecsEngine.getEntitiesFor(Family.all(TurretComponent.class).get());
 
         for (Entity defender : defenders) {
             int defenderX = (int) defender.getComponent(TransformComponent.class).position.x;
