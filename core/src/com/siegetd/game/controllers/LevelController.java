@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Timer;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.models.ecs.EntitySpawner;
 import com.siegetd.game.models.ecs.components.TransformComponent;
@@ -30,66 +30,69 @@ public class LevelController {
     private Level levelData;
     private int currRound = 0;
     private boolean roundOngoing = false;
+    private int count = 1;
 
     public LevelController(int level) {
         loadData(level);
         try {
             SocketConnection.getInstance().getSocket().on("next_round", onNextRound);
-        } catch (URISyntaxException e){
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
 
     private void startRound() {
-            this.removeAllAttackers();
+        this.removeAllAttackers();
 
-            // Wait for attackers to be deleted
-            new Timer().scheduleTask(new Timer.Task() {
-                @Override
-                public void run() {
-                    EntitySpawner entitySpawner = new EntitySpawner();
+        // Wait for attackers to be deleted
+        new Timer().scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                EntitySpawner entitySpawner = new EntitySpawner();
 
-                    Round currentRound = levelData.getRounds().get(currRound);
+                Round currentRound = levelData.getRounds().get(currRound);
 
-                    // TODO: ITERATE OVER ALL INSTEAD OF USING IFS, INCREASES MODIFIABILITY
-                    // Spawn scorpions
-                    if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
-                        entitySpawner.spawnAttackerAtInterval(
-                                currentRound.getSpawnRate().getScorpionSpawnRate(),
-                                Attacker.SCORPION,
-                                currentRound.getNumOfScorpions(),
-                                levelData.getEntitySpawnPos()
-                        );
-                    }
-                    // Spawn ogres
-                    if (currentRound.getSpawnRate().getOgreSpawnRate() > 0) {
-                        entitySpawner.spawnAttackerAtInterval(
-                                currentRound.getSpawnRate().getOgreSpawnRate(),
-                                Attacker.OGRE,
-                                currentRound.getNumOfOgres(),
-                                levelData.getEntitySpawnPos()
-                        );
-                    }
-                    // Spawn ghosts
-                    if (currentRound.getSpawnRate().getGhostSpawnRate() > 0) {
-                        entitySpawner.spawnAttackerAtInterval(
-                                currentRound.getSpawnRate().getGhostSpawnRate(),
-                                Attacker.GHOST,
-                                currentRound.getNumOfOgres(),
-                                levelData.getEntitySpawnPos()
-                        );
-                    }
-                    currRound++;
-                    roundOngoing = false;
+                // TODO: ITERATE OVER ALL INSTEAD OF USING IFS, INCREASES MODIFIABILITY
+                // Spawn scorpions
+                if (currentRound.getSpawnRate().getScorpionSpawnRate() > 0) {
+                    entitySpawner.spawnAttackerAtInterval(
+                            currentRound.getSpawnRate().getScorpionSpawnRate(),
+                            Attacker.SCORPION,
+                            currentRound.getNumOfScorpions(),
+                            levelData.getEntitySpawnPos()
+                    );
                 }
-            }, 1, 1, 0);
-        }
-        // TODO: ADD handler for when level is done
+                // Spawn ogres
+                if (currentRound.getSpawnRate().getOgreSpawnRate() > 0) {
+                    entitySpawner.spawnAttackerAtInterval(
+                            currentRound.getSpawnRate().getOgreSpawnRate(),
+                            Attacker.OGRE,
+                            currentRound.getNumOfOgres(),
+                            levelData.getEntitySpawnPos()
+                    );
+                }
+                // Spawn ghosts
+                if (currentRound.getSpawnRate().getGhostSpawnRate() > 0) {
+                    entitySpawner.spawnAttackerAtInterval(
+                            currentRound.getSpawnRate().getGhostSpawnRate(),
+                            Attacker.GHOST,
+                            currentRound.getNumOfOgres(),
+                            levelData.getEntitySpawnPos()
+                    );
+                }
+                currRound++;
+                roundOngoing = false;
+            }
+        }, 7, 1, 0);
+    }
+    // TODO: ADD handler for when level is done
 
-
+    public void isRoundFinished() {
         ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
         ArrayList<Entity> attackers = new ArrayList<>();
         ArrayList<Entity> attackersAtEnd = new ArrayList<>();
+
+        count++;
 
         for (Entity entity : entities) {
             for (Component component : entity.getComponents()) {
@@ -104,16 +107,17 @@ public class LevelController {
                 attackersAtEnd.add(attacker);
             }
         }
-        if (attackers.size() == attackersAtEnd.size() && !roundOngoing) {
+        if (attackers.size() == attackersAtEnd.size() && !roundOngoing && count%60 == 0) {
             roundOngoing = true;
-            try{
-                SocketConnection.getInstance().getSocket().emit("next_round", EngineState.pin);
-            } catch (URISyntaxException e){
+            try {
+                SocketConnection.getInstance().getSocket().emit("next_round", SiegeTdState.pin);
+            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
         }
 
     }
+
 
     private void removeAllAttackers() {
         ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
