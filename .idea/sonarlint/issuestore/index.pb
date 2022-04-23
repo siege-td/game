@@ -3,14 +3,8 @@
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 r
 Bcore/src/com/siegetd/game/models/ecs/components/TypeComponent.java,c/e/ceb7b87277730632b6c31a0b8d204679d26b8e1d
-s
-Ccore/src/com/siegetd/game/models/ecs/components/StateComponent.java,2/1/21e2560a53f00c7ed3207ca1f9c4d6dca0c51583
 i
 9desktop/src/com/siegetd/game/desktop/DesktopLauncher.java,1/6/163a3b2052472c184517e0bed7ac2cb83f3aa048
-v
-Fcore/src/com/siegetd/game/models/ecs/components/HitpointComponent.java,e/c/ec5ab654f8924110b650a80141c1456c3af07748
-v
-Fcore/src/com/siegetd/game/models/ecs/components/CurrencyComponent.java,b/9/b91c74f362f64b0a50ad3abaa7aabe98b782a19d
 p
 @core/src/com/siegetd/game/models/ecs/systems/MovementSystem.java,8/1/812df96d18dd3823ff8f8e4e1df3b1040c537c94
 A
