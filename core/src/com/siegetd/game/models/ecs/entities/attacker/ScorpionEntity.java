@@ -5,12 +5,11 @@ import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.AttackerComponent;
 import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
@@ -32,7 +31,7 @@ public class ScorpionEntity implements IEntity {
 
     @Override
     public void create() {
-        Entity entity = EngineState.ecsEngine.createEntity();
+        Entity entity = SiegeTdState.ecsEngine.createEntity();
 
         Pixmap origScorpionImg = new Pixmap(Gdx.files.internal("attacker/scorpion.png"));
         Pixmap scaledScorpionImg = new Pixmap(
@@ -52,7 +51,6 @@ public class ScorpionEntity implements IEntity {
         entity.add(new VelocityComponent(speed.x, speed.y));
         entity.add(new HitpointComponent(10));
 
-
-        EngineState.ecsEngine.addEntity(entity);
+        SiegeTdState.ecsEngine.addEntity(entity);
     }
 }

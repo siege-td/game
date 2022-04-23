@@ -1,29 +1,26 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.BackButton;
-import com.siegetd.game.views.components.HostButton;
-import com.siegetd.game.views.components.JoinButton;
+import com.siegetd.game.controllers.GameViewController;
+import com.siegetd.game.views.components.buttons.MultiPlayerButton;
 import com.siegetd.game.views.components.RopeComponent;
+import com.siegetd.game.views.components.buttons.SinglePlayerButton;
 import com.siegetd.game.views.components.WindowComponent;
 
-public class MultiPlayerMenuState extends GameState {
+public class MainMenuView extends GameView {
     private Texture background;
-    private BackButton btnBack;
-    private WindowComponent table;
+    private WindowComponent window;
     private RopeComponent rope;
-    private JoinButton joinButton;
-    private HostButton hostButton;
     private Table buttonTable;
+    private SinglePlayerButton singlePlayerButton;
+    private MultiPlayerButton multiPlayerButton;
     private Stage stage;
 
-    public MultiPlayerMenuState(GameStateController gsc){
+    public MainMenuView(final GameViewController gsc){
         super(gsc);
 
         createStage();
@@ -44,10 +41,11 @@ public class MultiPlayerMenuState extends GameState {
 
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(table.img, table.windowX,table.windowY, table.windowWidth, table.windowHeight);
+        batch.draw(window.img, window.windowX, window.windowY, window.windowWidth, window.windowHeight);
         batch.draw(rope.img, rope.ropeLeftX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.draw(rope.img, rope.ropeRightX, rope.ropeY, rope.ropeWidth, rope.img.getHeight());
         batch.end();
+
         stage.draw();
     }
 
@@ -58,42 +56,41 @@ public class MultiPlayerMenuState extends GameState {
 
     private void createBackground() {
         background = new Texture("GUI/bg.png");
-        table = new WindowComponent();
-        rope = new RopeComponent(table);
+        window = new WindowComponent();
+        rope = new RopeComponent(window);
     }
 
     private void createButtonTable() {
         buttonTable = new Table();
         buttonTable.setFillParent(true);
+
     }
 
     private void createButtons() {
-        joinButton = new JoinButton();
-        joinButton.addButtonListners(gsc);
-        buttonTable.add(joinButton.button).size(
-                (float)(table.windowWidth / 3),
-                (float) (table.windowHeight *0.3))
-                .row();
-        hostButton = new HostButton();
-        hostButton.addButtonListners(gsc);
-        buttonTable.add(hostButton.button).size(
-                (float)(table.windowWidth / 3),
-                (float) (table.windowHeight *0.3))
+        singlePlayerButton = new SinglePlayerButton();
+        singlePlayerButton.addButtonListners(gsc);
+        buttonTable.add(singlePlayerButton.getButton()).size(
+                (float)(window.windowWidth / 3),
+                (float) (window.windowHeight *0.3))
                 .row();
 
-        btnBack = new BackButton(table);
-        btnBack.addButtonListners(gsc);
+        multiPlayerButton = new MultiPlayerButton();
+        multiPlayerButton.addButtonListners(gsc);
+        buttonTable.add(multiPlayerButton.getButton()).size(
+                (float)(window.windowWidth / 3),
+                (float) (window.windowHeight *0.3))
+                .row();
     }
 
+
     private void stageComponents() {
-        stage.addActor(btnBack.button);
         stage.addActor(buttonTable);
     }
 
     @Override
     public void dispose() {
         background.dispose();
-        table.dispose();
+        window.dispose();
         rope.dispose();
         stage.dispose();
     }

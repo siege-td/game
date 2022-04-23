@@ -1,4 +1,4 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -9,12 +9,11 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.EngineState;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.views.GameState;
-import com.siegetd.game.views.components.BackButton;
-import com.siegetd.game.views.components.InputButton;
+import com.siegetd.game.controllers.GameViewController;
+import com.siegetd.game.views.components.buttons.BackButton;
+import com.siegetd.game.views.components.buttons.input.InputButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
@@ -22,7 +21,7 @@ import java.net.URISyntaxException;
 
 import io.socket.emitter.Emitter;
 
-public class JoinGameState extends GameState {
+public class JoinGameView extends GameView {
     //private JoinButton joinButton;
     private InputButton inputButton;
     private BackButton backButton;
@@ -40,7 +39,7 @@ public class JoinGameState extends GameState {
 
     private boolean hasJoinedLobby;
 
-    public JoinGameState(GameStateController gsc) {
+    public JoinGameView(GameViewController gsc) {
         super(gsc);
 
         createStage();
@@ -119,7 +118,7 @@ public class JoinGameState extends GameState {
         backButton = new BackButton(table);
         backButton.addButtonListners(gsc);
         inputButton = new InputButton();
-        inputButton.addButtonListners(gsc);
+        inputButton.addButtonListners();
     }
 
     private void createFont(){
@@ -141,24 +140,24 @@ public class JoinGameState extends GameState {
     }
 
     private void updateText() throws URISyntaxException {
-        if (inputButton.listener.getText().equalsIgnoreCase("NO PIN ADDED")
-                || inputButton.listener.getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
+        if (inputButton.getListener().getText().equalsIgnoreCase("NO PIN ADDED")
+                || inputButton.getListener().getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
         {
-            pin = "PIN: " + inputButton.listener.getText();
+            pin = "PIN: " + inputButton.getListener().getText();
         } else if (hasJoinedLobby){
-            pin = "PIN: " + inputButton.listener.getText() + "\nWaiting for host to start..";
+            pin = "PIN: " + inputButton.getListener().getText() + "\nWaiting for host to start..";
             if (!hasJoinedLobby) {
-                SocketConnection.getInstance().getSocket().emit("join_lobby", EngineState.pin);
+                SocketConnection.getInstance().getSocket().emit("join_lobby", SiegeTdState.pin);
             }
         } else {
-            inputButton.listener.incorrectPin();
+            inputButton.getListener().incorrectPin();
         }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
     }
 
     private void stageComponents() {
-        buttonTable.add(inputButton.button).size(
+        buttonTable.add(inputButton.getButton()).size(
                 (float)(table.windowWidth / 3),
                 (float) (table.windowHeight *0.3))
                 .row();
@@ -166,7 +165,7 @@ public class JoinGameState extends GameState {
         //        (float)(table.windowWidth / 3),
         //        (float) (table.windowHeight *0.3))
         //        .row();
-        stage.addActor(backButton.button);
+        stage.addActor(backButton.getButton());
         stage.addActor(buttonTable);
     }
 
@@ -183,7 +182,7 @@ public class JoinGameState extends GameState {
     private Emitter.Listener onGameStarted = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            gsc.setState(GameStateController.State.IN_GAME_MULTI);
+            gsc.setState(GameViewController.View.PLAY);
         }
     };
 
@@ -191,7 +190,7 @@ public class JoinGameState extends GameState {
         @Override
         public void call(Object... args) {
             hasJoinedLobby = false;
-            inputButton.listener.incorrectPin();
+            inputButton.getListener().incorrectPin();
         }
     };
 

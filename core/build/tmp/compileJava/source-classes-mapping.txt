@@ -23,6 +23,8 @@ com/siegetd/game/views/states/SettingsState.java
  com.siegetd.game.views.states.SettingsState
 com/siegetd/game/models/level/Level.java
  com.siegetd.game.models.level.Level
+com/siegetd/game/views/LobbyView.java
+ com.siegetd.game.views.LobbyView
 com/siegetd/game/models/ecs/components/TypeComponent.java
  com.siegetd.game.models.ecs.components.TypeComponent
 com/siegetd/game/views/components/SettingsButton.java
@@ -56,16 +58,11 @@ com/siegetd/game/views/components/gamestats/GameStat.java
  com.siegetd.game.views.components.gamestats.GameStat
 com/siegetd/game/models/ecs/entities/attacker/Attacker.java
  com.siegetd.game.models.ecs.entities.attacker.Attacker
-com/siegetd/game/views/components/ingame/InGameGUI.java
- com.siegetd.game.views.components.ingame.InGameGUI
+com/siegetd/game/views/components/buttons/BackButton.java
+ com.siegetd.game.views.components.buttons.BackButton
+ com.siegetd.game.views.components.buttons.BackButton$1
 com/siegetd/game/models/ecs/components/TextureComponent.java
  com.siegetd.game.models.ecs.components.TextureComponent
-com/siegetd/game/views/components/PlayButton.java
- com.siegetd.game.views.components.PlayButton
- com.siegetd.game.views.components.PlayButton$1
- com.siegetd.game.views.components.PlayButton$2
-com/siegetd/game/views/states/MultiPlayerMenuState.java
- com.siegetd.game.views.states.MultiPlayerMenuState
 com/siegetd/game/api/SocketConnection.java
  com.siegetd.game.api.SocketConnection
 com/siegetd/game/views/states/MainMenuState.java

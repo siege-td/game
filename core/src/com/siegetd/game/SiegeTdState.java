@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.models.map.GameMap;
 
-public class EngineState {
+public class SiegeTdState {
     public static String pin = "";
     public static GameMap gameMap = null;
     public static PooledEngine ecsEngine = null;

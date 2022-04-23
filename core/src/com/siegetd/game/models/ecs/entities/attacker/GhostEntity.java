@@ -5,14 +5,13 @@ import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.AttackerComponent;
 import com.siegetd.game.models.ecs.components.HitpointComponent;
+import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.Type;
@@ -32,7 +31,7 @@ public class GhostEntity implements IEntity {
 
     @Override
     public void create() {
-        Entity entity = EngineState.ecsEngine.createEntity();
+        Entity entity = SiegeTdState.ecsEngine.createEntity();
 
         Pixmap origGhostImg = new Pixmap(Gdx.files.internal("towers/ghost.png"));
         Pixmap scaledGhostImg = new Pixmap(
@@ -52,6 +51,6 @@ public class GhostEntity implements IEntity {
         entity.add(new TypeComponent(Type.ATTACKER));
         entity.add(new HitpointComponent(50));
 
-        EngineState.ecsEngine.addEntity(entity);
+        SiegeTdState.ecsEngine.addEntity(entity);
     }
 }
