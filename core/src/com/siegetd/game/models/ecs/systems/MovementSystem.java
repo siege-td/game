@@ -6,6 +6,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.siegetd.game.EngineState;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.Type;
+import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.components.VelocityComponent;
 import com.siegetd.game.controllers.ScoreController;
 
@@ -27,14 +29,16 @@ public class MovementSystem extends IteratingSystem {
         TransformComponent transformComponent = transformMapper.get(entity);
         this.velocityComponent = velocityMapper.get(entity);
 
-        updateMovement((int) transformComponent.position.x, (int) transformComponent.position.y, entity);
+        if(entity.getComponent(TypeComponent.class).type == Type.ATTACKER){
+            updateAttackerMovement((int) transformComponent.position.x, (int) transformComponent.position.y, entity);
+        }
 
         transformComponent.position.x += velocityComponent.xSpeed * deltaTime;
         transformComponent.position.y += velocityComponent.ySpeed * deltaTime;
     }
 
 
-    public void updateMovement(float currentX, float currentY, Entity curEntity) {
+    public void updateAttackerMovement(float currentX, float currentY, Entity curEntity) {
         float xDis = this.velocityComponent.nextX - currentX;
         float yDis = this.velocityComponent.nextY - currentY;
 

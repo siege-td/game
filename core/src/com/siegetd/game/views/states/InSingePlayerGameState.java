@@ -4,6 +4,7 @@ import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_SIZE;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,7 +15,12 @@ import com.siegetd.game.EngineState;
 import com.siegetd.game.controllers.collision.CollisionController;
 import com.siegetd.game.controllers.InputController;
 import com.siegetd.game.controllers.GameStateController;
+import com.siegetd.game.controllers.collision.DefenderAi;
+import com.siegetd.game.models.ecs.components.Type;
+import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
+import com.siegetd.game.models.ecs.systems.CollisionSystem;
+import com.siegetd.game.models.ecs.systems.DefenderAiSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
@@ -23,6 +29,7 @@ import com.siegetd.game.views.GameState;
 import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 public class InSingePlayerGameState extends GameState {
 
@@ -66,6 +73,8 @@ public class InSingePlayerGameState extends GameState {
         engine.addSystem(new AnimationSystem());
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
+        engine.addSystem(new DefenderAiSystem());
+        engine.addSystem(new CollisionSystem());
 
         EngineState.ecsEngine = engine;
 
@@ -94,7 +103,7 @@ public class InSingePlayerGameState extends GameState {
         EngineState.ecsEngine.update(Gdx.graphics.getDeltaTime());
         EngineState.stage.draw();
 
-        collisionController.listen();
+        //collisionController.listen();
     }
 
     @Override

@@ -8,13 +8,13 @@ import com.siegetd.game.models.ecs.components.TypeComponent;
 
 public class CollisionController {
 
-    private Array<DefendAttackPair> defendAttackPairs = new Array<>();
+    private Array<DefenderAi> defendAttackPairs = new Array<>();
 
     public CollisionController() {}
 
-    public boolean checkIfExists(DefendAttackPair newDefendAttackPair){
-        for (DefendAttackPair defendAttackPair : defendAttackPairs){
-            if(defendAttackPair.getAttacker().equals(newDefendAttackPair.getAttacker()) && defendAttackPair.getDefender().equals(newDefendAttackPair.getDefender())){
+    public boolean checkIfExists(DefenderAi newDefendAttackPair){
+        for (DefenderAi defendAttackPair : defendAttackPairs){
+            if(defendAttackPair.getTarget().equals(newDefendAttackPair.getTarget()) && defendAttackPair.getDefender().equals(newDefendAttackPair.getDefender())){
                 return true;
             }
         }
@@ -23,17 +23,17 @@ public class CollisionController {
     }
 
     private void updatePairArray(){
-        Array<DefendAttackPair> defendAttackPairsCopy = new Array<>();
-        for (DefendAttackPair defendAttackPair : defendAttackPairs){
+        Array<DefenderAi> defendAttackPairsCopy = new Array<>();
+        for (DefenderAi defendAttackPair : defendAttackPairs){
             defendAttackPair.draw();
 
-            if(defendAttackPair.getAttacker().getComponent(HitpointComponent.class).hitpoints <= 0){
+            if(defendAttackPair.getTarget().getComponent(HitpointComponent.class).hitpoints <= 0){
                 defendAttackPairsCopy.add(defendAttackPair);
             }
         }
 
-        for (DefendAttackPair defendAttackPair : defendAttackPairs){
-            for (DefendAttackPair defendAttackPair1 : defendAttackPairsCopy){
+        for (DefenderAi defendAttackPair : defendAttackPairs){
+            for (DefenderAi defendAttackPair1 : defendAttackPairsCopy){
                 if(defendAttackPair.equals(defendAttackPair1)){
                     defendAttackPairs.removeValue(defendAttackPair, false);
                 }
@@ -44,32 +44,15 @@ public class CollisionController {
     public void listen() {
         try{
             for (int i=0; i < EngineState.ecsEngine.getEntities().size(); i++) {
-                for (int j=0; j < EngineState.ecsEngine.getEntities().size(); j++) {
-                    if (EngineState.ecsEngine.getEntities().get(i).getComponent(TypeComponent.class).type == Type.DEFENDER && EngineState.ecsEngine.getEntities().get(j).getComponent(TypeComponent.class).type == Type.ATTACKER) {
+                    if (EngineState.ecsEngine.getEntities().get(i).getComponent(TypeComponent.class).type == Type.DEFENDER) {
 
-                        DefendAttackPair newDefendAttackPair = new DefendAttackPair(EngineState.ecsEngine.getEntities().get(i), EngineState.ecsEngine.getEntities().get(j));
-
-                        if(!checkIfExists(newDefendAttackPair)){
-                            defendAttackPairs.add(newDefendAttackPair);
-                        }
-                    }
-                }
-            }
-            Array<DefendAttackPair> defendAttackPairsCopy = new Array<>();
-            for (DefendAttackPair defendAttackPair : defendAttackPairs){
-                defendAttackPair.draw();
-
-                if(defendAttackPair.getAttacker().getComponent(HitpointComponent.class).hitpoints <= 0){
-                    defendAttackPairsCopy.add(defendAttackPair);
+                        DefenderAi defenderAi = new DefenderAi(EngineState.ecsEngine.getEntities().get(i));
                 }
             }
 
-            for (DefendAttackPair defendAttackPair : defendAttackPairs){
-                for (DefendAttackPair defendAttackPair1 : defendAttackPairsCopy){
-                    if(defendAttackPair.equals(defendAttackPair1)){
-                        defendAttackPairs.removeValue(defendAttackPair, false);
-                    }
-                }
+            for (DefenderAi defenderAi : defendAttackPairs){
+                defenderAi.findBestTarget();
+                defenderAi.draw();
             }
         }catch (Exception e){
             System.out.println(e.toString());
