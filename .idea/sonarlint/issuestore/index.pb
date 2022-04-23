@@ -3,8 +3,6 @@
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 w
 Gcore/src/com/siegetd/game/models/ecs/components/AnimationComponent.java,a/9/a9c73a8069784dce8c3dee149618482c3c960832
-j
-:core/src/com/siegetd/game/models/ecs/components/State.java,5/b/5be0ba5198a8cf8905ed4b4d85d138f1496afa38
 r
 Bcore/src/com/siegetd/game/models/ecs/components/TypeComponent.java,c/e/ceb7b87277730632b6c31a0b8d204679d26b8e1d
 s
@@ -87,8 +85,6 @@ s
 Ccore/src/com/siegetd/game/views/components/gamestats/GameStats.java,7/3/73875347bd72b8986a5a5f6866b63ddc7d4738cc
 D
 android/build.gradle,1/3/13f012f60e18f38225ce59137db2e07d5d70b29c
-n
->core/src/com/siegetd/game/views/components/map/TileBorder.java,1/2/12a074bab96410c511905f01a4291fd1dfa274d2
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 ~
@@ -97,5 +93,3 @@ t
 Dcore/src/com/siegetd/game/models/ecs/entities/defender/Defender.java,a/0/a016235441f8a7445e75046048d7e180b8860cac
 i
 9core/src/com/siegetd/game/models/ecs/components/Type.java,3/2/32d9e78384e66194782db2cbabe08c7529472aea
-n
->core/src/com/siegetd/game/controllers/GameStateController.java,b/6/b62127580781de9c940b27efea45e0a4c540858b

@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.siegetd.game.controllers.GameStateController;
+import com.siegetd.game.controllers.GameViewController;
 
 public class SiegeTd extends ApplicationAdapter {
 	public static final String APP_TITLE = "SiegeTD";
@@ -14,13 +14,13 @@ public class SiegeTd extends ApplicationAdapter {
 	public static final int APP_FPS = 60 ;
 
 	private SpriteBatch batch;
-	private GameStateController gsm;
+	private GameViewController gsm;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
-		gsm = new GameStateController(this);
+		gsm = new GameViewController(this);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.siegetd.game.api.SocketConnection;
-import com.siegetd.game.controllers.GameStateController;
+import com.siegetd.game.controllers.GameViewController;
 
 import java.net.URISyntaxException;
 
@@ -30,21 +30,21 @@ public class JoinButton extends ButtonComponent {
         }
     }
 
-    public void addButtonListners(final GameStateController gsc) {
+    public void addButtonListners(final GameViewController gsc) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameStateController.State.JOIN);
+                gsc.setState(GameViewController.View.JOIN);
             }
         });
     }
 
-    public void addButtonListnersJoinMultiplayer(final GameStateController gsc) {
+    public void addButtonListnersJoinMultiplayer(final GameViewController gsc) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //socket.emit("join_lobby", Globals.pin);
-                gsc.setState(GameStateController.State.IN_GAME_MULTI);
+                gsc.setState(GameViewController.View.IN_GAME_MULTI);
             }
         });
     }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.controllers.GameStateController;
+import com.siegetd.game.controllers.GameViewController;
 
 public class SettingsButton extends ButtonComponent {
 
@@ -18,11 +18,11 @@ public class SettingsButton extends ButtonComponent {
         this.button = this.buttonComponent.createButton( this.buttonImg);
     }
 
-    public void addButtonListners(final GameStateController gsc) {
+    public void addButtonListners(final GameViewController gsc) {
         this.button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsc.setState(GameStateController.State.SETTINGS);
+                gsc.setState(GameViewController.View.SETTINGS);
             }
         });
     }

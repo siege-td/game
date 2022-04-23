@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.siegetd.game.controllers.GameStateController;
+import com.siegetd.game.controllers.GameViewController;
 
 public class MusicButton extends ButtonComponent {
 
@@ -38,7 +38,7 @@ public class MusicButton extends ButtonComponent {
         this.buttonOff.setVisible(false);
     }
 
-    public void addButtonListners(final GameStateController gsc) {
+    public void addButtonListners(final GameViewController gsc) {
         this.buttonOn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

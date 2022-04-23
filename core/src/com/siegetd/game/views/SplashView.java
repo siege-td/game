@@ -1,18 +1,17 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.views.GameState;
+import com.siegetd.game.controllers.GameViewController;
 
-public class SplashState extends GameState{
+public class SplashView extends GameView {
     float acc = 0f;
     CharSequence str;
     BitmapFont font;
     final int COUNTDOWN = 1;
 
-    public SplashState(GameStateController gsc){
+    public SplashView(GameViewController gsc){
         super(gsc);
         str = "";
         font = new BitmapFont();
@@ -23,7 +22,7 @@ public class SplashState extends GameState{
     public void update(float delta) {
         acc += delta;
         if(acc >= COUNTDOWN){
-            gsc.setState(GameStateController.State.MENU);
+            gsc.setState(GameViewController.View.MENU);
         }
 
         str = "SPLASHSCREEN " + "\n" + (COUNTDOWN - acc) + "";

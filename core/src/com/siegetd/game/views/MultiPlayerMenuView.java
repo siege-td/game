@@ -1,19 +1,18 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.siegetd.game.controllers.GameStateController;
-import com.siegetd.game.views.GameState;
+import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.views.components.BackButton;
 import com.siegetd.game.views.components.HostButton;
 import com.siegetd.game.views.components.JoinButton;
 import com.siegetd.game.views.components.RopeComponent;
 import com.siegetd.game.views.components.WindowComponent;
 
-public class MultiPlayerMenuState extends GameState {
+public class MultiPlayerMenuView extends GameView {
     private Texture background;
     private BackButton btnBack;
     private WindowComponent table;
@@ -23,7 +22,7 @@ public class MultiPlayerMenuState extends GameState {
     private Table buttonTable;
     private Stage stage;
 
-    public MultiPlayerMenuState(GameStateController gsc){
+    public MultiPlayerMenuView(GameViewController gsc){
         super(gsc);
 
         createStage();

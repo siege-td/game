@@ -1,4 +1,4 @@
-package com.siegetd.game.views.states;
+package com.siegetd.game.views;
 
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_COLUMN;
 import static com.siegetd.game.models.map.utils.MapGlobals.TILE_ROW;
@@ -11,18 +11,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.EngineState;
-import com.siegetd.game.controllers.GameStateController;
 import com.siegetd.game.controllers.InputController;
+import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.models.ecs.systems.AnimationSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
-import com.siegetd.game.views.GameState;
+import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.views.components.ingame.InGameGUI;
 
 import java.net.URISyntaxException;
 
-public class InMultiPlayerGameState extends GameState {
+public class InSingePlayerGameView extends GameView {
 
     // Tilemap fields
     private GameMap gameMap;
@@ -32,9 +32,10 @@ public class InMultiPlayerGameState extends GameState {
     private PooledEngine engine;
     private RenderingSystem renderingSystem;
 
+    // Other fields
     private InputController inputController;
 
-    public InMultiPlayerGameState(GameStateController gsc) {
+    public InSingePlayerGameView(GameViewController gsc) {
         super(gsc);
 
         EngineState.batch = new SpriteBatch();
@@ -73,15 +74,18 @@ public class InMultiPlayerGameState extends GameState {
 
     @Override
     public void update(float delta) {
+        if(ScoreController.getInstance().getHealth()<=0){
+            Gdx.app.exit();
+        }
     }
 
     @Override
     public void render() {
         Gdx.gl.glClearColor(1f, 1f, 1f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameMap.render();
+        EngineState.gameMap.render();
         inputController.listen();
-        engine.update(Gdx.graphics.getDeltaTime());
+        EngineState.ecsEngine.update(Gdx.graphics.getDeltaTime());
         EngineState.stage.draw();
     }
 
