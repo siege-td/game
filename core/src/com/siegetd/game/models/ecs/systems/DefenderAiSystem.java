@@ -44,7 +44,7 @@ public class DefenderAiSystem extends IteratingSystem {
 
         this.defenderPosition = defender.getComponent(TransformComponent.class).position;
 
-        this.defenderRadius = defender.getComponent(CharacteristicsComponent.class).tower_radius;
+        this.defenderRadius = defender.getComponent(CharacteristicsComponent.class).towerRadius;
 
         setProjectile();
         shootEnemy(deltaTime);
@@ -59,14 +59,14 @@ public class DefenderAiSystem extends IteratingSystem {
 
     private void shootEnemy(float deltaTime){
         this.defender.getComponent(CharacteristicsComponent.class).shotTimer += deltaTime;
-        if(this.defender.getComponent(CharacteristicsComponent.class).shotTimer > defender.getComponent(CharacteristicsComponent.class).attack_rate){
+        if(this.defender.getComponent(CharacteristicsComponent.class).shotTimer > defender.getComponent(CharacteristicsComponent.class).attackRate){
             findBestTarget();
             if(target != null) {
                 calculateDirection();
 
                 CharacteristicsComponent defenderStats = characteristicMapper.get(defender);
 
-                BulletEntity bullet = new BulletEntity(bullet_texture, (int) defenderPosition.x, (int) defenderPosition.y, bulletDirection.x, bulletDirection.y, defenderStats.attack_damage);
+                BulletEntity bullet = new BulletEntity(bullet_texture, (int) defenderPosition.x, (int) defenderPosition.y, bulletDirection.x, bulletDirection.y, defenderStats.attackDamage);
                 SiegeTdState.ecsEngine.addEntity(bullet);
 
                 this.defender.getComponent(CharacteristicsComponent.class).shotTimer = 0;
