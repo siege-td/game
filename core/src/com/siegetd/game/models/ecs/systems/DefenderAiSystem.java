@@ -18,6 +18,7 @@ import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.TurretComponent;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.entities.ammo.BulletEntity;
+import com.siegetd.game.models.ecs.entities.defender.Defender;
 
 import java.util.ArrayList;
 
@@ -67,6 +68,8 @@ public class DefenderAiSystem extends IteratingSystem {
 
                 BulletEntity bullet = new BulletEntity(bullet_texture, (int) defenderPosition.x + TILE_SIZE/2, (int) defenderPosition.y + TILE_SIZE/2, bulletDirection.x, bulletDirection.y, defenderStats.attackDamage);
                 SiegeTdState.ecsEngine.addEntity(bullet);
+
+                defender.getComponent(TurretComponent.class).turretSound.play();
 
                 this.defender.getComponent(CharacteristicsComponent.class).shotTimer = 0;
             }
