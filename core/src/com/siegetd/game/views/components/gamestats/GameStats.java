@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
@@ -30,7 +31,12 @@ public class GameStats {
 
     private ArrayList<GameStat> gameStatList;
 
+    private SpriteBatch batch;
+
     public GameStats() throws URISyntaxException {
+        this.batch = new SpriteBatch();
+        this.batch.setProjectionMatrix(SiegeTdState.camera.combined);
+
         this.socket = SocketConnection.getInstance().getSocket();
 
         this.gameStatList = new ArrayList<>();
@@ -55,25 +61,31 @@ public class GameStats {
     }
 
     public void drawStats() {
+
         float xPos = 20f;
         if (gameStatList.size() == 0) {
+            this.batch.begin();
             font.draw(
-                    SiegeTdState.batch,
+                    this.batch,
                     "Player: Solo player\nHitpoints: " + ScoreController.getInstance().getHealth() + "\nCurrency: " + ScoreController.getInstance().getCurrency(),
                     xPos,
                     2530f
             );
+            this.batch.end();
         } else {
             for (GameStat stat : gameStatList) {
+                this.batch.begin();
                 font.draw(
-                        SiegeTdState.batch,
+                        this.batch,
                         "Player: " + stat.getName() + "\nHitpoints: " + stat.getHitpoints() + "\nCurrency: " + stat.getCurrency(),
                         xPos,
                         2530f
                 );
+                this.batch.end();
                 xPos += 1000f;
             }
         }
+
     }
 
     private ArrayList<GameStat> jsonArrayToArrayList(JSONArray array) throws JSONException {
@@ -98,6 +110,7 @@ public class GameStats {
         public void call(Object... args) {
             try {
                 gameStatList = jsonArrayToArrayList((JSONArray) args[0]);
+                drawStats();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

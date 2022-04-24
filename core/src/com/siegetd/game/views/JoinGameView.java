@@ -56,6 +56,7 @@ public class JoinGameView extends GameView {
         try {
             SocketConnection.getInstance().getSocket().on("join_pin_invalid", invalidPin);
             SocketConnection.getInstance().getSocket().on("join_pin_valid", validPin);
+            SocketConnection.getInstance().getSocket().on("game_started", onGameStarted);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -88,11 +89,6 @@ public class JoinGameView extends GameView {
         batch.end();
         stage.draw();
         //try catch invalidPin
-        try {
-            SocketConnection.getInstance().getSocket().on("game_started", onGameStarted);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
     }
 
     private void createStage() {
@@ -141,16 +137,16 @@ public class JoinGameView extends GameView {
 
     private void updateText() throws URISyntaxException {
         if (inputButton.getListener().getText().equalsIgnoreCase("NO PIN ADDED")
-                || inputButton.getListener().getText().equalsIgnoreCase("INCORRECT PIN ADDED"))
-        {
+                || inputButton.getListener().getText().equalsIgnoreCase("INCORRECT PIN ADDED")
+        ) {
             pin = "PIN: " + inputButton.getListener().getText();
-        } else if (hasJoinedLobby){
-            pin = "PIN: " + inputButton.getListener().getText() + "\nWaiting for host to start..";
+        } else {
             if (!hasJoinedLobby) {
                 SocketConnection.getInstance().getSocket().emit("join_lobby", SiegeTdState.pin);
             }
-        } else {
-            inputButton.getListener().incorrectPin();
+            if (hasJoinedLobby) {
+                pin = "PIN: " + inputButton.getListener().getText() + "\nWaiting for host to start..";
+            }
         }
         glyphLayout.setText(font, pin);
         textWidth = glyphLayout.width;
@@ -182,7 +178,12 @@ public class JoinGameView extends GameView {
     private Emitter.Listener onGameStarted = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            gsc.setState(GameViewController.View.PLAY);
+            Gdx.app.postRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    gsc.setState(GameViewController.View.PLAY);
+                }
+            });
         }
     };
 
