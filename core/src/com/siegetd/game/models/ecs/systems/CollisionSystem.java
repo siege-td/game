@@ -44,16 +44,16 @@ public class CollisionSystem extends EntitySystem{
                 ).get()
         );
 
-        checkForLaserCollision();
+        checkForBulletCollision();
     }
 
-    private void checkForLaserCollision() {
+    private void checkForBulletCollision() {
         for (Entity bullet : bullets) {
             TransformComponent bulletPosition = transformMapper.get(bullet);
             for (Entity attacker : attackers) {
                 TransformComponent attackerPosition = transformMapper.get(attacker);
                 Rectangle attackerHitBox = new Rectangle((int) attackerPosition.position.x, (int) attackerPosition.position.y, TILE_SIZE, TILE_SIZE);
-                if(Intersector.overlaps(new Circle((int) bulletPosition.position.x, (int) bulletPosition.position.x, 2), attackerHitBox)){
+                if(attackerHitBox.contains(bulletPosition.position)){
                     HitpointComponent attackerHp = hitpointMapper.get(attacker);
                     attackerHp.decreaseHitpoints(bullet.getComponent(BulletComponent.class).bulletDamage);
                     getEngine().removeEntity(bullet);

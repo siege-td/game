@@ -41,7 +41,7 @@ public class MovementSystem extends IteratingSystem {
         float xDis = this.velocityComponent.nextX - currentX;
         float yDis = this.velocityComponent.nextY - currentY;
 
-        if (xDis <= 1 && yDis <= 1) {
+        if (xDis <= 5 && yDis <= 5) {
             this.velocityComponent.pathIndex++;
             getNextPos(curEntity);
         } else {
@@ -53,7 +53,7 @@ public class MovementSystem extends IteratingSystem {
     private void getNextPos(Entity curEntity) {
         if (this.velocityComponent.pathIndex >= this.velocityComponent.path.size()) {
             SiegeTdState.ecsEngine.removeEntity(curEntity);
-            ScoreController.getInstance().setHealth(ScoreController.getInstance().getHealth()-10);
+            ScoreController.getInstance().decreaseHealth(2);
             System.out.println(ScoreController.getInstance().getHealth());
             return;
         }

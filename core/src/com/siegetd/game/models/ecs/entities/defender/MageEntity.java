@@ -47,7 +47,7 @@ public class MageEntity implements IEntity {
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
         entity.add(new TypeComponent(Type.DEFENDER, Defender.MAGE));
-        entity.add(new CharacteristicsComponent(3, 1f, 1));
+        entity.add(new CharacteristicsComponent(4, 0.7f, 10));
         entity.add(new TurretComponent());
 
         origMageImg.dispose();
