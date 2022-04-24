@@ -40,8 +40,8 @@ public class RenderingSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-        SiegeTdState.batch.begin();
         SiegeTdState.batch.setProjectionMatrix(SiegeTdState.camera.combined);
+        SiegeTdState.batch.begin();
 
         gameStats.drawStats();
 
