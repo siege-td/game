@@ -18,7 +18,7 @@ public class BulletEntity extends Entity {
     private float y;
     private float xDir;
     private float yDir;
-    private final float BULLET_SPEED = 1000;
+    private final float BULLET_SPEED = 1200;
     private int bulletDamage;
 
 

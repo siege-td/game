@@ -48,6 +48,12 @@ public class ScoreController {
         updateGameDataOnServer();
     }
 
+    public void decreaseHealth(int damage){
+        this.health -= damage;
+
+        updateGameDataOnServer();
+    }
+
     public int getHealth(){
         return this.health;
     }
