@@ -10,8 +10,11 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.SiegeTdState;
+import com.siegetd.game.models.ecs.components.AttackerComponent;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.Type;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.components.VelocityComponent;
 import com.siegetd.game.models.ecs.entities.IEntity;
@@ -41,10 +44,12 @@ public class OgreEntity implements IEntity {
                 0, 0, scaledOgreImg.getWidth(), scaledOgreImg.getHeight()
         );
 
+        entity.add(new AttackerComponent());
         entity.add(new TransformComponent(pos.x, pos.y));
         entity.add(new TextureComponent(new Texture(scaledOgreImg)));
         entity.add(new VelocityComponent(speed.x, speed.y));
-        entity.add(new TypeComponent());
+        entity.add(new TypeComponent(Type.ATTACKER));
+        entity.add(new HitpointComponent(20));
 
         SiegeTdState.ecsEngine.addEntity(entity);
     }

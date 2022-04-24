@@ -10,15 +10,19 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.SiegeTdState;
+import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.TurretComponent;
+import com.siegetd.game.models.ecs.components.Type;
+import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.entities.IEntity;
 
-public class ZappEntity implements IEntity {
+public class ArcherEntity implements IEntity {
 
     private Vector2 pos;
 
-    public ZappEntity(Vector2 spawnPos) {
+    public ArcherEntity(Vector2 spawnPos) {
         this.pos = spawnPos;
     }
 
@@ -26,7 +30,7 @@ public class ZappEntity implements IEntity {
     public void create() {
         Entity entity = SiegeTdState.ecsEngine.createEntity();
 
-        Pixmap origMageImg = new Pixmap(Gdx.files.internal("towers/zapp.png"));
+        Pixmap origMageImg = new Pixmap(Gdx.files.internal("towers/archer.png"));
         Pixmap scaledMageImg = new Pixmap(
                 ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN) * 2,
                 ((TILE_SIZE * TILE_ROW) / TILE_ROW) * 2,
@@ -42,6 +46,9 @@ public class ZappEntity implements IEntity {
                 (pos.y - (pos.y % (SiegeTdState.camera.viewportHeight / TILE_ROW)))
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
+        entity.add(new TypeComponent(Type.DEFENDER, Defender.ARCHER));
+        entity.add(new CharacteristicsComponent(5, 1f, 10));
+        entity.add(new TurretComponent());
 
         origMageImg.dispose();
         scaledMageImg.dispose();

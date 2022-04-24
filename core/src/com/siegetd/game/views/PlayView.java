@@ -15,6 +15,9 @@ import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.controllers.InputController;
 import com.siegetd.game.controllers.LevelController;
 import com.siegetd.game.controllers.ScoreController;
+import com.siegetd.game.models.ecs.systems.CollisionSystem;
+import com.siegetd.game.models.ecs.systems.DefenderAiSystem;
+import com.siegetd.game.models.ecs.systems.HitpointSystem;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
 import com.siegetd.game.models.map.GameMap;
@@ -60,6 +63,9 @@ public class PlayView extends GameView {
 
         engine.addSystem(renderingSystem);
         engine.addSystem(new MovementSystem());
+        engine.addSystem(new DefenderAiSystem());
+        engine.addSystem(new CollisionSystem());
+        engine.addSystem(new HitpointSystem());
 
         SiegeTdState.ecsEngine = engine;
 

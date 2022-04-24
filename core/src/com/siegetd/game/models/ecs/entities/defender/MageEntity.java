@@ -10,8 +10,12 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.siegetd.game.SiegeTdState;
+import com.siegetd.game.models.ecs.components.CharacteristicsComponent;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.TurretComponent;
+import com.siegetd.game.models.ecs.components.Type;
+import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.entities.IEntity;
 
 public class MageEntity implements IEntity {
@@ -42,6 +46,9 @@ public class MageEntity implements IEntity {
                 (pos.y - (pos.y % (SiegeTdState.camera.viewportHeight / TILE_ROW)))
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
+        entity.add(new TypeComponent(Type.DEFENDER, Defender.MAGE));
+        entity.add(new CharacteristicsComponent(3, 1f, 1));
+        entity.add(new TurretComponent());
 
         origMageImg.dispose();
         scaledMageImg.dispose();

@@ -9,4 +9,16 @@ public class HitpointComponent implements Component {
     public HitpointComponent(int hitpoints) {
         this.hitpoints = hitpoints;
     }
+
+    public int getHitpoints(){
+        return this.hitpoints;
+    }
+
+    public void setHitpoints(int hitpoints){
+        this.hitpoints = hitpoints;
+    }
+
+    public void decreaseHitpoints(int damageTaken){
+        this.hitpoints -= damageTaken;
+    }
 }

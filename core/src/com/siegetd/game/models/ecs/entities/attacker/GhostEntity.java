@@ -9,19 +9,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.siegetd.game.models.ecs.components.AttackerComponent;
+import com.siegetd.game.models.ecs.components.HitpointComponent;
 import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.models.ecs.components.TextureComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
+import com.siegetd.game.models.ecs.components.Type;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.components.VelocityComponent;
 import com.siegetd.game.models.ecs.entities.IEntity;
 
-public class ScorpionEntity implements IEntity {
+public class GhostEntity implements IEntity {
 
     private Vector2 pos;
     private Vector2 speed;
 
-    public ScorpionEntity(Vector2 spawnPos, Vector2 startSpeed) {
+    public GhostEntity(Vector2 spawnPos, Vector2 startSpeed) {
         this.pos = spawnPos;
         this.speed = startSpeed;
     }
@@ -30,21 +33,23 @@ public class ScorpionEntity implements IEntity {
     public void create() {
         Entity entity = SiegeTdState.ecsEngine.createEntity();
 
-        Pixmap origScorpionImg = new Pixmap(Gdx.files.internal("towers/scorpion.png"));
-        Pixmap scaledScorpionImg = new Pixmap(
-                ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN),
-                ((TILE_SIZE * TILE_ROW) / TILE_ROW),
-                origScorpionImg.getFormat()
+        Pixmap origGhostImg = new Pixmap(Gdx.files.internal("towers/ghost.png"));
+        Pixmap scaledGhostImg = new Pixmap(
+                ((TILE_SIZE * TILE_COLUMN) / TILE_COLUMN) * 2,
+                ((TILE_SIZE * TILE_ROW) / TILE_ROW) * 2,
+                origGhostImg.getFormat()
         );
-        scaledScorpionImg.drawPixmap(origScorpionImg,
-                0, 0, origScorpionImg.getWidth(), origScorpionImg.getHeight(),
-                0, 0, scaledScorpionImg.getWidth(), scaledScorpionImg.getHeight()
+        scaledGhostImg.drawPixmap(origGhostImg,
+                0, 0, origGhostImg.getWidth(), origGhostImg.getHeight(),
+                0, 0, scaledGhostImg.getWidth(), scaledGhostImg.getHeight()
         );
 
+        entity.add(new AttackerComponent());
         entity.add(new TransformComponent(pos.x, pos.y));
-        entity.add(new TextureComponent(new Texture(scaledScorpionImg)));
+        entity.add(new TextureComponent(new Texture(scaledGhostImg)));
         entity.add(new VelocityComponent(speed.x, speed.y));
-        entity.add(new TypeComponent());
+        entity.add(new TypeComponent(Type.ATTACKER));
+        entity.add(new HitpointComponent(50));
 
         SiegeTdState.ecsEngine.addEntity(entity);
     }

@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.models.map.tile.MovableTile;
@@ -120,6 +121,12 @@ public class GameMap extends Stage {
      */
     public List<MovableTile> getMovableTiles(){
         return this.movableTiles;
+    }
+
+    public Vector2 getEndPosition(){
+        MovableTile endCell = this.movableTiles.get(this.movableTiles.size()-1);
+        Vector2 endPos = new Vector2(endCell.getX(), endCell.getY());
+        return endPos;
     }
 
     public void render(){
