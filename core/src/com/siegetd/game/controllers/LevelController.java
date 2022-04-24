@@ -2,6 +2,7 @@ package com.siegetd.game.controllers;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.models.ecs.EntitySpawner;
+import com.siegetd.game.models.ecs.components.AttackerComponent;
 import com.siegetd.game.models.ecs.components.TransformComponent;
 import com.siegetd.game.models.ecs.components.TypeComponent;
 import com.siegetd.game.models.ecs.entities.attacker.Attacker;
@@ -42,8 +44,6 @@ public class LevelController {
     }
 
     private void startRound() {
-        this.removeAllAttackers();
-
         // Wait for attackers to be deleted
         new Timer().scheduleTask(new Timer.Task() {
             @Override
@@ -88,19 +88,10 @@ public class LevelController {
     // TODO: ADD handler for when level is done
 
     public void isRoundFinished() {
-        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
-        ArrayList<Entity> attackers = new ArrayList<>();
+        ImmutableArray<Entity> attackers = SiegeTdState.ecsEngine.getEntitiesFor(Family.all(AttackerComponent.class).get());
         ArrayList<Entity> attackersAtEnd = new ArrayList<>();
 
         count++;
-
-        for (Entity entity : entities) {
-            for (Component component : entity.getComponents()) {
-                if (component.getClass() == TypeComponent.class) {
-                    attackers.add(entity);
-                }
-            }
-        }
 
         for (Entity attacker : attackers) {
             if ((attacker.getComponent(TransformComponent.class).position.y >= levelData.getEntityEndPos().y) && (attacker.getComponent(TransformComponent.class).position.x >= levelData.getEntityEndPos().x)) {
@@ -108,33 +99,14 @@ public class LevelController {
             }
         }
         if (attackers.size() == attackersAtEnd.size() && !roundOngoing && count%60 == 0) {
-            roundOngoing = true;
             try {
                 SocketConnection.getInstance().getSocket().emit("next_round", SiegeTdState.pin);
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
+            roundOngoing = true;
         }
 
-    }
-
-
-    private void removeAllAttackers() {
-        ImmutableArray<Entity> entities = SiegeTdState.ecsEngine.getEntities();
-        ArrayList<Entity> attackers = new ArrayList<>();
-
-        for (Entity entity : entities) {
-            for (Component component : entity.getComponents()) {
-                if (component.getClass() == TypeComponent.class) {
-                    attackers.add(entity);
-                }
-            }
-        }
-
-        for (Entity attacker : attackers) {
-            SiegeTdState.ecsEngine.removeEntity(attacker);
-            System.out.println("Remove");
-        }
     }
 
     private void loadData(int level) {
