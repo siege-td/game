@@ -65,6 +65,7 @@ public class ScoreController {
             object.put("playerName", SocketConnection.getInstance().getSocket().id().substring(0, 5));
             object.put("hitpoints", health);
             object.put("currency", currency);
+            object.put("nextRound", false);
 
             SocketConnection.getInstance().getSocket().emit("update_game_data", object);
         } catch (JSONException | URISyntaxException e) {
