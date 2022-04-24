@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.controllers.GameViewController;
 import com.siegetd.game.controllers.InputController;
+import com.siegetd.game.controllers.LevelController;
 import com.siegetd.game.controllers.ScoreController;
 import com.siegetd.game.models.ecs.systems.MovementSystem;
 import com.siegetd.game.models.ecs.systems.RenderingSystem;
@@ -32,6 +33,7 @@ public class PlayView extends GameView {
 
     // Other fields
     private InputController inputController;
+    private LevelController levelController;
 
     public PlayView(GameViewController gsc) {
         super(gsc);
@@ -65,13 +67,13 @@ public class PlayView extends GameView {
         Gdx.input.setInputProcessor(SiegeTdState.stage);
 
         this.inputController = new InputController();
+        this.levelController = new LevelController(1);
+
     }
 
     @Override
     public void update(float delta) {
-        if(ScoreController.getInstance().getHealth()<=0){
-            Gdx.app.exit();
-        }
+        levelController.isRoundFinished();
     }
 
     @Override
@@ -86,4 +88,5 @@ public class PlayView extends GameView {
 
     @Override
     public void dispose() { }
+
 }
