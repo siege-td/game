@@ -1,8 +1,6 @@
 
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-r
-Bcore/src/com/siegetd/game/models/ecs/components/TypeComponent.java,c/e/ceb7b87277730632b6c31a0b8d204679d26b8e1d
 i
 9desktop/src/com/siegetd/game/desktop/DesktopLauncher.java,1/6/163a3b2052472c184517e0bed7ac2cb83f3aa048
 p
@@ -53,8 +51,6 @@ s
 Ccore/src/com/siegetd/game/views/components/gamestats/GameStats.java,7/3/73875347bd72b8986a5a5f6866b63ddc7d4738cc
 D
 android/build.gradle,1/3/13f012f60e18f38225ce59137db2e07d5d70b29c
-<
-build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 ~
 Ncore/src/com/siegetd/game/views/components/selectentity/SelectEntityModal.java,2/8/28d386b8241cab7952e027db2c2eba6bfe0b6450
 t
