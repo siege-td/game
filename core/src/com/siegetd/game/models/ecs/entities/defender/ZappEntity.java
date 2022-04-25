@@ -47,7 +47,7 @@ public class ZappEntity implements IEntity {
         ));
         entity.add(new TextureComponent(new Texture(scaledMageImg)));
         entity.add(new TypeComponent(Type.DEFENDER, Defender.ZAPP));
-        entity.add(new CharacteristicsComponent(6, 1f, 25));
+        entity.add(new CharacteristicsComponent(6, 1f, 8));
         entity.add(new TurretComponent());
 
         origMageImg.dispose();
