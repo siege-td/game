@@ -6,8 +6,8 @@
 - [Start development](#start-development)
 
 ## General info
-This project aims to solve the client-side of the SiegeTD game, a multiplayer tower defense game. In SiegeTD a player \
-must defend their base from scorpions, ogres and ghosts. A player can play with their friends in multiplayer sessions \
+This project aims to solve the client-side of the SiegeTD game, a multiplayer tower defense game. In SiegeTD a player
+must defend their base from scorpions, ogres and ghosts. A player can play with their friends in multiplayer sessions
 where live data from all players in the session is displayed in real time.
 
 ## Main game file structure
