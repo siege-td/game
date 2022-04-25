@@ -24,7 +24,7 @@ where live data from all players in the session is displayed in real time.
                 ├── models                  # Classes for all models, including the ecs
                 ├── views                   # Classes for all the views
                 ├── SiegeTd.java
-                └── SiegeTdState.javs
+                └── SiegeTdState.java
     ├── desktop                 # Files related for running game on desktop
     └── gradle                  # Files for the gradle building tool
 
