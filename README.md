@@ -2,6 +2,7 @@
 
 ## Table of contents
 - [General info](#general-info)
+- [Main game file structure](#main-game-file-structure)
 - [Game technologies](#game-technologies)
 - [Start development](#start-development)
 
