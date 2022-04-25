@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Timer;
+import com.siegetd.game.SiegeTd;
 import com.siegetd.game.SiegeTdState;
 import com.siegetd.game.api.SocketConnection;
 import com.siegetd.game.models.ecs.EntitySpawner;
@@ -20,6 +21,7 @@ import com.siegetd.game.models.level.Level;
 import com.siegetd.game.models.level.Round;
 import com.siegetd.game.models.level.SpawnRate;
 
+import java.net.Socket;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -90,7 +92,6 @@ public class LevelController {
     public void isRoundFinished() {
         ImmutableArray<Entity> attackers = SiegeTdState.ecsEngine.getEntitiesFor(Family.all(AttackerComponent.class).get());
         ArrayList<Entity> attackersAtEnd = new ArrayList<>();
-
         count++;
 
         for (Entity attacker : attackers) {
@@ -100,6 +101,7 @@ public class LevelController {
         }
         if (attackers.size() == attackersAtEnd.size() && !roundOngoing && count%60 == 0) {
             try {
+                SocketConnection.getInstance().getSocket().emit("test");
                 SocketConnection.getInstance().getSocket().emit("next_round", SiegeTdState.pin);
             } catch (URISyntaxException e) {
                 e.printStackTrace();

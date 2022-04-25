@@ -3,6 +3,7 @@
   <component name="FacetManager">
     <facet type="java-gradle" name="Java-Gradle">
       <configuration>
+        <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/../../../desktop/build" />
         <option name="BUILDABLE" value="true" />
       </configuration>
     </facet>
@@ -28,6 +29,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="Gradle: game.desktop.desktop-1.0" level="project" />
     <orderEntry type="module" module-name="game.core" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-backend-lwjgl:1.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-platform:1.10.0:natives-desktop" level="project" />
