@@ -15,7 +15,16 @@ where live data from all players in the session is displayed in real time.
     .
     ├── .idea                   # IDE related files
     ├── android                 # Files related for running game on android
-    ├── core                    # Source files, where the core logic of game is located
+    ├── core                    # Where the core logic of game is located                           
+        ├── build                   # Compiled files
+        └── src                     # Source files
+            └── com.siegetd.core    
+                ├── api                     # Classes for creating a socket connection
+                ├── controllers             # Classes for all controllers
+                ├── models                  # Classes for all models, including the ecs
+                ├── views                   # Classes for all the views
+                ├── SiegeTd.java
+                └── SiegeTdState.javs
     ├── desktop                 # Files related for running game on desktop
     └── gradle                  # Files for the gradle building tool
 
