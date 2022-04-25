@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.siegetd.game.SiegeTdState;
@@ -19,6 +20,7 @@ public class SelectEntityModal {
     private Button archerButton;
     private Button mageButton;
     private Button zappButton;
+    private Table buttonTable;
 
     //Cost of each tower
     private static final int archerCost = 30;
@@ -29,35 +31,28 @@ public class SelectEntityModal {
     }
 
     public void showModal() {
+        this.buttonTable = new Table();
+        this.buttonTable.setFillParent(true);
+
         this.archerButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_archer.png")));
-        this.archerButton.setSize(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
-        this.archerButton.setPosition(
-                ((Gdx.graphics.getWidth() / 2) - (this.archerButton.getWidth() / 2)) - 80,
-                ((Gdx.graphics.getHeight() / 2) - (this.archerButton.getHeight() / 2))
-        );
+        this.buttonTable.add(archerButton).size(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
         if (ScoreController.getInstance().getCurrency() < archerCost) {
             this.archerButton.setColor(Color.RED);
         }
 
         this.mageButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_mage.png")));
-        this.mageButton.setSize(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
-        this.mageButton.setPosition(
-                ((Gdx.graphics.getWidth() / 2) - (this.mageButton.getWidth() / 2)),
-                ((Gdx.graphics.getHeight() / 2) - ((this.mageButton.getHeight() / 2)))
-        );
+        this.buttonTable.add(mageButton).size(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
         if (ScoreController.getInstance().getCurrency() < mageCost) {
             this.mageButton.setColor(Color.RED);
         }
 
         this.zappButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_zapp.png")));
-        this.zappButton.setSize(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
-        this.zappButton.setPosition(
-                (((Gdx.graphics.getWidth() / 2) - (this.zappButton.getWidth() / 2))) + 80,
-                ((Gdx.graphics.getHeight() / 2) - ((this.zappButton.getHeight() / 2)))
-        );
+        this.buttonTable.add(zappButton).size(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
         if (ScoreController.getInstance().getCurrency() < zappCost) {
             this.zappButton.setColor(Color.RED);
         }
+
+
     }
 
     public void hideModal() {
@@ -102,15 +97,8 @@ public class SelectEntityModal {
         });
     }
 
-    public Button getArcherButton() {
-        return archerButton;
+    public Table getButtonTable() {
+        return buttonTable;
     }
 
-    public Button getMageButton() {
-        return mageButton;
-    }
-
-    public Button getZappButton() {
-        return zappButton;
-    }
 }

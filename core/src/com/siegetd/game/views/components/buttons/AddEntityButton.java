@@ -61,9 +61,7 @@ public class AddEntityButton extends GameButton {
                     selectEntityModal = new SelectEntityModal();
                     selectEntityModal.showModal();
                     selectEntityModal.addButtonListeners(entitySpawnPos);
-                    SiegeTdState.stage.addActor(selectEntityModal.getArcherButton());
-                    SiegeTdState.stage.addActor(selectEntityModal.getMageButton());
-                    SiegeTdState.stage.addActor(selectEntityModal.getZappButton());
+                    SiegeTdState.stage.addActor(selectEntityModal.getButtonTable());
                     addStageListeners();
                 }
             }
