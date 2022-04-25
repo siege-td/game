@@ -33,6 +33,7 @@ public class SelectEntityModal {
     public void showModal() {
         this.buttonTable = new Table();
         this.buttonTable.setFillParent(true);
+        this.buttonTable.bottom().right();
 
         this.archerButton = new Button(new TextureRegionDrawable(new Texture("GUI/add_archer.png")));
         this.buttonTable.add(archerButton).size(SiegeTdState.camera.viewportWidth / 80, SiegeTdState.camera.viewportWidth / 80);
